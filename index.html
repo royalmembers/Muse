@@ -25,6 +25,23 @@
 	body > header:first-child > section:first-child a:active {
 		color: #C6B;
 	}
+	section#part-avatar {
+		padding: 100px 20px 240px 20px; background-image: url(images/bg/dark_repeat.jpg); background-position: center top; background-repeat: no-repeat;
+	}
+	section#part-avatar > section {
+		text-align: center;
+	}
+	section#part-avatar > h1 {
+		font-size: 42px; font-weight: 200; font-style: normal; text-decoration: none; line-height: 48px; padding: 0 0 10px 0; text-align: center;
+	}
+	@media screen and (max-width:800px) {
+		body > header:first-child {
+			height: 60px;
+		}
+		body > header:first-child > section:first-child > h1 + ul {
+			display: none;
+		}
+	}
 	</style>
 </head>
 <body>
@@ -32,20 +49,22 @@
         <section>
             <h1><a href="https://musetuan.com"><strong>MuseTuan</strong><span>.com</span></a></h1>
             <ul>
-                <li>
-                    <a href="https://kingcean.net">Kingcean.net</a>
-                </li>
-                <li>
-                    <a href="https://kingcean.org">Kingcean.org</a>
-                </li>
             </ul>
         </section>
 	</header>
-	<section style="padding: 100px 20px 300px 20px; ">
-		<section style="text-align: center; ">
+	<section id="part-avatar">
+		<section>
 			<img alt="Muse Tuan" src="images/avatar/avatar_MuseTuan_201810.jpg" style="background-color: white; width: 240px; height: 240px; border: 8px solid #333; border-radius: 128px; text-align: center; " />
 		</section>
-		<h1 style="font-size: 42px; font-weight: 200; font-style: normal; text-decoration: none; line-height: 48px; padding: 0 0 10px 0; text-align: center; ">Royal Muse Tuan</h1>
+		<h1>Royal Muse Tuan</h1>
+	</section>
+	<section style="min-height: 300px; ">
+		<h2>Other links</h2>
+		<section>
+			<a class="link-tile-wide" href="https://kingcean.net"><span>Kingcean.net</span>
+			</a><a class="link-tile-wide" href="https://kingcean.org"><span>Kingcean.org</span>
+			</a><a class="link-tile-wide" href="https://jinchen.org"><span>Jinchen Art</span></a>
+		</section>
 	</section>
 	<footer>
 		<section>
