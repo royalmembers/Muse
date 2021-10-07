@@ -1,13 +1,73 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>Muse Tuan</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Muse Tuan</title>
+    <link href="css/layout.css" rel="stylesheet" />
+	<style type="text/css">
+	a, a:visited {
+		color: #F5B;
+	}
+	a:hover {
+		color: #F7C;
+	}
+	a:active {
+		color: #C6B;
+	}
+	body > header:first-child,
+	body > section + footer,
+	body > script + footer {
+		background-color: #333;
+		background-image: none;
+	}
+	body > header:first-child > section:first-child > h1 + ul > li.state-sel > a,
+	body > header:first-child > section:first-child > h1 + ul > li.state-sel > a:visited {
+		color: #EEE;
+	}
+	body > header:first-child > section:first-child a:hover {
+		color: #F5B;
+	}
+	body > header:first-child > section:first-child a:active {
+		color: #C6B;
+	}
+	@media screen and (max-width:800px) {
+		body > header:first-child {
+			height: 60px;
+		}
+		body > header:first-child > section:first-child > h1 + ul {
+			display: none;
+		}
+	}
+	</style>
 </head>
-<body style="font-family: 'Segoe UI','Helvetica Neue',Tahoma,Arial,Geneva,Verdana,sans-serif,'Segoe UI Symbol'; background-color: #EEE;">
-<div style="padding: 200px 10px 10px 0; text-align: center;">
-	<div style="padding-bottom: 20px; ">
-		<img alt="Muse Tuan" src="\images\avatar\avatar_MuseTuan_2017.jpg" style="background-color: white; width: 256px; height: 256px; border: 0 none transparent; border-radius: 128px; " />
-	</div>
-	<h1 style="font-size: 42px; font-weight: 200; font-style: normal; text-decoration: none; line-height: 48px; padding: 0 0 10px 0; margin: 0; ">Royal Muse Tuan</h1>
-</div>
+<body>
+	<header>
+        <section>
+            <h1><a href="https://musetuan.com"><strong>MuseTuan</strong><span>.com</span></a></h1>
+            <ul>
+                <li>
+                    <a href="https://kingcean.net">Kingcean.net</a>
+                </li>
+                <li>
+                    <a href="https://kingcean.org">Kingcean.org</a>
+                </li>
+            </ul>
+        </section>
+	</header>
+	<section style="padding: 100px 20px 300px 20px; ">
+		<section style="text-align: center; ">
+			<img alt="Muse Tuan" src="images/avatar/avatar_MuseTuan_2017.jpg" style="background-color: white; width: 240px; height: 240px; border: 8px solid #333; border-radius: 128px; text-align: center; " />
+		</section>
+		<h1 style="font-size: 42px; font-weight: 200; font-style: normal; text-decoration: none; line-height: 48px; padding: 0 0 10px 0; text-align: center; ">Royal Muse Tuan</h1>
+	</section>
+	<footer>
+		<section>
+			<div class="x-copyright">
+                <img src="images/logos/barcode.svg" />
+                <span>&copy; Kingcean Tuan &amp; Muse Tuan 2021</span>
+            </div>
+		</section>
+	</footer>
 </body>
 </html>
