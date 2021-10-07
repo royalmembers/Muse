@@ -26,13 +26,22 @@
 		color: #C6B;
 	}
 	section#part-avatar {
-		padding: 100px 20px 240px 20px; background-image: url(images/bg/dark_repeat.jpg); background-position: center top; background-repeat: no-repeat;
+		padding: 100px 20px 160px 20px;
+		background-image: url(images/bg/dark_hearts.jpg);
+		background-position: center top;
+		background-repeat: no-repeat;
+		border-bottom: 1px solid #333;
 	}
 	section#part-avatar > section {
 		text-align: center;
+		height: 260px;
+		user-select: none;
 	}
 	section#part-avatar > h1 {
-		font-size: 42px; font-weight: 200; font-style: normal; text-decoration: none; line-height: 48px; padding: 0 0 10px 0; text-align: center;
+		font-size: 42px; font-weight: 200; font-style: normal; text-decoration: none; line-height: 48px; height: 50px; padding: 0 0 10px 0; text-align: center;
+	}
+	section#part-avatar + section {
+		padding: 60px 20px 160px 20px;
 	}
 	@media screen and (max-width:800px) {
 		body > header:first-child {
@@ -58,7 +67,7 @@
 		</section>
 		<h1>Royal Muse Tuan</h1>
 	</section>
-	<section style="min-height: 300px; ">
+	<section>
 		<h2>Other links</h2>
 		<section>
 			<a class="link-tile-wide" href="https://kingcean.net"><span>Kingcean.net</span>
