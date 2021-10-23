@@ -45,18 +45,23 @@
 		padding: 80px 20px 160px 20px;
 	}
 	section > section > span.x-photo-avatar {
-		width: 192px;
+		width: 152px;
 		padding: 0;
 		margin: 0 8px 8px 0;
 		display: inline-block;
 		user-select: none;
 	}
 	section > section > span.x-photo-avatar > img {
-		width: 192px;
-		height: 192px;
+		width: 152px;
+		height: 152px;
 		border-radius: 8px;
 		padding: 0;
 		margin: 0;
+		transition: 0.4s;
+	}
+	section > section > span.x-photo-avatar > img:hover {
+		filter: contrast(1.2);
+		border-radius: 4px;
 	}
 	@media screen and (max-width:800px) {
 		body > header:first-child {
