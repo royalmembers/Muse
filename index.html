@@ -41,8 +41,22 @@
 	section#part-avatar > h1 {
 		font-size: 42px; font-weight: 200; font-style: normal; text-decoration: none; line-height: 48px; height: 50px; padding: 0 0 10px 0; text-align: center;
 	}
-	section#part-avatar + section {
-		padding: 60px 20px 160px 20px;
+	section.x-part-spacious {
+		padding: 80px 20px 160px 20px;
+	}
+	section > section > span.x-photo-avatar {
+		width: 192px;
+		padding: 0;
+		margin: 0 8px 8px 0;
+		display: inline-block;
+		user-select: none;
+	}
+	section > section > span.x-photo-avatar > img {
+		width: 192px;
+		height: 192px;
+		border-radius: 8px;
+		padding: 0;
+		margin: 0;
 	}
 	@media screen and (max-width:800px) {
 		body > header:first-child {
@@ -64,11 +78,18 @@
 	</header>
 	<section id="part-avatar">
 		<section>
-			<img alt="Muse Tuan" src="images/avatar/avatar_MuseTuan_201810.jpg" style="background-color: white; width: 240px; height: 240px; border: 8px solid #333; border-radius: 128px; text-align: center; " />
+			<img alt="Muse Tuan" src="images/avatar/avatar_MuseTuan_202104.jpg" style="background-color: white; width: 240px; height: 240px; border: 8px solid #333; border-radius: 128px; text-align: center; " />
 		</section>
 		<h1>Royal Muse Tuan</h1>
 	</section>
-	<section>
+	<section class="x-part-spacious">
+		<section style="margin-bottom: 60px;">
+			<span class="x-photo-avatar"><img alt="Muse (2020)" src="images/avatar/avatar_MuseTuan_202001.jpg">
+			</span><span class="x-photo-avatar"><img alt="Muse (2019)" src="images/avatar/avatar_MuseTuan_201910.jpg">
+			</span><span class="x-photo-avatar"><img alt="Muse (2018)" src="images/avatar/avatar_MuseTuan_201810.jpg">
+			</span><span class="x-photo-avatar"><img alt="Muse (2017)" src="images/avatar/avatar_MuseTuan_2017.jpg">
+			</span>
+		</section>
 		<h2>Other links</h2>
 		<section>
 			<a class="link-tile-wide" href="https://kingcean.net"><span>Kingcean.net</span>
