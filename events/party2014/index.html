@@ -29,22 +29,30 @@
 	body > header:first-child > section:first-child a:active {
 		color: #C6B;
 	}
-	section#part-main {
-		text-align: center;
-		padding: 60px 20px 80px 20px;
+	body > section.zone-bg {
 		background-image: url(../../images/bg/dark_hearts.jpg);
 		background-position: center top;
 		background-repeat: no-repeat;
 		user-select: none;
 	}
-	section#part-main > span:first-child {
+	section#part-main {
+		text-align: center;
+		padding: 60px 20px 0px 20px;
+		user-select: none;
+		border-top: 1px solid #222;
+		border-bottom: 1px solid #333;
+	}
+	section#part-main > section:first-child > span:first-child {
 		color: #F7C; background-color: rgba(10, 10, 10, 0.4); font-size: 32px; padding: 20px 60px; border-radius: 60px;
 	}
-	section#part-main > span:first-child + img {
+	section#part-main > section:first-child > span:first-child + img {
 		width: 90%; margin: 100px 0 120px 0; border-radius: 8px;
 	}
-	section#part-main > span:first-child + img + img {
+	section#part-main > section:first-child > span:first-child + img + img {
 		width: 40%;
+	}
+	section#part-main + section {
+		height: 160px;
 	}
 	@media screen and (max-width:800px) {
 		body > header:first-child {
@@ -53,15 +61,18 @@
 		body > header:first-child > section:first-child > h1 + ul {
 			display: none;
 		}
-		section#part-main > span:first-child {
+		section#part-main > section:first-child > span:first-child {
 			font-size: 24px;
 			padding: 20px 40px; 
 		}
-		section#part-main > span:first-child + img {
+		section#part-main > section:first-child > span:first-child + img {
 			width: 100%; margin: 80px 0; border-radius: 8px;
 		}
-		section#part-main > span:first-child + img + img {
+		section#part-main > section:first-child > span:first-child + img + img {
 			width: 50%;
+		}
+		section#part-main + section {
+			height: 80px;
 		}
 	}
 	</style>
@@ -74,12 +85,14 @@
             </ul>
         </section>
 	</header>
-	<section>
-		<section id="part-main" >
+	<section id="part-main" class="zone-bg" >
+		<section>
 			<span>Happy birthday to Muse!</span>
 			<img alt="Muse Tuan" src="20240601_213931.jpg" />
 			<img alt="Champagne" src="20240824_104719.png" />
 		</section>
+	</section>
+	<section class="zone-bg" >
 	</section>
 	<footer>
 		<section>
