@@ -16,6 +16,9 @@
 	a:active {
 		color: #C6B;
 	}
+	body > header:first-child {
+		user-select: none;
+	}
 	body > header:first-child > section:first-child > h1 + ul > li.state-sel > a,
 	body > header:first-child > section:first-child > h1 + ul > li.state-sel > a:visited {
 		color: #EEE;
@@ -27,7 +30,7 @@
 		color: #C6B;
 	}
 	section#part-avatar {
-		padding: 100px 20px 160px 20px;
+		padding: 100px 20px 140px 20px;
 		background-image: url(images/bg/dark_hearts.jpg);
 		background-position: center top;
 		background-repeat: no-repeat;
@@ -36,17 +39,33 @@
 	}
 	section#part-avatar > section {
 		text-align: center;
-		height: 260px;
+		height: 280px;
 		user-select: none;
 	}
+	section#part-avatar > section:first-child > img {
+		background-color: white;
+		width: 256px;
+		height: 256px;
+		border: 8px solid #333;
+		border-radius: 128px;
+		text-align: center;
+	}
 	section#part-avatar > h1 {
-		font-size: 42px; font-weight: 200; font-style: normal; text-decoration: none; line-height: 48px; height: 50px; padding: 0 0 10px 0; text-align: center;
+		font-size: 42px;
+		font-weight: 200;
+		font-style: normal;
+		text-decoration: none;
+		line-height: 48px;
+		height: 50px;
+		padding: 0 0 10px 0;
+		text-align: center;
 	}
 	section.x-part-spacious {
 		padding: 80px 20px 160px 20px;
 	}
 	section > section > span.x-photo-avatar {
-		width: 152px;
+		width: 192px;
+		height: 192px;
 		padding: 0;
 		margin: 0 8px 8px 0;
 		display: inline-block;
@@ -54,8 +73,8 @@
 		user-select: none;
 	}
 	section > section > span.x-photo-avatar > img {
-		width: 152px;
-		height: 152px;
+		width: 192px;
+		height: 192px;
 		border-radius: 8px;
 		padding: 0;
 		margin: 0;
@@ -63,9 +82,11 @@
 	}
 	section > section > span.x-photo-avatar > img:hover {
 		filter: contrast(1.2);
+		scale: 1.02;
 		border-radius: 4px;
 	}
 	#section-avatars {
+		text-align: center;
 		margin-bottom: 60px;
 	}
 	@media screen and (max-width:800px) {
@@ -88,7 +109,7 @@
 	</header>
 	<section id="part-avatar">
 		<section>
-			<img id="image-avatar" alt="Muse Tuan" src="images/avatar/avatar_MuseTuan_202104.jpg" style="background-color: white; width: 240px; height: 240px; border: 8px solid #333; border-radius: 128px; text-align: center; " />
+			<img id="image-avatar" alt="Muse Tuan" src="images/avatar/avatar_MuseTuan_202405.jpg" />
 		</section>
 		<h1>Royal Muse Tuan</h1>
 	</section>
@@ -106,7 +127,7 @@
 		<section>
 			<div class="x-copyright">
                 <img src="images/logos/barcode.svg" />
-                <span>&copy; Kingcean Tuan &amp; Muse Tuan 2021</span>
+                <span>&copy; 2021 Kingcean Tuan &amp; Muse Tuan</span>
             </div>
 		</section>
 	</footer>
@@ -146,7 +167,7 @@
 			span.addEventListener("click", function (ev) {
 				showAvatar(item);
 				container.children[0].style.display = "";
-				window.scrollTo(0, 0);
+				window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 			});
 			var img = document.createElement("img");
 			img.alt = item.title || ("Muse (" + item.year + ")");
