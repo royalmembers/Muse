@@ -47,14 +47,14 @@
 	body > section.x-part-greetings > section:first-child > span:first-child + span {
 		color: #999; font-size: 24px; margin: 40px 0 60px 0; display: block;
 	}
-	body > section.x-part-front > section:first-child {
+	body > section.x-part-front > section {
 		text-align: center;
 	}
 	body > section.x-part-front > section:first-child > img:first-child {
-		width: 90%; margin: 60px 0 80px 0; border-radius: 8px;
+		width: 100%; margin: 60px 0 0 0; border-radius: 8px;
 	}
-	body > section.x-part-front > section:first-child > img:first-child + img {
-		width: 40%;
+	body > section > section.x-zone-photos > img {
+		width: 90%; margin: 10px 0; border-radius: 8px;
 	}
 	body > section.zone-bg.x-part-foot {
 		height: 160px;
@@ -75,11 +75,8 @@
 		body > section.x-part-greetings > section:first-child > span:first-child + span {
 			font-size: 20px;
 		}
-		body > section.x-part-front > section:first-child > img:first-child {
-			width: 100%; margin: 40px 0; border-radius: 8px;
-		}
-		body > section.x-part-front > section:first-child > img:first-child + img {
-			width: 50%;
+		body > section > section.x-zone-photos > img {
+			width: 100%; margin: 10px 0; border-radius: 8px;
 		}
 	}
 	@media screen and (max-width:500px) {
@@ -103,13 +100,21 @@
 	<section class="x-part-greetings zone-bg" >
 		<section>
 			<span>Happy birthday to Muse!</span>
-			<span>Aug. 25<sup>th</sup>, 2024</span>
+			<span>Aug. 25<sup>th</sup>, 2024 &nbsp; | &nbsp; Shanghai</span>
 		</section>
 	</section>
 	<section class="x-part-front" >
 		<section>
-			<img alt="Muse Tuan" src="20240601_213931.jpg" />
-			<img alt="Champagne" src="20240824_104719.jpg" />
+			<img alt="Muse Tuan" src="banner_welcome.jpg" />
+		</section>
+		<section style="color: #999; font-size: 20px; height: 40px; line-height: 40px; " >
+			<span>~ 9 years old ~</span>
+		</section>
+		<section class="x-zone-photos" >
+			<img alt="Muse Tuan" src="20240825_131630.jpg" />
+			<img alt="Muse Tuan" src="20240825_131844.jpg" />
+			<img alt="Muse Tuan" src="20240825_134703.jpg" />
+			<img alt="Muse Tuan" src="20240825_134946.jpg" />
 		</section>
 	</section>
 	<section style="background-color: #282828; padding: 10px 0; " >
@@ -125,8 +130,8 @@
 	<section class="zone-bg x-part-foot" >
 	</section>
 	<section>
-		<section style="color: #444; font-size: 16px; text-align: center; height: 40px; line-height: 40px; user-select: none; " >
-			<span>~ 9 years old ~</span>
+		<section class="x-zone-photos" style="padding: 60px 0; " >
+			<img alt="Muse Tuan" src="20240601_213931.jpg" />
 		</section>
 	</section>
 	<footer>
