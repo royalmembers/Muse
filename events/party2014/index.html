@@ -35,24 +35,31 @@
 		background-repeat: no-repeat;
 		user-select: none;
 	}
-	section#part-main {
+	body > section.x-part-greetings {
 		text-align: center;
 		padding: 60px 20px 0px 20px;
-		user-select: none;
 		border-top: 1px solid #222;
 		border-bottom: 1px solid #333;
 	}
-	section#part-main > section:first-child > span:first-child {
+	body > section.x-part-greetings > section:first-child > span:first-child {
 		color: #F7C; background-color: rgba(10, 10, 10, 0.4); font-size: 32px; padding: 20px 60px; border-radius: 60px;
 	}
-	section#part-main > section:first-child > span:first-child + img {
-		width: 90%; margin: 100px 0 120px 0; border-radius: 8px;
+	body > section.x-part-greetings > section:first-child > span:first-child + span {
+		color: #999; font-size: 24px; margin: 40px 0 60px 0; display: block;
 	}
-	section#part-main > section:first-child > span:first-child + img + img {
+	body > section.x-part-front > section:first-child {
+		text-align: center;
+	}
+	body > section.x-part-front > section:first-child > img:first-child {
+		width: 90%; margin: 60px 0 80px 0; border-radius: 8px;
+	}
+	body > section.x-part-front > section:first-child > img:first-child + img {
 		width: 40%;
 	}
-	section#part-main + section {
+	body > section.zone-bg.x-part-foot {
 		height: 160px;
+		border-top: 1px dashed #444;
+		border-bottom: 1px dashed #444;
 	}
 	@media screen and (max-width:800px) {
 		body > header:first-child {
@@ -61,18 +68,29 @@
 		body > header:first-child > section:first-child > h1 + ul {
 			display: none;
 		}
-		section#part-main > section:first-child > span:first-child {
+		body > section.x-part-greetings > section:first-child > span:first-child {
 			font-size: 24px;
 			padding: 20px 40px; 
 		}
-		section#part-main > section:first-child > span:first-child + img {
-			width: 100%; margin: 80px 0; border-radius: 8px;
+		body > section.x-part-greetings > section:first-child > span:first-child + span {
+			font-size: 20px;
 		}
-		section#part-main > section:first-child > span:first-child + img + img {
+		body > section.x-part-front > section:first-child > img:first-child {
+			width: 100%; margin: 40px 0; border-radius: 8px;
+		}
+		body > section.x-part-front > section:first-child > img:first-child + img {
 			width: 50%;
 		}
-		section#part-main + section {
+		body > section.zone-bg.x-part-foot {
 			height: 80px;
+		}
+	}
+	@media screen and (max-width:500px) {
+		body > section.x-part-greetings > section:first-child > span:first-child {
+			font-size: 20px;
+		}
+		body > section.x-part-greetings > section:first-child > span:first-child + span {
+			font-size: 18px;
 		}
 	}
 	</style>
@@ -85,14 +103,34 @@
             </ul>
         </section>
 	</header>
-	<section id="part-main" class="zone-bg" >
+	<section class="x-part-greetings zone-bg" >
 		<section>
 			<span>Happy birthday to Muse!</span>
-			<img alt="Muse Tuan" src="20240601_213931.jpg" />
-			<img alt="Champagne" src="20240824_104719.png" />
+			<span>Aug. 25<sup>th</sup>, 2024</span>
 		</section>
 	</section>
-	<section class="zone-bg" >
+	<section class="x-part-front" >
+		<section>
+			<img alt="Muse Tuan" src="20240601_213931.jpg" />
+			<img alt="Champagne" src="20240824_104719.jpg" />
+		</section>
+	</section>
+	<section style="background-color: #282828; padding: 10px 0; " >
+		<section>
+			<img alt="Map" src="banner_map.jpg" style="width: 100%; margin: 0; border-radius: 8px; " />
+		</section>
+	</section>
+	<section>
+		<section style="text-align: center; padding: 80px 0; " >
+			<img alt="Map" src="20240825_093930.jpg" style="width: 256px; height: 256px; border-color: #333; border-style: solid; border-width: 0 32px; border-radius: 240px; " />
+		</section>
+	</section>
+	<section class="zone-bg x-part-foot" >
+	</section>
+	<section>
+		<section style="height: 20px; " >
+			
+		</section>
 	</section>
 	<footer>
 		<section>
