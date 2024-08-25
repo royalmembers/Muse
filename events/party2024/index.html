@@ -29,7 +29,7 @@
 	body > header:first-child > section:first-child a:active {
 		color: #C6B;
 	}
-	body > section.zone-bg {
+	body > section.x-zone-bg {
 		background-image: url(../../images/bg/dark_hearts.jpg);
 		background-position: center top;
 		background-repeat: no-repeat;
@@ -47,16 +47,23 @@
 	body > section.x-part-greetings > section:first-child > span:first-child + span {
 		color: #999; font-size: 24px; margin: 40px 0 60px 0; display: block;
 	}
-	body > section.x-part-front > section {
+	body > section.x-part-front > section, body > section.x-zone-photos, body > section > section.x-zone-photos {
 		text-align: center;
 	}
 	body > section.x-part-front > section:first-child > img:first-child {
-		width: 100%; margin: 60px 0 0 0; border-radius: 8px;
+		width: 100%; margin: 40px 0 0 0; border-radius: 8px;
+	}
+	body > section > section.x-zone-photos {
+		user-select: none;
 	}
 	body > section > section.x-zone-photos > img {
 		width: 90%; margin: 10px 0; border-radius: 8px;
 	}
-	body > section.zone-bg.x-part-foot {
+	body > section.x-part-foot {
+		background-image: url(../../images/bg/dark_repeat.jpg);
+		background-position: center top;
+		background-repeat: no-repeat;
+		user-select: none;
 		height: 160px;
 		border-top: 1px dashed #444;
 		border-bottom: 1px dashed #444;
@@ -75,11 +82,17 @@
 		body > section.x-part-greetings > section:first-child > span:first-child + span {
 			font-size: 20px;
 		}
+		body > section.x-part-front {
+			padding: 0 10px;
+		}
 		body > section > section.x-zone-photos > img {
 			width: 100%; margin: 10px 0; border-radius: 8px;
 		}
 	}
 	@media screen and (max-width:500px) {
+		body > section.x-part-front {
+			padding: 0 10px;
+		}
 		body > section.x-part-greetings > section:first-child > span:first-child {
 			font-size: 20px;
 		}
@@ -97,7 +110,7 @@
             </ul>
         </section>
 	</header>
-	<section class="x-part-greetings zone-bg" >
+	<section class="x-part-greetings x-zone-bg" >
 		<section>
 			<span>Happy birthday to Muse!</span>
 			<span>Aug. 25<sup>th</sup>, 2024 &nbsp; | &nbsp; Shanghai</span>
@@ -107,7 +120,9 @@
 		<section>
 			<img alt="Muse Tuan" src="banner_welcome.jpg" />
 		</section>
-		<section style="color: #999; font-size: 20px; height: 40px; line-height: 40px; " >
+	</section>
+	<section class="x-zone-photos" >
+		<section style="color: #999; font-size: 20px; height: 40px; line-height: 40px; user-select: none; " >
 			<span>~ 9 years old ~</span>
 		</section>
 		<section class="x-zone-photos" >
@@ -122,24 +137,25 @@
 			<img alt="Map" src="banner_map.jpg" style="width: 100%; margin: 0; border-radius: 8px; " />
 		</section>
 	</section>
-	<section>
-		<section style="text-align: center; padding: 80px 0; " >
-			<img alt="Map" src="20240825_093930.jpg" style="width: 256px; height: 256px; border-color: #333; border-style: solid; border-width: 0 32px; border-radius: 240px; " />
+	<section class="x-zone-photos" >
+		<section class="x-zone-photos" style="padding: 0 0 40px 0; " >
+			<img alt="Muse Tuan" src="20240825_093930.jpg" />
+			<img alt="Muse Tuan" src="20240825_161600.jpg" />
 		</section>
 	</section>
-	<section class="zone-bg x-part-foot" >
+	<section class="x-part-foot" >
 	</section>
-	<section>
-		<section class="x-zone-photos" style="padding: 60px 0; " >
+	<section class="x-zone-photos" >
+		<section class="x-zone-photos" style="padding: 40px 0; " >
 			<img alt="Muse Tuan" src="20240601_213931.jpg" />
 		</section>
 	</section>
 	<footer>
 		<section>
 			<div class="x-copyright">
-                <img src="../../images/logos/barcode.svg" />
-                <span>&copy; 2024 Kingcean Tuan &amp; Muse Tuan</span>
-            </div>
+				<img src="../../images/logos/barcode.svg" />
+				<span>&copy; 2024 Kingcean Tuan &amp; Muse Tuan</span>
+            		</div>
 		</section>
 	</footer>
 </body>
