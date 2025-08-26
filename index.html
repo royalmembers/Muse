@@ -67,8 +67,8 @@
 		width: 192px;
 		height: 192px;
 		padding: 0;
-		margin: 0 8px 8px 0;
-		display: inline-block;
+		margin: 0;
+		display: block;
 		cursor: pointer;
 		user-select: none;
 	}
@@ -86,8 +86,12 @@
 		border-radius: 4px;
 	}
 	#section-avatars {
-		text-align: center;
 		margin-bottom: 60px;
+		display: flex;
+		row-gap: 8px;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 8px;
 	}
 	@media screen and (max-width:800px) {
 		body > header:first-child {
@@ -97,23 +101,15 @@
 			display: none;
 		}
 		section > section > span.x-photo-avatar, section > section > span.x-photo-avatar > img {
-			width: 142px;
-			height: 142px;
-
+			width: 142px; height: 142px;
 		}
-	}
-	#section-avatars {
-		text-align: center;
-		margin-bottom: 60px;
 	}
 	@media screen and (max-width:500px) {
 		section.x-part-spacious {
 			padding: 60px 10px 160px 10px;
 		}
 		section > section > span.x-photo-avatar, section > section > span.x-photo-avatar > img {
-			width: 112px;
-			height: 112px;
-
+			width: 112px; height: 112px;
 		}
 	}
 	</style>
@@ -136,16 +132,16 @@
 		<section id="section-avatars">
 		</section>
 		<h2>Other links</h2>
-		<section>
-			<a class="link-tile-wide" href="https://kingcean.net"><span>Kingcean.net</span>
-			</a><a class="link-tile-wide" href="https://kingcean.org"><span>Kingcean.org</span>
-			</a><a class="link-tile-wide" href="https://jinchen.org"><span>Jinchen Art</span></a>
+		<section class="link-tile-wide">
+			<a href="https://kingcean.net"><span>Kingcean.net</span>
+			</a><a href="https://kingcean.org"><span>Kingcean.org</span>
+			</a><a href="https://jinchen.org"><span>Jinchen Art</span></a>
 		</section>
 	</section>
 	<footer>
 		<section>
 			<div class="x-copyright">
-                <img src="images/logos/barcode.svg" />
+                <img title="musetuan.com" src="images/logos/barcode.svg" />
                 <span>&copy; 2021 Kingcean Tuan &amp; Muse Tuan</span>
             </div>
 		</section>
