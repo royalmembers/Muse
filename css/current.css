@@ -27,7 +27,11 @@ body > header:first-child {
     body {
         background-image: none;
     }
+    body > header:first-child {
+        height: 60px;
+    }
     body > header:first-child > section:first-child > h1 + ul {
+        display: none;
         background-image: url(../images/bg/title-menu.jpg);
     }
 }

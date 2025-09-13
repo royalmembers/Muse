@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="images/bg/poster.jpg">
+	<title>Muse Tuan</title>
+    <link href="../css/current.css" rel="stylesheet" />
+	<style type="text/css">
+    body {
+        background-color: #222; padding: 0;
+    }
+	</style>
+    <script type="text/javascript">
+    function onInit() {
+        if (top === window || !top.document) return;
+        let ele = top.document.getElementById("video-frame");
+        if (!ele) return;
+        ele.style.display = "none";
+    }
+    </script>
+</head>
+<body onload="onInit()">
+    <section></section>
+</body>
+</html>

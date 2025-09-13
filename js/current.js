@@ -12,9 +12,11 @@ let museSite = {};
         { year: 2019, month: 10 },
         { year: 2018, month: 10 },
         { year: 2017, month: 4 },
-        { year: 2016, month: 6 }
+        { year: 2016, month: 6 },
+        { year: 2015, month: 9 }
     ];
     let videos = [{
+        id: "jingdezhen",
         name: "景德镇陶瓷研学之旅",
         year: 2025,
         links: {
@@ -22,13 +24,14 @@ let museSite = {};
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=4176576759377500"
         }
     },{
+        id: "led",
         name: "点亮神灯",
         year: 2020,
         links: {
             iqiyi: "https://www.iqiyi.com/v_lgmoijf6zg.html",
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=2193622781471600"
         }
-    }]
+    }];
 
     function getAvatarUrl(item) {
         let url = item.url;
@@ -52,6 +55,72 @@ let museSite = {};
         setElementProp("image-avatar", "src", getAvatarUrl(item));
         setElementProp("image-desc", "innerText", strings.photoTaken ? ("* " + strings.photoTaken.replace("{0}", item.year)) : "* Photo taken on '" + item.year + ".");
     }
+
+    museSite.video = function (year, id) {
+        for (let i = 0; i < videos.length; i++) {
+            let v = videos[i];
+            if (v && v.year === year && v.id === id) return v;
+        }
+
+        return undefined;
+    };
+
+    museSite.videosModel = function (kind) {
+        let frame = document.getElementById("video-frame");
+        let prefix = "../videos/?";
+        switch (kind) {
+            case "home":
+                prefix = "./videos/?";
+                break;
+            case "videos":
+                prefix = "./?";
+                break;
+            case "3":
+                prefix = "../../videos/?"
+                break;
+        }
+
+        let arr = videos.map(function (item) {
+            if (!item || !item.links || !item.name) return undefined;
+            let embed = true;
+            let url = item.links["iqiyi-embed"];
+            if (!url) {
+                embed = false;
+                url = item.iqiyi;
+            }
+
+            if (!url) return undefined;
+            let m = {
+                tagName: "a",
+                props: { href: embed ? (prefix + item.year + "/" + item.id) : url },
+                styleRefs: "link-long-button",
+                children: [{
+                    tagName: "span",
+                    children: item.name
+                }, {
+                    tagName: "span",
+                    children: item.year.toString(10)
+                }]
+            };
+            if (!embed) m.props.target = "_blank";
+            else if (frame) m.on = {
+                click(ev) {
+                    if (ev.preventDefault) ev.preventDefault();
+                    else ev.returnValue = false;
+                    frame.src = url;
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            };
+            return m;
+        }).filter(function (item) {
+            return item;
+        });
+        let element = document.getElementById("part-videos");
+        if (!element) return arr;
+        Hje.render(element, {
+            children: arr
+        });
+    };
 
     museSite.initHome = function () {
         let container = document.getElementById("section-avatars");
@@ -84,6 +153,7 @@ let museSite = {};
                 });
             }
         } catch (ex) { }
+        museSite.videosModel("home");
         if (typeof site === "undefined") return;
         let videoStr = site.getString("videos", "title-videos");
         site.getString("otherLinks", "title-links");
