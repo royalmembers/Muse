@@ -3,6 +3,7 @@ let museSite = {};
 
     let settings = {};
     let strings = {};
+
     let avatars = [
         { year: 2025, month: 7 },
         { year: 2024, month: 5 },
@@ -32,6 +33,52 @@ let museSite = {};
             iqiyi: "https://www.iqiyi.com/v_lgmoijf6zg.html",
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=2193622781471600"
         }
+    }];
+    let certs = [{
+        id: "kawai-asia-piano-2025",
+        name: "Kawai 亚洲钢琴大赛",
+        season: "第8届",
+        year: 2025,
+        month: 4,
+        group: "业余组儿童A组",
+        ranking: "三等奖"
+    }, {
+        id: "caa-raataa-3-2021",
+        name: "美院之路全国青少年美术大赛",
+        season: "第3届",
+        year: 2021,
+        month: 8,
+        group: "综合艺术类",
+        ranking: "三等奖"
+    }, {
+        id: "xiamen-musicseason-p-2021",
+        name: "厦门音乐季钢琴公开赛",
+        season: "2021",
+        year: 2021,
+        month: 7,
+        group: "上海赛区幼儿组",
+        ranking: "三等奖"
+    }, {
+        id: "shminhang-creative-36-2021",
+        name: "闵行区青少年科技创新大赛",
+        season: "第36届",
+        year: 2021,
+        month: 5,
+        group: "科学幻想幼儿组",
+        ranking: "二等奖"
+    }, {
+        id: "papajohns-cook-2021",
+        name: "棒约翰欢乐比萨学堂",
+        year: 2021,
+        ranking: "未来Pizza大师"
+    }, {
+        id: "taoli-os-2020",
+        name: "海外桃李杯",
+        season: "第11届",
+        year: 2020,
+        month: 9,
+        group: "学前组",
+        ranking: "二等奖"
     }];
 
     function checkNormalBrowser() {
