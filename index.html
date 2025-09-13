@@ -75,6 +75,9 @@
 			<img id="image-avatar" alt="Muse Tuan" src="images/avatar/avatar_MuseTuan_202507.jpg" />
 		</section>
 		<h1>Royal Muse Tuan</h1>
+		<div>
+			<span id="image-desc" ></span>
+		</div>
 	</section>
 	<section class="x-part-spacious">
 		<section id="section-avatars">
@@ -119,8 +122,15 @@
 			url += ".jpg";
 			return url;
 		}
+		function setElementProp(ele, key, value) {
+			var element = document.getElementById(ele);
+			if (!element) return;
+			element[key] = value;
+		}
 		function showAvatar(item) {
-			document.getElementById("image-avatar").src = getAvatarUrl(item);
+			if (!item) return;
+			setElementProp("image-avatar", "src", getAvatarUrl(item));
+			setElementProp("image-desc", "innerText", "* Photo taken on '" + item.year + ".");
 		}
 		avatars.forEach(function (item, i) {
 			if (!item) return;
