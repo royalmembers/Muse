@@ -9,24 +9,13 @@
     <link href="./css/current.css" rel="stylesheet" />
 	<style type="text/css">
 	section.x-part-spacious {
-		padding: 80px 20px 160px 20px;
+		padding: 20px 20px 160px 20px;
 	}
 	section > section > span.x-photo-avatar {
-		width: 192px;
-		height: 192px;
-		padding: 0;
-		margin: 0;
-		display: block;
-		cursor: pointer;
-		user-select: none;
+		width: 192px; height: 192px; padding: 0; margin: 0; display: block; cursor: pointer; user-select: none;
 	}
 	section > section > span.x-photo-avatar > img {
-		width: 192px;
-		height: 192px;
-		border-radius: 8px;
-		padding: 0;
-		margin: 0;
-		transition: 0.4s;
+		width: 100%; height: 100%; border-radius: 8px; padding: 0; margin: 0; transition: 0.4s;
 	}
 	section > section > span.x-photo-avatar > img:hover {
 		filter: contrast(1.2);
@@ -34,12 +23,23 @@
 		border-radius: 4px;
 	}
 	#section-avatars {
-		margin-bottom: 60px;
-		display: flex;
-		row-gap: 8px;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 8px;
+		margin-top: 60px; margin-bottom: 60px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+	}
+	.x-part-content {
+		padding-top: 19px;
+		padding-bottom: 29px;
+		border-width: 1px 0;
+		border-style: solid none;
+		border-color: #333;
+	}
+	@media screen and (max-width:860px) {
+		section > section > span.x-photo-avatar {
+			width: auto; height: auto; max-width: 192px; max-height: 192px;
+		}
+		#section-avatars {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+		}
 	}
 	@media screen and (max-width:800px) {
 		body > header:first-child {
@@ -48,19 +48,14 @@
 		body > header:first-child > section:first-child > h1 + ul {
 			display: none;
 		}
-		section > section > span.x-photo-avatar, section > section > span.x-photo-avatar > img {
-			width: 142px; height: 142px;
-		}
 	}
-	@media screen and (max-width:500px) {
-		section.x-part-spacious {
-			padding: 60px 10px 160px 10px;
-		}
-		section > section > span.x-photo-avatar, section > section > span.x-photo-avatar > img {
-			width: 112px; height: 112px;
+	@media screen and (max-width:600px) {
+		#section-avatars {
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 	</style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.0.0/docs/js/site.js" ></script>
 	<script type="text/javascript" src="./js/current.js" ></script>
 </head>
 <body onload="museSite.initHome()">
@@ -80,16 +75,20 @@
 			<span id="image-desc" ></span>
 		</div>
 	</section>
-	<section class="x-part-spacious">
+	<section>
 		<section id="section-avatars">
 		</section>
-		<h2>Videos</h2>
+	</section>
+	<section class="x-part-content">
+		<h2 id="title-videos">Videos</h2>
 		<section>
-			<a href="https://www.iqiyi.com/v_14kpuv94euo.html" class="link-long-button"><span>景德镇陶瓷研学之旅</span>
-			</a><a href="https://www.iqiyi.com/v_lgmoijf6zg.html" class="link-long-button"><span>点亮神灯</span>
+			<a href="https://www.iqiyi.com/v_14kpuv94euo.html" class="link-long-button"><span>景德镇陶瓷研学之旅</span><span>2025</span>
+			</a><a href="https://www.iqiyi.com/v_lgmoijf6zg.html" class="link-long-button"><span>点亮神灯</span><span><span>2020</span></span>
 			</a>
 		</section>
-		<h2>Other links</h2>
+	</section>
+	<section class="x-part-spacious">
+		<h2 id="title-links">Other links</h2>
 		<section class="link-tile-wide">
 			<a href="https://kingcean.net"><span>Kingcean.net</span>
 			</a><a href="https://kingcean.org"><span>Kingcean.org</span>

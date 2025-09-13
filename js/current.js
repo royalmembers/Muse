@@ -1,6 +1,7 @@
 let museSite = {};
 (function (museSite) {
 
+    let strings = {};
     let avatars = [
         { year: 2025, month: 7 },
         { year: 2024, month: 5 },
@@ -14,12 +15,14 @@ let museSite = {};
     ];
     let videos = [{
         name: "景德镇陶瓷研学之旅",
+        year: 2025,
         links: {
             iqiyi: "https://www.iqiyi.com/v_14kpuv94euo.html",
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=4176576759377500"
         }
     },{
         name: "点亮神灯",
+        year: 2020,
         links: {
             iqiyi: "https://www.iqiyi.com/v_lgmoijf6zg.html",
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=2193622781471600"
@@ -42,10 +45,11 @@ let museSite = {};
         if (!element) return;
         element[key] = value;
     }
+
     function showAvatar(item) {
         if (!item) return;
         setElementProp("image-avatar", "src", getAvatarUrl(item));
-        setElementProp("image-desc", "innerText", "* Photo taken on '" + item.year + ".");
+        setElementProp("image-desc", "innerText", strings.photoTaken ? ("* " + strings.photoTaken.replace("{0}", item.year)) : "* Photo taken on '" + item.year + ".");
     }
 
     museSite.initHome = function () {
@@ -79,6 +83,12 @@ let museSite = {};
                 });
             }
         } catch (ex) { }
+        if (typeof site === "undefined") return;
+        let videoStr = site.getString("videos", "title-videos");
+        site.getString("otherLinks", "title-links");
+        let ww = videoStr !== "视频";
+        if (ww) return;
+        strings.photoTaken = "照片拍摄于{0}年";
     }
 
 })(museSite || (museSite = {}));

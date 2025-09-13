@@ -36,7 +36,11 @@ body > section + footer,
 body > script + footer {
     background-image: url(../images/bg/bottom.jpg);
 }
-
+body > section > h2 + section > a.link-long-button > span + span {
+    color: #888;
+    font-size: 16px;
+    margin-left: 16px;
+}
 body > section.x-zone-bg {
     background-image: url(../images/bg/dark_hearts.jpg);
     background-position: center top;
@@ -76,4 +80,6 @@ section#part-avatar > h1 + div {
     width: 100%;
     height: 20px;
     text-align: center;
+    cursor: default;
+    user-select: none;
 }
