@@ -1,6 +1,7 @@
 let museSite = {};
 (function (museSite) {
 
+    let settings = {};
     let strings = {};
     let avatars = [
         { year: 2025, month: 7 },
@@ -33,6 +34,30 @@ let museSite = {};
         }
     }];
 
+    function checkNormalBrowser() {
+        if (typeof settings.unnormal === "boolean") return !settings.unnormal;
+        if (typeof navigator === "undefined" || !navigator.userAgent) {
+            settings.unnormal = true;
+            return false;
+        }
+
+        let ua = navigator.userAgent;
+        if (!ua.includes("Chrome/") && ua.includes("Edg/") && ua.includes("AppleWebKit/") && ua.includes("Firefox/")) {
+            settings.unnormal = true;
+            return false;
+        }
+
+        if (ua.includes("MicroMessenger/") || ua.includes("DingTalk/") || ua.includes("WeChat/") || ua.includes("BytedanceWebview/") || ua.includes("Lark/") || ua.includes("Weibo ")) {
+            if (!ua.includes(" (Windows NT ")) {
+                settings.unnormal = true;
+                return false;
+            }
+        }
+
+        settings.unnormal = false;
+        return true;
+    }
+
     function getAvatarUrl(item) {
         let url = item.url;
         if (url) return url;
@@ -44,6 +69,7 @@ let museSite = {};
         url += ".jpg";
         return url;
     }
+
     function setElementProp(ele, key, value) {
         let element = document.getElementById(ele);
         if (!element) return;
@@ -82,13 +108,9 @@ let museSite = {};
 
         let arr = videos.map(function (item) {
             if (!item || !item.links || !item.name) return undefined;
-            let embed = true;
             let url = item.links["iqiyi-embed"];
-            if (!url) {
-                embed = false;
-                url = item.iqiyi;
-            }
-
+            let embed = checkNormalBrowser() && url;
+            if (!embed) url = item.links.iqiyi;
             if (!url) return undefined;
             let m = {
                 tagName: "a",
@@ -144,7 +166,7 @@ let museSite = {};
         try {
             let q = location.search;
             if (q.length === 5) {
-                let year = parseInt(q.substr(1));
+                let year = parseInt(q.substring(1));
                 if (year > 2000 && year < 3000) avatars.some(function (item) {
                     if (item.year !== year) return false;
                     container.children[0].style.display = "";
