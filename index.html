@@ -61,8 +61,9 @@
 		}
 	}
 	</style>
+	<script type="text/javascript" src="./js/current.js" ></script>
 </head>
-<body>
+<body onload="museSite.initHome()">
 	<header>
         <section>
             <h1><a href="https://musetuan.com"><strong>MuseTuan</strong><span>.com</span></a></h1>
@@ -82,6 +83,12 @@
 	<section class="x-part-spacious">
 		<section id="section-avatars">
 		</section>
+		<h2>Videos</h2>
+		<section>
+			<a href="https://www.iqiyi.com/v_14kpuv94euo.html" class="link-long-button"><span>景德镇陶瓷研学之旅</span>
+			</a><a href="https://www.iqiyi.com/v_lgmoijf6zg.html" class="link-long-button"><span>点亮神灯</span>
+			</a>
+		</section>
 		<h2>Other links</h2>
 		<section class="link-tile-wide">
 			<a href="https://kingcean.net"><span>Kingcean.net</span>
@@ -97,71 +104,5 @@
             </div>
 		</section>
 	</footer>
-	<script type="text/javascript">
-	(function () {
-		var avatars = [
-			{ year: 2025, month: 7 },
-			{ year: 2024, month: 5 },
-			{ year: 2023, month: 6 },
-			{ year: 2022, month: 1 },
-			{ year: 2021, month: 4 },
-			{ year: 2020, month: 1 },
-			{ year: 2019, month: 10 },
-			{ year: 2018, month: 10 },
-			{ year: 2017, month: 4 }
-		];
-		var container = document.getElementById("section-avatars");
-		function getAvatarUrl(item) {
-			var url = item.url;
-			if (url) return url;
-			url = "./images/avatar/avatar_MuseTuan_" + item.year;
-			if (item.month) {
-				if (item.month < 10) url += "0";
-				url += item.month;
-			}
-			url += ".jpg";
-			return url;
-		}
-		function setElementProp(ele, key, value) {
-			var element = document.getElementById(ele);
-			if (!element) return;
-			element[key] = value;
-		}
-		function showAvatar(item) {
-			if (!item) return;
-			setElementProp("image-avatar", "src", getAvatarUrl(item));
-			setElementProp("image-desc", "innerText", "* Photo taken on '" + item.year + ".");
-		}
-		avatars.forEach(function (item, i) {
-			if (!item) return;
-			var url = getAvatarUrl(item);
-			var span = document.createElement("span");
-			span.className = "x-photo-avatar";
-			if (i === 0) span.style.display = "none";
-			span.addEventListener("click", function (ev) {
-				showAvatar(item);
-				container.children[0].style.display = "";
-				window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-			});
-			var img = document.createElement("img");
-			img.alt = item.title || ("Muse (" + item.year + ")");
-			img.src = url;
-			span.appendChild(img);
-			container.append(span);
-		});
-		try {
-			var q = location.search;
-			if (q.length === 5) {
-				var year = parseInt(q.substr(1));
-				if (year > 2000 && year < 3000) avatars.some(function (item) {
-					if (item.year !== year) return false;
-					container.children[0].style.display = "";
-					showAvatar(item);
-					return true;
-				});
-			}
-		} catch (ex) { }
-	}());
-	</script>
 </body>
 </html>
