@@ -11,7 +11,8 @@ let museSite = {};
         { year: 2020, month: 1 },
         { year: 2019, month: 10 },
         { year: 2018, month: 10 },
-        { year: 2017, month: 4 }
+        { year: 2017, month: 4 },
+        { year: 2016, month: 6 }
     ];
     let videos = [{
         name: "景德镇陶瓷研学之旅",
