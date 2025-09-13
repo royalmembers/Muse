@@ -88,7 +88,7 @@ let museSite = {};
         site.getString("otherLinks", "title-links");
         let ww = videoStr !== "视频";
         if (ww) return;
-        strings.photoTaken = "照片拍摄于{0}年";
+        strings.photoTaken = "本照片拍摄于{0}年";
     }
 
 })(museSite || (museSite = {}));
