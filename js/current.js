@@ -173,12 +173,15 @@ let museSite = {};
                 props: { alt: item.name, src: "../images/certs/" + (typeof item.img === "string" ? item.img : (item.id + ".jpg")) }
             }]
         });
+        let year = [{ tagName: "span", children: item.year.toString(10) + "年" }]
+        if (item.month) year[0].children += item.month.toString(10) + "月";
+        if (item.publisher) year.splice(0, 0, { tagName: "span", children: item.publisher });
         arr.push({
             tagName: "div",
             styleRefs: "x-part-cert-year",
-            children: [{ tagName: "span", children: item.year.toString(10) + "年" + (item.month ? (item.month.toString(10) + "月") : "") }]
+            children: year
         });
-        Hje.render(details, { children: arr });
+        Hje.render(details, { children: [{ tagName: "section", children: arr }] });
         details.style.display = "";
     }
 
