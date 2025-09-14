@@ -40,8 +40,9 @@ let museSite = {};
         season: "第8届",
         year: 2025,
         month: 4,
-        group: "业余组儿童A组",
-        ranking: "三等奖"
+        group: "上海赛区业余组儿童A组",
+        ranking: "三等奖",
+        publisher: "柏斯音乐基金会"
     }, {
         id: "caa-raataa-3-2021",
         name: "美院之路全国青少年美术大赛",
@@ -49,7 +50,8 @@ let museSite = {};
         year: 2021,
         month: 8,
         group: "综合艺术类",
-        ranking: "三等奖"
+        ranking: "三等奖",
+        publisher: "中国美术学院"
     }, {
         id: "xiamen-musicseason-p-2021",
         name: "厦门音乐季钢琴公开赛",
@@ -57,7 +59,8 @@ let museSite = {};
         year: 2021,
         month: 7,
         group: "上海赛区幼儿组",
-        ranking: "三等奖"
+        ranking: "三等奖",
+        publisher: "厦门市思明区人民政府"
     }, {
         id: "shminhang-creative-36-2021",
         name: "闵行区青少年科技创新大赛",
@@ -65,12 +68,14 @@ let museSite = {};
         year: 2021,
         month: 5,
         group: "科学幻想幼儿组",
-        ranking: "二等奖"
+        ranking: "二等奖",
+        publisher: "上海市闵行区教育局 上海市闵行区科学技术协会"
     }, {
         id: "papajohns-cook-2021",
         name: "棒约翰欢乐比萨学堂",
         year: 2021,
-        ranking: "未来Pizza大师"
+        ranking: "未来Pizza大师",
+        publisher: "上海棒约翰餐饮管理有限公司"
     }, {
         id: "taoli-os-2020",
         name: "海外桃李杯",
@@ -78,8 +83,13 @@ let museSite = {};
         year: 2020,
         month: 9,
         group: "学前组",
-        ranking: "二等奖"
+        ranking: "二等奖",
+        publisher: "深圳市五洲行艺术团有限责任公司"
     }];
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
     function checkNormalBrowser() {
         if (typeof settings.unnormal === "boolean") return !settings.unnormal;
@@ -129,6 +139,61 @@ let museSite = {};
         setElementProp("image-desc", "innerText", strings.photoTaken ? ("* " + strings.photoTaken.replace("{0}", item.year)) : "* Photo taken on '" + item.year + ".");
     }
 
+    function render(ele, model) {
+        if (!ele) return undefined;
+        if (typeof ele === "string") ele = document.getElementById(ele);
+        if (!ele.tagName) return undefined;
+        Hje.render(ele, model);
+        return ele;
+    }
+
+    function showCert(item, details) {
+        let arr = [{
+            tagName: "div",
+            styleRefs: "x-part-cert-name",
+            children: []
+        }];
+        if (item.season) arr[0].children.push({ tagName: "span", styleRefs: "x-part-cert-season", children: item.season });
+        arr[0].children.push({ tagName: "span", styleRefs: "x-part-cert-name", children: item.name });
+        if (item.group) arr.push({
+            tagName: "div",
+            styleRefs: "x-part-cert-group",
+            children: [{ tagName: "span", children: item.group }]
+        });
+        arr.push({
+            tagName: "div",
+            styleRefs: "x-part-cert-ranking",
+            children: [{tagName: "span", children: item.ranking }]
+        });
+        if (item.img !== false) arr.push({
+            tagName: "div",
+            styleRefs: "x-part-cert-img",
+            children: [{
+                tagName: "img",
+                props: { alt: item.name, src: "../images/certs/" + (typeof item.img === "string" ? item.img : (item.id + ".jpg")) }
+            }]
+        });
+        arr.push({
+            tagName: "div",
+            styleRefs: "x-part-cert-year",
+            children: [{ tagName: "span", children: item.year.toString(10) + "年" + (item.month ? (item.month.toString(10) + "月") : "") }]
+        });
+        Hje.render(details, { children: arr });
+        details.style.display = "";
+    }
+
+    function addCertEvent(item, model, details) {
+        if (!details) return;
+        model.on = {
+            click(ev) {
+                if (ev.preventDefault) ev.preventDefault();
+                else ev.returnValue = false;
+                showCert(item, details);
+                scrollToTop();
+            }
+        };
+    }
+
     museSite.video = function (year, id) {
         for (let i = 0; i < videos.length; i++) {
             let v = videos[i];
@@ -136,6 +201,46 @@ let museSite = {};
         }
 
         return undefined;
+    };
+
+    museSite.initHome = function () {
+        let container = document.getElementById("section-avatars");
+        avatars.forEach(function (item, i) {
+            if (!item) return;
+            let url = getAvatarUrl(item);
+            let span = document.createElement("span");
+            span.className = "x-photo-avatar";
+            if (i === 0) span.style.display = "none";
+            span.addEventListener("click", function (ev) {
+                showAvatar(item);
+                container.children[0].style.display = "";
+                scrollToTop();
+            });
+            let img = document.createElement("img");
+            img.alt = item.title || ("Muse (" + item.year + ")");
+            img.src = url;
+            span.appendChild(img);
+            container.append(span);
+        });
+        try {
+            let q = location.search;
+            if (q.length === 5) {
+                let year = parseInt(q.substring(1));
+                if (year > 2000 && year < 3000) avatars.some(function (item) {
+                    if (item.year !== year) return false;
+                    container.children[0].style.display = "";
+                    showAvatar(item);
+                    return true;
+                });
+            }
+        } catch (ex) { }
+        museSite.videosModel("home");
+        if (typeof site === "undefined") return;
+        let videoStr = site.getString("videos", "title-videos");
+        site.getString("otherLinks", "title-links");
+        let ww = videoStr !== "视频";
+        if (ww) return;
+        strings.photoTaken = "本照片拍摄于{0}年";
     };
 
     museSite.videosModel = function (kind) {
@@ -177,58 +282,55 @@ let museSite = {};
                     if (ev.preventDefault) ev.preventDefault();
                     else ev.returnValue = false;
                     frame.src = url;
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    scrollToTop();
                 }
             };
             return m;
         }).filter(function (item) {
             return item;
         });
-        let element = document.getElementById("part-videos");
-        if (!element) return arr;
-        Hje.render(element, {
+        render("part-videos", {
             children: arr
         });
     };
 
-    museSite.initHome = function () {
-        let container = document.getElementById("section-avatars");
-        avatars.forEach(function (item, i) {
-            if (!item) return;
-            let url = getAvatarUrl(item);
-            let span = document.createElement("span");
-            span.className = "x-photo-avatar";
-            if (i === 0) span.style.display = "none";
-            span.addEventListener("click", function (ev) {
-                showAvatar(item);
-                container.children[0].style.display = "";
-                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-            });
-            let img = document.createElement("img");
-            img.alt = item.title || ("Muse (" + item.year + ")");
-            img.src = url;
-            span.appendChild(img);
-            container.append(span);
-        });
-        try {
-            let q = location.search;
-            if (q.length === 5) {
-                let year = parseInt(q.substring(1));
-                if (year > 2000 && year < 3000) avatars.some(function (item) {
-                    if (item.year !== year) return false;
-                    container.children[0].style.display = "";
-                    showAvatar(item);
-                    return true;
+    museSite.initCerts = function () {
+        let arr = [];
+        let details = document.getElementById("part-cert");
+        let id = site.firstQuery();
+        let info;
+        let year;
+        for (let i = 0; i < certs.length; i++) {
+            let item = certs[i];
+            if (!item || !item.name) continue;
+            if (item.year !== year && !isNaN(parseInt(item.year))) {
+                arr.push({
+                    tagName: "span",
+                    styleRefs: "x-part-cert-year",
+                    children: item.year.toString(10)
                 });
+                year = item.year;
             }
-        } catch (ex) { }
-        museSite.videosModel("home");
-        if (typeof site === "undefined") return;
-        let videoStr = site.getString("videos", "title-videos");
-        site.getString("otherLinks", "title-links");
-        let ww = videoStr !== "视频";
-        if (ww) return;
-        strings.photoTaken = "本照片拍摄于{0}年";
-    }
+
+            let m = {
+                tagName: "a",
+                styleRefs: "link-long-button",
+                props: {
+                    href: "../certs/?" + item.id
+                },
+                children: [
+                    { tagName: "span", children: item.name },
+                    { tagName: "span", children: item.ranking }
+                ]
+            };
+            addCertEvent(item, m, details);
+            if (id && id === item.id) info = item;
+            arr.push(m);
+        }
+
+        Hje.render("part-certs", { children: arr });
+        if (id && info) showCert(info, details);
+        return arr;
+    };
 
 })(museSite || (museSite = {}));
