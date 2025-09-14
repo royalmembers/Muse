@@ -43,7 +43,8 @@ let museSite = {};
         month: 4,
         group: "上海赛区业余组儿童A组",
         ranking: "三等奖",
-        publisher: "柏斯音乐基金会"
+        publisher: "柏斯音乐基金会",
+        keywords: ["instrumental performance"]
     }, {
         id: "shnu3ps-honor-2025",
         name: "上师三附小“英语学科大闯关”",
@@ -52,7 +53,8 @@ let museSite = {};
         month: 4,
         group: "四年级比赛",
         ranking: "背记小达人",
-        publisher: "上海师范大学附属闵行第三小学"
+        publisher: "上海师范大学附属闵行第三小学",
+        keywords: ["subject"]
     }, {
         id: "shnu3ps-match-2025",
         name: "上师三附小艺术单项比赛",
@@ -62,7 +64,8 @@ let museSite = {};
         month: 3,
         group: "钢琴专场",
         ranking: "三等奖",
-        publisher: "上海师范大学附属闵行第三小学"
+        publisher: "上海师范大学附属闵行第三小学",
+        keywords: ["instrumental performance"]
     }, {
         id: "vivace-piano-2024",
         name: "Vivace 国际钢琴大赛",
@@ -72,7 +75,8 @@ let museSite = {};
         month: 6,
         group: "上海赛区少儿A组",
         ranking: "二等奖",
-        publisher: "法国中法艺术协会"
+        publisher: "法国中法艺术协会",
+        keywords: ["instrumental performance"]
     }, {
         id: "shnu3ps-honer-2024",
         name: "红领巾奖章",
@@ -81,7 +85,8 @@ let museSite = {};
         year: 2024,
         month: 1,
         ranking: "个人一星章",
-        publisher: "中国少先队上海师范大学附属闵行第三小学工作委员会"
+        publisher: "中国少先队上海师范大学附属闵行第三小学工作委员会",
+        keywords: ["medal"]
     }, {
         id: "kawai-asia-piano-2023",
         name: "Kawai 亚洲钢琴大赛",
@@ -91,7 +96,8 @@ let museSite = {};
         month: 4,
         group: "上海赛区业余组儿童B组",
         ranking: "二等奖",
-        publisher: "柏斯音乐基金会"
+        publisher: "柏斯音乐基金会",
+        keywords: ["instrumental performance"]
     }, {
         id: "shnu3ps-match-2023",
         name: "上师三附小“未来星电视台”小记者评比",
@@ -99,7 +105,8 @@ let museSite = {};
         year: 2023,
         month: 3,
         ranking: "一等奖",
-        publisher: "上海师范大学附属闵行第三小学"
+        publisher: "上海师范大学附属闵行第三小学",
+        keywords: []
     }, {
         id: "shnu3ps-match-2022",
         name: "上师三附小“一起创造献冬奥”评比",
@@ -107,7 +114,8 @@ let museSite = {};
         year: 2022,
         month: 3,
         ranking: "一等奖",
-        publisher: "上海师范大学附属闵行第三小学"
+        publisher: "上海师范大学附属闵行第三小学",
+        keywords: ["fine art"]
     }, {
         id: "caa-raataa-3-2021",
         name: "美院之路全国青少年美术大赛",
@@ -117,7 +125,8 @@ let museSite = {};
         month: 8,
         group: "综合艺术类",
         ranking: "三等奖",
-        publisher: "中国美术学院"
+        publisher: "中国美术学院",
+        keywords: ["fine art"]
     }, {
         id: "xiamen-musicseason-p-2021",
         name: "厦门音乐季钢琴公开赛",
@@ -127,7 +136,8 @@ let museSite = {};
         month: 7,
         group: "上海赛区幼儿组",
         ranking: "三等奖",
-        publisher: "厦门市思明区人民政府"
+        publisher: "厦门市思明区人民政府",
+        keywords: ["instrumental performance"]
     }, {
         id: "shminhang-creative-36-2021",
         name: "闵行区青少年科技创新大赛",
@@ -135,16 +145,18 @@ let museSite = {};
         season: "第36届",
         year: 2021,
         month: 5,
-        group: "科学幻想幼儿组",
+        group: "科学幻想画幼儿组",
         ranking: "二等奖",
-        publisher: "上海市闵行区教育局 上海市闵行区科学技术协会"
+        publisher: "上海市闵行区教育局 上海市闵行区科学技术协会",
+        keywords: ["fine art"]
     }, {
         id: "papajohns-cook-2021",
         name: "棒约翰欢乐比萨学堂",
         scope: "interest",
         year: 2021,
         ranking: "未来Pizza大师",
-        publisher: "上海棒约翰餐饮管理有限公司"
+        publisher: "上海棒约翰餐饮管理有限公司",
+        keywords: ["cook"]
     }, {
         id: "childrenpal-shminhangpjz-hc-2020",
         name: "浦江镇青少年教育培训中心合唱",
@@ -152,7 +164,8 @@ let museSite = {};
         year: 2020,
         month: 12,
         ranking: "勤奋学员",
-        publisher: "中国福利会少年宫上海闵行区浦江镇青少年教育培训中心"
+        publisher: "中国福利会少年宫上海闵行区浦江镇青少年教育培训中心",
+        keywords: ["sing"]
     }, {
         id: "taoli-os-2020",
         name: "海外桃李杯",
@@ -162,7 +175,8 @@ let museSite = {};
         month: 9,
         group: "学前组",
         ranking: "二等奖",
-        publisher: "深圳市五洲行艺术团有限责任公司"
+        publisher: "深圳市五洲行艺术团有限责任公司",
+        keywords: ["dance"]
     }];
 
     function scrollToTop() {
