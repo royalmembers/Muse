@@ -11,10 +11,23 @@
     section.video-container {
         padding: 0;
     }
+    header + section.video-container + section {
+        margin-bottom: 29px; padding: 20px; border-bottom: 1px solid #333; background: url(../images/bg/dark_hearts.jpg); background-position: center top;
+    }
+    header + section.video-container + section > section {
+        margin-top: 0; margin-bottom: 0;
+    }
+    header + section.video-container + section > section:first-child > span {
+        color: #CCC;
+    }
+    header + section.video-container + section > section:first-child > span:first-child + span {
+        color: #888; margin-left: 16px;
+    }
+    header + section.video-container + section > section:first-child > span:first-child + span + a {
+        float: right;
+    }
 	iframe#video-frame {
-        width: 100%;
-        height: calc(100vh - 60px);
-        border: 0 none transparent;
+        width: 100%; height: calc(100vh - 60px); border: 0 none transparent;
     }
     body > section:has(+ footer) {
         margin-bottom: 80px;
@@ -23,23 +36,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.0.0/dist/index.js" ></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.0.0/docs/js/site.js" ></script>
 	<script type="text/javascript" src="../js/current.js" ></script>
-    <script type="text/javascript" >
-    function onInit() {
-        site.getString("videos", "title-videos");
-        museSite.videosModel("videos");
-        let q = (site.firstQuery() || "").split("/");
-        if (q.length < 2) return;
-        let year = parseInt(q[0]);
-        let id = q[1];
-        let v = museSite.video(year, id);
-        if (!v || !v.links) return;
-        let ele = document.getElementById("video-frame");
-        ele.src = v.links["iqiyi-embed"] || v.links.iqiyi;
-        ele.style.display = "";
-    }
-    </script>
 </head>
-<body onload="onInit()">
+<body onload="museSite.initVideos()">
 	<header>
         <section>
             <h1><a href="https://musetuan.com"><strong>Muse</strong><span>Tuan.com</span></a></h1>
@@ -49,6 +47,10 @@
 	</header>
 	<section class="video-container">
 		<iframe id="video-frame" title="Video" allow="fullscreen; autoplay; encrypted-media; midi; payment" allowtransparency="true" style="display: none;" ></iframe>
+	</section>
+    <section>
+        <section id="part-video-name">
+        </section>
 	</section>
     <section>
 		<h2 id="title-videos">Videos</h2>

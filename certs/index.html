@@ -12,7 +12,7 @@
         margin-bottom: 80px;
     }
     section.x-zone-hl {
-        padding: 20px; margin: 0; background: url(../images/bg/dark_repeat.jpg); background-position: center top;
+        padding: 20px; margin: 0; background: url(../images/bg/dark_repeat.jpg); background-position: center top; position: sticky; top: 0; z-index: 100;
     }
     section.x-zone-hl > h2 {
         padding: 0; margin: 0 auto; line-height: 30px;
@@ -45,7 +45,10 @@
         font-size: 20px; line-height: 28px;
     }
     section#part-cert > section > div.x-part-cert-img {
-        padding: 2px; margin: 20px 0 10px 0; border: 1px solid #333; border-radius: 4px; cursor: default; user-select: none;
+        padding: 2px; margin: 20px 0 10px 0; border: 1px solid #333; border-radius: 4px; cursor: default; user-select: none; transition: 0.2s;
+    }
+    section#part-cert > section > div.x-part-cert-img:hover {
+        border-color: #3C3C3C;
     }
     section#part-cert > section > div.x-part-cert-img > img {
         width: 100%; max-width: 1000px; max-height: 1000px; aspect-ratio: auto; object-fit: contain;
@@ -71,12 +74,33 @@
     section#part-certs > span.x-part-cert-year {
         color: #888; line-height: 20px; margin: 20px 15px 10px 25px; display: block; cursor: default; user-select: none;
     }
+    section#part-certs > a.link-long-button {
+        padding: 14px 24px 14px 64px; background: url(../images/decoration/olive-branch-2-gray4.png) no-repeat left 20px center / 32px; background-color: rgba(128, 128, 128, 0.06);
+    }
+    section#part-certs > a.link-long-button:hover {
+        padding: 14px 24px 14px 67px; background: url(../images/decoration/olive-branch-2-gold.png) no-repeat left 18px center / 36px; background-color: rgba(128, 128, 128, 0.2);
+    }
+    section#part-certs > a.link-long-button:active {
+        padding: 14px 24px 14px 64px; background: url(../images/decoration/olive-branch-2-gold.png) no-repeat left 20px center / 32px; background-color: rgba(128, 128, 128, 0.08);
+    }
+    section#part-certs > a.link-long-button > span {
+        display: block;
+    }
+    section#part-certs > a.link-long-button > span:first-child {
+        font-size: 14px;
+    }
+    section#part-certs > a.link-long-button > span + span {
+        font-size: 12px;
+    }
     section#part-certs > a.link-long-button > span:first-child + span {
-        font-size: 18px; margin-left: 30px;
+        font-size: 16px;
     }
     @media screen and (max-width:640px) {
         section#part-cert > section > div.x-part-cert-year > span {
             display: block;
+        }
+        section#part-cert > section > div:first-child > div.x-part-cert-name > span.x-part-cert-name {
+            font-size: 16px;
         }
         section#part-cert > section > div.x-part-cert-year > span + span {
             margin-left: 0;
@@ -86,13 +110,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.0.0/dist/index.js" ></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.0.0/docs/js/site.js" ></script>
 	<script type="text/javascript" src="../js/current.js" ></script>
-    <script type="text/javascript" >
-    function onInit() {
-        museSite.initCerts();
-    }
-    </script>
 </head>
-<body onload="onInit()">
+<body onload="museSite.initCerts()">
 	<header>
         <section>
             <h1><a href="https://musetuan.com"><strong>Muse</strong><span>Tuan.com</span></a></h1>
@@ -110,7 +129,7 @@
     <section>
 		<section id="part-certs-filter">
             <label>
-                <input id="checkbox-certs" type="checkbox" value="only-match" /><span>过滤仅显示有一定影响力的赛事或称号</span>
+                <input id="checkbox-certs" type="checkbox" value="only-match" /><span>过滤为仅显示有一定影响力的赛事或称号</span>
             </label>
 		</section>
 		<section id="part-certs">

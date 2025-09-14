@@ -228,6 +228,42 @@ let museSite = {};
         };
     }
 
+    function certsModel(arr, id, details, onlyMatch) {
+        let info;
+        let year;
+        if (arr.length > 1) arr.splice(0);
+        for (let i = 0; i < certs.length; i++) {
+            let item = certs[i];
+            if (!item || !item.name || item.disable) continue;
+            if (onlyMatch && item.scope !== "match" && item.scope !== "pro") continue;
+            if (item.year !== year && !isNaN(parseInt(item.year))) {
+                arr.push({
+                    tagName: "span",
+                    styleRefs: "x-part-cert-year",
+                    children: item.year.toString(10)
+                });
+                year = item.year;
+            }
+
+            let m = {
+                tagName: "a",
+                styleRefs: "link-long-button",
+                props: {
+                    href: "../certs/?" + item.id
+                },
+                children: [
+                    { tagName: "span", children: item.name },
+                    { tagName: "span", children: item.ranking }
+                ]
+            };
+            addCertEvent(item, m, details);
+            if (id && id === item.id) info = item;
+            arr.push(m);
+        }
+
+        return info;
+    }
+
     museSite.video = function (year, id) {
         for (let i = 0; i < videos.length; i++) {
             let v = videos[i];
@@ -330,41 +366,33 @@ let museSite = {};
         });
     };
 
-    function certsModel(arr, id, details, onlyMatch) {
-        let info;
-        let year;
-        if (arr.length > 1) arr.splice(0);
-        for (let i = 0; i < certs.length; i++) {
-            let item = certs[i];
-            if (!item || !item.name || item.disable) continue;
-            if (onlyMatch && item.scope !== "match" && item.scope !== "pro") continue;
-            if (item.year !== year && !isNaN(parseInt(item.year))) {
-                arr.push({
-                    tagName: "span",
-                    styleRefs: "x-part-cert-year",
-                    children: item.year.toString(10)
-                });
-                year = item.year;
-            }
-
-            let m = {
+    museSite.initVideos = function () {
+        let videoStr = site.getString("videos", "title-videos");
+        museSite.videosModel("videos");
+        let q = (site.firstQuery() || "").split("/");
+        if (q.length < 2) return;
+        let year = parseInt(q[0]);
+        let id = q[1];
+        let v = museSite.video(year, id);
+        if (!v || !v.links) return;
+        let ele = document.getElementById("video-frame");
+        ele.src = v.links["iqiyi-embed"] || v.links.iqiyi;
+        ele.style.display = "";
+        ele = document.getElementById("part-video-name");
+        if (ele) Hje.render(ele, {
+            children: [{
+                tagName: "span",
+                children: v.name
+            }, {
+                tagName: "span",
+                children: v.year.toString(10)
+            }, {
                 tagName: "a",
-                styleRefs: "link-long-button",
-                props: {
-                    href: "../certs/?" + item.id
-                },
-                children: [
-                    { tagName: "span", children: item.name },
-                    { tagName: "span", children: item.ranking }
-                ]
-            };
-            addCertEvent(item, m, details);
-            if (id && id === item.id) info = item;
-            arr.push(m);
-        }
-
-        return info;
-    }
+                props: { href: v.links.iqiyi },
+                children: videoStr === "视频" ? "刷新" : "Refresh"
+            }]
+        });
+    };
 
     museSite.initCerts = function () {
         let arr = [];
@@ -378,7 +406,6 @@ let museSite = {};
             certsModel(arr, id, details, checkbox.checked);
             c.refresh();
         });
-        return arr;
     };
 
 })(museSite || (museSite = {}));
