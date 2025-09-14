@@ -37,6 +37,7 @@ let museSite = {};
     let certs = [{
         id: "kawai-asia-piano-2025",
         name: "Kawai 亚洲钢琴大赛",
+        scope: "match",
         season: "第8届",
         year: 2025,
         month: 4,
@@ -44,8 +45,25 @@ let museSite = {};
         ranking: "三等奖",
         publisher: "柏斯音乐基金会"
     }, {
+        id: "shnu3ps-match-2023",
+        name: "上师三附小“未来星电视台”小记者评比",
+        scope: "school",
+        year: 2023,
+        month: 3,
+        ranking: "一等奖",
+        publisher: "上海师范大学附属闵行第三小学"
+    }, {
+        id: "shnu3ps-match-2022",
+        name: "上师三附小“一起创造献冬奥”评比",
+        scope: "school",
+        year: 2022,
+        month: 3,
+        ranking: "一等奖",
+        publisher: "上海师范大学附属闵行第三小学"
+    }, {
         id: "caa-raataa-3-2021",
         name: "美院之路全国青少年美术大赛",
+        scope: "match",
         season: "第3届",
         year: 2021,
         month: 8,
@@ -55,6 +73,7 @@ let museSite = {};
     }, {
         id: "xiamen-musicseason-p-2021",
         name: "厦门音乐季钢琴公开赛",
+        scope: "match",
         season: "2021",
         year: 2021,
         month: 7,
@@ -64,6 +83,7 @@ let museSite = {};
     }, {
         id: "shminhang-creative-36-2021",
         name: "闵行区青少年科技创新大赛",
+        scope: "match",
         season: "第36届",
         year: 2021,
         month: 5,
@@ -73,12 +93,22 @@ let museSite = {};
     }, {
         id: "papajohns-cook-2021",
         name: "棒约翰欢乐比萨学堂",
+        scope: "interest",
         year: 2021,
         ranking: "未来Pizza大师",
         publisher: "上海棒约翰餐饮管理有限公司"
     }, {
+        id: "childrenpal-shminhangpjz-hc-2020",
+        name: "浦江镇青少年教育培训中心合唱",
+        scope: "institution",
+        year: 2020,
+        month: 12,
+        ranking: "勤奋学员",
+        publisher: "中国福利会少年宫上海闵行区浦江镇青少年教育培训中心"
+    }, {
         id: "taoli-os-2020",
         name: "海外桃李杯",
+        scope: "match",
         season: "第11届",
         year: 2020,
         month: 9,
@@ -165,6 +195,7 @@ let museSite = {};
             styleRefs: "x-part-cert-ranking",
             children: [{tagName: "span", children: item.ranking }]
         });
+        arr = [{ tagName: "div", children: arr }];
         if (item.img !== false) arr.push({
             tagName: "div",
             styleRefs: "x-part-cert-img",
@@ -239,6 +270,7 @@ let museSite = {};
         } catch (ex) { }
         museSite.videosModel("home");
         if (typeof site === "undefined") return;
+        site.getString("about", "title-about");
         let videoStr = site.getString("videos", "title-videos");
         site.getString("otherLinks", "title-links");
         let ww = videoStr !== "视频";
@@ -298,15 +330,14 @@ let museSite = {};
         });
     };
 
-    museSite.initCerts = function () {
-        let arr = [];
-        let details = document.getElementById("part-cert");
-        let id = site.firstQuery();
+    function certsModel(arr, id, details, onlyMatch) {
         let info;
         let year;
+        if (arr.length > 1) arr.splice(0);
         for (let i = 0; i < certs.length; i++) {
             let item = certs[i];
-            if (!item || !item.name) continue;
+            if (!item || !item.name || item.disable) continue;
+            if (onlyMatch && item.scope !== "match" && item.scope !== "pro") continue;
             if (item.year !== year && !isNaN(parseInt(item.year))) {
                 arr.push({
                     tagName: "span",
@@ -332,8 +363,21 @@ let museSite = {};
             arr.push(m);
         }
 
-        Hje.render("part-certs", { children: arr });
+        return info;
+    }
+
+    museSite.initCerts = function () {
+        let arr = [];
+        let details = document.getElementById("part-cert");
+        let id = site.firstQuery();
+        let info = certsModel(arr, id, details);
         if (id && info) showCert(info, details);
+        let c = Hje.render("part-certs", { children: arr });
+        let checkbox = document.getElementById("checkbox-certs");
+        if (checkbox) checkbox.addEventListener("change", function (ev) {
+            certsModel(arr, id, details, checkbox.checked);
+            c.refresh();
+        });
         return arr;
     };
 

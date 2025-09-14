@@ -20,22 +20,28 @@
     section#part-cert {
         padding-bottom: 39px; border-bottom: 1px solid #333;
     }
+    section#part-cert > section {
+        position: relative;
+    }
     section#part-cert > section > div {
         text-align: center;
     }
-    section#part-cert > section > div.x-part-cert-name {
+    section#part-cert > section > div:first-child {
+        background: url(../images/decoration/olive-branch-1-left.png) no-repeat left bottom / 36px, url(../images/decoration/olive-branch-1-right.png) no-repeat right bottom / 36px;
+    }
+    section#part-cert > section > div:first-child > div.x-part-cert-name {
         margin-bottom: 10px;
     }
-    section#part-cert > section > div.x-part-cert-name > span.x-part-cert-season {
+    section#part-cert > section > div:first-child > div.x-part-cert-name > span.x-part-cert-season {
         line-height: 20px; background-color: #333; border-radius: 4px; padding: 4px 8px; margin-right: 8px; display: inline-block; vertical-align: middle;
     }
-    section#part-cert > section > div.x-part-cert-name > span.x-part-cert-name {
+    section#part-cert > section > div:first-child > div.x-part-cert-name > span.x-part-cert-name {
         font-size: 18px; line-height: 28px; display: inline-block; vertical-align: middle;
     }
-    section#part-cert > section > div.x-part-cert-group {
+    section#part-cert > section > div:first-child > div.x-part-cert-group {
         color: #999; font-size: 14x; line-height: 28px;
     }
-    section#part-cert > section > div.x-part-cert-ranking {
+    section#part-cert > section > div:first-child > div.x-part-cert-ranking {
         font-size: 20px; line-height: 28px;
     }
     section#part-cert > section > div.x-part-cert-img {
@@ -53,11 +59,20 @@
     section#part-cert > section > div.x-part-cert-year > span + span {
         margin-left: 20px;
     }
+    section#part-certs-filter {
+        border-bottom: 1px dashed #333; padding-bottom: 19px;
+    }
+    section#part-certs-filter > label > input, section#part-certs-filter > label > span {
+        vertical-align: middle;
+    }
+    section#part-certs-filter > label > input + span {
+        color: #999; margin-left: 8px; vertical-align: middle;
+    }
     section#part-certs > span.x-part-cert-year {
         color: #888; line-height: 20px; margin: 20px 15px 10px 25px; display: block; cursor: default; user-select: none;
     }
     section#part-certs > a.link-long-button > span:first-child + span {
-        color: #CCC; font-size: 18px; margin-left: 30px;
+        font-size: 18px; margin-left: 30px;
     }
     @media screen and (max-width:640px) {
         section#part-cert > section > div.x-part-cert-year > span {
@@ -93,6 +108,11 @@
 		<h2 id="title-certs">小小荣誉</h2>
     </section>
     <section>
+		<section id="part-certs-filter">
+            <label>
+                <input id="checkbox-certs" type="checkbox" value="only-match" /><span>过滤仅显示赛事</span>
+            </label>
+		</section>
 		<section id="part-certs">
 		</section>
     </section>
