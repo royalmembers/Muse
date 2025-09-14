@@ -45,6 +45,54 @@ let museSite = {};
         ranking: "三等奖",
         publisher: "柏斯音乐基金会"
     }, {
+        id: "shnu3ps-honor-2025",
+        name: "上师三附“英语学科大闯关”",
+        scope: "school",
+        year: 2025,
+        month: 4,
+        group: "四年级比赛",
+        ranking: "背记小达人",
+        publisher: "上海师范大学附属闵行第三小学"
+    }, {
+        id: "shnu3ps-match-2025",
+        name: "上师三附小艺术单项比赛",
+        scope: "school",
+        season: "第7届",
+        year: 2025,
+        month: 3,
+        group: "钢琴专场",
+        ranking: "三等奖",
+        publisher: "上海师范大学附属闵行第三小学"
+    }, {
+        id: "vivace-piano-2024",
+        name: "Vivace 国际钢琴大赛",
+        scope: "match",
+        season: "亚洲2024",
+        year: 2024,
+        month: 6,
+        group: "上海赛区少儿A组",
+        ranking: "二等奖",
+        publisher: "法国中法艺术协会"
+    }, {
+        id: "shnu3ps-honer-2024",
+        name: "红领巾奖章",
+        scope: "school",
+        season: "2023-2024学年",
+        year: 2024,
+        month: 1,
+        ranking: "个人一星章",
+        publisher: "中国少先队上海师范大学附属闵行第三小学工作委员会"
+    }, {
+        id: "kawai-asia-piano-2023",
+        name: "Kawai 亚洲钢琴大赛",
+        scope: "match",
+        season: "第7届",
+        year: 2023,
+        month: 4,
+        group: "上海赛区业余组儿童B组",
+        ranking: "二等奖",
+        publisher: "柏斯音乐基金会"
+    }, {
         id: "shnu3ps-match-2023",
         name: "上师三附小“未来星电视台”小记者评比",
         scope: "school",
