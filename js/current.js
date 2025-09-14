@@ -46,7 +46,7 @@ let museSite = {};
         publisher: "柏斯音乐基金会"
     }, {
         id: "shnu3ps-honor-2025",
-        name: "上师三附“英语学科大闯关”",
+        name: "上师三附小“英语学科大闯关”",
         scope: "school",
         year: 2025,
         month: 4,
@@ -67,7 +67,7 @@ let museSite = {};
         id: "vivace-piano-2024",
         name: "Vivace 国际钢琴大赛",
         scope: "match",
-        season: "亚洲2024",
+        season: "2024",
         year: 2024,
         month: 6,
         group: "上海赛区少儿A组",
