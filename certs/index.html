@@ -11,6 +11,12 @@
     body > section:has(+ footer) {
         margin-bottom: 80px;
     }
+    section.x-zone-hl {
+        padding: 20px 0; margin: 0; background: url(../images/bg/dark_repeat.jpg); background-position: center top;
+    }
+    section.x-zone-hl > h2 {
+        margin: 0 20px; line-height: 30px;
+    }
     section#part-cert > div {
         text-align: center;
     }
@@ -57,7 +63,7 @@
 <body onload="onInit()">
 	<header>
         <section>
-            <h1><a href="https://musetuan.com"><strong>MuseTuan</strong><span>.com</span></a></h1>
+            <h1><a href="https://musetuan.com"><strong>Muse</strong><span>Tuan.com</span></a></h1>
             <ul>
             </ul>
         </section>
@@ -65,7 +71,11 @@
     <section>
         <section id="part-cert" style="display: none; ">
         </section>
+    </section>
+    <section class="x-zone-hl">
 		<h2 id="title-certs">小小荣誉</h2>
+    </section>
+    <section>
 		<section id="part-certs">
 		</section>
     </section>

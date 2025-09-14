@@ -241,6 +241,7 @@ let museSite = {};
         let ww = videoStr !== "视频";
         if (ww) return;
         strings.photoTaken = "本照片拍摄于{0}年";
+        setElementProp("link-certs", "innerText", "小小荣誉");
     };
 
     museSite.videosModel = function (kind) {
