@@ -388,7 +388,7 @@ let museSite = {};
                 children: v.year.toString(10)
             }, {
                 tagName: "a",
-                props: { href: v.links.iqiyi },
+                props: { href: v.links.iqiyi, target: "_blank" },
                 children: videoStr === "视频" ? "刷新" : "Refresh"
             }]
         });
