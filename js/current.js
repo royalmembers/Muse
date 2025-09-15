@@ -44,7 +44,7 @@ let museSite = {};
         group: "上海赛区业余组儿童A组",
         ranking: "三等奖",
         publisher: "柏斯音乐基金会",
-        keywords: ["instrumental performance"]
+        keywords: ["instrumental performance", "match"]
     }, {
         id: "shnu3ps-honor-2025",
         name: "上师三附小“英语学科大闯关”",
@@ -65,7 +65,7 @@ let museSite = {};
         group: "钢琴专场",
         ranking: "三等奖",
         publisher: "上海师范大学附属闵行第三小学",
-        keywords: ["instrumental performance"]
+        keywords: ["instrumental performance", "match"]
     }, {
         id: "vivace-piano-2024",
         name: "Vivace 国际钢琴大赛",
@@ -76,7 +76,7 @@ let museSite = {};
         group: "上海赛区少儿A组",
         ranking: "二等奖",
         publisher: "法国中法艺术协会",
-        keywords: ["instrumental performance"]
+        keywords: ["instrumental performance", "match"]
     }, {
         id: "shnu3ps-honer-2024",
         name: "红领巾奖章",
@@ -85,7 +85,7 @@ let museSite = {};
         year: 2024,
         month: 1,
         ranking: "个人一星章",
-        publisher: "中国少先队上海师范大学附属闵行第三小学工作委员会",
+        publisher: "中国少年先锋队上海师范大学附属闵行第三小学工作委员会",
         keywords: ["medal"]
     }, {
         id: "kawai-asia-piano-2023",
@@ -97,7 +97,7 @@ let museSite = {};
         group: "上海赛区业余组儿童B组",
         ranking: "二等奖",
         publisher: "柏斯音乐基金会",
-        keywords: ["instrumental performance"]
+        keywords: ["instrumental performance", "match"]
     }, {
         id: "shnu3ps-match-2023",
         name: "上师三附小“未来星电视台”小记者评比",
@@ -115,7 +115,7 @@ let museSite = {};
         month: 3,
         ranking: "一等奖",
         publisher: "上海师范大学附属闵行第三小学",
-        keywords: ["fine art"]
+        keywords: ["fine art", "match"]
     }, {
         id: "caa-raataa-3-2021",
         name: "美院之路全国青少年美术大赛",
@@ -126,7 +126,7 @@ let museSite = {};
         group: "综合艺术类",
         ranking: "三等奖",
         publisher: "中国美术学院",
-        keywords: ["fine art"]
+        keywords: ["fine art", "match"]
     }, {
         id: "xiamen-musicseason-p-2021",
         name: "厦门音乐季钢琴公开赛",
@@ -137,7 +137,7 @@ let museSite = {};
         group: "上海赛区幼儿组",
         ranking: "三等奖",
         publisher: "厦门市思明区人民政府",
-        keywords: ["instrumental performance"]
+        keywords: ["instrumental performance", "match"]
     }, {
         id: "shminhang-creative-36-2021",
         name: "闵行区青少年科技创新大赛",
@@ -148,7 +148,7 @@ let museSite = {};
         group: "科学幻想画幼儿组",
         ranking: "二等奖",
         publisher: "上海市闵行区教育局 上海市闵行区科学技术协会",
-        keywords: ["fine art"]
+        keywords: ["fine art", "match"]
     }, {
         id: "papajohns-cook-2021",
         name: "棒约翰欢乐比萨学堂",
@@ -176,11 +176,11 @@ let museSite = {};
         group: "学前组",
         ranking: "二等奖",
         publisher: "深圳市五洲行艺术团有限责任公司",
-        keywords: ["dance"]
+        keywords: ["dance", "match"]
     }];
 
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+    function scrollToTop(top) {
+        window.scrollTo({ top: top || 0, behavior: "smooth" });
     }
 
     function checkNormalBrowser() {
@@ -239,6 +239,40 @@ let museSite = {};
         return ele;
     }
 
+    function playVideo(v, frame, name) {
+        if (v.links) {
+            frame.model().children[0].props.src = v.links["iqiyi-embed"] || v.links.iqiyi;
+            frame.refresh();
+            frame.element().style.display = "";
+        }
+
+        let m = name.model().children;
+        m.splice(0);
+        m.push({
+            tagName: "span",
+            children: v.name
+        });
+        m.push({
+            tagName: "span",
+            children: v.year.toString(10)
+        });
+        m.push({
+            tagName: "a",
+            props: { href: v.links.iqiyi, target: "_blank" },
+            children: site.getString("name") === "名称" ? "刷新" : "Refresh",
+            on: {
+                click(ev) {
+                    frame.model().children[0].props.src = "./blank.html";
+                    frame.refresh();
+                    frame.element().style.display = "none";
+                    m.splice(0);
+                    name.refresh();
+                }
+            }
+        });
+        name.refresh();
+    }
+
     function showCert(item, details) {
         let arr = [{
             tagName: "div",
@@ -286,6 +320,8 @@ let museSite = {};
                 else ev.returnValue = false;
                 showCert(item, details);
                 scrollToTop();
+                if (location.search) history.replaceState({ id: item.id }, "", "?" + item.id);
+                else history.pushState({ id: item.id }, "", "?" + item.id);
             }
         };
     }
@@ -337,6 +373,7 @@ let museSite = {};
 
     museSite.initHome = function () {
         let container = document.getElementById("section-avatars");
+        container.innerHTML = "";
         avatars.forEach(function (item, i) {
             if (!item) return;
             let url = getAvatarUrl(item);
@@ -378,9 +415,9 @@ let museSite = {};
     };
 
     museSite.videosModel = function (kind) {
-        let frame = document.getElementById("video-frame");
+        let info;
         let prefix = "../videos/?";
-        switch (kind) {
+        switch (kind || "") {
             case "home":
                 prefix = "./videos/?";
                 break;
@@ -389,6 +426,9 @@ let museSite = {};
                 break;
             case "3":
                 prefix = "../../videos/?"
+                break;
+            default:
+                if (kind.frame && kind.name) info = kind;
                 break;
         }
 
@@ -411,12 +451,12 @@ let museSite = {};
                 }]
             };
             if (!embed) m.props.target = "_blank";
-            else if (frame) m.on = {
+            else if (info) m.on = {
                 click(ev) {
                     if (ev.preventDefault) ev.preventDefault();
                     else ev.returnValue = false;
-                    frame.src = url;
-                    scrollToTop();
+                    playVideo(item, info.frame, info.name);
+                    scrollToTop(4);
                 }
             };
             return m;
@@ -429,37 +469,30 @@ let museSite = {};
     };
 
     museSite.initVideos = function () {
-        let videoStr = site.getString("videos", "title-videos");
-        museSite.videosModel("videos");
+        site.getString("videos", "title-videos");
+        let frame = Hje.render("part-video-container", {
+            children: [{
+                tagName: "iframe",
+                props: {
+                    title: "Video",
+                    allow: "fullscreen; autoplay; encrypted-media; midi; payment"
+                }
+            }]
+        });
+        let name = Hje.render("part-video-name", {
+            children: []
+        });
+        museSite.videosModel({
+            frame: frame,
+            name: name
+        });
         let q = (site.firstQuery() || "").split("/");
         if (q.length < 2) return;
         let year = parseInt(q[0]);
         let id = q[1];
         let v = museSite.video(year, id);
         if (!v || !v.links) return;
-        let ele = document.getElementById("video-frame");
-        ele.src = v.links["iqiyi-embed"] || v.links.iqiyi;
-        ele.style.display = "";
-        ele = document.getElementById("part-video-name");
-        if (ele) Hje.render(ele, {
-            children: [{
-                tagName: "span",
-                children: v.name
-            }, {
-                tagName: "span",
-                children: v.year.toString(10)
-            }, {
-                tagName: "a",
-                props: { href: v.links.iqiyi, target: "_blank" },
-                children: videoStr === "视频" ? "刷新" : "Refresh",
-                on: {
-                    click(ev) {
-                        ele.src = "./blank.html";
-                        ele.style.display = "none";
-                    }
-                }
-            }]
-        });
+        playVideo(v, frame, name);
     };
 
     museSite.initCerts = function () {
@@ -473,6 +506,20 @@ let museSite = {};
         if (checkbox) checkbox.addEventListener("change", function (ev) {
             certsModel(arr, id, details, checkbox.checked);
             c.refresh();
+        });
+        window.addEventListener("popstate", function (ev) {
+            id = (ev.state || {}).id;
+            if (!id) {
+                details.style.display = "none";
+                return;
+            }
+
+            for (let i = 0; i < certs.length; i++) {
+                let item = certs[i];
+                if (!item || item.id !== id) continue;
+                showCert(item, details);
+                return;
+            }
         });
     };
 

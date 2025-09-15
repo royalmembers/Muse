@@ -23,6 +23,12 @@ body > header:first-child > section:first-child a:active {
 body > header:first-child {
     background-image: url(../images/bg/title.jpg);
 }
+div.placeholder-after-loading {
+    line-height: 20px;
+}
+div.placeholder-after-loading:first-child > span::after {
+    color: #888; font-size: 12px; content: "Loading…"
+}
 @media screen and (max-width:800px) {
     body {
         background-image: none;

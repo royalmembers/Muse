@@ -24,7 +24,7 @@
         position: relative;
     }
     section#part-cert > section > div {
-        text-align: center;
+        text-align: center; min-height: 70px;
     }
     section#part-cert > section > div:first-child {
         background: url(../images/decoration/olive-branch-1-left.png) no-repeat left bottom / 36px, url(../images/decoration/olive-branch-1-right.png) no-repeat right bottom / 36px;
@@ -61,6 +61,9 @@
     }
     section#part-cert > section > div.x-part-cert-year > span + span {
         margin-left: 20px;
+    }
+    section#part-certs {
+        min-height: 480px;
     }
     section#part-certs-filter {
         border-bottom: 1px dashed #333; padding-bottom: 19px;
@@ -133,6 +136,7 @@
             </label>
 		</section>
 		<section id="part-certs">
+			<div class="placeholder-after-loading"><span></span></div>
 		</section>
     </section>
 	<footer>
