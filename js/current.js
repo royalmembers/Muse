@@ -297,7 +297,7 @@ let museSite = {};
         for (let i = 0; i < certs.length; i++) {
             let item = certs[i];
             if (!item || !item.name || item.disable) continue;
-            if (onlyMatch && item.scope !== "match" && item.scope !== "pro") continue;
+            if (onlyMatch && item.scope !== "match" && item.scope !== "pro" && item.scope !== "variety") continue;
             if (item.year !== year && !isNaN(parseInt(item.year))) {
                 arr.push({
                     tagName: "span",
@@ -451,7 +451,13 @@ let museSite = {};
             }, {
                 tagName: "a",
                 props: { href: v.links.iqiyi, target: "_blank" },
-                children: videoStr === "视频" ? "刷新" : "Refresh"
+                children: videoStr === "视频" ? "刷新" : "Refresh",
+                on: {
+                    click(ev) {
+                        ele.src = "./blank.html";
+                        ele.style.display = "none";
+                    }
+                }
             }]
         });
     };
