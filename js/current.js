@@ -183,28 +183,19 @@ let museSite = {};
         window.scrollTo({ top: top || 0, behavior: "smooth" });
     }
 
-    function checkNormalBrowser() {
-        if (typeof settings.unnormal === "boolean") return !settings.unnormal;
-        if (typeof navigator === "undefined" || !navigator.userAgent) {
-            settings.unnormal = true;
-            return false;
-        }
-
+    function checkBrowserKind() {
+        if (typeof settings.browserKind === "string") return settings.browserKind;
+        if (typeof navigator === "undefined" || !navigator.userAgent)
+            return settings.browserKind = "unknown";
         let ua = navigator.userAgent;
-        if (!ua.includes("Chrome/") && ua.includes("Edg/") && ua.includes("AppleWebKit/") && ua.includes("Firefox/")) {
-            settings.unnormal = true;
-            return false;
-        }
-
+        if (!ua.includes("Chrome/") && ua.includes("Edg/") && ua.includes("AppleWebKit/") && ua.includes("Firefox/"))
+            return settings.browserKind = "unknown";
         if (ua.includes("MicroMessenger/") || ua.includes("DingTalk/") || ua.includes("WeChat/") || ua.includes("BytedanceWebview/") || ua.includes("Lark/") || ua.includes("Weibo ")) {
-            if (!ua.includes(" (Windows NT ")) {
-                settings.unnormal = true;
-                return false;
-            }
+            if (!ua.includes(" (Windows NT "))
+                return settings.browserKind = "applet";
         }
 
-        settings.unnormal = false;
-        return true;
+        return settings.browserKind = ua.includes(" (Windows NT ") ? "windows" : "normal";
     }
 
     function getAvatarUrl(item) {
@@ -435,7 +426,7 @@ let museSite = {};
         let arr = videos.map(function (item) {
             if (!item || !item.links || !item.name) return undefined;
             let url = item.links["iqiyi-embed"];
-            let embed = checkNormalBrowser() && url;
+            let embed = checkBrowserKind() === "windows" && url;
             if (!embed) url = item.links.iqiyi;
             if (!url) return undefined;
             let m = {
