@@ -7,6 +7,13 @@ a:hover {
 a:active {
     color: #C6B;
 }
+body {
+    background-image: url(../images/bg/bg_dark.jpg);
+    background-repeat: repeat;
+    background-position: center top;
+    background-size: 240px;
+    background-attachment: fixed;
+}
 body > header:first-child {
     user-select: none;
 }
@@ -24,6 +31,7 @@ body > header:first-child {
     background-image: url(../images/bg/accent_dark.jpg);
     background-repeat: repeat;
     background-size: 240px;
+    background-attachment: fixed;
 }
 div.placeholder-after-loading {
     line-height: 20px;
@@ -49,6 +57,7 @@ body > script + footer {
     background-position: center top;
     background-repeat: repeat;
     background-size: 240px;
+    background-attachment: fixed;
 }
 body > section > h2 + section > a.link-long-button > span + span {
     color: #888;
@@ -57,9 +66,10 @@ body > section > h2 + section > a.link-long-button > span + span {
 }
 body > section.x-zone-bg {
     background-image: url(../images/bg/deep_dark.jpg);
-    background-position: center top 180px;
+    background-position: center top;
     background-repeat: repeat;
     background-size: 240px;
+    background-attachment: fixed;
 }
 section#part-avatar {
     padding: 100px 20px 20px 20px;
