@@ -21,13 +21,15 @@ body > header:first-child > section:first-child a:active {
     color: #C6B;
 }
 body > header:first-child {
-    background-image: url(../images/bg/title.jpg);
+    background-image: url(../images/bg/accent_dark.jpg);
+    background-repeat: repeat;
+    background-size: 240px;
 }
 div.placeholder-after-loading {
     line-height: 20px;
 }
 div.placeholder-after-loading:first-child > span::after {
-    color: #888; font-size: 12px; content: "Loading…"
+    color: #888; font-size: 12px; content: "Loading…";
 }
 @media screen and (max-width:800px) {
     body {
@@ -38,13 +40,15 @@ div.placeholder-after-loading:first-child > span::after {
     }
     body > header:first-child > section:first-child > h1 + ul {
         display: none;
-        background-image: url(../images/bg/title-menu.jpg);
     }
 }
 body > main + footer,
 body > section + footer,
 body > script + footer {
-    background-image: url(../images/bg/bottom.jpg);
+    background-image: url(../images/bg/accent_dark.jpg);
+    background-position: center top;
+    background-repeat: repeat;
+    background-size: 240px;
 }
 body > section > h2 + section > a.link-long-button > span + span {
     color: #888;
@@ -52,9 +56,10 @@ body > section > h2 + section > a.link-long-button > span + span {
     margin-left: 16px;
 }
 body > section.x-zone-bg {
-    background-image: url(../images/bg/dark_hearts.jpg);
-    background-position: center top;
-    background-repeat: no-repeat;
+    background-image: url(../images/bg/deep_dark.jpg);
+    background-position: center top 180px;
+    background-repeat: repeat;
+    background-size: 240px;
 }
 section#part-avatar {
     padding: 100px 20px 20px 20px;

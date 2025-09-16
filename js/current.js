@@ -21,11 +21,22 @@ let museSite = {};
         id: "jingdezhen",
         name: "景德镇陶瓷研学之旅",
         year: 2025,
+        month: 7,
         links: {
             iqiyi: "https://www.iqiyi.com/v_14kpuv94euo.html",
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=4176576759377500"
         }
-    },{
+    }, {
+        id: "jingdezhen",
+        disable: true,
+        guest: "featuring",
+        name: "学生不练琴，我选择做这三件事",
+        year: 2025,
+        month: 4,
+        links: {
+            xiaohongshu: "https://xhslink.com/m/9SueR085WK8",
+        }
+    }, {
         id: "led",
         name: "点亮神灯",
         year: 2020,
@@ -424,7 +435,7 @@ let museSite = {};
         }
 
         let arr = videos.map(function (item) {
-            if (!item || !item.links || !item.name) return undefined;
+            if (!item || !item.links || !item.name || item.disable) return undefined;
             let url = item.links["iqiyi-embed"];
             let embed = checkBrowserKind() === "windows" && url;
             if (!embed) url = item.links.iqiyi;
