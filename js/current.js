@@ -296,7 +296,7 @@ let museSite = {};
         arr = [{ tagName: "div", children: arr }];
         if (item.img !== false) arr.push({
             tagName: "div",
-            styleRefs: "x-part-cert-img",
+            styleRefs: ["x-part-cert-img", "x-bg-emphasis"],
             children: [{
                 tagName: "img",
                 props: { alt: item.name, src: "../images/certs/" + (typeof item.img === "string" ? item.img : (item.id + ".jpg")) }
@@ -332,15 +332,16 @@ let museSite = {};
         let info;
         let year;
         if (arr.length > 1) arr.splice(0);
+        let thisYear = new Date().getFullYear();
         for (let i = 0; i < certs.length; i++) {
             let item = certs[i];
             if (!item || !item.name || item.disable) continue;
             if (onlyMatch && item.scope !== "match" && item.scope !== "pro" && item.scope !== "variety") continue;
-            if (item.year !== year && !isNaN(parseInt(item.year))) {
+            if (item.year && item.year !== year && !isNaN(item.year)) {
                 arr.push({
                     tagName: "span",
                     styleRefs: "x-part-cert-year",
-                    children: item.year.toString(10)
+                    children: item.year === thisYear ? site.getString("thisYear") : item.year.toString(10)
                 });
                 year = item.year;
             }
