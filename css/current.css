@@ -1,5 +1,4 @@
 body > header:first-child {
-    background-position: center top;
     user-select: none;
 }
 @media screen and (max-width:800px) {
