@@ -30,10 +30,13 @@
 		width: 90%; margin: 10px 0; border-radius: 8px;
 	}
 	body > section.x-part-foot {
-		height: 160px;
-		border-top: 1px dashed #444;
-		border-bottom: 1px dashed #444;
-		user-select: none;
+		height: 160px; border-top: 1px dashed #444; border-bottom: 1px dashed #444; user-select: none;
+	}
+	body > section.x-part-foot > section.x-part-center {
+		text-align: center; line-height: 120px;
+	}
+	body > section.x-part-foot > section.x-part-center > img {
+		width: 32px; height: 32px; vertical-align: middle;
 	}
 	@media screen and (max-width:800px) {
 		body > section.x-part-greetings > section:first-child > span:first-child {
@@ -116,6 +119,9 @@
 		</section>
 	</section>
 	<section class="x-part-foot x-bg-outstanding" >
+		<section class="x-part-center">
+			<img alt="Cake" src="../../images/icons/cake_segoe_fluent.png" loading="lazy" />
+		</section>
 	</section>
 	<section class="x-zone-photos" >
 		<section class="x-zone-photos" style="padding: 40px 0; " >
