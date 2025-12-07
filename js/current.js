@@ -221,16 +221,10 @@ let museSite = {};
         return url;
     }
 
-    function setElementProp(ele, key, value) {
-        let element = document.getElementById(ele);
-        if (!element) return;
-        element[key] = value;
-    }
-
     function showAvatar(item) {
         if (!item) return;
-        setElementProp("image-avatar", "src", getAvatarUrl(item));
-        setElementProp("image-desc", "innerText", strings.photoTaken ? ("* " + strings.photoTaken.replace("{0}", item.year)) : "* Photo taken on '" + item.year + ".");
+        DeepX.MdBlogs.setElementProp("image-avatar", "src", getAvatarUrl(item));
+        DeepX.MdBlogs.setElementProp("image-desc", "innerText", strings.photoTaken ? ("* " + strings.photoTaken.replace("{0}", item.year)) : "* Photo taken on '" + item.year + ".");
     }
 
     function render(ele, model) {
@@ -261,7 +255,7 @@ let museSite = {};
         m.push({
             tagName: "a",
             props: { href: v.links.iqiyi, target: "_blank" },
-            children: site.getString("name") === "名称" ? "刷新" : "Refresh",
+            children: DeepX.MdBlogs.getLocaleString("name") === "名称" ? "刷新" : "Refresh",
             on: {
                 click(ev) {
                     frame.model().children[0].props.src = "./blank.html";
@@ -341,7 +335,7 @@ let museSite = {};
                 arr.push({
                     tagName: "span",
                     styleRefs: "x-part-cert-year",
-                    children: item.year === thisYear ? site.getString("thisYear") : item.year.toString(10)
+                    children: item.year === thisYear ? DeepX.MdBlogs.getLocaleString("thisYear") : item.year.toString(10)
                 });
                 year = item.year;
             }
@@ -407,14 +401,14 @@ let museSite = {};
             }
         } catch (ex) { }
         museSite.videosModel("home");
-        if (typeof site === "undefined") return;
-        site.getString("about", "title-about");
-        let videoStr = site.getString("videos", "title-videos");
-        site.getString("otherLinks", "title-links");
+        if (typeof DeepX === "undefined") return;
+        DeepX.MdBlogs.setElementText("title-about", "about");
+        let videoStr = DeepX.MdBlogs.setElementText("title-videos", "videos");
+        DeepX.MdBlogs.setElementText("title-links", "otherLinks");
         let ww = videoStr !== "视频";
         if (ww) return;
         strings.photoTaken = "本照片拍摄于{0}年";
-        setElementProp("link-certs", "innerText", "小小荣誉");
+        DeepX.MdBlogs.setElementProp("link-certs", "innerText", "小小荣誉");
     };
 
     museSite.videosModel = function (kind) {
@@ -472,7 +466,7 @@ let museSite = {};
     };
 
     museSite.initVideos = function () {
-        site.getString("videos", "title-videos");
+        DeepX.MdBlogs.setElementText("title-videos", "videos");
         let frame = Hje.render("part-video-container", {
             children: [{
                 tagName: "iframe",
@@ -489,7 +483,7 @@ let museSite = {};
             frame: frame,
             name: name
         });
-        let q = (site.firstQuery() || "").split("/");
+        let q = (DeepX.MdBlogs.firstQuery() || "").split("/");
         if (q.length < 2) return;
         let year = parseInt(q[0]);
         let id = q[1];
@@ -501,7 +495,7 @@ let museSite = {};
     museSite.initCerts = function () {
         let arr = [];
         let details = document.getElementById("part-cert");
-        let id = site.firstQuery();
+        let id = DeepX.MdBlogs.firstQuery();
         let info = certsModel(arr, id, details);
         if (id && info) showCert(info, details);
         let c = Hje.render("part-certs", { children: arr });
