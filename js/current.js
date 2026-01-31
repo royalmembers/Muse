@@ -4,7 +4,7 @@ let museSite = {};
     let settings = {};
     let strings = {};
 
-    let avatars = [
+    const avatars = [
         { year: 2025, month: 7 },
         { year: 2024, month: 5 },
         { year: 2023, month: 6 },
@@ -17,7 +17,7 @@ let museSite = {};
         { year: 2016, month: 6 },
         { year: 2015, month: 9 }
     ];
-    let videos = [{
+    const videos = [{
         id: "jingdezhen",
         name: "景德镇陶瓷研学之旅",
         year: 2025,
@@ -45,8 +45,8 @@ let museSite = {};
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=2193622781471600"
         }
     }];
-    let certs = [{
-        id: "kawai-asia-piano-2025",
+    const certs = [{
+        id: "kawai",
         name: "Kawai 亚洲钢琴大赛",
         scope: "match",
         season: "第8届",
@@ -57,7 +57,7 @@ let museSite = {};
         publisher: "柏斯音乐基金会",
         keywords: ["instrumental performance", "match"]
     }, {
-        id: "shnu3ps-honor-2025",
+        id: "shnu3ps-honor",
         name: "上师三附小“英语学科大闯关”",
         scope: "school",
         year: 2025,
@@ -67,7 +67,7 @@ let museSite = {};
         publisher: "上海师范大学附属闵行第三小学",
         keywords: ["subject"]
     }, {
-        id: "shnu3ps-match-2025",
+        id: "shnu3ps-match",
         name: "上师三附小艺术单项比赛",
         scope: "school",
         season: "第7届",
@@ -78,7 +78,7 @@ let museSite = {};
         publisher: "上海师范大学附属闵行第三小学",
         keywords: ["instrumental performance", "match"]
     }, {
-        id: "vivace-piano-2024",
+        id: "vivace",
         name: "Vivace 国际钢琴大赛",
         scope: "match",
         season: "2024",
@@ -89,7 +89,7 @@ let museSite = {};
         publisher: "法国中法艺术协会",
         keywords: ["instrumental performance", "match"]
     }, {
-        id: "shnu3ps-honer-2024",
+        id: "shnu3ps-honor",
         name: "红领巾奖章",
         scope: "school",
         season: "2023-2024学年",
@@ -99,7 +99,7 @@ let museSite = {};
         publisher: "中国少年先锋队上海师范大学附属闵行第三小学工作委员会",
         keywords: ["medal"]
     }, {
-        id: "kawai-asia-piano-2023",
+        id: "kawai",
         name: "Kawai 亚洲钢琴大赛",
         scope: "match",
         season: "第7届",
@@ -110,7 +110,7 @@ let museSite = {};
         publisher: "柏斯音乐基金会",
         keywords: ["instrumental performance", "match"]
     }, {
-        id: "shnu3ps-match-2023",
+        id: "shnu3ps-match",
         name: "上师三附小“未来星电视台”小记者评比",
         scope: "school",
         year: 2023,
@@ -119,7 +119,7 @@ let museSite = {};
         publisher: "上海师范大学附属闵行第三小学",
         keywords: []
     }, {
-        id: "shnu3ps-match-2022",
+        id: "shnu3ps-match",
         name: "上师三附小“一起创造献冬奥”评比",
         scope: "school",
         year: 2022,
@@ -128,7 +128,7 @@ let museSite = {};
         publisher: "上海师范大学附属闵行第三小学",
         keywords: ["fine art", "match"]
     }, {
-        id: "caa-raataa-3-2021",
+        id: "caa",
         name: "美院之路全国青少年美术大赛",
         scope: "match",
         season: "第3届",
@@ -139,7 +139,7 @@ let museSite = {};
         publisher: "中国美术学院",
         keywords: ["fine art", "match"]
     }, {
-        id: "xiamen-musicseason-p-2021",
+        id: "xiamen",
         name: "厦门音乐季钢琴公开赛",
         scope: "match",
         season: "2021",
@@ -150,7 +150,7 @@ let museSite = {};
         publisher: "厦门市思明区人民政府",
         keywords: ["instrumental performance", "match"]
     }, {
-        id: "shminhang-creative-36-2021",
+        id: "shminhang-creative",
         name: "闵行区青少年科技创新大赛",
         scope: "match",
         season: "第36届",
@@ -161,7 +161,7 @@ let museSite = {};
         publisher: "上海市闵行区教育局 上海市闵行区科学技术协会",
         keywords: ["fine art", "match"]
     }, {
-        id: "papajohns-cook-2021",
+        id: "papajohns",
         name: "棒约翰欢乐比萨学堂",
         scope: "interest",
         year: 2021,
@@ -169,7 +169,7 @@ let museSite = {};
         publisher: "上海棒约翰餐饮管理有限公司",
         keywords: ["cook"]
     }, {
-        id: "childrenpal-shminhangpjz-hc-2020",
+        id: "shminhang-pujiang",
         name: "浦江镇青少年教育培训中心合唱",
         scope: "institution",
         year: 2020,
@@ -178,7 +178,7 @@ let museSite = {};
         publisher: "中国福利会少年宫上海闵行区浦江镇青少年教育培训中心",
         keywords: ["sing"]
     }, {
-        id: "taoli-os-2020",
+        id: "taolicup",
         name: "海外桃李杯",
         scope: "match",
         season: "第11届",
@@ -188,6 +188,50 @@ let museSite = {};
         ranking: "二等奖",
         publisher: "深圳市五洲行艺术团有限责任公司",
         keywords: ["dance", "match"]
+    }];
+    const paints = [{
+        id: "countryside",
+        name: "乡村景色",
+        year: 2025,
+        month: 4,
+        keywords: []
+    }, {
+        id: "moon-rabbit",
+        name: "玉兔月球车",
+        year: 2025,
+        month: 2,
+        keywords: []
+    }, {
+        id: "gold-medal",
+        name: "金牌时刻",
+        year: 2024,
+        month: 8,
+        keywords: []
+    }, {
+        id: "takeout",
+        name: "外卖",
+        year: 2022,
+        month: 7,
+        keywords: []
+    }, {
+        id: "fighting-covid-19",
+        disable: true,
+        name: "抗击新冠",
+        year: 2022,
+        month: 4,
+        keywords: []
+    }, {
+        id: "love-music",
+        name: "我爱音乐",
+        year: 2021,
+        month: 2,
+        keywords: []
+    }, {
+        id: "defend-dream",
+        name: "守护梦想",
+        year: 2020,
+        month: 5,
+        keywords: []
     }];
 
     function scrollToTop(top) {
@@ -293,7 +337,7 @@ let museSite = {};
             styleRefs: ["x-part-cert-img", "x-bg-emphasis"],
             children: [{
                 tagName: "img",
-                props: { alt: item.name, src: "../images/certs/" + (typeof item.img === "string" ? item.img : (item.id + ".jpg")) }
+                props: { alt: item.name, src: "../images/certs/" + item.year.toString(10) + "/" + (typeof item.img === "string" ? item.img : (item.id + ".jpg")) }
             }]
         });
         let year = [{ tagName: "span", children: item.year.toString(10) + "年" }]
@@ -316,10 +360,23 @@ let museSite = {};
                 else ev.returnValue = false;
                 showCert(item, details);
                 scrollToTop();
-                if (location.search) history.replaceState({ id: item.id }, "", "?" + item.id);
-                else history.pushState({ id: item.id }, "", "?" + item.id);
+                const path = "?" + item.year + "/" + item.id;
+                if (location.search) history.replaceState({ id: item.id }, "", path);
+                else history.pushState({ id: item.id }, "", path);
             }
         };
+    }
+
+    function parseFirstQuery(id) {
+        if (!id) return {};
+        const arr = id.split('/');
+        if (arr.length < 2 || !arr[0] && !arr[1]) return {};
+        const obj = {
+            id: arr[1],
+            year: arr[0]
+        };
+        if (arr.length > 2) obj.sub = arr[2];
+        return obj;
     }
 
     function certsModel(arr, id, details, onlyMatch) {
@@ -327,6 +384,7 @@ let museSite = {};
         let year;
         if (arr.length > 1) arr.splice(0);
         let thisYear = new Date().getFullYear();
+        const selInfo = parseFirstQuery(id);
         for (let i = 0; i < certs.length; i++) {
             let item = certs[i];
             if (!item || !item.name || item.disable) continue;
@@ -352,7 +410,9 @@ let museSite = {};
                 ]
             };
             addCertEvent(item, m, details);
-            if (id && id === item.id) info = item;
+            if (selInfo.id) {
+                if (selInfo.id === item.id && selInfo.year === item.year) info = item;
+            }
             arr.push(m);
         }
 
@@ -506,14 +566,15 @@ let museSite = {};
         });
         window.addEventListener("popstate", function (ev) {
             id = (ev.state || {}).id;
-            if (!id) {
+            const selInfo = parseFirstQuery(id);
+            if (!selInfo.id) {
                 details.style.display = "none";
                 return;
             }
 
             for (let i = 0; i < certs.length; i++) {
                 let item = certs[i];
-                if (!item || item.id !== id) continue;
+                if (!item || item.id !== selInfo.id || item.year !== selInfo.year) continue;
                 showCert(item, details);
                 return;
             }
