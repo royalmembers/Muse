@@ -532,6 +532,8 @@ let museSite = {};
         if (ww) return;
         strings.photoTaken = "本照片拍摄于{0}年";
         DeepX.MdBlogs.setElementProp("link-certs", "innerText", "小小荣誉");
+        DeepX.MdBlogs.setElementProp("title-works", "innerText", "作品集");
+        DeepX.MdBlogs.setElementProp("link-paintings", "innerText", "画");
     };
 
     museSite.videosModel = function (kind) {
