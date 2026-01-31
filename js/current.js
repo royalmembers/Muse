@@ -195,28 +195,52 @@ let museSite = {};
         year: 2025,
         month: 4,
         thumb: true,
-        keywords: []
+        keywords: ["colored-pencil"]
     }, {
         id: "moon-rabbit",
         name: "玉兔月球车",
         year: 2025,
         month: 2,
         thumb: true,
-        keywords: []
+        keywords: ["computer-art"]
+    }, {
+        id: "fish",
+        name: "年年有余",
+        year: 2025,
+        thumb: true,
+        keywords: ["chinese-brush"]
     }, {
         id: "gold-medal",
         name: "金牌时刻",
         year: 2024,
         month: 8,
         thumb: true,
-        keywords: []
+        keywords: ["watercolor"]
+    }, {
+        id: "magpie",
+        name: "喜上眉梢",
+        year: 2024,
+        thumb: true,
+        keywords: ["chinese-brush"]
+    }, {
+        id: "cat",
+        name: "喵宅妙哉",
+        year: 2024,
+        thumb: true,
+        keywords: ["chinese-brush"]
+    }, {
+        id: "lesser-panda",
+        name: "小熊猫",
+        year: 2024,
+        thumb: true,
+        keywords: ["chinese-brush"]
     }, {
         id: "takeout",
         name: "外卖",
         year: 2022,
         month: 7,
         thumb: true,
-        keywords: []
+        keywords: ["watercolor"]
     }, {
         id: "fighting-covid-19",
         disable: true,
@@ -231,14 +255,14 @@ let museSite = {};
         year: 2021,
         month: 2,
         thumb: true,
-        keywords: []
+        keywords: ["colored-pencil"]
     }, {
         id: "defend-dream",
         name: "守护梦想",
         year: 2020,
         month: 5,
         thumb: true,
-        keywords: []
+        keywords: ["watercolor"]
     }];
 
     function scrollToTop(top) {
