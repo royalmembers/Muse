@@ -1,6 +1,9 @@
 body > header:first-child {
     user-select: none;
 }
+body > header:first-child > section:first-child > h1 > img {
+    width: 48px; height: 48px; vertical-align: middle; margin-right: 8px;
+}
 @media screen and (max-width:800px) {
     body > header:first-child {
         height: 60px;
