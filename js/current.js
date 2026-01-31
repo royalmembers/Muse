@@ -380,7 +380,7 @@ let museSite = {};
         if (arr.length < 2 || !arr[0] && !arr[1]) return {};
         const obj = {
             id: arr[1],
-            year: arr[0]
+            year: parseInt(arr[0])
         };
         if (arr.length > 2) obj.sub = arr[2];
         return obj;
