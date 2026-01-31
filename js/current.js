@@ -433,7 +433,7 @@ let museSite = {};
                 tagName: "a",
                 styleRefs: "link-long-button",
                 props: {
-                    href: "../certs/?" + item.id
+                    href: "../certs/?" + item.year.toString(10) + "/" + item.id
                 },
                 children: [
                     { tagName: "span", children: item.name },
