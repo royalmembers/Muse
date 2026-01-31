@@ -440,7 +440,8 @@ let museSite = {};
     };
 
     museSite.renderNextWave = function (images, paging) {
-        const containerEle = document.getElementById("section-works-container");
+        const idPrefix = paging.id || "section-works";
+        const containerEle = document.getElementById(idPrefix + "-container");
         for (let i = paging.offset; i < Math.min(paging.offset + paging.size, images.length); i++) {
             const imageInfo = images[i];
             if (!imageInfo || imageInfo.disable) continue;
@@ -449,7 +450,7 @@ let museSite = {};
             } catch (ex) { }
         }
         paging.offset += paging.size;
-        document.getElementById("section-works-more").style.display = paging.offset < images.length ? "" : "none";
+        document.getElementById(idPrefix + "-more").style.display = paging.offset < images.length ? "" : "none";
     };
 
     museSite.renderImage = function (containerEle, imageInfo, paging) {
@@ -462,8 +463,9 @@ let museSite = {};
         let thumbUrl = imageInfo.thumb;
         if (thumbUrl === true) thumbUrl = sourceUrl.replace("~/", "~/thumbnails/");
         else if (!thumbUrl) thumbUrl = sourceUrl;
-        if (thumbUrl.indexOf("~/") == 0) thumbUrl = thumbUrl.replace("~/", "../images/" + paging.path + "/");
-        if (sourceUrl.indexOf("~/") == 0) sourceUrl = sourceUrl.replace("~/", "../images/" + paging.path + "/");
+        const imagesPath = paging.root ? "./images/" : "../images/";
+        if (thumbUrl.indexOf("~/") == 0) thumbUrl = thumbUrl.replace("~/", imagesPath + paging.path + "/");
+        if (sourceUrl.indexOf("~/") == 0) sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
         imageEle.src = thumbUrl;
         let imageName = imageInfo.name;
         let imageSize = imageInfo.size || "";
@@ -523,6 +525,17 @@ let museSite = {};
                 });
             }
         } catch (ex) { }
+        const paging = {
+            offset: 0,
+            size: 12,
+            path: "paintings",
+            root: true
+        };
+        museSite.renderNextWave(paints, paging);
+        document.getElementById("popup-view").addEventListener("click", museSite.hidePopupView);
+        document.getElementById("section-works-more").addEventListener("click", function () {
+            museSite.renderNextWave(paints, paging);
+        });
         museSite.videosModel("home");
         if (typeof DeepX === "undefined") return;
         DeepX.MdBlogs.setElementText("title-about", "about");
@@ -533,7 +546,7 @@ let museSite = {};
         strings.photoTaken = "本照片拍摄于{0}年";
         DeepX.MdBlogs.setElementProp("link-certs", "innerText", "小小荣誉");
         DeepX.MdBlogs.setElementProp("title-works", "innerText", "作品集");
-        DeepX.MdBlogs.setElementProp("link-paintings", "innerText", "画");
+        DeepX.MdBlogs.setElementProp("title-paintings", "innerText", "小小画作");
     };
 
     museSite.videosModel = function (kind) {
@@ -650,12 +663,12 @@ let museSite = {};
         const paging = {
             offset: 0,
             size: 12,
-            path: "paintings"
+            path: "paintings",
         };
         museSite.renderNextWave(paints, paging);
         document.getElementById("popup-view").addEventListener("click", museSite.hidePopupView);
         document.getElementById("section-works-more").addEventListener("click", function () {
-            museSite.renderNextWave(paging);
+            museSite.renderNextWave(paints, paging);
         });
     };
 

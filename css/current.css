@@ -4,6 +4,9 @@ body > header:first-child {
 body > header:first-child > section:first-child > h1 > img {
     width: 48px; height: 48px; vertical-align: middle; margin-right: 8px;
 }
+body > header:first-child > section:first-child > h1 > img:first-child + a > strong:first-child + span {
+    font-weight: lighter;
+}
 @media screen and (max-width:800px) {
     body > header:first-child {
         height: 60px;
@@ -104,4 +107,78 @@ section > div.x-copyright-spec {
 }
 section > div.x-copyright-spec > img:first-child {
     width: 220px; height: 220px; border-radius: 6px; 
+}
+section.x-container-pics {
+    margin: 20px auto;
+    display: grid;
+    gap: 6px;
+    grid-template-columns: repeat(6, 1fr);
+    user-select: none;
+}
+section.x-container-pics > img {
+    background-color: #333;
+    width: 100%;
+    aspect-ratio: 1.22;
+    margin: 0;
+    border-radius: 4px;
+    object-fit: cover;
+    transition: 0.2s;
+    cursor: pointer;
+}
+section.x-container-pics > img:hover {
+    filter: contrast(1.2);
+    scale: 1.02;
+}
+section.x-container-pics + section {
+    margin-top: 0;
+}
+section.x-container-pics span#section-works-more {
+    color: #CCC;
+    line-height: 30px;
+    text-align: center;
+    height: 30px;
+    background-color: #F5B;
+    border-radius: 4px;
+    display: block;
+    transition: 0.2s;
+    user-select: none;
+    cursor: pointer;
+}
+section.x-container-pics span#section-works-more:hover {
+    color: #EEE; background-color: #F7C;
+}
+section.x-container-pics span#section-works-more:active {
+    color: #CCC; background-color: #C6B;
+}
+section.x-container-pics span#section-works-more > span:first-child {
+    vertical-align: baseline;
+}
+section.x-container-pics span#section-works-more > span:first-child + img {
+    width: 12px; height: 12px; margin-left: 10px; vertical-align: middle; opacity: 0.8; transition: 0.2s;
+}
+section.x-container-pics span#section-works-more:active > span:first-child + img {
+    opacity: 1;
+}
+section.x-container-pics span#section-works-more:active > span:first-child + img {
+    width: 8px; height: 8px; opacity: 0.8;
+}
+@media screen and (max-width:1110px) {
+    section.x-container-pics {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media screen and (max-width:860px) {
+    section.x-container-pics {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen and (max-width:560px) {
+    section.x-container-pics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width:320px) {
+    section.x-container-pics {
+        grid-template-columns: 1fr;
+    }
 }
