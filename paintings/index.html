@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Muse Tuan</title>
+    <meta property="og:image" content="https://jinchen.org/images/bg/poster.jpg">
+    <meta property="og:title" content="Real &amp; Unreal 虚实之间 - Jinchen Art" />
+    <meta name="description" content="Real &amp; Unreal, a David Tuan studio: Art opens a window for you.  (虚实之间——段湧工作室)" />
+    <meta property="og:description" content="Real &amp; Unreal, a David Tuan studio: Art opens a window for you.  (虚实之间——段湧工作室)" />
+    <link href="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/css/site.heart.css" rel="stylesheet" />
+    <link href="../css/current.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/js/mdblogs.js" ></script>
+	<script type="text/javascript" src="../js/current.js" ></script>
+    <style type="text/css">
+    section#section-head {
+        margin-top: 40px; margin-bottom: 60px;
+    }
+    section#section-head > section {
+        text-align: center;
+    }
+    section#section-head > section > img {
+        width: 100%;
+        border-radius: 4px;
+        user-select: none;
+    }
+    section#section-works > section:first-child + section {
+        display: grid;
+        min-height: 480px;
+        gap: 6px;
+        grid-template-columns: repeat(6, 1fr);
+        margin: 20px auto 20px auto;
+        user-select: none;
+    }
+    section#section-works > section:first-child + section > img {
+        background-color: #333;
+        width: 100%;
+        aspect-ratio: 1.22;
+        margin: 0;
+        border-radius: 4px;
+        object-fit: cover;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+    section#section-works > section:first-child + section > img:hover {
+        filter: contrast(1.2);
+		scale: 1.02;
+    }
+    section#section-works > section:first-child + section + section {
+        margin-top: 0;
+    }
+    section#section-works span#section-works-more {
+        color: #CCC;
+        line-height: 30px;
+        text-align: center;
+        height: 30px;
+        background-color: #369;
+        border-radius: 4px;
+        display: block;
+        transition: 0.2s;
+        user-select: none;
+        cursor: pointer;
+    }
+    section#section-works span#section-works-more:hover {
+        color: #EEE; background-color: #47A;
+    }
+    section#section-works span#section-works-more:active {
+        color: #CCC; background-color: #47A;
+    }
+    section#section-works span#section-works-more > span:first-child {
+        vertical-align: baseline;
+    }
+    section#section-works span#section-works-more > span:first-child + img {
+        width: 12px; height: 12px; margin-left: 10px; vertical-align: middle; opacity: 0.8; transition: 0.2s;
+    }
+    section#section-works span#section-works-more:active > span:first-child + img {
+        opacity: 1;
+    }
+    section#section-works span#section-works-more:active > span:first-child + img {
+        width: 8px; height: 8px; opacity: 0.8;
+    }
+    @media screen and (max-width:1110px) {
+        section#section-works > section:first-child {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    @media screen and (max-width:860px) {
+        section#section-works > section:first-child {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media screen and (max-width:560px) {
+        section#section-works > section:first-child {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media screen and (max-width:320px) {
+        section#section-works > section:first-child {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+    <script type="text/javascript" src="https://jinchen.org/js/current.js" ></script>
+</head>
+<body onload="museSite.initPaint()">
+	<header>
+        <section>
+            <h1><a href="https://musetuan.com"><strong>Muse</strong><span>Tuan.com</span></a></h1>
+            <ul>
+            </ul>
+        </section>
+	</header>
+    <section id="section-works" >
+        <section class="x-zone-hl layout-wide-full x-bg-outstanding">
+            <h2 id="title-certs">小小画作</h2>
+        </section>
+        <section id="section-works-container" >
+        </section>
+        <section>
+            <span id="section-works-more" style="display: none; " ><span id="button-works-more">See more</span><img alt="See more" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/images/ele/down_pos_white.png" /></span>
+        </section>
+    </section>
+	<footer>
+		<section>
+			<div class="x-copyright">
+                <img title="musetuan.com" src="../images/logos/barcode.svg" />
+                <span>&copy; 2025 Kingcean Tuan &amp; Muse Tuan</span>
+            </div>
+		</section>
+	</footer>
+    <div id="popup-view" style="display: none; " >
+        <div class="priority-backup"><img id="popup-view-thumb"></div><div class="priority-main"><img id="popup-view-img"></div><div class="priority-subtitle"><strong id="popup-view-title"></strong><br /><span id="popup-view-desc"></span></div>
+    </div>
+</body>
+</html>

@@ -194,24 +194,28 @@ let museSite = {};
         name: "乡村景色",
         year: 2025,
         month: 4,
+        thumb: true,
         keywords: []
     }, {
         id: "moon-rabbit",
         name: "玉兔月球车",
         year: 2025,
         month: 2,
+        thumb: true,
         keywords: []
     }, {
         id: "gold-medal",
         name: "金牌时刻",
         year: 2024,
         month: 8,
+        thumb: true,
         keywords: []
     }, {
         id: "takeout",
         name: "外卖",
         year: 2022,
         month: 7,
+        thumb: true,
         keywords: []
     }, {
         id: "fighting-covid-19",
@@ -219,18 +223,21 @@ let museSite = {};
         name: "抗击新冠",
         year: 2022,
         month: 4,
+        thumb: true,
         keywords: []
     }, {
         id: "love-music",
         name: "我爱音乐",
         year: 2021,
         month: 2,
+        thumb: true,
         keywords: []
     }, {
         id: "defend-dream",
         name: "守护梦想",
         year: 2020,
         month: 5,
+        thumb: true,
         keywords: []
     }];
 
@@ -419,6 +426,10 @@ let museSite = {};
         return info;
     }
 
+    museSite.hidePopupView = function () {
+        document.getElementById("popup-view").style.display = "none";
+    };
+
     museSite.video = function (year, id) {
         for (let i = 0; i < videos.length; i++) {
             let v = videos[i];
@@ -426,6 +437,58 @@ let museSite = {};
         }
 
         return undefined;
+    };
+
+    museSite.renderNextWave = function (images, paging) {
+        const containerEle = document.getElementById("section-works-container");
+        for (let i = paging.offset; i < Math.min(paging.offset + paging.size, images.length); i++) {
+            const imageInfo = images[i];
+            if (!imageInfo || imageInfo.disable) continue;
+            try {
+                museSite.renderImage(containerEle, imageInfo, paging);
+            } catch (ex) { }
+        }
+        paging.offset += paging.size;
+        document.getElementById("section-works-more").style.display = paging.offset < images.length ? "" : "none";
+    };
+
+    museSite.renderImage = function (containerEle, imageInfo, paging) {
+        const imageEle = document.createElement("img");
+        let sourceUrl = imageInfo.url;
+        if (!sourceUrl) {
+            if (imageInfo.id && imageInfo.year) sourceUrl = "~/" + imageInfo.year + "/" + imageInfo.id + ".webp";
+            else return;
+        }
+        let thumbUrl = imageInfo.thumb;
+        if (thumbUrl === true) thumbUrl = sourceUrl.replace("~/", "~/thumbnails/");
+        else if (!thumbUrl) thumbUrl = sourceUrl;
+        if (thumbUrl.indexOf("~/") == 0) thumbUrl = thumbUrl.replace("~/", "../images/" + paging.path + "/");
+        if (sourceUrl.indexOf("~/") == 0) sourceUrl = sourceUrl.replace("~/", "../images/" + paging.path + "/");
+        imageEle.src = thumbUrl;
+        let imageName = imageInfo.name;
+        let imageSize = imageInfo.size || "";
+        if (imageSize && imageSize.indexOf("x") > 0)
+            imageSize = imageSize.replace("x", "cm × ") + "cm";
+        if (imageInfo.year) {
+            if (imageSize && imageInfo.year) imageSize += " &nbsp; | &nbsp; ";
+            imageSize += "&#39;" + imageInfo.year.toString();
+        }
+        if (imageName) {
+            if (imageSize) imageName += " (" + imageSize + ")";
+        } else {
+            imageName = paging.defaultName;
+        }
+        imageEle.alt = imageName;
+        containerEle.appendChild(imageEle);
+        imageEle.addEventListener("click", function (ev) {
+            document.getElementById("popup-view-img").src = sourceUrl;
+            document.getElementById("popup-view-img").alt = imageName;
+            document.getElementById("popup-view-thumb").src = thumbUrl;
+            document.getElementById("popup-view-thumb").alt = imageName;
+            document.getElementById("popup-view-title").innerHTML = imageInfo.name || paging.defaultName;
+            document.getElementById("popup-view-desc").innerHTML = imageSize;
+            document.getElementById("popup-view").style.display = "";
+        });
     };
 
     museSite.initHome = function () {
@@ -578,6 +641,19 @@ let museSite = {};
                 showCert(item, details);
                 return;
             }
+        });
+    };
+
+    museSite.initPaint = function () {
+        const paging = {
+            offset: 0,
+            size: 12,
+            path: "paintings"
+        };
+        museSite.renderNextWave(paints, paging);
+        document.getElementById("popup-view").addEventListener("click", museSite.hidePopupView);
+        document.getElementById("section-works-more").addEventListener("click", function () {
+            museSite.renderNextWave(paging);
         });
     };
 

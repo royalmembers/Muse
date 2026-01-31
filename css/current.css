@@ -55,3 +55,50 @@ section#part-avatar > h1 + div {
     cursor: default;
     user-select: none;
 }
+div#popup-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0,0,0,0.6);
+    user-select: none;
+    cursor: default;
+    z-index: 1000;
+}
+div#popup-view > div.priority-main, div#popup-view > div.priority-backup {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 50px;
+}
+div#popup-view > div.priority-main > img, div#popup-view > div.priority-backup > img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+div#popup-view > div.priority-subtitle {
+    font-size: 14px;
+    height: 48px;
+    line-height: 24px;
+    text-align: center;
+    text-shadow: 0 0 4px black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+}
+div#popup-view > div.priority-subtitle > strong {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+}
+section > div.x-copyright-spec {
+    color: #F9F9F9; text-align: center; width: 220px; position: absolute; top: 40px; left: 0;
+}
+section > div.x-copyright-spec > img:first-child {
+    width: 220px; height: 220px; border-radius: 6px; 
+}
