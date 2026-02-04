@@ -5,6 +5,7 @@ let museSite = {};
     let strings = {};
 
     const avatars = [
+        { year: 2026, month: 2 },
         { year: 2025, month: 7 },
         { year: 2024, month: 5 },
         { year: 2023, month: 6 },
@@ -287,12 +288,12 @@ let museSite = {};
     function getAvatarUrl(item) {
         let url = item.url;
         if (url) return url;
-        url = "./images/avatar/avatar_MuseTuan_" + item.year;
+        url = "./images/avatar/avatar_MuseTuan_" + item.year.toString(10);
         if (item.month) {
             if (item.month < 10) url += "0";
             url += item.month;
         }
-        url += ".jpg";
+        url += item.year > 2025 ? ".webp" : ".jpg";
         return url;
     }
 
