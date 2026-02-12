@@ -265,6 +265,71 @@ let museSite = {};
         thumb: true,
         keywords: ["watercolor"]
     }];
+    const paintSeries = {
+        mao: [{
+            id: "mao-26-02-p-01",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-02",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-03",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-04",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-05",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-06",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-07",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-08",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-09",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-10",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-11",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-12",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-26-02-p-13",
+            year: 2026,
+            month: 2
+        }, {
+            id: "mao-260210-p01",
+            year: 2026,
+            month: 2,
+            day: 10
+        }, {
+            id: "mao-260210-p02",
+            year: 2026,
+            month: 2,
+            day: 10
+        }]
+    };
 
     function scrollToTop(top) {
         window.scrollTo({ top: top || 0, behavior: "smooth" });
@@ -451,6 +516,14 @@ let museSite = {};
         return info;
     }
 
+    function renderPaintSection(images, paging) {
+        museSite.renderNextWave(images, paging);
+        const idPrefix = paging.id || "section-works";
+        document.getElementById(idPrefix + "-more").addEventListener("click", function () {
+            museSite.renderNextWave(images, paging);
+        });
+    }
+
     museSite.hidePopupView = function () {
         document.getElementById("popup-view").style.display = "none";
     };
@@ -480,9 +553,11 @@ let museSite = {};
 
     museSite.renderImage = function (containerEle, imageInfo, paging) {
         const imageEle = document.createElement("img");
+        imageEle.loading = "lazy";
         let sourceUrl = imageInfo.url;
+        const ext = "." + (paging.ext || "webp");
         if (!sourceUrl) {
-            if (imageInfo.id && imageInfo.year) sourceUrl = "~/" + imageInfo.year + "/" + imageInfo.id + ".webp";
+            if (imageInfo.id && imageInfo.year) sourceUrl = "~/" + imageInfo.year + "/" + imageInfo.id + ext;
             else return;
         }
         let thumbUrl = imageInfo.thumb;
@@ -503,7 +578,7 @@ let museSite = {};
         if (imageName) {
             if (imageSize) imageName += " (" + imageSize + ")";
         } else {
-            imageName = paging.defaultName;
+            imageName = paging.defaultName || "";
         }
         imageEle.alt = imageName;
         containerEle.appendChild(imageEle);
@@ -685,16 +760,19 @@ let museSite = {};
     };
 
     museSite.initPaint = function () {
-        const paging = {
+        renderPaintSection(paints, {
+            offset: 0,
+            size: 12,
+            path: "paintings"
+        });
+        renderPaintSection(paintSeries.mao, {
             offset: 0,
             size: 12,
             path: "paintings",
-        };
-        museSite.renderNextWave(paints, paging);
-        document.getElementById("popup-view").addEventListener("click", museSite.hidePopupView);
-        document.getElementById("section-works-more").addEventListener("click", function () {
-            museSite.renderNextWave(paints, paging);
+            ext: "jpg",
+            defaultName: "摸凹喵",
+            id: "section-mao"
         });
+        document.getElementById("popup-view").addEventListener("click", museSite.hidePopupView);
     };
-
 })(museSite || (museSite = {}));
