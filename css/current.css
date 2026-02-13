@@ -10,6 +10,9 @@ body > header:first-child > section:first-child > h1 > img:hover {
 body > header:first-child > section:first-child > h1 > img:first-child + a > strong:first-child + span {
     font-weight: lighter;
 }
+body > footer > section > div.x-copyright > img:first-child + span + span {
+    font-size: 12px; line-height: 18px; text-align: center; height: 18px; padding-right: 1px; display: block; cursor: default;
+}
 button.x-button-more {
     color: #EEE; background-color: #333; padding: 8px 16px; margin: 0; border: 0 none transparent; border-radius: 4px; cursor: pointer; transition: 0.2s;
 }

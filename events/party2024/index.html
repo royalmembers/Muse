@@ -40,6 +40,12 @@
 		width: 32px; height: 32px; vertical-align: middle;
 	}
 	@media screen and (max-width:800px) {
+		body > header:first-child {
+			height: 60px;
+		}
+		body > header:first-child > section:first-child > h1 + ul {
+			display: none;
+		}
 		body > section.x-part-greetings > section:first-child > span:first-child {
 			font-size: 24px; padding: 20px 40px; 
 		}
@@ -138,7 +144,7 @@
 		<section>
 			<div class="x-copyright">
 				<img src="../../images/logos/barcode.svg" />
-				<span>&copy; 2024 Kingcean Tuan &amp; Muse Tuan</span>
+				<span>&copy; 2024 Muse Tuan &amp; Kingcean Tuan</span>
             		</div>
 		</section>
 	</footer>
