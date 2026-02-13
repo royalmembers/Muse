@@ -1,20 +1,6 @@
 "use strict";
 var PageCtrl;
 (function (PageCtrl) {
-    var avatars = [
-        { year: 2026, month: 2 },
-        { year: 2025, month: 7 },
-        { year: 2024, month: 5 },
-        { year: 2023, month: 6 },
-        { year: 2022, month: 1 },
-        { year: 2021, month: 4 },
-        { year: 2020, month: 1 },
-        { year: 2019, month: 10 },
-        { year: 2018, month: 10 },
-        { year: 2017, month: 4 },
-        { year: 2016, month: 6 },
-        { year: 2015, month: 9 }
-    ];
     var certs = [{
             id: "kawai",
             name: "Kawai 亚洲钢琴大赛",
@@ -159,25 +145,6 @@ var PageCtrl;
             publisher: "深圳市五洲行艺术团有限责任公司",
             keywords: ["dance", "match"]
         }];
-    function getAvatarUrl(item) {
-        var url = item.url;
-        if (url)
-            return url;
-        url = "./images/avatar/avatar_MuseTuan_" + item.year.toString(10);
-        if (item.month) {
-            if (item.month < 10)
-                url += "0";
-            url += item.month;
-        }
-        url += item.year > 2025 ? ".webp" : ".jpg";
-        return url;
-    }
-    function showAvatar(item) {
-        if (!item)
-            return;
-        DeepX.MdBlogs.setElementProp("image-avatar", "src", getAvatarUrl(item));
-        DeepX.MdBlogs.setElementProp("image-desc", "innerText", PageCtrl.getString("photoTaken").replace("{0}", item.year));
-    }
     function showCert(item, details) {
         var arr = [{
                 tagName: "div",
@@ -242,27 +209,13 @@ var PageCtrl;
             }
         };
     }
-    function parseFirstQuery(id) {
-        if (!id)
-            return {};
-        var arr = id.split('/');
-        if (arr.length < 2 || !arr[0] && !arr[1])
-            return {};
-        var obj = {
-            id: arr[1],
-            year: parseInt(arr[0])
-        };
-        if (arr.length > 2)
-            obj.sub = arr[2];
-        return obj;
-    }
     function certsModel(arr, id, details, onlyMatch) {
         var info;
         var year;
         if (arr.length > 1)
             arr.splice(0);
         var thisYear = new Date().getFullYear();
-        var selInfo = parseFirstQuery(id);
+        var selInfo = PageCtrl.parseFirstQuery(id);
         for (var i = 0; i < certs.length; i++) {
             var item = certs[i];
             if (!item || !item.name || item.disable)
@@ -297,6 +250,102 @@ var PageCtrl;
         }
         return info;
     }
+    function initCerts() {
+        var arr = [];
+        var details = document.getElementById("part-cert");
+        var id = DeepX.MdBlogs.firstQuery();
+        var info = certsModel(arr, id, details);
+        if (id && info)
+            showCert(info, details);
+        var c = Hje.render("part-certs", { children: arr });
+        var checkbox = document.getElementById("checkbox-certs");
+        if (checkbox)
+            checkbox.addEventListener("change", function (ev) {
+                certsModel(arr, id, details, checkbox.checked);
+                c.refresh();
+            });
+        window.addEventListener("popstate", function (ev) {
+            id = (ev.state || {}).id;
+            var selInfo = PageCtrl.parseFirstQuery(id);
+            if (!selInfo.id) {
+                details.style.display = "none";
+                return;
+            }
+            for (var i = 0; i < certs.length; i++) {
+                var item = certs[i];
+                if (!item || item.id !== selInfo.id || item.year !== selInfo.year)
+                    continue;
+                showCert(item, details);
+                return;
+            }
+        });
+        PageCtrl.initMenu("certs");
+    }
+    PageCtrl.initCerts = initCerts;
+})(PageCtrl || (PageCtrl = {}));
+var PageCtrl;
+(function (PageCtrl) {
+    var avatars = [
+        { year: 2026, month: 2 },
+        { year: 2025, month: 7 },
+        { year: 2024, month: 5 },
+        { year: 2023, month: 6 },
+        { year: 2022, month: 1 },
+        { year: 2021, month: 4 },
+        { year: 2020, month: 1 },
+        { year: 2019, month: 10 },
+        { year: 2018, month: 10 },
+        { year: 2017, month: 4 },
+        { year: 2016, month: 6 },
+        { year: 2015, month: 9 }
+    ];
+    var menu = [{
+            id: "certs",
+            name: "Honors",
+            "name#zh": "荣誉",
+        }, {
+            id: "paintings",
+            name: "Paintings",
+            "name#zh": "画作",
+        }];
+    function getAvatarUrl(item) {
+        var url = item.url;
+        if (url)
+            return url;
+        url = "./images/avatar/avatar_MuseTuan_" + item.year.toString(10);
+        if (item.month) {
+            if (item.month < 10)
+                url += "0";
+            url += item.month;
+        }
+        url += item.year > 2025 ? ".webp" : ".jpg";
+        return url;
+    }
+    function showAvatar(item) {
+        if (!item)
+            return;
+        DeepX.MdBlogs.setElementProp("image-avatar", "src", getAvatarUrl(item));
+        DeepX.MdBlogs.setElementProp("image-desc", "innerText", PageCtrl.getString("photoTaken").replace("{0}", item.year));
+    }
+    function initMenu(id) {
+        var container = document.getElementById("top-menu");
+        container.innerHTML = "";
+        var rela = id === true ? "./" : "../";
+        var sel = typeof id === "string" ? id : undefined;
+        menu.forEach(function (ele) {
+            if (!ele || ele.disable || !ele.name || !ele.id)
+                return;
+            var item = document.createElement("li");
+            var link = document.createElement("a");
+            container.appendChild(item);
+            item.appendChild(link);
+            link.href = rela + ele.id;
+            link.innerText = DeepX.MdBlogs.getLocaleProp(ele, "name");
+            if (ele.id === sel)
+                item.className = "state-sel";
+        });
+    }
+    PageCtrl.initMenu = initMenu;
     function initHome() {
         var container = document.getElementById("section-avatars");
         container.innerHTML = "";
@@ -352,40 +401,9 @@ var PageCtrl;
             return;
         DeepX.MdBlogs.setElementProp("link-certs", "innerText", "小小荣誉");
         DeepX.MdBlogs.setElementProp("title-works", "innerText", "作品集");
+        initMenu(true);
     }
     PageCtrl.initHome = initHome;
-    ;
-    function initCerts() {
-        var arr = [];
-        var details = document.getElementById("part-cert");
-        var id = DeepX.MdBlogs.firstQuery();
-        var info = certsModel(arr, id, details);
-        if (id && info)
-            showCert(info, details);
-        var c = Hje.render("part-certs", { children: arr });
-        var checkbox = document.getElementById("checkbox-certs");
-        if (checkbox)
-            checkbox.addEventListener("change", function (ev) {
-                certsModel(arr, id, details, checkbox.checked);
-                c.refresh();
-            });
-        window.addEventListener("popstate", function (ev) {
-            id = (ev.state || {}).id;
-            var selInfo = parseFirstQuery(id);
-            if (!selInfo.id) {
-                details.style.display = "none";
-                return;
-            }
-            for (var i = 0; i < certs.length; i++) {
-                var item = certs[i];
-                if (!item || item.id !== selInfo.id || item.year !== selInfo.year)
-                    continue;
-                showCert(item, details);
-                return;
-            }
-        });
-    }
-    PageCtrl.initCerts = initCerts;
     ;
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
@@ -395,6 +413,8 @@ var PageCtrl;
         "photoTaken#zh": "本照片拍摄于{0}年",
         paintings: "Paintings",
         "paintings#zh": "画作",
+        series: "Series",
+        "series#zh": "系列",
     };
     function getString(key) {
         return DeepX.MdBlogs.getLocaleProp(strings, key);
@@ -624,7 +644,7 @@ var PageCtrl;
                 container.className = "x-container-pics";
                 break;
         }
-        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || "paintings");
+        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || PageCtrl.getString("paintings"));
         renderNextWave(images, paging);
         getContainerElement(paging, "more").addEventListener("click", function () {
             renderNextWave(images, paging);
@@ -691,20 +711,25 @@ var PageCtrl;
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         var q = DeepX.MdBlogs.firstQuery();
-        var series = getSeries(q);
-        if (series) {
-            if (series.id)
-                q = series.id;
+        var sel = getSeries(q);
+        var seriesMenu = document.getElementById("section-series-container");
+        seriesMenu.innerHTML = "";
+        if (sel) {
+            if (sel.id)
+                q = sel.id;
             var col = works[q];
             renderPaintings(col, {
                 offset: 0,
                 size: 24,
                 path: "paintings",
-                ext: series.ext,
-                defaultName: series.name,
+                ext: sel.ext,
+                defaultName: sel.name,
                 ratio: "p",
-                thumb: series.thumb,
+                thumb: sel.thumb,
             });
+            document.getElementById("section-back-container").style.display = "";
+            document.getElementById("section-series-title-container").style.display = "none";
+            seriesMenu.style.display = "none";
         }
         else {
             renderPaintings(works.common, {
@@ -713,8 +738,27 @@ var PageCtrl;
                 path: "paintings",
                 thumb: true,
             });
+            document.getElementById("section-back-container").style.display = "none";
+            document.getElementById("section-series-title-container").style.display = "";
+            seriesMenu.style.display = "";
+        }
+        for (var i in series) {
+            var item = series[i];
+            if (!item || item.disable || !item.name || !item.id)
+                continue;
+            var linkEle = document.createElement("a");
+            linkEle.className = "link-long-button";
+            linkEle.href = "./?" + item.id;
+            var spanEle = document.createElement("span");
+            spanEle.title = spanEle.innerText = item.name;
+            linkEle.appendChild(spanEle);
+            seriesMenu.appendChild(linkEle);
         }
         initPopupView();
+        DeepX.MdBlogs.setElementText("text-back", "back");
+        PageCtrl.setElementProp("section-series-title", null, "series");
+        PageCtrl.setElementProp("text-series", null, "series");
+        PageCtrl.initMenu("paintings");
     }
     PageCtrl.initPaint = initPaint;
     ;
@@ -745,6 +789,21 @@ var PageCtrl;
         return inner.browserKind = ua.includes(" (Windows NT ") ? "windows" : "normal";
     }
     PageCtrl.checkBrowserKind = checkBrowserKind;
+    function parseFirstQuery(id) {
+        if (!id)
+            return {};
+        var arr = id.split('/');
+        if (arr.length < 2 || !arr[0] && !arr[1])
+            return {};
+        var obj = {
+            id: arr[1],
+            year: parseInt(arr[0])
+        };
+        if (arr.length > 2)
+            obj.sub = arr[2];
+        return obj;
+    }
+    PageCtrl.parseFirstQuery = parseFirstQuery;
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
 (function (PageCtrl) {

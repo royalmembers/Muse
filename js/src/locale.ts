@@ -5,6 +5,8 @@ namespace PageCtrl {
         "photoTaken#zh": "本照片拍摄于{0}年",
         paintings: "Paintings",
         "paintings#zh": "画作",
+        series: "Series",
+        "series#zh": "系列",
     }
 
     export function getString(key: keyof typeof strings) {

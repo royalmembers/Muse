@@ -1,10 +1,4 @@
 declare namespace PageCtrl {
-    interface IAvatarInfo {
-        title?: string;
-        year: number;
-        month: number;
-        url?: string;
-    }
     interface ICertInfo {
         id: string;
         disable?: boolean;
@@ -19,8 +13,23 @@ declare namespace PageCtrl {
         img?: string | false;
         keywords?: string[];
     }
-    function initHome(): void;
     function initCerts(): void;
+}
+declare namespace PageCtrl {
+    export interface IAvatarInfo {
+        title?: string;
+        year: number;
+        month: number;
+        url?: string;
+    }
+    const menu: {
+        id: string;
+        name: string;
+        "name#zh": string;
+    }[];
+    export function initMenu(id?: (typeof menu)[number]["id"] | boolean): void;
+    export function initHome(): void;
+    export {};
 }
 declare namespace PageCtrl {
     const strings: {
@@ -28,6 +37,8 @@ declare namespace PageCtrl {
         "photoTaken#zh": string;
         paintings: string;
         "paintings#zh": string;
+        series: string;
+        "series#zh": string;
     };
     export function getString(key: keyof typeof strings): any;
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings): void;
@@ -77,6 +88,11 @@ declare namespace PageCtrl {
 declare namespace PageCtrl {
     function scrollToTop(top?: number): void;
     function checkBrowserKind(): string;
+    function parseFirstQuery(id: string | null | undefined): {
+        id?: string;
+        year?: number;
+        sub?: string;
+    };
 }
 declare namespace PageCtrl {
     interface IElementBag {

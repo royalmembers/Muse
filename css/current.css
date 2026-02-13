@@ -22,14 +22,6 @@ button.x-button-more > span {
 button.x-button-more > span + img {
     width: 16px; height: 16px; vertical-align: middle; margin-left: 8px;
 }
-@media screen and (max-width:800px) {
-    body > header:first-child {
-        height: 60px;
-    }
-    body > header:first-child > section:first-child > h1 + ul {
-        display: none;
-    }
-}
 body > section > h2 + section > a.link-long-button > span + span {
     color: #888;
     font-size: 16px;

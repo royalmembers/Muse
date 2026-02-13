@@ -255,7 +255,7 @@ namespace PageCtrl {
                 break;
         }
 
-        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || "paintings");
+        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || getString("paintings"));
         renderNextWave(images, paging);
         getContainerElement(paging, "more")!.addEventListener("click", function () {
             renderNextWave(images, paging);
@@ -311,19 +311,24 @@ namespace PageCtrl {
 
     export function initPaint() {
         let q = DeepX.MdBlogs.firstQuery();
-        const series = getSeries(q);
-        if (series) {
-            if (series.id) q = series.id;
+        const sel = getSeries(q);
+        const seriesMenu = document.getElementById("section-series-container")!;
+        seriesMenu.innerHTML = "";
+        if (sel) {
+            if (sel.id) q = sel.id;
             const col = works[q];
             renderPaintings(col, {
                 offset: 0,
                 size: 24,
                 path: "paintings",
-                ext: series.ext,
-                defaultName: series.name,
+                ext: sel.ext,
+                defaultName: sel.name,
                 ratio: "p",
-                thumb: series.thumb,
+                thumb: sel.thumb,
             });
+            document.getElementById("section-back-container")!.style.display = "";
+            document.getElementById("section-series-title-container")!.style.display = "none";
+            seriesMenu.style.display = "none";
         } else {
             renderPaintings(works.common, {
                 offset: 0,
@@ -331,8 +336,27 @@ namespace PageCtrl {
                 path: "paintings",
                 thumb: true,
             });
+            document.getElementById("section-back-container")!.style.display = "none";
+            document.getElementById("section-series-title-container")!.style.display = "";
+            seriesMenu.style.display = "";
         }
+        for (let i in series) {
+            const item = series[i];
+            if (!item || item.disable || !item.name || !item.id) continue;
+            const linkEle = document.createElement("a");
+            linkEle.className = "link-long-button";
+            linkEle.href = "./?" + item.id;
+            const spanEle = document.createElement("span");
+            spanEle.title = spanEle.innerText = item.name;
+            linkEle.appendChild(spanEle);
+            seriesMenu.appendChild(linkEle);
+        }
+
         initPopupView();
+        DeepX.MdBlogs.setElementText("text-back", "back");
+        setElementProp("section-series-title", null, "series");
+        setElementProp("text-series", null, "series");
+        initMenu("paintings");
     };
 
     export function initPopupView() {

@@ -12,8 +12,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/js/mdblogs.js" ></script>
 	<script type="text/javascript" src="../js/current.js" ></script>
     <style type="text/css">
-    body > section:has(+ footer) {
-        min-height: 600px;
+    body > .x-main-container {
+        margin-bottom: 100px;
     }
     </style>
     <script type="text/javascript" src="https://jinchen.org/js/current.js" ></script>
@@ -22,11 +22,15 @@
 	<header>
         <section>
             <h1><img alt="Muse Tuan" src="../images/logos/logo-2026-paint.png" /><a href="https://musetuan.com"><strong>Muse</strong><span>Tuan.com</span></a></h1>
-            <ul>
+            <ul id="top-menu" >
             </ul>
         </section>
 	</header>
-    <section >
+    <section class="x-main-container" >
+        <section id="section-back-container" style="display: none; " >
+            <a href="./" title="Turn back to paintings" ><span>&lt; </span><span id="text-back" >Back</span></a>
+            <span> &nbsp; | &nbsp; </span><span id="text-series">Series</span>
+        </section>
         <section class="x-zone-hl layout-wide-full x-bg-outstanding">
             <h2 id="section-works-title">Paintings</h2>
         </section>
@@ -35,12 +39,18 @@
         <section>
             <button id="section-works-more" class="x-button-more" style="display: none; " ><span id="button-works-more">See more</span><img alt="See more" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/images/ele/down_pos_white.png" /></button>
         </section>
+        <section id="section-series-title-container" class="x-zone-hl layout-wide-full x-bg-outstanding">
+            <h2 id="section-series-title">Series</h2>
+        </section>
+        <section id="section-series-container" >
+			<a href="./?mao" class="link-long-button"><span>摸凹喵</span></a>
+        </section>
     </section>
 	<footer>
 		<section>
 			<div class="x-copyright">
                 <img title="musetuan.com" src="../images/logos/barcode.svg" />
-                <span>&copy; 2025 Kingcean Tuan &amp; Muse Tuan</span>
+                <span>&copy; 2025 Muse Tuan &amp; Kingcean Tuan</span>
             </div>
 		</section>
 	</footer>
