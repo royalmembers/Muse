@@ -137,7 +137,8 @@ namespace PageCtrl {
             id: "mao-26-02-p-10",
             name: "摸凹喵吊坠",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 7
         }, {
             id: "mao-26-02-p-09",
             year: 2026,
@@ -146,12 +147,14 @@ namespace PageCtrl {
             id: "mao-26-02-p-08",
             name: "熊猫摸凹喵",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 5
         }, {
             id: "mao-26-02-p-07",
             name: "熊猫摸凹喵",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 5
         }, {
             id: "mao-26-02-p-06",
             year: 2026,
@@ -164,22 +167,26 @@ namespace PageCtrl {
             id: "mao-26-02-p-04",
             name: "摸凹喵吃成都火锅",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 4
         }, {
             id: "mao-26-02-p-03",
             name: "摸凹喵吃老北京火锅",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 3
         }, {
             id: "mao-26-02-p-02",
             name: "摸凹喵泡澡",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 3
         }, {
             id: "mao-26-02-p-01",
             name: "摸凹喵玩游戏",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 2
         }]
     };
 
