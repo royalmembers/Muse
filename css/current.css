@@ -133,12 +133,24 @@ section.x-container-pics {
 section.x-container-pics > img {
     background-color: #333;
     width: 100%;
-    aspect-ratio: 1.22;
+    aspect-ratio: 1.333;
     margin: 0;
     border-radius: 4px;
     object-fit: cover;
     transition: 0.2s;
     cursor: pointer;
+}
+section.x-container-pics.x-image-ratio-p > img {
+    aspect-ratio: 0.707;
+}
+section.x-container-pics.x-image-ratio-h > img {
+    aspect-ratio: 0.75;
+}
+section.x-container-pics.x-image-ratio-s > img {
+    aspect-ratio: 1;
+}
+section.x-container-pics.x-image-ratio-w > img {
+    aspect-ratio: 1.777;
 }
 section.x-container-pics > img:hover {
     filter: contrast(1.2);
