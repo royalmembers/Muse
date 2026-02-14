@@ -187,6 +187,37 @@ namespace PageCtrl {
             year: 2026,
             month: 2,
             day: 2
+        }, {
+            id: "mao-26-01-p-09",
+            year: 2026,
+            month: 1
+        }, {
+            id: "mao-26-01-p-08",
+            year: 2026,
+            month: 1
+        }, {
+            id: "mao-26-01-p-07",
+            name: "摸凹喵的美梦",
+            year: 2026,
+            month: 1
+        }, {
+            id: "mao-26-01-p-06",
+            name: "摸凹喵照镜子",
+            year: 2026,
+            month: 1
+        }, {
+            id: "mao-26-01-p-05",
+            name: "摸凹喵的冰淇淋掉了",
+            year: 2026,
+            month: 1
+        }, {
+            id: "mao-26-01-p-04",
+            year: 2026,
+            month: 1
+        }, {
+            id: "mao-26-01-p-03",
+            year: 2026,
+            month: 1
         }]
     };
 
@@ -217,6 +248,7 @@ namespace PageCtrl {
 
     function getSeries(id: string) {
         if (!id) return undefined;
+        id = id.replace("=", "").replace(" ", "");
         for (let i in series) {
             const item = series[i];
             if (item?.id !== id || item.disable) continue;
