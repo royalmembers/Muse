@@ -107,42 +107,50 @@ namespace PageCtrl {
             name: "摸凹喵凤凰神兽",
             year: 2026,
             month: 2,
-            day: 10
+            day: 10,
+            keywords: ["神兽"]
         }, {
             id: "mao-260210-p1",
             name: "摸凹喵龙神兽",
             year: 2026,
             month: 2,
-            day: 10
+            day: 10,
+            keywords: ["神兽"]
         }, {
             id: "mao-26-02-p-14",
-            name: "摸凹喵吊坠",
+            name: "摸凹喵短尾猫吊坠",
             year: 2026,
-            month: 2
+            month: 2,
+            keywords: ["吊坠"]
         }, {
             id: "mao-26-02-p-13",
-            name: "摸凹喵吊坠",
+            name: "摸凹喵狐狸吊坠",
             year: 2026,
-            month: 2
+            month: 2,
+            keywords: ["吊坠"]
         }, {
             id: "mao-26-02-p-12",
             year: 2026,
             month: 2
         }, {
             id: "mao-26-02-p-11",
-            name: "狮子摸凹喵",
-            year: 2026,
-            month: 2
-        }, {
-            id: "mao-26-02-p-10",
-            name: "摸凹喵吊坠",
+            name: "摸凹喵花朵狮",
             year: 2026,
             month: 2,
-            day: 7
+            day: 5
+        }, {
+            id: "mao-26-02-p-10",
+            name: "摸凹喵小熊猫吊坠",
+            year: 2026,
+            month: 2,
+            day: 5,
+            keywords: ["吊坠"]
         }, {
             id: "mao-26-02-p-09",
+            name: "摸凹喵花豹",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 5
         }, {
             id: "mao-26-02-p-08",
             name: "熊猫摸凹喵",
@@ -158,11 +166,14 @@ namespace PageCtrl {
         }, {
             id: "mao-26-02-p-06",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 5
         }, {
             id: "mao-26-02-p-05",
+            name: "摸凹喵与摇钱树",
             year: 2026,
-            month: 2
+            month: 2,
+            day: 5
         }, {
             id: "mao-26-02-p-04",
             name: "摸凹喵吃成都火锅",
@@ -216,6 +227,10 @@ namespace PageCtrl {
             month: 1
         }, {
             id: "mao-26-01-p-03",
+            year: 2026,
+            month: 1
+        }, {
+            id: "mao-26-01-p-01",
             year: 2026,
             month: 1
         }]
