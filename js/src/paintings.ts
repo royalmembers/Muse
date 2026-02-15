@@ -117,6 +117,18 @@ namespace PageCtrl {
             day: 10,
             keywords: ["神兽"]
         }, {
+            id: "mao-260208-p2",
+            name: "古装摸凹喵",
+            year: 2026,
+            month: 2,
+            day: 8
+        }, {
+            id: "mao-260208-p1",
+            name: "古装摸凹喵",
+            year: 2026,
+            month: 2,
+            day: 8
+        }, {
             id: "mao-26-02-p-14",
             name: "摸凹喵短尾猫吊坠",
             year: 2026,
@@ -401,6 +413,7 @@ namespace PageCtrl {
 
         initPopupView();
         DeepX.MdBlogs.setElementText("text-back", "back");
+        DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         setElementProp("section-series-title", null, "series");
         setElementProp("text-series", null, "series");
         initMenu("paintings");

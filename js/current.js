@@ -401,6 +401,7 @@ var PageCtrl;
             return;
         DeepX.MdBlogs.setElementProp("link-certs", "innerText", "小小荣誉");
         DeepX.MdBlogs.setElementProp("title-works", "innerText", "作品集");
+        DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         initMenu(true);
     }
     PageCtrl.initHome = initHome;
@@ -506,6 +507,16 @@ var PageCtrl;
                 month: 2,
                 day: 10,
                 keywords: ["神兽"]
+            }, {
+                id: "mao-260208-p2",
+                year: 2026,
+                month: 2,
+                day: 8
+            }, {
+                id: "mao-260208-p1",
+                year: 2026,
+                month: 2,
+                day: 8
             }, {
                 id: "mao-26-02-p-14",
                 name: "摸凹喵短尾猫吊坠",
@@ -803,6 +814,7 @@ var PageCtrl;
         }
         initPopupView();
         DeepX.MdBlogs.setElementText("text-back", "back");
+        DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         PageCtrl.setElementProp("section-series-title", null, "series");
         PageCtrl.setElementProp("text-series", null, "series");
         PageCtrl.initMenu("paintings");
