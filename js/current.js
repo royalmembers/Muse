@@ -494,6 +494,20 @@ var PageCtrl;
                 keywords: ["watercolor"]
             }],
         mao: [{
+                id: "mao-260211-p2",
+                name: "摸凹喵龙尾神兽",
+                year: 2026,
+                month: 2,
+                day: 12,
+                keywords: ["神兽"]
+            }, {
+                id: "mao-260211-p1",
+                name: "摸凹喵麒麟神兽",
+                year: 2026,
+                month: 2,
+                day: 11,
+                keywords: ["神兽"]
+            }, {
                 id: "mao-260210-p2",
                 name: "摸凹喵凤凰神兽",
                 year: 2026,
@@ -509,11 +523,13 @@ var PageCtrl;
                 keywords: ["神兽"]
             }, {
                 id: "mao-260208-p2",
+                name: "古装摸凹喵",
                 year: 2026,
                 month: 2,
                 day: 8
             }, {
                 id: "mao-260208-p1",
+                name: "古装摸凹喵",
                 year: 2026,
                 month: 2,
                 day: 8
@@ -554,13 +570,13 @@ var PageCtrl;
                 day: 5
             }, {
                 id: "mao-26-02-p-08",
-                name: "熊猫摸凹喵",
+                name: "摸凹喵熊猫",
                 year: 2026,
                 month: 2,
                 day: 5
             }, {
                 id: "mao-26-02-p-07",
-                name: "熊猫摸凹喵",
+                name: "摸凹喵熊猫",
                 year: 2026,
                 month: 2,
                 day: 5
@@ -632,6 +648,7 @@ var PageCtrl;
                 month: 1
             }, {
                 id: "mao-26-01-p-01",
+                name: "摸凹喵诞生",
                 year: 2026,
                 month: 1
             }]
