@@ -103,11 +103,18 @@ namespace PageCtrl {
             keywords: ["watercolor"]
         }],
         mao: [{
+            id: "mao-260218-p1",
+            name: "摸凹喵在滕王阁",
+            year: 2026,
+            month: 2,
+            day: 18,
+            keywords: ["神兽"]
+        }, {
             id: "mao-260211-p2",
             name: "摸凹喵龙尾神兽",
             year: 2026,
             month: 2,
-            day: 12,
+            day: 11,
             keywords: ["神兽"]
         }, {
             id: "mao-260211-p1",
