@@ -37,246 +37,21 @@ namespace PageCtrl {
         thumb?: boolean;
     }
 
-    const works: Record<string, IPaintingInfo[]> = {
-        common: [{
-            id: "countryside",
-            name: "乡村景色",
-            year: 2025,
-            month: 4,
-            keywords: ["colored-pencil"]
-        }, {
-            id: "moon-rabbit",
-            name: "玉兔月球车",
-            year: 2025,
-            month: 2,
-            keywords: ["computer-art"]
-        }, {
-            id: "fish",
-            name: "年年有余",
-            year: 2025,
-            keywords: ["chinese-brush"]
-        }, {
-            id: "gold-medal",
-            name: "金牌时刻",
-            year: 2024,
-            month: 8,
-            keywords: ["watercolor"]
-        }, {
-            id: "magpie",
-            name: "喜上眉梢",
-            year: 2024,
-            keywords: ["chinese-brush"]
-        }, {
-            id: "cat",
-            name: "喵宅妙哉",
-            year: 2024,
-            keywords: ["chinese-brush"]
-        }, {
-            id: "lesser-panda",
-            name: "小熊猫",
-            year: 2024,
-            keywords: ["chinese-brush"]
-        }, {
-            id: "takeout",
-            name: "外卖",
-            year: 2022,
-            month: 7,
-            keywords: ["watercolor"]
-        }, {
-            id: "fighting-covid-19",
-            disable: true,
-            name: "抗击新冠",
-            year: 2022,
-            month: 4,
-            keywords: []
-        }, {
-            id: "love-music",
-            name: "我爱音乐",
-            year: 2021,
-            month: 2,
-            keywords: ["colored-pencil"]
-        }, {
-            id: "defend-dream",
-            name: "守护梦想",
-            year: 2020,
-            month: 5,
-            keywords: ["watercolor"]
-        }],
-        mao: [{
-            id: "mao-260218-p1",
-            name: "摸凹喵在滕王阁",
-            year: 2026,
-            month: 2,
-            day: 18,
-            keywords: ["神兽"]
-        }, {
-            id: "mao-260211-p2",
-            name: "摸凹喵龙尾神兽",
-            year: 2026,
-            month: 2,
-            day: 11,
-            keywords: ["神兽"]
-        }, {
-            id: "mao-260211-p1",
-            name: "摸凹喵麒麟神兽",
-            year: 2026,
-            month: 2,
-            day: 11,
-            keywords: ["神兽"]
-        }, {
-            id: "mao-260210-p2",
-            name: "摸凹喵凤凰神兽",
-            year: 2026,
-            month: 2,
-            day: 10,
-            keywords: ["神兽"]
-        }, {
-            id: "mao-260210-p1",
-            name: "摸凹喵龙神兽",
-            year: 2026,
-            month: 2,
-            day: 10,
-            keywords: ["神兽"]
-        }, {
-            id: "mao-260208-p2",
-            name: "古装摸凹喵",
-            year: 2026,
-            month: 2,
-            day: 8
-        }, {
-            id: "mao-260208-p1",
-            name: "古装摸凹喵",
-            year: 2026,
-            month: 2,
-            day: 8
-        }, {
-            id: "mao-26-02-p-14",
-            name: "摸凹喵短尾猫吊坠",
-            year: 2026,
-            month: 2,
-            keywords: ["吊坠"]
-        }, {
-            id: "mao-26-02-p-13",
-            name: "摸凹喵狐狸吊坠",
-            year: 2026,
-            month: 2,
-            keywords: ["吊坠"]
-        }, {
-            id: "mao-26-02-p-12",
-            year: 2026,
-            month: 2
-        }, {
-            id: "mao-26-02-p-11",
-            name: "摸凹喵花朵狮",
-            year: 2026,
-            month: 2,
-            day: 5
-        }, {
-            id: "mao-26-02-p-10",
-            name: "摸凹喵小熊猫吊坠",
-            year: 2026,
-            month: 2,
-            day: 5,
-            keywords: ["吊坠"]
-        }, {
-            id: "mao-26-02-p-09",
-            name: "摸凹喵花豹",
-            year: 2026,
-            month: 2,
-            day: 5
-        }, {
-            id: "mao-26-02-p-08",
-            name: "摸凹喵熊猫",
-            year: 2026,
-            month: 2,
-            day: 5
-        }, {
-            id: "mao-26-02-p-07",
-            name: "摸凹喵熊猫",
-            year: 2026,
-            month: 2,
-            day: 5
-        }, {
-            id: "mao-26-02-p-06",
-            year: 2026,
-            month: 2,
-            day: 5
-        }, {
-            id: "mao-26-02-p-05",
-            name: "摸凹喵与摇钱树",
-            year: 2026,
-            month: 2,
-            day: 5
-        }, {
-            id: "mao-26-02-p-04",
-            name: "摸凹喵吃成都火锅",
-            year: 2026,
-            month: 2,
-            day: 4
-        }, {
-            id: "mao-26-02-p-03",
-            name: "摸凹喵吃老北京火锅",
-            year: 2026,
-            month: 2,
-            day: 3
-        }, {
-            id: "mao-26-02-p-02",
-            name: "摸凹喵泡澡",
-            year: 2026,
-            month: 2,
-            day: 3
-        }, {
-            id: "mao-26-02-p-01",
-            name: "摸凹喵玩游戏",
-            year: 2026,
-            month: 2,
-            day: 2
-        }, {
-            id: "mao-26-01-p-09",
-            year: 2026,
-            month: 1
-        }, {
-            id: "mao-26-01-p-08",
-            year: 2026,
-            month: 1
-        }, {
-            id: "mao-26-01-p-07",
-            name: "摸凹喵的美梦",
-            year: 2026,
-            month: 1
-        }, {
-            id: "mao-26-01-p-06",
-            name: "摸凹喵照镜子",
-            year: 2026,
-            month: 1
-        }, {
-            id: "mao-26-01-p-05",
-            name: "摸凹喵的冰淇淋掉了",
-            year: 2026,
-            month: 1
-        }, {
-            id: "mao-26-01-p-04",
-            year: 2026,
-            month: 1
-        }, {
-            id: "mao-26-01-p-03",
-            year: 2026,
-            month: 1
-        }, {
-            id: "mao-26-01-p-01",
-            name: "摸凹喵诞生",
-            year: 2026,
-            month: 1
-        }]
+    let works = {
+        series: [] as IPaintingSeriesInfo[],
+        common: [] as IPaintingInfo[],
+        done: false
     };
 
-    const series: IPaintingSeriesInfo[] = [{
-        id: "mao",
-        name: "摸凹喵",
-        year: 2026,
-        ratio: "p",
-        thumb: true,
-    }];
+    async function init(rela?: string) {
+        if (works.done) return true;
+        const res = await fetch(`${rela || "../paintings/"}config.json`);
+        const json = await res.json();
+        if (!json) return false;
+        works = json;
+        works.done = true;
+        return true;
+    }
 
     function getContainerElement(paging: IPaintingPaging, suffix?: string) {
         return document.getElementById(`${paging?.id || "section-works"}-${suffix || "container"}`)!;
@@ -298,6 +73,7 @@ namespace PageCtrl {
     function getSeries(id: string) {
         if (!id) return undefined;
         id = id.replace("=", "").replace(" ", "");
+        const series = works.series || [];
         for (let i in series) {
             const item = series[i];
             if (item?.id !== id || item.disable) continue;
@@ -307,9 +83,11 @@ namespace PageCtrl {
         return undefined;
     }
     
-    export function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging) {
+    export async function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging) {
         if (!paging) return;
-        if (images === true) images = works.common;
+        if (paging.root) await init("./paintings/");
+        else await init();
+        if (images === true) images = works.common || [];
         const container = getContainerElement(paging);
         container.innerHTML = "";
         switch (paging.ratio) {
@@ -364,7 +142,7 @@ namespace PageCtrl {
         if (thumbUrl.indexOf("~/") == 0) thumbUrl = thumbUrl.replace("~/", imagesPath + paging.path + "/");
         if (sourceUrl.indexOf("~/") == 0) sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
         imageEle.src = thumbUrl;
-        let imageName = imageInfo.name;
+        let imageName = imageInfo.name || paging.defaultName || "";
         let imageSize = imageInfo.size || "";
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
@@ -372,11 +150,7 @@ namespace PageCtrl {
             if (imageSize && imageInfo.year) imageSize += " &nbsp; | &nbsp; ";
             imageSize += "&#39;" + imageInfo.year.toString();
         }
-        if (imageName) {
-            if (imageSize) imageName += " (" + imageSize + ")";
-        } else {
-            imageName = paging.defaultName || "";
-        }
+        if (imageSize) imageName += " (" + imageSize + ")";
         imageEle.alt = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
@@ -390,15 +164,22 @@ namespace PageCtrl {
         });
     }
 
-    export function initPaint() {
+    export async function initPaint() {
+        DeepX.MdBlogs.setElementText("section-works-container", "loading");
+        try {
+            await init();
+        } catch (ex) {
+            DeepX.MdBlogs.setElementText("section-works-container", "loadFailed");
+        }
+
         let q = DeepX.MdBlogs.firstQuery();
         const sel = getSeries(q);
         const seriesMenu = document.getElementById("section-series-container")!;
         seriesMenu.innerHTML = "";
         if (sel) {
             if (sel.id) q = sel.id;
-            const col = works[q];
-            renderPaintings(col, {
+            const col = (works as any as Record<string, IPaintingInfo[]>)[q];
+            await renderPaintings(col, {
                 offset: 0,
                 size: 24,
                 path: "paintings",
@@ -411,7 +192,7 @@ namespace PageCtrl {
             document.getElementById("section-series-title-container")!.style.display = "none";
             seriesMenu.style.display = "none";
         } else {
-            renderPaintings(works.common, {
+            await renderPaintings(works.common, {
                 offset: 0,
                 size: 24,
                 path: "paintings",
@@ -421,6 +202,7 @@ namespace PageCtrl {
             document.getElementById("section-series-title-container")!.style.display = "";
             seriesMenu.style.display = "";
         }
+        const series = works.series || [];
         for (let i in series) {
             const item = series[i];
             if (!item || item.disable || !item.name || !item.id) continue;

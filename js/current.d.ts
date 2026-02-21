@@ -78,10 +78,10 @@ declare namespace PageCtrl {
         ratio?: IImageRatio;
         thumb?: boolean;
     }
-    export function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging): void;
+    export function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging): Promise<void>;
     export function hidePopupView(): void;
     export function renderImage(containerEle: HTMLElement, imageInfo: IPaintingInfo, paging: IPaintingPaging): void;
-    export function initPaint(): void;
+    export function initPaint(): Promise<void>;
     export function initPopupView(): void;
     export {};
 }

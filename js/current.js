@@ -1,4 +1,40 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 var PageCtrl;
 (function (PageCtrl) {
     var certs = [{
@@ -429,244 +465,33 @@ var PageCtrl;
 var PageCtrl;
 (function (PageCtrl) {
     var works = {
-        common: [{
-                id: "countryside",
-                name: "乡村景色",
-                year: 2025,
-                month: 4,
-                keywords: ["colored-pencil"]
-            }, {
-                id: "moon-rabbit",
-                name: "玉兔月球车",
-                year: 2025,
-                month: 2,
-                keywords: ["computer-art"]
-            }, {
-                id: "fish",
-                name: "年年有余",
-                year: 2025,
-                keywords: ["chinese-brush"]
-            }, {
-                id: "gold-medal",
-                name: "金牌时刻",
-                year: 2024,
-                month: 8,
-                keywords: ["watercolor"]
-            }, {
-                id: "magpie",
-                name: "喜上眉梢",
-                year: 2024,
-                keywords: ["chinese-brush"]
-            }, {
-                id: "cat",
-                name: "喵宅妙哉",
-                year: 2024,
-                keywords: ["chinese-brush"]
-            }, {
-                id: "lesser-panda",
-                name: "小熊猫",
-                year: 2024,
-                keywords: ["chinese-brush"]
-            }, {
-                id: "takeout",
-                name: "外卖",
-                year: 2022,
-                month: 7,
-                keywords: ["watercolor"]
-            }, {
-                id: "fighting-covid-19",
-                disable: true,
-                name: "抗击新冠",
-                year: 2022,
-                month: 4,
-                keywords: []
-            }, {
-                id: "love-music",
-                name: "我爱音乐",
-                year: 2021,
-                month: 2,
-                keywords: ["colored-pencil"]
-            }, {
-                id: "defend-dream",
-                name: "守护梦想",
-                year: 2020,
-                month: 5,
-                keywords: ["watercolor"]
-            }],
-        mao: [{
-                id: "mao-260218-p1",
-                name: "摸凹喵在滕王阁",
-                year: 2026,
-                month: 2,
-                day: 18,
-                keywords: ["神兽"]
-            }, {
-                id: "mao-260211-p2",
-                name: "摸凹喵龙尾神兽",
-                year: 2026,
-                month: 2,
-                day: 11,
-                keywords: ["神兽"]
-            }, {
-                id: "mao-260211-p1",
-                name: "摸凹喵麒麟神兽",
-                year: 2026,
-                month: 2,
-                day: 11,
-                keywords: ["神兽"]
-            }, {
-                id: "mao-260210-p2",
-                name: "摸凹喵凤凰神兽",
-                year: 2026,
-                month: 2,
-                day: 10,
-                keywords: ["神兽"]
-            }, {
-                id: "mao-260210-p1",
-                name: "摸凹喵龙神兽",
-                year: 2026,
-                month: 2,
-                day: 10,
-                keywords: ["神兽"]
-            }, {
-                id: "mao-260208-p2",
-                name: "古装摸凹喵",
-                year: 2026,
-                month: 2,
-                day: 8
-            }, {
-                id: "mao-260208-p1",
-                name: "古装摸凹喵",
-                year: 2026,
-                month: 2,
-                day: 8
-            }, {
-                id: "mao-26-02-p-14",
-                name: "摸凹喵短尾猫吊坠",
-                year: 2026,
-                month: 2,
-                keywords: ["吊坠"]
-            }, {
-                id: "mao-26-02-p-13",
-                name: "摸凹喵狐狸吊坠",
-                year: 2026,
-                month: 2,
-                keywords: ["吊坠"]
-            }, {
-                id: "mao-26-02-p-12",
-                year: 2026,
-                month: 2
-            }, {
-                id: "mao-26-02-p-11",
-                name: "摸凹喵花朵狮",
-                year: 2026,
-                month: 2,
-                day: 5
-            }, {
-                id: "mao-26-02-p-10",
-                name: "摸凹喵小熊猫吊坠",
-                year: 2026,
-                month: 2,
-                day: 5,
-                keywords: ["吊坠"]
-            }, {
-                id: "mao-26-02-p-09",
-                name: "摸凹喵花豹",
-                year: 2026,
-                month: 2,
-                day: 5
-            }, {
-                id: "mao-26-02-p-08",
-                name: "摸凹喵熊猫",
-                year: 2026,
-                month: 2,
-                day: 5
-            }, {
-                id: "mao-26-02-p-07",
-                name: "摸凹喵熊猫",
-                year: 2026,
-                month: 2,
-                day: 5
-            }, {
-                id: "mao-26-02-p-06",
-                year: 2026,
-                month: 2,
-                day: 5
-            }, {
-                id: "mao-26-02-p-05",
-                name: "摸凹喵与摇钱树",
-                year: 2026,
-                month: 2,
-                day: 5
-            }, {
-                id: "mao-26-02-p-04",
-                name: "摸凹喵吃成都火锅",
-                year: 2026,
-                month: 2,
-                day: 4
-            }, {
-                id: "mao-26-02-p-03",
-                name: "摸凹喵吃老北京火锅",
-                year: 2026,
-                month: 2,
-                day: 3
-            }, {
-                id: "mao-26-02-p-02",
-                name: "摸凹喵泡澡",
-                year: 2026,
-                month: 2,
-                day: 3
-            }, {
-                id: "mao-26-02-p-01",
-                name: "摸凹喵玩游戏",
-                year: 2026,
-                month: 2,
-                day: 2
-            }, {
-                id: "mao-26-01-p-09",
-                year: 2026,
-                month: 1
-            }, {
-                id: "mao-26-01-p-08",
-                year: 2026,
-                month: 1
-            }, {
-                id: "mao-26-01-p-07",
-                name: "摸凹喵的美梦",
-                year: 2026,
-                month: 1
-            }, {
-                id: "mao-26-01-p-06",
-                name: "摸凹喵照镜子",
-                year: 2026,
-                month: 1
-            }, {
-                id: "mao-26-01-p-05",
-                name: "摸凹喵的冰淇淋掉了",
-                year: 2026,
-                month: 1
-            }, {
-                id: "mao-26-01-p-04",
-                year: 2026,
-                month: 1
-            }, {
-                id: "mao-26-01-p-03",
-                year: 2026,
-                month: 1
-            }, {
-                id: "mao-26-01-p-01",
-                name: "摸凹喵诞生",
-                year: 2026,
-                month: 1
-            }]
+        series: [],
+        common: [],
+        done: false
     };
-    var series = [{
-            id: "mao",
-            name: "摸凹喵",
-            year: 2026,
-            ratio: "p",
-            thumb: true,
-        }];
+    function init(rela) {
+        return __awaiter(this, void 0, void 0, function () {
+            var res, json;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (works.done)
+                            return [2 /*return*/, true];
+                        return [4 /*yield*/, fetch("".concat(rela || "../paintings/", "config.json"))];
+                    case 1:
+                        res = _a.sent();
+                        return [4 /*yield*/, res.json()];
+                    case 2:
+                        json = _a.sent();
+                        if (!json)
+                            return [2 /*return*/, false];
+                        works = json;
+                        works.done = true;
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    }
     function getContainerElement(paging, suffix) {
         return document.getElementById("".concat((paging === null || paging === void 0 ? void 0 : paging.id) || "section-works", "-").concat(suffix || "container"));
     }
@@ -688,6 +513,7 @@ var PageCtrl;
         if (!id)
             return undefined;
         id = id.replace("=", "").replace(" ", "");
+        var series = works.series || [];
         for (var i in series) {
             var item = series[i];
             if ((item === null || item === void 0 ? void 0 : item.id) !== id || item.disable)
@@ -697,39 +523,58 @@ var PageCtrl;
         return undefined;
     }
     function renderPaintings(images, paging) {
-        if (!paging)
-            return;
-        if (images === true)
-            images = works.common;
-        var container = getContainerElement(paging);
-        container.innerHTML = "";
-        switch (paging.ratio) {
-            case "w":
-            case "wide":
-                container.className = "x-container-pics x-image-ratio-w";
-                break;
-            case "s":
-            case "square":
-                container.className = "x-container-pics x-image-ratio-s";
-                break;
-            case "p":
-            case "page":
-                container.className = "x-container-pics x-image-ratio-p";
-                break;
-            case "h":
-            case "horizontal":
-                container.className = "x-container-pics x-image-ratio-h";
-                break;
-            case "v":
-            case "vertical":
-            default:
-                container.className = "x-container-pics";
-                break;
-        }
-        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || PageCtrl.getString("paintings"));
-        renderNextWave(images, paging);
-        getContainerElement(paging, "more").addEventListener("click", function () {
-            renderNextWave(images, paging);
+        return __awaiter(this, void 0, void 0, function () {
+            var container;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!paging)
+                            return [2 /*return*/];
+                        if (!paging.root) return [3 /*break*/, 2];
+                        return [4 /*yield*/, init("./paintings/")];
+                    case 1:
+                        _a.sent();
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, init()];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4:
+                        if (images === true)
+                            images = works.common || [];
+                        container = getContainerElement(paging);
+                        container.innerHTML = "";
+                        switch (paging.ratio) {
+                            case "w":
+                            case "wide":
+                                container.className = "x-container-pics x-image-ratio-w";
+                                break;
+                            case "s":
+                            case "square":
+                                container.className = "x-container-pics x-image-ratio-s";
+                                break;
+                            case "p":
+                            case "page":
+                                container.className = "x-container-pics x-image-ratio-p";
+                                break;
+                            case "h":
+                            case "horizontal":
+                                container.className = "x-container-pics x-image-ratio-h";
+                                break;
+                            case "v":
+                            case "vertical":
+                            default:
+                                container.className = "x-container-pics";
+                                break;
+                        }
+                        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || PageCtrl.getString("paintings"));
+                        renderNextWave(images, paging);
+                        getContainerElement(paging, "more").addEventListener("click", function () {
+                            renderNextWave(images, paging);
+                        });
+                        return [2 /*return*/];
+                }
+            });
         });
     }
     PageCtrl.renderPaintings = renderPaintings;
@@ -762,7 +607,7 @@ var PageCtrl;
         if (sourceUrl.indexOf("~/") == 0)
             sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
         imageEle.src = thumbUrl;
-        var imageName = imageInfo.name;
+        var imageName = imageInfo.name || paging.defaultName || "";
         var imageSize = imageInfo.size || "";
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
@@ -771,13 +616,8 @@ var PageCtrl;
                 imageSize += " &nbsp; | &nbsp; ";
             imageSize += "&#39;" + imageInfo.year.toString();
         }
-        if (imageName) {
-            if (imageSize)
-                imageName += " (" + imageSize + ")";
-        }
-        else {
-            imageName = paging.defaultName || "";
-        }
+        if (imageSize)
+            imageName += " (" + imageSize + ")";
         imageEle.alt = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
@@ -792,56 +632,83 @@ var PageCtrl;
     }
     PageCtrl.renderImage = renderImage;
     function initPaint() {
-        var q = DeepX.MdBlogs.firstQuery();
-        var sel = getSeries(q);
-        var seriesMenu = document.getElementById("section-series-container");
-        seriesMenu.innerHTML = "";
-        if (sel) {
-            if (sel.id)
-                q = sel.id;
-            var col = works[q];
-            renderPaintings(col, {
-                offset: 0,
-                size: 24,
-                path: "paintings",
-                ext: sel.ext,
-                defaultName: sel.name,
-                ratio: "p",
-                thumb: sel.thumb,
+        return __awaiter(this, void 0, void 0, function () {
+            var ex_1, q, sel, seriesMenu, col, series, i, item, linkEle, spanEle;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        DeepX.MdBlogs.setElementText("section-works-container", "loading");
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, init()];
+                    case 2:
+                        _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        ex_1 = _a.sent();
+                        DeepX.MdBlogs.setElementText("section-works-container", "loadFailed");
+                        return [3 /*break*/, 4];
+                    case 4:
+                        q = DeepX.MdBlogs.firstQuery();
+                        sel = getSeries(q);
+                        seriesMenu = document.getElementById("section-series-container");
+                        seriesMenu.innerHTML = "";
+                        if (!sel) return [3 /*break*/, 6];
+                        if (sel.id)
+                            q = sel.id;
+                        col = works[q];
+                        return [4 /*yield*/, renderPaintings(col, {
+                                offset: 0,
+                                size: 24,
+                                path: "paintings",
+                                ext: sel.ext,
+                                defaultName: sel.name,
+                                ratio: "p",
+                                thumb: sel.thumb,
+                            })];
+                    case 5:
+                        _a.sent();
+                        document.getElementById("section-back-container").style.display = "";
+                        document.getElementById("section-series-title-container").style.display = "none";
+                        seriesMenu.style.display = "none";
+                        return [3 /*break*/, 8];
+                    case 6: return [4 /*yield*/, renderPaintings(works.common, {
+                            offset: 0,
+                            size: 24,
+                            path: "paintings",
+                            thumb: true,
+                        })];
+                    case 7:
+                        _a.sent();
+                        document.getElementById("section-back-container").style.display = "none";
+                        document.getElementById("section-series-title-container").style.display = "";
+                        seriesMenu.style.display = "";
+                        _a.label = 8;
+                    case 8:
+                        series = works.series || [];
+                        for (i in series) {
+                            item = series[i];
+                            if (!item || item.disable || !item.name || !item.id)
+                                continue;
+                            linkEle = document.createElement("a");
+                            linkEle.className = "link-long-button";
+                            linkEle.href = "./?" + item.id;
+                            spanEle = document.createElement("span");
+                            spanEle.title = spanEle.innerText = item.name;
+                            linkEle.appendChild(spanEle);
+                            seriesMenu.appendChild(linkEle);
+                        }
+                        initPopupView();
+                        DeepX.MdBlogs.setElementText("text-back", "back");
+                        DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
+                        PageCtrl.setElementProp("section-series-title", null, "series");
+                        PageCtrl.setElementProp("text-series", null, "series");
+                        PageCtrl.initMenu("paintings");
+                        return [2 /*return*/];
+                }
             });
-            document.getElementById("section-back-container").style.display = "";
-            document.getElementById("section-series-title-container").style.display = "none";
-            seriesMenu.style.display = "none";
-        }
-        else {
-            renderPaintings(works.common, {
-                offset: 0,
-                size: 24,
-                path: "paintings",
-                thumb: true,
-            });
-            document.getElementById("section-back-container").style.display = "none";
-            document.getElementById("section-series-title-container").style.display = "";
-            seriesMenu.style.display = "";
-        }
-        for (var i in series) {
-            var item = series[i];
-            if (!item || item.disable || !item.name || !item.id)
-                continue;
-            var linkEle = document.createElement("a");
-            linkEle.className = "link-long-button";
-            linkEle.href = "./?" + item.id;
-            var spanEle = document.createElement("span");
-            spanEle.title = spanEle.innerText = item.name;
-            linkEle.appendChild(spanEle);
-            seriesMenu.appendChild(linkEle);
-        }
-        initPopupView();
-        DeepX.MdBlogs.setElementText("text-back", "back");
-        DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
-        PageCtrl.setElementProp("section-series-title", null, "series");
-        PageCtrl.setElementProp("text-series", null, "series");
-        PageCtrl.initMenu("paintings");
+        });
     }
     PageCtrl.initPaint = initPaint;
     ;
