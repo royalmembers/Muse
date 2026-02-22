@@ -125,8 +125,11 @@ namespace PageCtrl {
 
         DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || getString("paintings"));
         const icon = getContainerElement(paging, "title-icon") as HTMLImageElement;
-        if (icon) icon.src = getSeriesIcon(paging);
-        icon.style.display = paging.icon ? "" : "none";
+        if (icon) {
+            icon.src = getSeriesIcon(paging);
+            icon.style.display = paging.icon ? "" : "none";
+        }
+
         renderNextWave(images, paging);
         getContainerElement(paging, "more")!.addEventListener("click", function () {
             renderNextWave(images, paging);
