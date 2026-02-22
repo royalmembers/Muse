@@ -568,6 +568,7 @@ var PageCtrl;
                                 break;
                         }
                         DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || PageCtrl.getString("paintings"));
+                        getContainerElement(paging, "title-icon").src = (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
                         renderNextWave(images, paging);
                         getContainerElement(paging, "more").addEventListener("click", function () {
                             renderNextWave(images, paging);

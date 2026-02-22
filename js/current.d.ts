@@ -52,6 +52,7 @@ declare namespace PageCtrl {
         path: string;
         ext?: string;
         defaultName?: string;
+        icon?: string;
         root?: boolean;
         id?: string;
         ratio?: IImageRatio;

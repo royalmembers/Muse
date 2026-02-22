@@ -8,6 +8,7 @@ namespace PageCtrl {
         path: string;
         ext?: string;
         defaultName?: string;
+        icon?: string;
         root?: boolean;
         id?: string;
         ratio?: IImageRatio;
@@ -115,6 +116,7 @@ namespace PageCtrl {
         }
 
         DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || getString("paintings"));
+        (getContainerElement(paging, "title-icon") as HTMLImageElement).src = (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
         renderNextWave(images, paging);
         getContainerElement(paging, "more")!.addEventListener("click", function () {
             renderNextWave(images, paging);

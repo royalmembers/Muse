@@ -2,6 +2,7 @@
     "series": [{
         "id": "mao",
         "name": "摸凹喵",
+        "icon": "logos/mao-2026.png",
         "year": 2026,
         "ratio": "p",
         "thumb": true
