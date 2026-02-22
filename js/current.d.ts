@@ -74,6 +74,7 @@ declare namespace PageCtrl {
         id: string;
         disable?: string;
         name: string;
+        icon?: string;
         year: number;
         ext?: string;
         ratio?: IImageRatio;

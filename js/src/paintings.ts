@@ -32,6 +32,7 @@ namespace PageCtrl {
         id: string;
         disable?: string;
         name: string;
+        icon?: string;
         year: number;
         ext?: string;
         ratio?: IImageRatio;
@@ -116,6 +117,7 @@ namespace PageCtrl {
         }
 
         DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || getString("paintings"));
+        console.info(getContainerElement(paging, "title-icon"));
         (getContainerElement(paging, "title-icon") as HTMLImageElement).src = (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
         renderNextWave(images, paging);
         getContainerElement(paging, "more")!.addEventListener("click", function () {
@@ -188,6 +190,7 @@ namespace PageCtrl {
                 ext: sel.ext,
                 defaultName: sel.name,
                 ratio: "p",
+                icon: sel.icon,
                 thumb: sel.thumb,
             });
             document.getElementById("section-back-container")!.style.display = "";

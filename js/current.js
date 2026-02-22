@@ -568,6 +568,7 @@ var PageCtrl;
                                 break;
                         }
                         DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || PageCtrl.getString("paintings"));
+                        console.info(getContainerElement(paging, "title-icon"));
                         getContainerElement(paging, "title-icon").src = (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
                         renderNextWave(images, paging);
                         getContainerElement(paging, "more").addEventListener("click", function () {
@@ -666,6 +667,7 @@ var PageCtrl;
                                 ext: sel.ext,
                                 defaultName: sel.name,
                                 ratio: "p",
+                                icon: sel.icon,
                                 thumb: sel.thumb,
                             })];
                     case 5:
