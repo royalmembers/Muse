@@ -84,7 +84,14 @@ namespace PageCtrl {
 
         return undefined;
     }
-    
+
+    function getSeriesIcon(paging: {
+        root?: boolean;
+        icon?: string;
+    }) {
+        return (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
+    }
+
     export async function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging) {
         if (!paging) return;
         if (paging.root) await init("./paintings/");
@@ -117,8 +124,9 @@ namespace PageCtrl {
         }
 
         DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || getString("paintings"));
-        console.info(getContainerElement(paging, "title-icon"));
-        (getContainerElement(paging, "title-icon") as HTMLImageElement).src = (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
+        const icon = getContainerElement(paging, "title-icon") as HTMLImageElement;
+        if (icon) icon.src = getSeriesIcon(paging);
+        icon.style.display = paging.icon ? "" : "none";
         renderNextWave(images, paging);
         getContainerElement(paging, "more")!.addEventListener("click", function () {
             renderNextWave(images, paging);
@@ -214,6 +222,13 @@ namespace PageCtrl {
             const linkEle = document.createElement("a");
             linkEle.className = "link-long-button";
             linkEle.href = "./?" + item.id;
+            if (item.icon) {
+                const icon = document.createElement("img");
+                icon.src = getSeriesIcon(item);
+                icon.alt = item.name;
+                linkEle.appendChild(icon);
+            }
+
             const spanEle = document.createElement("span");
             spanEle.title = spanEle.innerText = item.name;
             linkEle.appendChild(spanEle);

@@ -522,9 +522,12 @@ var PageCtrl;
         }
         return undefined;
     }
+    function getSeriesIcon(paging) {
+        return (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
+    }
     function renderPaintings(images, paging) {
         return __awaiter(this, void 0, void 0, function () {
-            var container;
+            var container, icon;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -568,8 +571,10 @@ var PageCtrl;
                                 break;
                         }
                         DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || PageCtrl.getString("paintings"));
-                        console.info(getContainerElement(paging, "title-icon"));
-                        getContainerElement(paging, "title-icon").src = (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
+                        icon = getContainerElement(paging, "title-icon");
+                        if (icon)
+                            icon.src = getSeriesIcon(paging);
+                        icon.style.display = paging.icon ? "" : "none";
                         renderNextWave(images, paging);
                         getContainerElement(paging, "more").addEventListener("click", function () {
                             renderNextWave(images, paging);
@@ -635,7 +640,7 @@ var PageCtrl;
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         return __awaiter(this, void 0, void 0, function () {
-            var ex_1, q, sel, seriesMenu, col, series, i, item, linkEle, spanEle;
+            var ex_1, q, sel, seriesMenu, col, series, i, item, linkEle, icon, spanEle;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -697,6 +702,12 @@ var PageCtrl;
                             linkEle = document.createElement("a");
                             linkEle.className = "link-long-button";
                             linkEle.href = "./?" + item.id;
+                            if (item.icon) {
+                                icon = document.createElement("img");
+                                icon.src = getSeriesIcon(item);
+                                icon.alt = item.name;
+                                linkEle.appendChild(icon);
+                            }
                             spanEle = document.createElement("span");
                             spanEle.title = spanEle.innerText = item.name;
                             linkEle.appendChild(spanEle);
