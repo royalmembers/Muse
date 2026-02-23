@@ -25,7 +25,8 @@ button.x-button-more > span {
 button.x-button-more > span + img {
     width: 16px; height: 16px; vertical-align: middle; margin-left: 8px;
 }
-body > section > h2 + section > a.link-long-button > span + span {
+body > section > h2 + section > a.link-long-button > span + span,
+body > section.x-main-container > section > a.link-long-button > span + span {
     color: #888;
     font-size: 16px;
     margin-left: 16px;

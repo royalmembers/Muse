@@ -46,17 +46,25 @@ declare namespace PageCtrl {
 }
 declare namespace PageCtrl {
     type IImageRatio = "p" | "page" | "v" | "vertical" | "h" | "horizontal" | "s" | "square" | "w" | "wide";
+    export interface IPaintingSeriesInfo {
+        id: string;
+        disable?: string;
+        name: string;
+        subtitle?: string;
+        icon?: string;
+        year: number;
+        ext?: string;
+        ratio?: IImageRatio;
+        thumb?: boolean;
+    }
     interface IPaintingPaging {
+        id?: string;
         offset: number;
         size: number;
         path: string;
-        ext?: string;
         defaultName?: string;
-        icon?: string;
         root?: boolean;
-        id?: string;
-        ratio?: IImageRatio;
-        thumb?: boolean;
+        series?: IPaintingSeriesInfo;
     }
     export interface IPaintingInfo {
         id: string;
@@ -69,16 +77,6 @@ declare namespace PageCtrl {
         thumb?: boolean | string;
         keywords?: string[];
         size?: string;
-    }
-    export interface IPaintingSeriesInfo {
-        id: string;
-        disable?: string;
-        name: string;
-        icon?: string;
-        year: number;
-        ext?: string;
-        ratio?: IImageRatio;
-        thumb?: boolean;
     }
     export function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging): Promise<void>;
     export function hidePopupView(): void;

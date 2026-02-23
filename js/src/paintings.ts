@@ -2,17 +2,26 @@ namespace PageCtrl {
 
     type IImageRatio = "p" | "page" | "v" | "vertical" | "h" | "horizontal" | "s" | "square" | "w" | "wide";
 
+    export interface IPaintingSeriesInfo {
+        id: string;
+        disable?: string;
+        name: string;
+        subtitle?: string;
+        icon?: string;
+        year: number;
+        ext?: string;
+        ratio?: IImageRatio;
+        thumb?: boolean;
+    }
+
     interface IPaintingPaging {
+        id?: string;
         offset: number;
         size: number;
         path: string;
-        ext?: string;
         defaultName?: string;
-        icon?: string;
         root?: boolean;
-        id?: string;
-        ratio?: IImageRatio;
-        thumb?: boolean;
+        series?: IPaintingSeriesInfo;
     }
 
     export interface IPaintingInfo {
@@ -26,17 +35,6 @@ namespace PageCtrl {
         thumb?: boolean | string;
         keywords?: string[];
         size?: string;
-    }
-
-    export interface IPaintingSeriesInfo {
-        id: string;
-        disable?: string;
-        name: string;
-        icon?: string;
-        year: number;
-        ext?: string;
-        ratio?: IImageRatio;
-        thumb?: boolean;
     }
 
     let works = {
@@ -85,11 +83,12 @@ namespace PageCtrl {
         return undefined;
     }
 
-    function getSeriesIcon(paging: {
-        root?: boolean;
-        icon?: string;
-    }) {
-        return (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
+    function getSeriesIcon(icon: string | undefined, root?: boolean) {
+        return (root ? "./images/" : "../images/") + (icon || "logos/mspaint.png");
+    }
+
+    function seriesInPaging(paging: IPaintingPaging) {
+        return paging.series || {} as IPaintingSeriesInfo;
     }
 
     export async function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging) {
@@ -97,9 +96,10 @@ namespace PageCtrl {
         if (paging.root) await init("./paintings/");
         else await init();
         if (images === true) images = works.common || [];
+        const series = seriesInPaging(paging);
         const container = getContainerElement(paging);
         container.innerHTML = "";
-        switch (paging.ratio) {
+        switch (series.ratio) {
             case "w":
             case "wide":
                 container.className = "x-container-pics x-image-ratio-w";
@@ -123,11 +123,12 @@ namespace PageCtrl {
                 break;
         }
 
-        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || getString("paintings"));
+        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, series.name || paging.defaultName || getString("paintings"));
+        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "subtitle"), null, series.subtitle || "");
         const icon = getContainerElement(paging, "title-icon") as HTMLImageElement;
         if (icon) {
-            icon.src = getSeriesIcon(paging);
-            icon.style.display = paging.icon ? "" : "none";
+            icon.src = getSeriesIcon(series.icon, paging.root);
+            icon.style.display = series.icon ? "" : "none";
         }
 
         renderNextWave(images, paging);
@@ -144,26 +145,27 @@ namespace PageCtrl {
         const imageEle = document.createElement("img");
         imageEle.loading = "lazy";
         let sourceUrl = imageInfo.url;
-        const ext = "." + (paging.ext || "webp");
+        const series = seriesInPaging(paging);
+        const ext = "." + (series.ext || "webp");
         if (!sourceUrl) {
             if (imageInfo.id && imageInfo.year) sourceUrl = "~/" + imageInfo.year + "/" + imageInfo.id + ext;
             else return;
         }
         let thumbUrl = imageInfo.thumb;
-        if (thumbUrl === undefined) thumbUrl = paging.thumb;
+        if (thumbUrl === undefined) thumbUrl = series.thumb;
         if (thumbUrl === true) thumbUrl = sourceUrl.replace("~/", "~/thumbnails/");
         else if (!thumbUrl) thumbUrl = sourceUrl;
         const imagesPath = paging.root ? "./images/" : "../images/";
         if (thumbUrl.indexOf("~/") == 0) thumbUrl = thumbUrl.replace("~/", imagesPath + paging.path + "/");
         if (sourceUrl.indexOf("~/") == 0) sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
         imageEle.src = thumbUrl;
-        let imageName = imageInfo.name || paging.defaultName || "";
+        let imageName = imageInfo.name || series.name || paging.defaultName || "";
         let imageSize = imageInfo.size || "";
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (imageInfo.year) {
-            if (imageSize && imageInfo.year) imageSize += " &nbsp; | &nbsp; ";
-            imageSize += "&#39;" + imageInfo.year.toString();
+            if (imageSize && imageInfo.year) imageSize += " 　 | 　 ";
+            imageSize += "'" + imageInfo.year.toString();
         }
         if (imageSize) imageName += " (" + imageSize + ")";
         imageEle.alt = imageName;
@@ -173,8 +175,8 @@ namespace PageCtrl {
             (document.getElementById("popup-view-img") as HTMLImageElement).alt = imageName;
             (document.getElementById("popup-view-thumb") as HTMLImageElement).src = thumbUrl;
             (document.getElementById("popup-view-thumb") as HTMLImageElement).alt = imageName;
-            document.getElementById("popup-view-title")!.innerHTML = imageInfo.name || paging.defaultName || "";
-            document.getElementById("popup-view-desc")!.innerHTML = imageSize;
+            document.getElementById("popup-view-title")!.innerText = imageInfo.name || series.name || paging.defaultName || "";
+            document.getElementById("popup-view-desc")!.innerText = imageSize;
             document.getElementById("popup-view")!.style.display = "";
         });
     }
@@ -198,11 +200,7 @@ namespace PageCtrl {
                 offset: 0,
                 size: 24,
                 path: "paintings",
-                ext: sel.ext,
-                defaultName: sel.name,
-                ratio: "p",
-                icon: sel.icon,
-                thumb: sel.thumb,
+                series: sel
             });
             document.getElementById("section-back-container")!.style.display = "";
             document.getElementById("section-series-title-container")!.style.display = "none";
@@ -212,7 +210,9 @@ namespace PageCtrl {
                 offset: 0,
                 size: 24,
                 path: "paintings",
-                thumb: true,
+                series: {
+                    thumb: true
+                } as IPaintingSeriesInfo,
             });
             document.getElementById("section-back-container")!.style.display = "none";
             document.getElementById("section-series-title-container")!.style.display = "";
@@ -227,7 +227,7 @@ namespace PageCtrl {
             linkEle.href = "./?" + item.id;
             if (item.icon) {
                 const icon = document.createElement("img");
-                icon.src = getSeriesIcon(item);
+                icon.src = getSeriesIcon(item.icon);
                 icon.alt = item.name;
                 linkEle.appendChild(icon);
             }
@@ -235,6 +235,14 @@ namespace PageCtrl {
             const spanEle = document.createElement("span");
             spanEle.title = spanEle.innerText = item.name;
             linkEle.appendChild(spanEle);
+            if (item.subtitle) {
+                const subtitle = document.createElement("span");
+                subtitle.title = subtitle.innerText = item.subtitle;
+                const subtitle2 = document.createElement("span");
+                subtitle2.appendChild(subtitle);
+                linkEle.appendChild(subtitle2);
+            }
+
             seriesMenu.appendChild(linkEle);
         }
 

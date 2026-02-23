@@ -522,12 +522,15 @@ var PageCtrl;
         }
         return undefined;
     }
-    function getSeriesIcon(paging) {
-        return (paging.root ? "./images/" : "../images/") + (paging.icon || "logos/mspaint.png");
+    function getSeriesIcon(icon, root) {
+        return (root ? "./images/" : "../images/") + (icon || "logos/mspaint.png");
+    }
+    function seriesInPaging(paging) {
+        return paging.series || {};
     }
     function renderPaintings(images, paging) {
         return __awaiter(this, void 0, void 0, function () {
-            var container, icon;
+            var series, container, icon;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -545,9 +548,10 @@ var PageCtrl;
                     case 4:
                         if (images === true)
                             images = works.common || [];
+                        series = seriesInPaging(paging);
                         container = getContainerElement(paging);
                         container.innerHTML = "";
-                        switch (paging.ratio) {
+                        switch (series.ratio) {
                             case "w":
                             case "wide":
                                 container.className = "x-container-pics x-image-ratio-w";
@@ -570,11 +574,12 @@ var PageCtrl;
                                 container.className = "x-container-pics";
                                 break;
                         }
-                        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, paging.defaultName || PageCtrl.getString("paintings"));
+                        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, series.name || paging.defaultName || PageCtrl.getString("paintings"));
+                        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "subtitle"), null, series.subtitle || "");
                         icon = getContainerElement(paging, "title-icon");
                         if (icon) {
-                            icon.src = getSeriesIcon(paging);
-                            icon.style.display = paging.icon ? "" : "none";
+                            icon.src = getSeriesIcon(series.icon, paging.root);
+                            icon.style.display = series.icon ? "" : "none";
                         }
                         renderNextWave(images, paging);
                         getContainerElement(paging, "more").addEventListener("click", function () {
@@ -595,7 +600,8 @@ var PageCtrl;
         var imageEle = document.createElement("img");
         imageEle.loading = "lazy";
         var sourceUrl = imageInfo.url;
-        var ext = "." + (paging.ext || "webp");
+        var series = seriesInPaging(paging);
+        var ext = "." + (series.ext || "webp");
         if (!sourceUrl) {
             if (imageInfo.id && imageInfo.year)
                 sourceUrl = "~/" + imageInfo.year + "/" + imageInfo.id + ext;
@@ -604,7 +610,7 @@ var PageCtrl;
         }
         var thumbUrl = imageInfo.thumb;
         if (thumbUrl === undefined)
-            thumbUrl = paging.thumb;
+            thumbUrl = series.thumb;
         if (thumbUrl === true)
             thumbUrl = sourceUrl.replace("~/", "~/thumbnails/");
         else if (!thumbUrl)
@@ -615,14 +621,14 @@ var PageCtrl;
         if (sourceUrl.indexOf("~/") == 0)
             sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
         imageEle.src = thumbUrl;
-        var imageName = imageInfo.name || paging.defaultName || "";
+        var imageName = imageInfo.name || series.name || paging.defaultName || "";
         var imageSize = imageInfo.size || "";
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (imageInfo.year) {
             if (imageSize && imageInfo.year)
-                imageSize += " &nbsp; | &nbsp; ";
-            imageSize += "&#39;" + imageInfo.year.toString();
+                imageSize += " 　 | 　 ";
+            imageSize += "'" + imageInfo.year.toString();
         }
         if (imageSize)
             imageName += " (" + imageSize + ")";
@@ -633,15 +639,15 @@ var PageCtrl;
             document.getElementById("popup-view-img").alt = imageName;
             document.getElementById("popup-view-thumb").src = thumbUrl;
             document.getElementById("popup-view-thumb").alt = imageName;
-            document.getElementById("popup-view-title").innerHTML = imageInfo.name || paging.defaultName || "";
-            document.getElementById("popup-view-desc").innerHTML = imageSize;
+            document.getElementById("popup-view-title").innerText = imageInfo.name || series.name || paging.defaultName || "";
+            document.getElementById("popup-view-desc").innerText = imageSize;
             document.getElementById("popup-view").style.display = "";
         });
     }
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         return __awaiter(this, void 0, void 0, function () {
-            var ex_1, q, sel, seriesMenu, col, series, i, item, linkEle, icon, spanEle;
+            var ex_1, q, sel, seriesMenu, col, series, i, item, linkEle, icon, spanEle, subtitle, subtitle2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -670,11 +676,7 @@ var PageCtrl;
                                 offset: 0,
                                 size: 24,
                                 path: "paintings",
-                                ext: sel.ext,
-                                defaultName: sel.name,
-                                ratio: "p",
-                                icon: sel.icon,
-                                thumb: sel.thumb,
+                                series: sel
                             })];
                     case 5:
                         _a.sent();
@@ -686,7 +688,9 @@ var PageCtrl;
                             offset: 0,
                             size: 24,
                             path: "paintings",
-                            thumb: true,
+                            series: {
+                                thumb: true
+                            },
                         })];
                     case 7:
                         _a.sent();
@@ -705,13 +709,20 @@ var PageCtrl;
                             linkEle.href = "./?" + item.id;
                             if (item.icon) {
                                 icon = document.createElement("img");
-                                icon.src = getSeriesIcon(item);
+                                icon.src = getSeriesIcon(item.icon);
                                 icon.alt = item.name;
                                 linkEle.appendChild(icon);
                             }
                             spanEle = document.createElement("span");
                             spanEle.title = spanEle.innerText = item.name;
                             linkEle.appendChild(spanEle);
+                            if (item.subtitle) {
+                                subtitle = document.createElement("span");
+                                subtitle.title = subtitle.innerText = item.subtitle;
+                                subtitle2 = document.createElement("span");
+                                subtitle2.appendChild(subtitle);
+                                linkEle.appendChild(subtitle2);
+                            }
                             seriesMenu.appendChild(linkEle);
                         }
                         initPopupView();
