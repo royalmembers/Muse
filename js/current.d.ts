@@ -50,7 +50,9 @@ declare namespace PageCtrl {
         id: string;
         disable?: string;
         name: string;
+        "name-cap"?: "small" | "normal" | null;
         subtitle?: string;
+        "subtitle-cap"?: "small" | "normal" | null;
         icon?: string;
         year: number;
         ext?: string;

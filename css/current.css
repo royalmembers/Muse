@@ -185,6 +185,9 @@ section.x-container-pics span#section-works-more:active > span:first-child + img
 section.x-container-pics span#section-works-more:active > span:first-child + img {
     width: 8px; height: 8px; opacity: 0.8;
 }
+span.x-text-cap-small {
+    font-variant-caps: small-caps;
+}
 @media screen and (max-width:1110px) {
     section.x-container-pics {
         grid-template-columns: repeat(4, 1fr);

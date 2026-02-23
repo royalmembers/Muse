@@ -6,7 +6,9 @@ namespace PageCtrl {
         id: string;
         disable?: string;
         name: string;
+        "name-cap"?: "small" | "normal" | null;
         subtitle?: string;
+        "subtitle-cap"?: "small" | "normal" | null;
         icon?: string;
         year: number;
         ext?: string;
@@ -124,7 +126,12 @@ namespace PageCtrl {
         }
 
         DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, series.name || paging.defaultName || getString("paintings"));
-        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "subtitle"), null, series.subtitle || "");
+        const subtitle = getContainerElement(paging, "subtitle");
+        if (subtitle) {
+            if (series.subtitle) DeepX.MdBlogs.setElementProp(subtitle, null, series.subtitle);
+            subtitle.className = series["subtitle-cap"] === "small" ? "x-text-cap-small" : "";
+        }
+
         const icon = getContainerElement(paging, "title-icon") as HTMLImageElement;
         if (icon) {
             icon.src = getSeriesIcon(series.icon, paging.root);
@@ -234,10 +241,12 @@ namespace PageCtrl {
 
             const spanEle = document.createElement("span");
             spanEle.title = spanEle.innerText = item.name;
+            if (item["name-cap"] === "small") spanEle.className = "x-text-cap-small";
             linkEle.appendChild(spanEle);
             if (item.subtitle) {
                 const subtitle = document.createElement("span");
                 subtitle.title = subtitle.innerText = item.subtitle;
+                if (item["subtitle-cap"] === "small") subtitle.className = "x-text-cap-small";
                 const subtitle2 = document.createElement("span");
                 subtitle2.appendChild(subtitle);
                 linkEle.appendChild(subtitle2);
