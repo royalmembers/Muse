@@ -74,6 +74,20 @@
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260223-p2",
+        "name": "摸凹喵蛇",
+        "year": 2026,
+        "month": 2,
+        "day": 23,
+        "keywords": ["动物装扮"]
+    }, {
+        "id": "mao-260223-p1",
+        "name": "摸凹喵彩虹马",
+        "year": 2026,
+        "month": 2,
+        "day": 23,
+        "keywords": ["动物装扮"]
+    }, {
         "id": "mao-260221-p1",
         "name": "土家族摸凹喵",
         "year": 2026,
@@ -164,7 +178,8 @@
         "name": "摸凹喵花朵狮",
         "year": 2026,
         "month": 2,
-        "day": 5
+        "day": 5,
+        "keywords": ["动物装扮"]
     }, {
         "id": "mao-26-02-p-10",
         "name": "摸凹喵小熊猫吊坠",
@@ -177,19 +192,22 @@
         "name": "摸凹喵花豹",
         "year": 2026,
         "month": 2,
-        "day": 5
+        "day": 5,
+        "keywords": ["动物装扮"]
     }, {
         "id": "mao-26-02-p-08",
         "name": "摸凹喵熊猫",
         "year": 2026,
         "month": 2,
-        "day": 5
+        "day": 5,
+        "keywords": ["动物装扮"]
     }, {
         "id": "mao-26-02-p-07",
         "name": "摸凹喵熊猫",
         "year": 2026,
         "month": 2,
-        "day": 5
+        "day": 5,
+        "keywords": ["动物装扮"]
     }, {
         "id": "mao-26-02-p-06",
         "year": 2026,
