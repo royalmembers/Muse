@@ -80,6 +80,7 @@ declare namespace PageCtrl {
         keywords?: string[];
         size?: string;
     }
+    export function hidePopupViewDelay(): void;
     export function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging): Promise<void>;
     export function hidePopupView(): void;
     export function renderImage(containerEle: HTMLElement, imageInfo: IPaintingInfo, paging: IPaintingPaging): void;

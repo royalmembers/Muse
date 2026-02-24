@@ -117,5 +117,5 @@ namespace PageCtrl {
         DeepX.MdBlogs.setElementProp("title-works", "innerText", "作品集");
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         initMenu(true);
-    };
+    }
 }

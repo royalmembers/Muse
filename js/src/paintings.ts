@@ -93,6 +93,12 @@ namespace PageCtrl {
         return paging.series || {} as IPaintingSeriesInfo;
     }
 
+    export function hidePopupViewDelay() {
+        setTimeout(() => {
+            hidePopupView();
+        }, 200);
+    }
+
     export async function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging) {
         if (!paging) return;
         if (paging.root) await init("./paintings/");
@@ -146,7 +152,7 @@ namespace PageCtrl {
 
     export function hidePopupView() {
         document.getElementById("popup-view")!.style.display = "none";
-    };
+    }
 
     export function renderImage(containerEle: HTMLElement, imageInfo: IPaintingInfo, paging: IPaintingPaging) {
         const imageEle = document.createElement("img");
@@ -261,10 +267,13 @@ namespace PageCtrl {
         setElementProp("section-series-title", null, "series");
         setElementProp("text-series", null, "series");
         initMenu("paintings");
-    };
+    }
 
     export function initPopupView() {
-        document.getElementById("popup-view")!.addEventListener("click", hidePopupView);
+        const c = document.getElementById("popup-view");
+        if (!c) return;
+        c.addEventListener("click", hidePopupView);
+        c.addEventListener("touchend", hidePopupViewDelay);
     }
 
 }
