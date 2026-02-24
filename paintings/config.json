@@ -12,12 +12,14 @@
     "common": [{
         "id": "countryside",
         "name": "乡村景色",
+        "name#en": "Countryside Scenery",
         "year": 2025,
         "month": 4,
         "keywords": ["colored-pencil"]
     }, {
         "id": "moon-rabbit",
         "name": "玉兔月球车",
+        "name#en": "Jade Rabbit Lunar Rover",
         "year": 2025,
         "month": 2,
         "keywords": ["computer-art"]
@@ -45,11 +47,13 @@
     }, {
         "id": "lesser-panda",
         "name": "小熊猫",
+        "name#en": "Red Panda",
         "year": 2024,
         "keywords": ["chinese-brush"]
     }, {
         "id": "takeout",
         "name": "外卖",
+        "name#en": "Takeout",
         "year": 2022,
         "month": 7,
         "keywords": ["watercolor"]
@@ -57,36 +61,57 @@
         "id": "fighting-covid-19",
         "disable": true,
         "name": "抗击新冠",
+        "name#en": "Fighting against COVID-19",
         "year": 2022,
         "month": 4,
         "keywords": []
     }, {
         "id": "love-music",
         "name": "我爱音乐",
+        "name#en": "I Love Music",
         "year": 2021,
         "month": 2,
         "keywords": ["colored-pencil"]
     }, {
         "id": "defend-dream",
         "name": "守护梦想",
+        "name#en": "Defend Dream",
         "year": 2020,
         "month": 5,
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260225-p1",
+        "disable": true,
+        "name": "摸凹喵与鼎",
+        "year": 2026,
+        "month": 2,
+        "day": 25
+    }, {
+        "id": "mao-260224-p1",
+        "disable": true,
+        "name": "摸凹喵龙",
+        "name#en": "Mor-Ow Meow Dressed as Loong",
+        "year": 2026,
+        "month": 2,
+        "day": 24,
+        "keywords": ["动物装扮", "十二生肖"]
+    }, {
         "id": "mao-260223-p2",
         "name": "摸凹喵蛇",
+        "name#en": "Mor-Ow Meow Dressed as Snake",
         "year": 2026,
         "month": 2,
         "day": 23,
-        "keywords": ["动物装扮"]
+        "keywords": ["动物装扮", "十二生肖"]
     }, {
         "id": "mao-260223-p1",
         "name": "摸凹喵彩虹马",
+        "name#en": "Mor-Ow Meow Dressed as Sunshine Horse",
         "year": 2026,
         "month": 2,
         "day": 23,
-        "keywords": ["动物装扮"]
+        "keywords": ["动物装扮", "十二生肖"]
     }, {
         "id": "mao-260221-p1",
         "name": "土家族摸凹喵",
@@ -97,6 +122,7 @@
     }, {
         "id": "mao-260220-p2",
         "name": "摸凹喵警官",
+        "name#en": "Mor-Ow Meow Dressed as Police Officer",
         "year": 2026,
         "month": 2,
         "day": 20,
@@ -104,6 +130,7 @@
     }, {
         "id": "mao-260220-p1",
         "name": "摸凹喵敦煌",
+        "name#en": "Mor-Ow Meow Dressed as Dunhuang Dancer",
         "year": 2026,
         "month": 2,
         "day": 20,
@@ -111,6 +138,7 @@
     }, {
         "id": "mao-260218-p1",
         "name": "摸凹喵在滕王阁",
+        "name#en": "Mor-Ow Meow at Pavilion of Prince Teng",
         "year": 2026,
         "month": 2,
         "day": 18,
@@ -160,12 +188,14 @@
     }, {
         "id": "mao-26-02-p-14",
         "name": "摸凹喵短尾猫吊坠",
+        "name#en": "Pendant Mor-Ow Meow Dressed as Bobtail Cat",
         "year": 2026,
         "month": 2,
         "keywords": ["吊坠"]
     }, {
         "id": "mao-26-02-p-13",
         "name": "摸凹喵狐狸吊坠",
+        "name#en": "Pendant Mor-Ow Meow Dressed as Fox",
         "year": 2026,
         "month": 2,
         "keywords": ["吊坠"]
@@ -183,6 +213,7 @@
     }, {
         "id": "mao-26-02-p-10",
         "name": "摸凹喵小熊猫吊坠",
+        "name#en": "Pendant Mor-Ow Meow Dressed as Red Panda",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -190,6 +221,7 @@
     }, {
         "id": "mao-26-02-p-09",
         "name": "摸凹喵花豹",
+        "name#en": "Mor-Ow Meow Dressed as Leopard",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -197,6 +229,7 @@
     }, {
         "id": "mao-26-02-p-08",
         "name": "摸凹喵熊猫",
+        "name#en": "Mor-Ow Meow Dressed as Panda",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -204,6 +237,7 @@
     }, {
         "id": "mao-26-02-p-07",
         "name": "摸凹喵熊猫",
+        "name#en": "Mor-Ow Meow Dressed as Panda",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -222,24 +256,28 @@
     }, {
         "id": "mao-26-02-p-04",
         "name": "摸凹喵吃成都火锅",
+        "name#en": "Mor-Ow Meow Eating Chengdu Hotpot",
         "year": 2026,
         "month": 2,
         "day": 4
     }, {
         "id": "mao-26-02-p-03",
         "name": "摸凹喵吃老北京火锅",
+        "name#en": "Mor-Ow Meow Eating Old Beijing Hotpot",
         "year": 2026,
         "month": 2,
         "day": 3
     }, {
         "id": "mao-26-02-p-02",
         "name": "摸凹喵泡澡",
+        "name#en": "Mor-Ow Meow Taking a Bath",
         "year": 2026,
         "month": 2,
         "day": 3
     }, {
         "id": "mao-26-02-p-01",
         "name": "摸凹喵玩游戏",
+        "name#en": "Mor-Ow Meow Playing Handheld",
         "year": 2026,
         "month": 2,
         "day": 2
@@ -254,16 +292,19 @@
     }, {
         "id": "mao-26-01-p-07",
         "name": "摸凹喵的美梦",
+        "name#en": "Mor-Ow Meow's Sweet Dream",
         "year": 2026,
         "month": 1
     }, {
         "id": "mao-26-01-p-06",
         "name": "摸凹喵照镜子",
+        "name#en": "Mor-Ow Meow Looking in the Mirror",
         "year": 2026,
         "month": 1
     }, {
         "id": "mao-26-01-p-05",
         "name": "摸凹喵的冰淇淋掉了",
+        "name#en": "Mor-Ow Meow's Ice Cream Fell",
         "year": 2026,
         "month": 1
     }, {
@@ -277,6 +318,7 @@
     }, {
         "id": "mao-26-01-p-01",
         "name": "摸凹喵诞生",
+        "name#en": "Baby Mor-Ow Meow",
         "year": 2026,
         "month": 1
     }]
