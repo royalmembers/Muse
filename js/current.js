@@ -733,7 +733,7 @@ var PageCtrl;
                         if (!sel) return [3 /*break*/, 6];
                         if (sel.id)
                             q = sel.id;
-                        col = works[q];
+                        col = (works[q] || []).filter(function (ele) { return !!ele && !ele.disable; });
                         return [4 /*yield*/, renderPaintings(col, {
                                 offset: 0,
                                 size: 24,

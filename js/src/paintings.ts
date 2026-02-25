@@ -209,7 +209,7 @@ namespace PageCtrl {
         seriesMenu.innerHTML = "";
         if (sel) {
             if (sel.id) q = sel.id;
-            const col = (works as any as Record<string, IPaintingInfo[]>)[q];
+            const col = ((works as any as Record<string, IPaintingInfo[]>)[q] || []).filter(ele => !!ele && !ele.disable);
             await renderPaintings(col, {
                 offset: 0,
                 size: 24,
