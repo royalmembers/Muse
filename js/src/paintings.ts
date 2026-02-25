@@ -178,8 +178,13 @@ namespace PageCtrl {
             imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (imageInfo.year) {
             if (imageSize && imageInfo.year) imageSize += " 　 | 　 ";
-            imageSize += "'" + imageInfo.year.toString();
+            if (imageInfo.month) {
+                imageSize += getString("dateToMonth").replace("YYYY", imageInfo.year.toString(10)).replace("MM", imageInfo.month.toString(10));
+            } else {
+                imageSize += "'" + imageInfo.year.toString();
+            }
         }
+
         if (imageSize) imageName += " (" + imageSize + ")";
         imageEle.alt = imageName;
         containerEle.appendChild(imageEle);

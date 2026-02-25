@@ -7,6 +7,8 @@ namespace PageCtrl {
         "paintings#zh": "画作",
         series: "Series",
         "series#zh": "系列",
+        dateToMonth: "MM YYYY",
+        "dateToMonth#zh": "YYYY年MM月",
     }
 
     export function getString(key: keyof typeof strings) {

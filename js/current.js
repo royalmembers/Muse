@@ -451,6 +451,8 @@ var PageCtrl;
         "paintings#zh": "画作",
         series: "Series",
         "series#zh": "系列",
+        dateToMonth: "MM YYYY",
+        "dateToMonth#zh": "YYYY年MM月",
     };
     function getString(key) {
         return DeepX.MdBlogs.getLocaleProp(strings, key);
@@ -637,7 +639,12 @@ var PageCtrl;
         if (imageInfo.year) {
             if (imageSize && imageInfo.year)
                 imageSize += " 　 | 　 ";
-            imageSize += "'" + imageInfo.year.toString();
+            if (imageInfo.month) {
+                imageSize += PageCtrl.getString("dateToMonth").replace("YYYY", imageInfo.year.toString(10)).replace("MM", imageInfo.month.toString(10));
+            }
+            else {
+                imageSize += "'" + imageInfo.year.toString();
+            }
         }
         if (imageSize)
             imageName += " (" + imageSize + ")";
