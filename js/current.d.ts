@@ -41,6 +41,10 @@ declare namespace PageCtrl {
         "series#zh": string;
         dateToMonth: string;
         "dateToMonth#zh": string;
+        certHonors: string;
+        "certHonors#zh": string;
+        generalPaintings: string;
+        "generalPaintings#zh": string;
     };
     export function getString(key: keyof typeof strings): string;
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings): void;

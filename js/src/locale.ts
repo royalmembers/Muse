@@ -9,6 +9,10 @@ namespace PageCtrl {
         "series#zh": "系列",
         dateToMonth: "MMM YYYY",
         "dateToMonth#zh": "YYYY年MM月",
+        certHonors: "Honors",
+        "certHonors#zh": "小小荣誉",
+        generalPaintings: "General",
+        "generalPaintings#zh": "常规",
     }
 
     export function getString(key: keyof typeof strings) {

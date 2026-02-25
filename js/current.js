@@ -435,8 +435,9 @@ var PageCtrl;
         var ww = videoStr !== "视频";
         if (ww)
             return;
-        DeepX.MdBlogs.setElementProp("link-certs", "innerText", "小小荣誉");
-        DeepX.MdBlogs.setElementProp("title-works", "innerText", "作品集");
+        PageCtrl.setElementProp("link-certs", null, "certHonors");
+        PageCtrl.setElementProp("title-works-series", null, "series");
+        PageCtrl.setElementProp("title-works-common", null, "generalPaintings");
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         initMenu(true);
     }
@@ -453,6 +454,10 @@ var PageCtrl;
         "series#zh": "系列",
         dateToMonth: "MMM YYYY",
         "dateToMonth#zh": "YYYY年MM月",
+        certHonors: "Honors",
+        "certHonors#zh": "小小荣誉",
+        generalPaintings: "General",
+        "generalPaintings#zh": "常规",
     };
     function getString(key) {
         return DeepX.MdBlogs.getLocaleProp(strings, key);

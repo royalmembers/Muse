@@ -25,11 +25,20 @@ button.x-button-more > span {
 button.x-button-more > span + img {
     width: 16px; height: 16px; vertical-align: middle; margin-left: 8px;
 }
-body > section > h2 + section > a.link-long-button > span + span,
+body > section.x-part-content > section > a.link-long-button > span + span,
+body > section.x-part-content > section.link-tile-wide > a > span + span,
 body > section.x-main-container > section > a.link-long-button > span + span {
     color: #888;
     font-size: 16px;
     margin-left: 16px;
+}
+body > section.x-part-content > section.x-part-subtitle {
+    color: #888;
+    margin-bottom: 10px;
+    user-select: none;
+}
+body > section.x-part-content > section.x-part-subtitle + section {
+    margin-top: 10px;
 }
 section#part-avatar {
     padding: 100px 20px 20px 20px;

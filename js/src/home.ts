@@ -113,8 +113,9 @@ namespace PageCtrl {
         DeepX.MdBlogs.setElementText("title-links", "otherLinks");
         let ww = videoStr !== "视频";
         if (ww) return;
-        DeepX.MdBlogs.setElementProp("link-certs", "innerText", "小小荣誉");
-        DeepX.MdBlogs.setElementProp("title-works", "innerText", "作品集");
+        setElementProp("link-certs", null, "certHonors");
+        setElementProp("title-works-series", null, "series");
+        setElementProp("title-works-common", null, "generalPaintings");
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         initMenu(true);
     }
