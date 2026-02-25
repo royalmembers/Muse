@@ -81,9 +81,16 @@
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260225-p3",
+        "name": "摸凹喵魔术师",
+        "name#en": "Mor-Ow Meow Magician",
+        "year": 2026,
+        "month": 2,
+        "day": 25
+    }, {
         "id": "mao-260225-p2",
-        "disable": true,
         "name": "摸凹喵与鼎",
+        "name#en": "Mor-Ow Meow and Ding",
         "year": 2026,
         "month": 2,
         "day": 25
