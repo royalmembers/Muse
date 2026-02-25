@@ -21,6 +21,12 @@
     section.x-bg-outstanding.x-zone-hl > h2 > img:first-child {
         width: 32px; height: 32px; margin-right: 10px;
     }
+    section.x-zone-actions > div {
+        margin-bottom: 20px; user-select: none;
+    }
+    section img#section-works-qr {
+        width: 200px; height: 200px; border-radius: 4px; opacity: 0.9;
+    }
     section#section-back-container {
         user-select: none;
     }
@@ -48,8 +54,13 @@
         </section>
         <section id="section-works-container" class="x-container-pics" >
         </section>
-        <section>
-            <button id="section-works-more" class="x-button-more" style="display: none; " ><span id="button-works-more">See more</span><img alt="See more" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/images/ele/down_pos_white.png" /></button>
+        <section class="x-zone-actions">
+            <div>
+                <button id="section-works-more" class="x-button-more" style="display: none; " ><span id="button-works-more">See more</span><img alt="See more" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/images/ele/down_pos_white.png" /></button>
+            </div>
+            <div>
+                <img id="section-works-qr" alt="QR code" src="../images/logos/qr.png" style="display: none; " />
+            </div>
         </section>
         <section id="section-series-title-container" class="x-zone-hl layout-wide-full x-bg-outstanding">
             <h2 id="section-series-title">Series</h2>

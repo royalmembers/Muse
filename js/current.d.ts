@@ -61,6 +61,7 @@ declare namespace PageCtrl {
         subtitle?: string;
         "subtitle-cap"?: "small" | "normal" | null;
         icon?: string;
+        qr?: string;
         year: number;
         ext?: string;
         ratio?: IImageRatio;

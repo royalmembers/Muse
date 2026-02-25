@@ -593,7 +593,7 @@ var PageCtrl;
     PageCtrl.hidePopupViewDelay = hidePopupViewDelay;
     function renderPaintings(images, paging) {
         return __awaiter(this, void 0, void 0, function () {
-            var series, container, subtitle, icon;
+            var series, container, subtitle, icon, qr;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -648,6 +648,11 @@ var PageCtrl;
                         if (icon) {
                             icon.src = getSeriesIcon(series.icon, paging.root);
                             icon.style.display = series.icon ? "" : "none";
+                        }
+                        qr = getContainerElement(paging, "qr");
+                        if (qr) {
+                            qr.src = getSeriesIcon(series.qr, paging.root);
+                            qr.style.display = series.qr ? "" : "none";
                         }
                         renderNextWave(images, paging);
                         getContainerElement(paging, "more").addEventListener("click", function () {

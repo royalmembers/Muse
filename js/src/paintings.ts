@@ -10,6 +10,7 @@ namespace PageCtrl {
         subtitle?: string;
         "subtitle-cap"?: "small" | "normal" | null;
         icon?: string;
+        qr?: string;
         year: number;
         ext?: string;
         ratio?: IImageRatio;
@@ -142,6 +143,12 @@ namespace PageCtrl {
         if (icon) {
             icon.src = getSeriesIcon(series.icon, paging.root);
             icon.style.display = series.icon ? "" : "none";
+        }
+
+        const qr = getContainerElement(paging, "qr") as HTMLImageElement;
+        if (qr) {
+            qr.src = getSeriesIcon(series.qr, paging.root);
+            qr.style.display = series.qr ? "" : "none";
         }
 
         renderNextWave(images, paging);
