@@ -361,7 +361,7 @@ var PageCtrl;
         if (!item)
             return;
         DeepX.MdBlogs.setElementProp("image-avatar", "src", getAvatarUrl(item));
-        DeepX.MdBlogs.setElementProp("image-desc", "innerText", PageCtrl.getString("photoTaken").replace("{0}", item.year));
+        DeepX.MdBlogs.setElementProp("image-desc", "innerText", PageCtrl.getString("photoTaken").replace("{0}", item.year.toString(10)));
     }
     function initMenu(id) {
         var container = document.getElementById("top-menu");
@@ -451,7 +451,7 @@ var PageCtrl;
         "paintings#zh": "画作",
         series: "Series",
         "series#zh": "系列",
-        dateToMonth: "MM YYYY",
+        dateToMonth: "MMM YYYY",
         "dateToMonth#zh": "YYYY年MM月",
     };
     function getString(key) {
@@ -462,6 +462,57 @@ var PageCtrl;
         return DeepX.MdBlogs.setElementProp(element, prop, DeepX.MdBlogs.getLocaleProp(strings, key));
     }
     PageCtrl.setElementProp = setElementProp;
+    function monthYear(year, month) {
+        if (typeof month !== "number" || isNaN(month) || month < 1 || month > 13)
+            return "'" + year.toString(10);
+        var template = getString("dateToMonth").replace("YYYY", year.toString(10));
+        if (template.includes("MMM")) {
+            switch (month) {
+                case 1:
+                    template = template.replace("MMM", "Jan");
+                    break;
+                case 2:
+                    template = template.replace("MMM", "Feb");
+                    break;
+                case 3:
+                    template = template.replace("MMM", "Mar");
+                    break;
+                case 4:
+                    template = template.replace("MMM", "Apr");
+                    break;
+                case 5:
+                    template = template.replace("MMM", "May");
+                    break;
+                case 6:
+                    template = template.replace("MMM", "Jun");
+                    break;
+                case 7:
+                    template = template.replace("MMM", "Jul");
+                    break;
+                case 8:
+                    template = template.replace("MMM", "Aug");
+                    break;
+                case 9:
+                    template = template.replace("MMM", "Sep");
+                    break;
+                case 10:
+                    template = template.replace("MMM", "Oct");
+                    break;
+                case 11:
+                    template = template.replace("MMM", "Nov");
+                    break;
+                case 12:
+                    template = template.replace("MMM", "Dec");
+                    break;
+                case 13:
+                    template = template.replace("MMM", "Und");
+                    break;
+            }
+        }
+        template = template.replace("MM", month.toString(10));
+        return template;
+    }
+    PageCtrl.monthYear = monthYear;
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
 (function (PageCtrl) {
@@ -637,14 +688,9 @@ var PageCtrl;
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (imageInfo.year) {
-            if (imageSize && imageInfo.year)
+            if (imageSize)
                 imageSize += " 　 | 　 ";
-            if (imageInfo.month) {
-                imageSize += PageCtrl.getString("dateToMonth").replace("YYYY", imageInfo.year.toString(10)).replace("MM", imageInfo.month.toString(10));
-            }
-            else {
-                imageSize += "'" + imageInfo.year.toString();
-            }
+            imageSize += PageCtrl.monthYear(imageInfo.year, imageInfo.month);
         }
         if (imageSize)
             imageName += " (" + imageSize + ")";

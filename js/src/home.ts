@@ -47,7 +47,7 @@ namespace PageCtrl {
     function showAvatar(item: IAvatarInfo) {
         if (!item) return;
         DeepX.MdBlogs.setElementProp("image-avatar", "src", getAvatarUrl(item));
-        DeepX.MdBlogs.setElementProp("image-desc", "innerText", getString("photoTaken").replace("{0}", item.year));
+        DeepX.MdBlogs.setElementProp("image-desc", "innerText", getString("photoTaken").replace("{0}", item.year.toString(10)));
     }
 
     export function initMenu(id?: (typeof menu)[number]["id"] | boolean) {

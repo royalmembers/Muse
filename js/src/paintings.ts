@@ -177,12 +177,8 @@ namespace PageCtrl {
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (imageInfo.year) {
-            if (imageSize && imageInfo.year) imageSize += " 　 | 　 ";
-            if (imageInfo.month) {
-                imageSize += getString("dateToMonth").replace("YYYY", imageInfo.year.toString(10)).replace("MM", imageInfo.month.toString(10));
-            } else {
-                imageSize += "'" + imageInfo.year.toString();
-            }
+            if (imageSize) imageSize += " 　 | 　 ";
+            imageSize += monthYear(imageInfo.year, imageInfo.month);
         }
 
         if (imageSize) imageName += " (" + imageSize + ")";
