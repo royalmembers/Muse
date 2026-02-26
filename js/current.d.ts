@@ -33,6 +33,8 @@ declare namespace PageCtrl {
 }
 declare namespace PageCtrl {
     const strings: {
+        share: string;
+        "share#zh": string;
         photoTaken: string;
         "photoTaken#zh": string;
         paintings: string;
@@ -55,6 +57,7 @@ declare namespace PageCtrl {
     type IImageRatio = "p" | "page" | "v" | "vertical" | "h" | "horizontal" | "s" | "square" | "w" | "wide";
     export interface IPaintingSeriesInfo {
         id: string;
+        alias?: string[] | null;
         disable?: string;
         name: string;
         "name-cap"?: "small" | "normal" | null;

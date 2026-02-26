@@ -1,6 +1,8 @@
 namespace PageCtrl {
 
     const strings = {
+        share: "Share",
+        "share#zh": "分享",
         photoTaken: "Photo taken on {0}.",
         "photoTaken#zh": "本照片拍摄于{0}年",
         paintings: "Paintings",

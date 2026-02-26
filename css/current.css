@@ -13,16 +13,28 @@ body > header:first-child > section:first-child > h1 > img:first-child + a > str
 body > footer > section > div.x-copyright > img:first-child + span + span {
     font-size: 12px; line-height: 18px; text-align: center; height: 18px; padding-right: 1px; display: block; cursor: default;
 }
-button.x-button-more {
-    color: #EEE; background-color: #333; padding: 8px 16px; margin: 0; border: 0 none transparent; border-radius: 4px; cursor: pointer; transition: 0.2s;
+button.x-button-link {
+    color: #EEE;
+    background-color: #333;
+    padding: 8px 16px;
+    margin: 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(128, 128, 128, 0.2) rgba(128, 128, 128, 0.1) rgba(128, 128, 128, 0.1) rgba(128, 128, 128, 0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.5s;
+    user-select: none;
 }
-button.x-button-more:hover {
+button.x-button-link:hover {
     background-color: #444;
+    border-color: rgba(128, 128, 128, 0.4) rgba(128, 128, 128, 0.2) rgba(128, 128, 128, 0.2) rgba(128, 128, 128, 0.2);
+    transition: 0.1s;
 }
-button.x-button-more > span {
+button.x-button-link > span {
     vertical-align: middle;
 }
-button.x-button-more > span + img {
+button.x-button-link > span + img {
     width: 16px; height: 16px; vertical-align: middle; margin-left: 8px;
 }
 body > section.x-part-content > section > a.link-long-button > span + span,

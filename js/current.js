@@ -446,6 +446,8 @@ var PageCtrl;
 var PageCtrl;
 (function (PageCtrl) {
     var strings = {
+        share: "Share",
+        "share#zh": "分享",
         photoTaken: "Photo taken on {0}.",
         "photoTaken#zh": "本照片拍摄于{0}年",
         paintings: "Paintings",
@@ -576,6 +578,13 @@ var PageCtrl;
             if ((item === null || item === void 0 ? void 0 : item.id) !== id || item.disable)
                 continue;
             return item;
+        }
+        for (var i in series) {
+            var item = series[i];
+            if (!(item === null || item === void 0 ? void 0 : item.alias) || item.disable || !(item.alias instanceof Array))
+                continue;
+            if (item.alias.indexOf(id) > -1)
+                return item;
         }
         return undefined;
     }

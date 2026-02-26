@@ -1,8 +1,18 @@
 {
     "series": [{
         "id": "mao",
+        "alias": ["meow", "mor-ow-meow"],
         "name": "摸凹喵",
+        "name#en": "Mor-Ow Meow",
+        "name#fr": "Moh-Aou Miaou",
+        "name#ko": "모오 미야오",
+        "name-cap#en": "small",
+        "name-cap#fr": "small",
         "subtitle": "Mor-Ow Meow",
+        "subtitle#en": "摸凹喵",
+        "subtitle#fr": "摸凹喵",
+        "subtitle#ko": "摸凹喵 / Mor-Ow Meow",
+        "subtitle#ja": "Mor-Ow Meow / モル オウ ニャー",
         "subtitle-cap": "small",
         "icon": "logos/mao-2026.png",
         "qr": "logos/qr-mao.webp",

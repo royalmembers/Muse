@@ -4,6 +4,7 @@ namespace PageCtrl {
 
     export interface IPaintingSeriesInfo {
         id: string;
+        alias?: string[] | null;
         disable?: string;
         name: string;
         "name-cap"?: "small" | "normal" | null;
@@ -81,6 +82,12 @@ namespace PageCtrl {
             const item = series[i];
             if (item?.id !== id || item.disable) continue;
             return item;
+        }
+
+        for (let i in series) {
+            const item = series[i];
+            if (!item?.alias || item.disable || !(item.alias instanceof Array)) continue;
+            if (item.alias.indexOf(id) > -1) return item;
         }
 
         return undefined;
@@ -171,6 +178,7 @@ namespace PageCtrl {
             if (imageInfo.id && imageInfo.year) sourceUrl = "~/" + imageInfo.year + "/" + imageInfo.id + ext;
             else return;
         }
+
         let thumbUrl = imageInfo.thumb;
         if (thumbUrl === undefined) thumbUrl = series.thumb;
         if (thumbUrl === true) thumbUrl = sourceUrl.replace("~/", "~/thumbnails/");
