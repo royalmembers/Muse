@@ -21,6 +21,14 @@
         "thumb": true
     }],
     "common": [{
+        "id": "rescue",
+        "name": "飞行拯救生命",
+        "name#en": "Rescue by flying",
+        "year": 2026,
+        "month": 2,
+        "day": 27,
+        "keywords": []
+    }, {
         "id": "countryside",
         "name": "乡村景色",
         "name#en": "Countryside Scenery",
