@@ -52,6 +52,12 @@ body > section.x-part-content > section.x-part-subtitle {
 body > section.x-part-content > section.x-part-subtitle + section {
     margin-top: 10px;
 }
+section.x-part-copyright-tuans > section {
+    text-align: center; user-select: none;
+}
+section.x-part-copyright-tuans > section > img {
+    width: 128px; height: 128px; opacity: 0.9; cursor: default;
+}
 section#part-avatar {
     padding: 100px 20px 20px 20px;
     border-top: 1px solid #222;

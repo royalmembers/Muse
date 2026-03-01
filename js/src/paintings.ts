@@ -153,9 +153,10 @@ namespace PageCtrl {
         }
 
         const qr = getContainerElement(paging, "qr") as HTMLImageElement;
+        const qrContainer = getContainerElement(paging, "share") as HTMLImageElement;
         if (qr) {
             qr.src = getSeriesIcon(series.qr, paging.root);
-            qr.style.display = series.qr ? "" : "none";
+            if (qrContainer) qrContainer.style.display = series.qr ? "" : "none";
         }
 
         renderNextWave(images, paging);
@@ -192,7 +193,7 @@ namespace PageCtrl {
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (imageInfo.year) {
-            if (imageSize) imageSize += " 　 | 　 ";
+            if (imageSize) imageSize += " 　|　 ";
             imageSize += monthYear(imageInfo.year, imageInfo.month);
         }
 
@@ -231,23 +232,31 @@ namespace PageCtrl {
                 path: "paintings",
                 series: sel
             });
-            document.getElementById("section-back-container")!.style.display = "";
-            document.getElementById("section-series-title-container")!.style.display = "none";
-            seriesMenu.style.display = "none";
+            document.getElementById("text-series")!.style.display = "";
         } else {
             await renderPaintings(works.common, {
                 offset: 0,
                 size: 24,
                 path: "paintings",
                 series: {
-                    thumb: true
+                    thumb: true,
+                    qr: "logos/qr-paintings.png",
                 } as IPaintingSeriesInfo,
             });
-            document.getElementById("section-back-container")!.style.display = "none";
-            document.getElementById("section-series-title-container")!.style.display = "";
-            seriesMenu.style.display = "";
+            document.getElementById("text-series")!.style.display = "none";
         }
         const series = works.series || [];
+        {
+            const linkEle = document.createElement("a");
+            linkEle.className = "link-long-button";
+            linkEle.href = "./";
+            linkEle.innerText = getString("generalPaintings");
+            seriesMenu.appendChild(linkEle);
+            const subtitle = document.createElement("span");
+            subtitle.className = "x-text-subtitle";
+            subtitle.innerText = getString("series");
+            seriesMenu.appendChild(subtitle);
+        }
         for (let i in series) {
             const item = series[i];
             if (!item || item.disable || !item.name || !item.id) continue;
@@ -278,10 +287,10 @@ namespace PageCtrl {
         }
 
         initPopupView();
-        DeepX.MdBlogs.setElementText("text-back", "back");
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
-        setElementProp("section-series-title", null, "series");
+        setElementProp("section-series-title", null, "all");
         setElementProp("text-series", null, "series");
+        setElementProp("section-share-title", null, "share");
         initMenu("paintings");
     }
 

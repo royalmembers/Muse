@@ -33,6 +33,8 @@ declare namespace PageCtrl {
 }
 declare namespace PageCtrl {
     const strings: {
+        all: string;
+        "all#zh": string;
         share: string;
         "share#zh": string;
         photoTaken: string;

@@ -446,6 +446,8 @@ var PageCtrl;
 var PageCtrl;
 (function (PageCtrl) {
     var strings = {
+        all: "All",
+        "all#zh": "全部",
         share: "Share",
         "share#zh": "分享",
         photoTaken: "Photo taken on {0}.",
@@ -602,7 +604,7 @@ var PageCtrl;
     PageCtrl.hidePopupViewDelay = hidePopupViewDelay;
     function renderPaintings(images, paging) {
         return __awaiter(this, void 0, void 0, function () {
-            var series, container, subtitle, icon, qr;
+            var series, container, subtitle, icon, qr, qrContainer;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -659,9 +661,11 @@ var PageCtrl;
                             icon.style.display = series.icon ? "" : "none";
                         }
                         qr = getContainerElement(paging, "qr");
+                        qrContainer = getContainerElement(paging, "share");
                         if (qr) {
                             qr.src = getSeriesIcon(series.qr, paging.root);
-                            qr.style.display = series.qr ? "" : "none";
+                            if (qrContainer)
+                                qrContainer.style.display = series.qr ? "" : "none";
                         }
                         renderNextWave(images, paging);
                         getContainerElement(paging, "more").addEventListener("click", function () {
@@ -708,7 +712,7 @@ var PageCtrl;
             imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (imageInfo.year) {
             if (imageSize)
-                imageSize += " 　 | 　 ";
+                imageSize += " 　|　 ";
             imageSize += PageCtrl.monthYear(imageInfo.year, imageInfo.month);
         }
         if (imageSize)
@@ -728,7 +732,7 @@ var PageCtrl;
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         return __awaiter(this, void 0, void 0, function () {
-            var ex_1, q, sel, seriesMenu, col, series, i, item, linkEle, icon, spanEle, subtitle, subtitle2;
+            var ex_1, q, sel, seriesMenu, col, series, linkEle, subtitle, i, item, linkEle, icon, spanEle, subtitle, subtitle2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -761,26 +765,34 @@ var PageCtrl;
                             })];
                     case 5:
                         _a.sent();
-                        document.getElementById("section-back-container").style.display = "";
-                        document.getElementById("section-series-title-container").style.display = "none";
-                        seriesMenu.style.display = "none";
+                        document.getElementById("text-series").style.display = "";
                         return [3 /*break*/, 8];
                     case 6: return [4 /*yield*/, renderPaintings(works.common, {
                             offset: 0,
                             size: 24,
                             path: "paintings",
                             series: {
-                                thumb: true
+                                thumb: true,
+                                qr: "logos/qr-paintings.png",
                             },
                         })];
                     case 7:
                         _a.sent();
-                        document.getElementById("section-back-container").style.display = "none";
-                        document.getElementById("section-series-title-container").style.display = "";
-                        seriesMenu.style.display = "";
+                        document.getElementById("text-series").style.display = "none";
                         _a.label = 8;
                     case 8:
                         series = works.series || [];
+                        {
+                            linkEle = document.createElement("a");
+                            linkEle.className = "link-long-button";
+                            linkEle.href = "./";
+                            linkEle.innerText = PageCtrl.getString("generalPaintings");
+                            seriesMenu.appendChild(linkEle);
+                            subtitle = document.createElement("span");
+                            subtitle.className = "x-text-subtitle";
+                            subtitle.innerText = PageCtrl.getString("series");
+                            seriesMenu.appendChild(subtitle);
+                        }
                         for (i in series) {
                             item = series[i];
                             if (!item || item.disable || !item.name || !item.id)
@@ -811,10 +823,10 @@ var PageCtrl;
                             seriesMenu.appendChild(linkEle);
                         }
                         initPopupView();
-                        DeepX.MdBlogs.setElementText("text-back", "back");
                         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
-                        PageCtrl.setElementProp("section-series-title", null, "series");
+                        PageCtrl.setElementProp("section-series-title", null, "all");
                         PageCtrl.setElementProp("text-series", null, "series");
+                        PageCtrl.setElementProp("section-share-title", null, "share");
                         PageCtrl.initMenu("paintings");
                         return [2 /*return*/];
                 }

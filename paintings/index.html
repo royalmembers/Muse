@@ -24,14 +24,35 @@
     section.x-zone-actions > div {
         margin-bottom: 20px; user-select: none;
     }
+    section.x-part-copyright-tuans {
+        padding: 24px 0 24px 0; border-width: 1px 0 1px 0; border-style: solid none solid none; border-color: #333;
+    }
+    section.x-main-container span.x-text-subtitle {
+        color: #888; margin-top: 20px; margin-bottom: 10px; display: block; user-select: none;
+    }
+    section.x-part-panel {
+        padding: 19px; border: 1px solid #333; border-radius: 8px; user-select: none;
+    }
+    section.x-part-panel > h2 {
+        font-size: 16px; font-weight: normal; padding: 0; margin: 0 0 20px 0; cursor: default;
+    }
     section img#section-works-qr {
         width: 200px; height: 200px; border-radius: 4px; opacity: 0.9;
+    }
+    span#text-series {
+        color: #999; font-size: 14px; font-weight: normal; position: absolute; top: 4px; right: 0;
     }
     section#section-back-container {
         user-select: none;
     }
     span#section-works-subtitle {
         color: rgba(240, 240, 240, 0.6); font-size: 16px; font-weight: lighter; margin-left: 20px;
+    }
+    section#section-series-title-container {
+        margin-top: 80px;
+    }
+    section.x-part-copyright-notice {
+        color: #666;
     }
     </style>
     <script type="text/javascript" src="https://jinchen.org/js/current.js" ></script>
@@ -45,12 +66,11 @@
         </section>
 	</header>
     <section class="x-main-container" >
-        <section id="section-back-container" style="display: none; " >
-            <a href="./" title="Turn back to paintings" ><span>&lt; </span><span id="text-back" >Back</span></a>
-            <span> &nbsp; | &nbsp; </span><span id="text-series">Series</span>
-        </section>
         <section class="x-zone-hl layout-wide-full x-bg-outstanding">
-            <h2><img id="section-works-title-icon" alt="Paintings" src="../images/logos/mspaint.png" /><span id="section-works-title">Paintings</span><span id="section-works-subtitle"></span></h2>
+            <h2>
+                <img id="section-works-title-icon" alt="Paintings" src="../images/logos/mspaint.png" /><span id="section-works-title">Paintings</span><span id="section-works-subtitle"></span>
+                <span id="text-series" style="display: none; " >Series</span>
+            </h2>
         </section>
         <section id="section-works-container" class="x-container-pics" >
         </section>
@@ -58,17 +78,32 @@
             <div>
                 <button id="section-works-more" class="x-button-more x-button-link" style="display: none; " ><span id="button-works-more">See more</span><img alt="See more" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/images/ele/down_pos_white.png" /></button>
             </div>
+        </section>
+        <section id="section-works-share" class="x-part-panel x-bg-emphasis">
+            <h2 id="section-share-title">Share</h2>
             <div>
-                <img id="section-works-qr" alt="QR code" src="../images/logos/qr.png" style="display: none; " />
+                <img id="section-works-qr" alt="QR code" src="../images/logos/qr.png" />
             </div>
         </section>
         <section id="section-series-title-container" class="x-zone-hl layout-wide-full x-bg-outstanding">
-            <h2 id="section-series-title">Series</h2>
+            <h2 id="section-series-title">All</h2>
         </section>
         <section id="section-series-container" >
+			<a href="./" class="link-long-button"><span>General</span></a>
+            <span class="x-text-subtitle">Series</span>
 			<a href="./?mao" class="link-long-button"><span>摸凹喵</span><span><span class="x-text-cap-small">Mor-Ow Meow</span></span></a>
         </section>
     </section>
+	<section class="x-part-content x-bg-emphasis x-part-copyright-tuans">
+		<section>
+			<img alt="Tuans" src="../images/logos/tuans.png" />
+		</section>
+	</section>
+	<section class="x-part-content">
+		<section class="x-part-copyright-notice">
+			<span>Original | 原创图画</span>
+		</section>
+	</section>
 	<footer>
 		<section>
 			<div class="x-copyright">
