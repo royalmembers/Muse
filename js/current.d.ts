@@ -122,6 +122,7 @@ declare namespace PageCtrl {
         guest?: "featuring" | string;
         year: number;
         month?: number;
+        thumb?: string;
         links: Record<string, string>;
     }
     export function video(year: number, id: string): IVideoInfo | undefined;

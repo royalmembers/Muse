@@ -98,9 +98,17 @@
         "name#en": "Defend Dream",
         "year": 2020,
         "month": 5,
+        "day": 24,
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260301-p1",
+        "name": "摸凹喵坐缆车",
+        "name#en": "Mor-Ow Meow in Cable Car",
+        "year": 2026,
+        "month": 3,
+        "day": 1
+    }, {
         "id": "mao-260225-p3",
         "name": "摸凹喵巫师",
         "name#en": "Mor-Ow Meow Wizard",

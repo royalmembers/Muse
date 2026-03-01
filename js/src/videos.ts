@@ -12,6 +12,7 @@ namespace PageCtrl {
         guest?: "featuring" | string;
         year: number;
         month?: number;
+        thumb?: string;
         links: Record<string, string>;
     }
 
@@ -20,6 +21,7 @@ namespace PageCtrl {
         name: "景德镇陶瓷研学之旅",
         year: 2025,
         month: 7,
+        thumb: "posters/thumbnails/20250706_145015.webp",
         links: {
             iqiyi: "https://www.iqiyi.com/v_14kpuv94euo.html",
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=4176576759377500"
@@ -38,6 +40,7 @@ namespace PageCtrl {
         id: "led",
         name: "点亮神灯",
         year: 2020,
+        thumb: "posters/thumbnails/2020/led.webp",
         links: {
             iqiyi: "https://www.iqiyi.com/v_lgmoijf6zg.html",
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=2193622781471600"
