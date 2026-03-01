@@ -34,13 +34,25 @@
         padding: 19px; border: 1px solid #333; border-radius: 8px; user-select: none;
     }
     section.x-part-panel > h2 {
-        font-size: 16px; font-weight: normal; padding: 0; margin: 0 0 20px 0; cursor: default;
+        font-size: 16px; font-weight: normal; line-height: 20px; padding: 0; margin: 0 0 20px 0; cursor: default;
+    }
+    section.x-part-panel > h2 > img:first-child {
+        width: 20px; height: 20px; margin-right: 10px; opacity: 0.9;
+    }
+    section.x-part-panel > h2 > img, section.x-part-panel > h2 > span {
+        vertical-align: middle;
     }
     section img#section-works-qr {
-        width: 200px; height: 200px; border-radius: 4px; opacity: 0.9;
+        width: 160px; height: 160px; border-radius: 4px; opacity: 0.9;
+    }
+    span.x-text-link {
+        cursor: pointer;
+    }
+    span.x-text-link:hover {
+        color: #F5B;
     }
     span#text-series {
-        color: #999; font-size: 14px; font-weight: normal; position: absolute; top: 4px; right: 0;
+        color: #999; font-size: 14px; font-weight: normal; position: absolute; top: 2px; right: 0;
     }
     section#section-back-container {
         user-select: none;
@@ -69,7 +81,7 @@
         <section class="x-zone-hl layout-wide-full x-bg-outstanding">
             <h2>
                 <img id="section-works-title-icon" alt="Paintings" src="../images/logos/mspaint.png" /><span id="section-works-title">Paintings</span><span id="section-works-subtitle"></span>
-                <span id="text-series" style="display: none; " >Series</span>
+                <span id="text-series">Series</span>
             </h2>
         </section>
         <section id="section-works-container" class="x-container-pics" >
@@ -80,7 +92,7 @@
             </div>
         </section>
         <section id="section-works-share" class="x-part-panel x-bg-emphasis">
-            <h2 id="section-share-title">Share</h2>
+            <h2><img alt="Share" src="../images/icons/share-w.png" /><span id="section-share-title">Share</span></h2>
             <div>
                 <img id="section-works-qr" alt="QR code" src="../images/logos/qr.png" />
             </div>

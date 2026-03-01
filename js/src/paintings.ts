@@ -232,7 +232,7 @@ namespace PageCtrl {
                 path: "paintings",
                 series: sel
             });
-            document.getElementById("text-series")!.style.display = "";
+            setElementProp("text-series", null, "series");
         } else {
             await renderPaintings(works.common, {
                 offset: 0,
@@ -243,7 +243,7 @@ namespace PageCtrl {
                     qr: "logos/qr-paintings.png",
                 } as IPaintingSeriesInfo,
             });
-            document.getElementById("text-series")!.style.display = "none";
+            setElementProp("text-series", null, "generalPaintings");
         }
         const series = works.series || [];
         {
@@ -289,8 +289,23 @@ namespace PageCtrl {
         initPopupView();
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         setElementProp("section-series-title", null, "all");
-        setElementProp("text-series", null, "series");
-        setElementProp("section-share-title", null, "share");
+        const share = document.getElementById("section-share-title");
+        if (share) {
+            setElementProp(share, null, "share");
+            if (typeof navigator === 'object' && typeof navigator.share === "function") {
+                share.className = "x-text-link";
+                share.addEventListener("click", ev => {
+                    const title = document.getElementById("section-works-title")?.innerText;
+                    const paintings = getString("paintings");
+                    if (!title) return;
+                    navigator.share({
+                        title: title === paintings ? `${paintings} - Muse` : `${title} - ${paintings} by Muse`,
+                        url: sel && q ? `./?${q}` : "./"
+                    });
+                });
+            }
+        }
+
         initMenu("paintings");
     }
 

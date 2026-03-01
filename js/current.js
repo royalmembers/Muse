@@ -732,7 +732,7 @@ var PageCtrl;
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         return __awaiter(this, void 0, void 0, function () {
-            var ex_1, q, sel, seriesMenu, col, series, linkEle, subtitle, i, item, linkEle, icon, spanEle, subtitle, subtitle2;
+            var ex_1, q, sel, seriesMenu, col, series, linkEle, subtitle, i, item, linkEle, icon, spanEle, subtitle, subtitle2, share;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -765,7 +765,7 @@ var PageCtrl;
                             })];
                     case 5:
                         _a.sent();
-                        document.getElementById("text-series").style.display = "";
+                        PageCtrl.setElementProp("text-series", null, "series");
                         return [3 /*break*/, 8];
                     case 6: return [4 /*yield*/, renderPaintings(works.common, {
                             offset: 0,
@@ -778,7 +778,7 @@ var PageCtrl;
                         })];
                     case 7:
                         _a.sent();
-                        document.getElementById("text-series").style.display = "none";
+                        PageCtrl.setElementProp("text-series", null, "generalPaintings");
                         _a.label = 8;
                     case 8:
                         series = works.series || [];
@@ -825,8 +825,24 @@ var PageCtrl;
                         initPopupView();
                         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
                         PageCtrl.setElementProp("section-series-title", null, "all");
-                        PageCtrl.setElementProp("text-series", null, "series");
-                        PageCtrl.setElementProp("section-share-title", null, "share");
+                        share = document.getElementById("section-share-title");
+                        if (share) {
+                            PageCtrl.setElementProp(share, null, "share");
+                            if (typeof navigator === 'object' && typeof navigator.share === "function") {
+                                share.className = "x-text-link";
+                                share.addEventListener("click", function (ev) {
+                                    var _a;
+                                    var title = (_a = document.getElementById("section-works-title")) === null || _a === void 0 ? void 0 : _a.innerText;
+                                    var paintings = PageCtrl.getString("paintings");
+                                    if (!title)
+                                        return;
+                                    navigator.share({
+                                        title: title === paintings ? "".concat(paintings, " - Muse") : "".concat(title, " - ").concat(paintings, " by Muse"),
+                                        url: sel && q ? "./?".concat(q) : "./"
+                                    });
+                                });
+                            }
+                        }
                         PageCtrl.initMenu("paintings");
                         return [2 /*return*/];
                 }
