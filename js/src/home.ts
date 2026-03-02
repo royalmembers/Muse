@@ -51,7 +51,7 @@ namespace PageCtrl {
     }
 
     export function initMenu(id?: (typeof menu)[number]["id"] | boolean) {
-        const container = document.getElementById("top-menu")!;
+        const container = ele("top-menu")!;
         container.innerHTML = "";
         const rela = id === true ? "./" : "../";
         const sel = typeof id === "string" ? id : undefined;
@@ -68,7 +68,7 @@ namespace PageCtrl {
     }
 
     export function initHome() {
-        let container = document.getElementById("section-avatars")!;
+        let container = ele("section-avatars")!;
         container.innerHTML = "";
         avatars.forEach(function (item, i) {
             if (!item) return;
@@ -109,10 +109,8 @@ namespace PageCtrl {
         videosModel("home");
         if (typeof DeepX === "undefined") return;
         DeepX.MdBlogs.setElementText("title-about", "about");
-        let videoStr = DeepX.MdBlogs.setElementText("title-videos", "videos");
+        DeepX.MdBlogs.setElementText("title-videos", "videos");
         DeepX.MdBlogs.setElementText("title-links", "otherLinks");
-        let ww = videoStr !== "视频";
-        if (ww) return;
         setElementProp("link-certs", null, "certHonors");
         setElementProp("title-works-series", null, "series");
         setElementProp("title-works-common", null, "generalPaintings");

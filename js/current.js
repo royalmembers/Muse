@@ -288,13 +288,13 @@ var PageCtrl;
     }
     function initCerts() {
         var arr = [];
-        var details = document.getElementById("part-cert");
+        var details = PageCtrl.ele("part-cert");
         var id = DeepX.MdBlogs.firstQuery();
         var info = certsModel(arr, id, details);
         if (id && info)
             showCert(info, details);
         var c = Hje.render("part-certs", { children: arr });
-        var checkbox = document.getElementById("checkbox-certs");
+        var checkbox = PageCtrl.ele("checkbox-certs");
         if (checkbox)
             checkbox.addEventListener("change", function (ev) {
                 certsModel(arr, id, details, checkbox.checked);
@@ -364,7 +364,7 @@ var PageCtrl;
         DeepX.MdBlogs.setElementProp("image-desc", "innerText", PageCtrl.getString("photoTaken").replace("{0}", item.year.toString(10)));
     }
     function initMenu(id) {
-        var container = document.getElementById("top-menu");
+        var container = PageCtrl.ele("top-menu");
         container.innerHTML = "";
         var rela = id === true ? "./" : "../";
         var sel = typeof id === "string" ? id : undefined;
@@ -383,7 +383,7 @@ var PageCtrl;
     }
     PageCtrl.initMenu = initMenu;
     function initHome() {
-        var container = document.getElementById("section-avatars");
+        var container = PageCtrl.ele("section-avatars");
         container.innerHTML = "";
         avatars.forEach(function (item, i) {
             if (!item)
@@ -430,11 +430,8 @@ var PageCtrl;
         if (typeof DeepX === "undefined")
             return;
         DeepX.MdBlogs.setElementText("title-about", "about");
-        var videoStr = DeepX.MdBlogs.setElementText("title-videos", "videos");
+        DeepX.MdBlogs.setElementText("title-videos", "videos");
         DeepX.MdBlogs.setElementText("title-links", "otherLinks");
-        var ww = videoStr !== "视频";
-        if (ww)
-            return;
         PageCtrl.setElementProp("link-certs", null, "certHonors");
         PageCtrl.setElementProp("title-works-series", null, "series");
         PageCtrl.setElementProp("title-works-common", null, "generalPaintings");
@@ -462,6 +459,8 @@ var PageCtrl;
         "certHonors#zh": "小小荣誉",
         generalPaintings: "General",
         "generalPaintings#zh": "常规",
+        worksBy: "{1} by {0}",
+        "worksBy#zh": "{0}的{1}",
     };
     function getString(key) {
         return DeepX.MdBlogs.getLocaleProp(strings, key);
@@ -554,7 +553,7 @@ var PageCtrl;
         });
     }
     function getContainerElement(paging, suffix) {
-        return document.getElementById("".concat((paging === null || paging === void 0 ? void 0 : paging.id) || "section-works", "-").concat(suffix || "container"));
+        return PageCtrl.ele("".concat((paging === null || paging === void 0 ? void 0 : paging.id) || "section-works", "-").concat(suffix || "container"));
     }
     function renderNextWave(images, paging) {
         var containerEle = getContainerElement(paging);
@@ -591,7 +590,7 @@ var PageCtrl;
         return undefined;
     }
     function getSeriesIcon(icon, root) {
-        return (root ? "./images/" : "../images/") + (icon || "logos/mspaint.png");
+        return "".concat(PageCtrl.rootRela(root), "images/").concat((icon || "logos/mspaint.png"));
     }
     function seriesInPaging(paging) {
         return paging.series || {};
@@ -678,7 +677,7 @@ var PageCtrl;
     }
     PageCtrl.renderPaintings = renderPaintings;
     function hidePopupView() {
-        document.getElementById("popup-view").style.display = "none";
+        PageCtrl.ele("popup-view").style.display = "none";
     }
     PageCtrl.hidePopupView = hidePopupView;
     function renderImage(containerEle, imageInfo, paging) {
@@ -700,7 +699,7 @@ var PageCtrl;
             thumbUrl = sourceUrl.replace("~/", "~/thumbnails/");
         else if (!thumbUrl)
             thumbUrl = sourceUrl;
-        var imagesPath = paging.root ? "./images/" : "../images/";
+        var imagesPath = PageCtrl.rootRela(paging.root) + "images/";
         if (thumbUrl.indexOf("~/") == 0)
             thumbUrl = thumbUrl.replace("~/", imagesPath + paging.path + "/");
         if (sourceUrl.indexOf("~/") == 0)
@@ -720,19 +719,19 @@ var PageCtrl;
         imageEle.alt = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
-            document.getElementById("popup-view-img").src = sourceUrl;
-            document.getElementById("popup-view-img").alt = imageName;
-            document.getElementById("popup-view-thumb").src = thumbUrl;
-            document.getElementById("popup-view-thumb").alt = imageName;
-            document.getElementById("popup-view-title").innerText = imageInfo.name || series.name || paging.defaultName || "";
-            document.getElementById("popup-view-desc").innerText = imageSize;
-            document.getElementById("popup-view").style.display = "";
+            PageCtrl.ele("popup-view-img").src = sourceUrl;
+            PageCtrl.ele("popup-view-img").alt = imageName;
+            PageCtrl.ele("popup-view-thumb").src = thumbUrl;
+            PageCtrl.ele("popup-view-thumb").alt = imageName;
+            PageCtrl.ele("popup-view-title").innerText = imageInfo.name || series.name || paging.defaultName || "";
+            PageCtrl.ele("popup-view-desc").innerText = imageSize;
+            PageCtrl.ele("popup-view").style.display = "";
         });
     }
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         return __awaiter(this, void 0, void 0, function () {
-            var ex_1, q, sel, seriesMenu, col, series, linkEle, subtitle, i, item, linkEle, icon, spanEle, subtitle, subtitle2, share;
+            var ex_1, q, sel, seriesMenu, paintingsString, paintingsTitleString, iconElement, col, icon, series, linkEle, subtitle, i, item, linkEle, icon, spanEle, subtitle, subtitle2, share;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -751,8 +750,14 @@ var PageCtrl;
                     case 4:
                         q = DeepX.MdBlogs.firstQuery();
                         sel = getSeries(q);
-                        seriesMenu = document.getElementById("section-series-container");
+                        seriesMenu = PageCtrl.ele("section-series-container");
                         seriesMenu.innerHTML = "";
+                        paintingsString = PageCtrl.getString("paintings");
+                        paintingsTitleString = PageCtrl.getString("worksBy").replace("{0}", "Muse").replace("{1}", paintingsString);
+                        document.title = paintingsTitleString;
+                        iconElement = PageCtrl.ele("ph-link-icon");
+                        if (iconElement)
+                            iconElement.href = "../images/logos/logo-2026-paint.png";
                         if (!sel) return [3 /*break*/, 6];
                         if (sel.id)
                             q = sel.id;
@@ -765,6 +770,11 @@ var PageCtrl;
                             })];
                     case 5:
                         _a.sent();
+                        if (sel.name && sel.name !== paintingsString)
+                            document.title = "".concat(sel.name, " - ").concat(paintingsTitleString);
+                        icon = getSeriesIcon(sel.icon);
+                        if (iconElement && icon)
+                            iconElement.href = icon;
                         PageCtrl.setElementProp("text-series", null, "series");
                         return [3 /*break*/, 8];
                     case 6: return [4 /*yield*/, renderPaintings(works.common, {
@@ -825,19 +835,14 @@ var PageCtrl;
                         initPopupView();
                         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
                         PageCtrl.setElementProp("section-series-title", null, "all");
-                        share = document.getElementById("section-share-title");
+                        share = PageCtrl.ele("section-share-title");
                         if (share) {
                             PageCtrl.setElementProp(share, null, "share");
                             if (typeof navigator === 'object' && typeof navigator.share === "function") {
                                 share.className = "x-text-link";
                                 share.addEventListener("click", function (ev) {
-                                    var _a;
-                                    var title = (_a = document.getElementById("section-works-title")) === null || _a === void 0 ? void 0 : _a.innerText;
-                                    var paintings = PageCtrl.getString("paintings");
-                                    if (!title)
-                                        return;
                                     navigator.share({
-                                        title: title === paintings ? "".concat(paintings, " - Muse") : "".concat(title, " - ").concat(paintings, " by Muse"),
+                                        title: document.title,
                                         url: sel && q ? "./?".concat(q) : "./"
                                     });
                                 });
@@ -851,7 +856,7 @@ var PageCtrl;
     }
     PageCtrl.initPaint = initPaint;
     function initPopupView() {
-        var c = document.getElementById("popup-view");
+        var c = PageCtrl.ele("popup-view");
         if (!c)
             return;
         c.addEventListener("click", hidePopupView);
@@ -881,6 +886,27 @@ var PageCtrl;
         return inner.browserKind = ua.includes(" (Windows NT ") ? "windows" : "normal";
     }
     PageCtrl.checkBrowserKind = checkBrowserKind;
+    function ele(id) {
+        return document.getElementById(id);
+    }
+    PageCtrl.ele = ele;
+    function rootRela(root) {
+        if (typeof root === "number") {
+            if (root < 0 || isNaN(root))
+                return "../";
+            if (!Number.isInteger(root))
+                root = Math.round(root);
+            if (root === 0)
+                return "./";
+            var s = "../";
+            for (var i = 1; i < root; i++) {
+                s += "../";
+            }
+            return s;
+        }
+        return root ? "./" : "../";
+    }
+    PageCtrl.rootRela = rootRela;
     function parseFirstQuery(id) {
         if (!id)
             return {};

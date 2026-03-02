@@ -49,6 +49,8 @@ declare namespace PageCtrl {
         "certHonors#zh": string;
         generalPaintings: string;
         "generalPaintings#zh": string;
+        worksBy: string;
+        "worksBy#zh": string;
     };
     export function getString(key: keyof typeof strings): string;
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings): void;
@@ -104,6 +106,8 @@ declare namespace PageCtrl {
 declare namespace PageCtrl {
     function scrollToTop(top?: number): void;
     function checkBrowserKind(): string;
+    function ele(id: string): HTMLElement | null;
+    function rootRela(root?: boolean | number): string;
     function parseFirstQuery(id: string | null | undefined): {
         id?: string;
         year?: number;

@@ -17,6 +17,8 @@ namespace PageCtrl {
         "certHonors#zh": "小小荣誉",
         generalPaintings: "General",
         "generalPaintings#zh": "常规",
+        worksBy: "{1} by {0}",
+        "worksBy#zh": "{0}的{1}",
     }
 
     export function getString(key: keyof typeof strings) {

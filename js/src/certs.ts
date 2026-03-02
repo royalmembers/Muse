@@ -258,12 +258,12 @@ namespace PageCtrl {
 
     export function initCerts() {
         let arr: Hje.DescriptionContract[] = [];
-        let details = document.getElementById("part-cert")!;
+        let details = ele("part-cert")!;
         let id = DeepX.MdBlogs.firstQuery();
         let info = certsModel(arr, id, details);
         if (id && info) showCert(info, details);
         let c = Hje.render("part-certs", { children: arr })!;
-        let checkbox = document.getElementById("checkbox-certs") as HTMLInputElement;
+        let checkbox = ele("checkbox-certs") as HTMLInputElement;
         if (checkbox) checkbox.addEventListener("change", function (ev) {
             certsModel(arr, id, details, checkbox.checked);
             c.refresh();

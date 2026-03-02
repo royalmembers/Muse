@@ -58,7 +58,7 @@ namespace PageCtrl {
     }
 
     function getContainerElement(paging: IPaintingPaging, suffix?: string) {
-        return document.getElementById(`${paging?.id || "section-works"}-${suffix || "container"}`)!;
+        return ele(`${paging?.id || "section-works"}-${suffix || "container"}`)!;
     }
 
     function renderNextWave(images: IPaintingInfo[], paging: IPaintingPaging) {
@@ -94,7 +94,7 @@ namespace PageCtrl {
     }
 
     function getSeriesIcon(icon: string | undefined, root?: boolean) {
-        return (root ? "./images/" : "../images/") + (icon || "logos/mspaint.png");
+        return `${rootRela(root)}images/${(icon || "logos/mspaint.png")}`;
     }
 
     function seriesInPaging(paging: IPaintingPaging) {
@@ -166,7 +166,7 @@ namespace PageCtrl {
     }
 
     export function hidePopupView() {
-        document.getElementById("popup-view")!.style.display = "none";
+        ele("popup-view")!.style.display = "none";
     }
 
     export function renderImage(containerEle: HTMLElement, imageInfo: IPaintingInfo, paging: IPaintingPaging) {
@@ -184,7 +184,7 @@ namespace PageCtrl {
         if (thumbUrl === undefined) thumbUrl = series.thumb;
         if (thumbUrl === true) thumbUrl = sourceUrl.replace("~/", "~/thumbnails/");
         else if (!thumbUrl) thumbUrl = sourceUrl;
-        const imagesPath = paging.root ? "./images/" : "../images/";
+        const imagesPath = rootRela(paging.root) + "images/";
         if (thumbUrl.indexOf("~/") == 0) thumbUrl = thumbUrl.replace("~/", imagesPath + paging.path + "/");
         if (sourceUrl.indexOf("~/") == 0) sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
         imageEle.src = thumbUrl;
@@ -201,13 +201,13 @@ namespace PageCtrl {
         imageEle.alt = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
-            (document.getElementById("popup-view-img") as HTMLImageElement).src = sourceUrl;
-            (document.getElementById("popup-view-img") as HTMLImageElement).alt = imageName;
-            (document.getElementById("popup-view-thumb") as HTMLImageElement).src = thumbUrl;
-            (document.getElementById("popup-view-thumb") as HTMLImageElement).alt = imageName;
-            document.getElementById("popup-view-title")!.innerText = imageInfo.name || series.name || paging.defaultName || "";
-            document.getElementById("popup-view-desc")!.innerText = imageSize;
-            document.getElementById("popup-view")!.style.display = "";
+            (ele("popup-view-img") as HTMLImageElement).src = sourceUrl;
+            (ele("popup-view-img") as HTMLImageElement).alt = imageName;
+            (ele("popup-view-thumb") as HTMLImageElement).src = thumbUrl;
+            (ele("popup-view-thumb") as HTMLImageElement).alt = imageName;
+            ele("popup-view-title")!.innerText = imageInfo.name || series.name || paging.defaultName || "";
+            ele("popup-view-desc")!.innerText = imageSize;
+            ele("popup-view")!.style.display = "";
         });
     }
 
@@ -221,8 +221,13 @@ namespace PageCtrl {
 
         let q = DeepX.MdBlogs.firstQuery();
         const sel = getSeries(q);
-        const seriesMenu = document.getElementById("section-series-container")!;
+        const seriesMenu = ele("section-series-container")!;
         seriesMenu.innerHTML = "";
+        const paintingsString = getString("paintings");
+        const paintingsTitleString = getString("worksBy").replace("{0}", "Muse").replace("{1}", paintingsString);
+        document.title = paintingsTitleString;
+        const iconElement = ele("ph-link-icon") as HTMLLinkElement;
+        if (iconElement) iconElement.href = "../images/logos/logo-2026-paint.png";
         if (sel) {
             if (sel.id) q = sel.id;
             const col = ((works as any as Record<string, IPaintingInfo[]>)[q] || []).filter(ele => !!ele && !ele.disable);
@@ -232,6 +237,9 @@ namespace PageCtrl {
                 path: "paintings",
                 series: sel
             });
+            if (sel.name && sel.name !== paintingsString) document.title = `${sel.name} - ${paintingsTitleString}`;
+            const icon = getSeriesIcon(sel.icon);
+            if (iconElement && icon) iconElement.href = icon;
             setElementProp("text-series", null, "series");
         } else {
             await renderPaintings(works.common, {
@@ -289,17 +297,14 @@ namespace PageCtrl {
         initPopupView();
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         setElementProp("section-series-title", null, "all");
-        const share = document.getElementById("section-share-title");
+        const share = ele("section-share-title");
         if (share) {
             setElementProp(share, null, "share");
             if (typeof navigator === 'object' && typeof navigator.share === "function") {
                 share.className = "x-text-link";
                 share.addEventListener("click", ev => {
-                    const title = document.getElementById("section-works-title")?.innerText;
-                    const paintings = getString("paintings");
-                    if (!title) return;
                     navigator.share({
-                        title: title === paintings ? `${paintings} - Muse` : `${title} - ${paintings} by Muse`,
+                        title: document.title,
                         url: sel && q ? `./?${q}` : "./"
                     });
                 });
@@ -310,7 +315,7 @@ namespace PageCtrl {
     }
 
     export function initPopupView() {
-        const c = document.getElementById("popup-view");
+        const c = ele("popup-view");
         if (!c) return;
         c.addEventListener("click", hidePopupView);
         c.addEventListener("touchend", hidePopupViewDelay);

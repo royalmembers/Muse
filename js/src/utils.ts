@@ -23,6 +23,26 @@ namespace PageCtrl {
         return inner.browserKind = ua.includes(" (Windows NT ") ? "windows" : "normal";
     }
 
+    export function ele(id: string) {
+        return document.getElementById(id);
+    }
+
+    export function rootRela(root?: boolean | number) {
+        if (typeof root === "number") {
+            if (root < 0 || isNaN(root)) return "../";
+            if (!Number.isInteger(root)) root = Math.round(root);
+            if (root === 0) return "./";
+            let s = "../";
+            for (let i = 1; i < root; i++) {
+                s += "../";
+            }
+
+            return s;
+        }
+
+        return root ? "./" : "../";
+    }
+
     export function parseFirstQuery(id: string | null | undefined): {
         id?: string;
         year?: number;
