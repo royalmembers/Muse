@@ -794,7 +794,7 @@ var PageCtrl;
                         series = works.series || [];
                         {
                             linkEle = document.createElement("a");
-                            linkEle.className = "link-long-button";
+                            linkEle.className = sel ? "link-long-button" : "link-long-button state-sel";
                             linkEle.href = "./";
                             linkEle.innerText = PageCtrl.getString("generalPaintings");
                             seriesMenu.appendChild(linkEle);
@@ -808,7 +808,7 @@ var PageCtrl;
                             if (!item || item.disable || !item.name || !item.id)
                                 continue;
                             linkEle = document.createElement("a");
-                            linkEle.className = "link-long-button";
+                            linkEle.className = sel === item ? "link-long-button state-sel" : "link-long-button";
                             linkEle.href = "./?" + item.id;
                             if (item.icon) {
                                 icon = document.createElement("img");

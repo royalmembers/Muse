@@ -212,6 +212,9 @@ section.x-container-pics span#section-works-more:active > span:first-child + img
 section.x-container-pics span#section-works-more:active > span:first-child + img {
     width: 8px; height: 8px; opacity: 0.8;
 }
+section > a.link-long-button.state-sel {
+    background-color: transparent; border-color: rgba(128,128,128,0.3) rgba(128,128,128,0.3) rgba(128,128,128,0.4) rgba(128,128,128,0.3);
+}
 span.x-text-cap-small {
     font-variant-caps: small-caps;
 }

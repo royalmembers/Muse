@@ -256,7 +256,7 @@ namespace PageCtrl {
         const series = works.series || [];
         {
             const linkEle = document.createElement("a");
-            linkEle.className = "link-long-button";
+            linkEle.className = sel ? "link-long-button" : "link-long-button state-sel";
             linkEle.href = "./";
             linkEle.innerText = getString("generalPaintings");
             seriesMenu.appendChild(linkEle);
@@ -269,7 +269,7 @@ namespace PageCtrl {
             const item = series[i];
             if (!item || item.disable || !item.name || !item.id) continue;
             const linkEle = document.createElement("a");
-            linkEle.className = "link-long-button";
+            linkEle.className = sel === item ? "link-long-button state-sel" : "link-long-button";
             linkEle.href = "./?" + item.id;
             if (item.icon) {
                 const icon = document.createElement("img");
