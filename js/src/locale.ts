@@ -19,6 +19,10 @@ namespace PageCtrl {
         "generalPaintings#zh": "常规",
         worksBy: "{1} by {0}",
         "worksBy#zh": "{0}的{1}",
+        workMorOwMeow: "摸凹喵",
+        "workMorOwMeow#en": "Mor-Ow Meow",
+        "workMorOwMeow#fr": "Moh-Aou Miaou",
+        "workMorOwMeow#ko": "모오 미야오",
     }
 
     export function getString(key: keyof typeof strings) {

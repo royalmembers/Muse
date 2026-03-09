@@ -39,9 +39,57 @@ var PageCtrl;
 (function (PageCtrl) {
     function initBlog() {
         PageCtrl.initMenu("blog");
-        DeepX.MdBlogs.render("blog_content", "./config.json", { title: true });
+        DeepX.MdBlogs.render("blog_content", "./config.json", {
+            title: true,
+            onselect: function (ev) {
+                if (!ev)
+                    return;
+                var article = ev.article;
+                var model = ev.children;
+                if (!article || !model)
+                    return;
+                var arr = { end: [] };
+                if (article.hasKeyword("mor-ow-meow"))
+                    appendMorOwMeowNotice(arr, article);
+                if (arr.end.length > 0)
+                    ev.insertChildren("end", {
+                        tagName: "section",
+                        styleRefs: "x-part-blog-related",
+                        children: arr.end
+                    });
+            },
+        });
     }
     PageCtrl.initBlog = initBlog;
+    function appendMorOwMeowNotice(arr, article) {
+        arr.end.push({
+            tagName: "p",
+            children: [{
+                    tagName: "span",
+                    children: "注：摸凹喵（Mor-Ow Meow）及其形象，连同猫头鱼尾兽图标，都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品均受知识产权保护，版权所有。",
+                }]
+        }, {
+            tagName: "ul",
+            styleRefs: "link-tile-compact",
+            children: [{
+                    tagName: "li",
+                    children: [{
+                            tagName: "a",
+                            props: {
+                                title: "《摸凹喵》画作集",
+                                href: "../paintings/?mao"
+                            },
+                            children: [{
+                                    tagName: "span",
+                                    children: "\u300A".concat(PageCtrl.getString("workMorOwMeow"), "\u300B"),
+                                }, {
+                                    tagName: "span",
+                                    children: "查看完整画作集",
+                                }],
+                        }],
+                }],
+        });
+    }
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
 (function (PageCtrl) {
@@ -354,7 +402,7 @@ var PageCtrl;
         }, {
             id: "blog",
             name: "Blog",
-            "name#zh": "朋友圈",
+            "name#zh": "博客",
             disable: true,
         }];
     function getAvatarUrl(item) {
@@ -447,6 +495,7 @@ var PageCtrl;
         DeepX.MdBlogs.setElementText("title-about", "about");
         DeepX.MdBlogs.setElementText("title-videos", "videos");
         DeepX.MdBlogs.setElementText("title-links", "otherLinks");
+        DeepX.MdBlogs.setElementText("button-blog", "blog");
         PageCtrl.setElementProp("link-certs", null, "certHonors");
         PageCtrl.setElementProp("title-works-series", null, "series");
         PageCtrl.setElementProp("title-works-common", null, "generalPaintings");
@@ -476,6 +525,10 @@ var PageCtrl;
         "generalPaintings#zh": "常规",
         worksBy: "{1} by {0}",
         "worksBy#zh": "{0}的{1}",
+        workMorOwMeow: "摸凹喵",
+        "workMorOwMeow#en": "Mor-Ow Meow",
+        "workMorOwMeow#fr": "Moh-Aou Miaou",
+        "workMorOwMeow#ko": "모오 미야오",
     };
     function getString(key) {
         return DeepX.MdBlogs.getLocaleProp(strings, key);

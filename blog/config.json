@@ -1,8 +1,27 @@
 ﻿{
     "$schema": "https://cdn.jsdelivr.net/npm/hje@2.4.6/dist/mdblogs.schema.json",
-    "name": "Muse Blog",
-    "name#zh": "Muse 朋友圈",
+    "name": "ᥫᩣMuse Blog",
+    "name#zh": "ᥫᩣMuse 博客",
     "blog": [
+        {
+            "name": "海口沙滩",
+            "name#en": "Beach in Haikou",
+            "dir": "haikou",
+            "file": true,
+            "keywords": ["trip"],
+            "date": "20250512",
+            "location": "海口",
+            "end": true,
+            "related": [
+                {
+                    "name": "来自 Daddy 的文章《海口闪电游》",
+                    "url": "https://weibo.com/ttarticle/p/show?id=2309405165275912994918"
+                }
+            ],
+            "notes": [
+                "文章中的照片由 Kingcean Tuan 拍摄。"
+            ]
+        },
         {
             "name": "朝鲜王朝",
             "name#en": "Korea Dynasty",
@@ -14,13 +33,13 @@
             "end": true,
             "related": [
                 {
-                    "name": "来自 Daddy 的《朝鲜王朝》",
-                    "url": "https://card.weibo.com/article/v5/editor#/history/3516797"
+                    "name": "来自 Daddy 的文章《朝鲜王朝》",
+                    "url": "https://weibo.com/ttarticle/p/show?id=2309405169776405381633"
                 }
             ],
             "notes": [
                 "本文包含部分虚构情节。",
-                "文章中的照片由 Kingcean Tuan 拍摄。"
+                "文章中的照片分别由 Muse 和 Kingcean Tuan 拍摄。"
             ]
         },
         {
@@ -34,8 +53,8 @@
             "end": true,
             "related": [
                 {
-                    "name": "来自 Daddy 的《雍和宫》",
-                    "url": "https://card.weibo.com/article/v5/editor#/history/3538230" 
+                    "name": "来自 Daddy 的文章《雍和宫》",
+                    "url": "https://weibo.com/ttarticle/p/show?id=2309405181733422366755" 
                 }
             ],
             "notes": [
@@ -51,10 +70,7 @@
             "keywords": ["mor-ow-meow"],
             "date": "20260131",
             "location": "上海",
-            "end": true,
-            "notes": [
-                "摸凹喵及其形象，连同猫头鱼尾兽图标都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品受知识产权保护，版权所有。"
-            ]
+            "end": true
         },
         {
             "name": "成都",
@@ -65,8 +81,13 @@
             "date": "20260208",
             "location": "成都",
             "end": true,
+            "related": [
+                {
+                    "name": "来自 Daddy 的文章《成都》",
+                    "url": "https://weibo.com/ttarticle/p/show?id=2309405264019283116204"
+                }
+            ],
             "notes": [
-                "摸凹喵及其形象，连同猫头鱼尾兽图标都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品受知识产权保护，版权所有。",
                 "文章中的照片由 Kingcean Tuan 拍摄。"
             ]
         },
@@ -79,7 +100,6 @@
             "location": "南昌",
             "end": true,
             "notes": [
-                "摸凹喵及其形象，连同猫头鱼尾兽图标都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品受知识产权保护，版权所有。",
                 "文章中的照片由 Kingcean Tuan 拍摄。"
             ]
         },
@@ -92,15 +112,15 @@
             "file": true,
             "keywords": ["mor-ow-meow"],
             "date": "20260308",
-            "end": true,
-            "notes": [
-                "摸凹喵及其形象，连同猫头鱼尾兽图标都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品受知识产权保护，版权所有。"
-            ]
+            "end": true
         }
     ],
     "links": [
     ],
     "redir": {
+    },
+    "options": {
+        "disableName": true
     },
     "$defs": {
         "contributors": [

@@ -33,9 +33,9 @@ namespace PageCtrl {
     }, {
         id: "blog",
         name: "Blog",
-        "name#zh": "朋友圈",
+        "name#zh": "博客",
         disable: true,
-    }]
+    }];
 
     function getAvatarUrl(item: IAvatarInfo) {
         let url = item.url;
@@ -117,6 +117,7 @@ namespace PageCtrl {
         DeepX.MdBlogs.setElementText("title-about", "about");
         DeepX.MdBlogs.setElementText("title-videos", "videos");
         DeepX.MdBlogs.setElementText("title-links", "otherLinks");
+        DeepX.MdBlogs.setElementText("button-blog", "blog");
         setElementProp("link-certs", null, "certHonors");
         setElementProp("title-works-series", null, "series");
         setElementProp("title-works-common", null, "generalPaintings");

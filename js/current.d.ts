@@ -1,4 +1,7 @@
 declare namespace PageCtrl {
+    interface IArticleRenderExtension {
+        end: Hje.DescriptionContract[];
+    }
     function initBlog(): void;
 }
 declare namespace PageCtrl {
@@ -60,6 +63,10 @@ declare namespace PageCtrl {
         "generalPaintings#zh": string;
         worksBy: string;
         "worksBy#zh": string;
+        workMorOwMeow: string;
+        "workMorOwMeow#en": string;
+        "workMorOwMeow#fr": string;
+        "workMorOwMeow#ko": string;
     };
     export function getString(key: keyof typeof strings): string;
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings): void;
