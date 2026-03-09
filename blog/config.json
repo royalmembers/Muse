@@ -11,15 +11,16 @@
             "keywords": ["trip"],
             "date": "20250512",
             "location": "海口",
+            "author": {
+                "author": "Muse Tuan",
+                "photographer": "Kingcean Tuan"
+            },
             "end": true,
             "related": [
                 {
                     "name": "来自 Daddy 的文章《海口闪电游》",
                     "url": "https://weibo.com/ttarticle/p/show?id=2309405165275912994918"
                 }
-            ],
-            "notes": [
-                "文章中的照片由 Kingcean Tuan 拍摄。"
             ]
         },
         {
@@ -30,6 +31,10 @@
             "keywords": ["trip"],
             "date": "20250524",
             "location": "首尔",
+            "author": {
+                "author": "Muse Tuan",
+                "photographer": "Kingcean Tuan"
+            },
             "end": true,
             "related": [
                 {
@@ -38,8 +43,7 @@
                 }
             ],
             "notes": [
-                "本文包含部分虚构情节。",
-                "文章中的照片分别由 Muse 和 Kingcean Tuan 拍摄。"
+                "本文包含部分虚构情节。"
             ]
         },
         {
@@ -50,6 +54,10 @@
             "keywords": ["trip"],
             "date": "20250628",
             "location": "北京",
+            "author": {
+                "author": "Muse Tuan",
+                "photographer": ["Kingcean Tuan", "Muse Tuan"]
+            },
             "end": true,
             "related": [
                 {
@@ -58,8 +66,7 @@
                 }
             ],
             "notes": [
-                "本文包含部分虚构情节。",
-                "文章中的照片由 Kingcean Tuan 拍摄。"
+                "本文包含部分虚构情节。"
             ]
         },
         {
@@ -70,15 +77,15 @@
             "keywords": ["trip"],
             "date": "20250721",
             "location": "青岛",
+            "author": {
+                "author": "Muse Tuan"
+            },
             "end": true,
             "related": [
                 {
                     "name": "来自 Daddy 的文章《青岛》",
                     "url": "https://weibo.com/ttarticle/p/show?id=2309405190791697400122"
                 }
-            ],
-            "notes": [
-                "文章中的照片由 Kingcean Tuan 拍摄。"
             ]
         },
         {
@@ -89,6 +96,9 @@
             "keywords": ["mor-ow-meow"],
             "date": "20260131",
             "location": "上海",
+            "author": {
+                "painter": "Muse Tuan"
+            },
             "end": true
         },
         {
@@ -99,15 +109,17 @@
             "keywords": ["trip", "mor-ow-meow"],
             "date": "20260208",
             "location": "成都",
+            "author": {
+                "author": "Muse Tuan",
+                "photographer": "Kingcean Tuan",
+                "painter": "Muse Tuan"
+            },
             "end": true,
             "related": [
                 {
                     "name": "来自 Daddy 的文章《成都》",
                     "url": "https://weibo.com/ttarticle/p/show?id=2309405264019283116204"
                 }
-            ],
-            "notes": [
-                "文章中的照片由 Kingcean Tuan 拍摄。"
             ]
         },
         {
@@ -118,9 +130,11 @@
             "date": "20260224",
             "location": "南昌",
             "end": true,
-            "notes": [
-                "文章中的照片由 Kingcean Tuan 拍摄。"
-            ]
+            "author": {
+                "author": "Muse Tuan",
+                "photographer": "Kingcean Tuan",
+                "painter": "Muse Tuan"
+            }
         },
         {
             "name": "古装和民族服饰",
@@ -131,6 +145,9 @@
             "file": true,
             "keywords": ["mor-ow-meow"],
             "date": "20260308",
+            "author": {
+                "painter": "Muse Tuan"
+            },
             "end": true
         }
     ],
@@ -143,7 +160,8 @@
     },
     "$defs": {
         "contributors": [
-            { "name": "Muse Tuan", "url": "https://musetuan.com" }
+            { "name": "Muse Tuan", "url": "https://musetuan.com" },
+            { "name": "Kingcean Tuan", "url": "https://kingcean.github.io" }
         ],
         "keywords": [
             { "name": "Trip", "name#zh": "旅行", "value": "trip" },
