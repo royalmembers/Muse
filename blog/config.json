@@ -1,0 +1,115 @@
+﻿{
+    "$schema": "https://cdn.jsdelivr.net/npm/hje@2.4.6/dist/mdblogs.schema.json",
+    "name": "Muse Blog",
+    "name#zh": "Muse 朋友圈",
+    "blog": [
+        {
+            "name": "朝鲜王朝",
+            "name#en": "Korea Dynasty",
+            "dir": "korea",
+            "file": true,
+            "keywords": ["trip"],
+            "date": "20250524",
+            "location": "首尔",
+            "end": true,
+            "related": [
+                {
+                    "name": "来自 Daddy 的《朝鲜王朝》",
+                    "url": "https://card.weibo.com/article/v5/editor#/history/3516797"
+                }
+            ],
+            "notes": [
+                "本文包含部分虚构情节。",
+                "文章中的照片由 Kingcean Tuan 拍摄。"
+            ]
+        },
+        {
+            "name": "雍和宫",
+            "name#en": "The Lama Temple",
+            "dir": "yonghe",
+            "file": true,
+            "keywords": ["trip"],
+            "date": "20250628",
+            "location": "北京",
+            "end": true,
+            "related": [
+                {
+                    "name": "来自 Daddy 的《雍和宫》",
+                    "url": "https://card.weibo.com/article/v5/editor#/history/3538230" 
+                }
+            ],
+            "notes": [
+                "本文包含部分虚构情节。",
+                "文章中的照片由 Kingcean Tuan 拍摄。"
+            ]
+        },
+        {
+            "name": "摸凹喵来啦",
+            "name#en": "Introduce Mor-Ow Meow",
+            "dir": "mao",
+            "file": true,
+            "keywords": ["mor-ow-meow"],
+            "date": "20260131",
+            "location": "上海",
+            "end": true,
+            "notes": [
+                "摸凹喵及其形象，连同猫头鱼尾兽图标都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品受知识产权保护，版权所有。"
+            ]
+        },
+        {
+            "name": "成都",
+            "name#en": "Chengdu",
+            "dir": "chengdu",
+            "file": true,
+            "keywords": ["trip", "mor-ow-meow"],
+            "date": "20260208",
+            "location": "成都",
+            "end": true,
+            "notes": [
+                "摸凹喵及其形象，连同猫头鱼尾兽图标都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品受知识产权保护，版权所有。",
+                "文章中的照片由 Kingcean Tuan 拍摄。"
+            ]
+        },
+        {
+            "name": "马年快乐",
+            "dir": "horse",
+            "file": true,
+            "keywords": ["trip", "mor-ow-meow"],
+            "date": "20260224",
+            "location": "南昌",
+            "end": true,
+            "notes": [
+                "摸凹喵及其形象，连同猫头鱼尾兽图标都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品受知识产权保护，版权所有。",
+                "文章中的照片由 Kingcean Tuan 拍摄。"
+            ]
+        },
+        {
+            "name": "古装和民族",
+            "name#en": "Ancient Costume",
+            "subtitle": "摸凹喵",
+            "subtitle#en": "Mor-Ow Meow",
+            "dir": "costume",
+            "file": true,
+            "keywords": ["mor-ow-meow"],
+            "date": "20260308",
+            "end": true,
+            "notes": [
+                "摸凹喵及其形象，连同猫头鱼尾兽图标都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品受知识产权保护，版权所有。"
+            ]
+        }
+    ],
+    "links": [
+    ],
+    "redir": {
+    },
+    "$defs": {
+        "contributors": [
+            { "name": "Muse Tuan", "url": "https://musetuan.com" }
+        ],
+        "keywords": [
+            { "name": "Trip", "name#zh": "旅行", "value": "trip" },
+            { "name": "Mor-Ow Meow", "name#zh": "摸凹喵", "name#fr": "Moh-Aou Miaou", "name#ko": "모오 미야오", "value": "mor-ow-meow" },
+            { "name": "Intro", "name#zh": "介绍", "value": "intro" }
+        ]
+    }
+}

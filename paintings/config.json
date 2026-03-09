@@ -215,14 +215,14 @@
         "keywords": ["神兽"]
     }, {
         "id": "mao-260208-p2",
-        "name": "古装摸凹喵",
+        "name": "蝴蝶翩翩古装摸凹喵",
         "year": 2026,
         "month": 2,
         "day": 8,
         "keywords": ["古装"]
     }, {
         "id": "mao-260208-p1",
-        "name": "古装摸凹喵",
+        "name": "大红华丽古装摸凹喵",
         "year": 2026,
         "month": 2,
         "day": 8,
@@ -289,6 +289,8 @@
         "keywords": ["动物装扮"]
     }, {
         "id": "mao-260205-p2",
+        "name": "花园中的摸凹喵",
+        "name#en": "Mor-Ow Meow in the Garden",
         "year": 2026,
         "month": 2,
         "day": 5
@@ -328,6 +330,8 @@
         "day": 2
     }, {
         "id": "mao-26-01-p-09",
+        "name": "摸凹喵骑车",
+        "name#en": "Mo-Ow Meow is Riding",
         "year": 2026,
         "month": 1
     }, {

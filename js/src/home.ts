@@ -26,10 +26,15 @@ namespace PageCtrl {
         id: "certs",
         name: "Honors",
         "name#zh": "荣誉",
-    },{
+    }, {
         id: "paintings",
         name: "Paintings",
         "name#zh": "画作",
+    }, {
+        id: "blog",
+        name: "Blog",
+        "name#zh": "朋友圈",
+        disable: true,
     }]
 
     function getAvatarUrl(item: IAvatarInfo) {
@@ -51,7 +56,8 @@ namespace PageCtrl {
     }
 
     export function initMenu(id?: (typeof menu)[number]["id"] | boolean) {
-        const container = ele("top-menu")!;
+        const container = ele("top-menu");
+        if (!container) return;
         container.innerHTML = "";
         const rela = id === true ? "./" : "../";
         const sel = typeof id === "string" ? id : undefined;

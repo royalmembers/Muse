@@ -37,6 +37,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var PageCtrl;
 (function (PageCtrl) {
+    function initBlog() {
+        PageCtrl.initMenu("blog");
+        DeepX.MdBlogs.render("blog_content", "./config.json", { title: true });
+    }
+    PageCtrl.initBlog = initBlog;
+})(PageCtrl || (PageCtrl = {}));
+var PageCtrl;
+(function (PageCtrl) {
     var certs = [{
             id: "kawai",
             name: "Kawai 亚洲钢琴大赛",
@@ -343,6 +351,11 @@ var PageCtrl;
             id: "paintings",
             name: "Paintings",
             "name#zh": "画作",
+        }, {
+            id: "blog",
+            name: "Blog",
+            "name#zh": "朋友圈",
+            disable: true,
         }];
     function getAvatarUrl(item) {
         var url = item.url;
@@ -365,6 +378,8 @@ var PageCtrl;
     }
     function initMenu(id) {
         var container = PageCtrl.ele("top-menu");
+        if (!container)
+            return;
         container.innerHTML = "";
         var rela = id === true ? "./" : "../";
         var sel = typeof id === "string" ? id : undefined;
