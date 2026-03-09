@@ -63,6 +63,25 @@
             ]
         },
         {
+            "name": "青岛",
+            "name#en": "Tsingtao",
+            "dir": "tsingtao",
+            "file": true,
+            "keywords": ["trip"],
+            "date": "20250721",
+            "location": "青岛",
+            "end": true,
+            "related": [
+                {
+                    "name": "来自 Daddy 的文章《青岛》",
+                    "url": "https://weibo.com/ttarticle/p/show?id=2309405190791697400122"
+                }
+            ],
+            "notes": [
+                "文章中的照片由 Kingcean Tuan 拍摄。"
+            ]
+        },
+        {
             "name": "摸凹喵诞生",
             "name#en": "Mor-Ow Meow Borns",
             "dir": "mao",
@@ -104,7 +123,7 @@
             ]
         },
         {
-            "name": "古装和民族",
+            "name": "古装和民族服饰",
             "name#en": "Ancient Costume",
             "subtitle": "摸凹喵",
             "subtitle#en": "Mor-Ow Meow",
