@@ -23,6 +23,8 @@ namespace PageCtrl {
         "workMorOwMeow#en": "Mor-Ow Meow",
         "workMorOwMeow#fr": "Moh-Aou Miaou",
         "workMorOwMeow#ko": "모오 미야오",
+        seeSeriesWorks: "See all works of the serie",
+        "seeSeriesWorks#zh": "查看系列完整画作集",
     }
 
     export function getString(key: keyof typeof strings) {

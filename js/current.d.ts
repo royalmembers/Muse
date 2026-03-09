@@ -67,6 +67,8 @@ declare namespace PageCtrl {
         "workMorOwMeow#en": string;
         "workMorOwMeow#fr": string;
         "workMorOwMeow#ko": string;
+        seeSeriesWorks: string;
+        "seeSeriesWorks#zh": string;
     };
     export function getString(key: keyof typeof strings): string;
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings): void;

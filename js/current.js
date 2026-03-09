@@ -37,6 +37,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var PageCtrl;
 (function (PageCtrl) {
+    var seriesMap = {
+        "mor-ow-meow": {
+            name: "workMorOwMeow",
+            url: "../paintings/?mao",
+            logo: "../images/logos/mao-2026.png",
+        },
+    };
     function initBlog() {
         PageCtrl.initMenu("blog");
         DeepX.MdBlogs.render("blog_content", "./config.json", {
@@ -50,7 +57,7 @@ var PageCtrl;
                     return;
                 var arr = { end: [] };
                 if (article.hasKeyword("mor-ow-meow"))
-                    appendMorOwMeowNotice(arr, article);
+                    appendSeriesNotice("mor-ow-meow", arr, article);
                 if (arr.end.length > 0)
                     ev.insertChildren("end", {
                         tagName: "section",
@@ -61,12 +68,16 @@ var PageCtrl;
         });
     }
     PageCtrl.initBlog = initBlog;
-    function appendMorOwMeowNotice(arr, article) {
+    function appendSeriesNotice(key, arr, article) {
+        var series = seriesMap[key || ""];
+        if (!(series === null || series === void 0 ? void 0 : series.name))
+            return;
+        var name = PageCtrl.getString(series.name);
         arr.end.push({
-            tagName: "p",
+            tagName: "h2",
             children: [{
                     tagName: "span",
-                    children: "注：摸凹喵（Mor-Ow Meow）及其形象，连同猫头鱼尾兽图标，都是 Muse 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生产品均受知识产权保护，版权所有。",
+                    children: name,
                 }]
         }, {
             tagName: "ul",
@@ -76,18 +87,28 @@ var PageCtrl;
                     children: [{
                             tagName: "a",
                             props: {
-                                title: "《摸凹喵》画作集",
-                                href: "../paintings/?mao"
+                                title: "".concat(PageCtrl.getString("seeSeriesWorks"), " - ").concat(name),
+                                href: series.url
                             },
                             children: [{
                                     tagName: "span",
-                                    children: "\u300A".concat(PageCtrl.getString("workMorOwMeow"), "\u300B"),
-                                }, {
-                                    tagName: "span",
-                                    children: "查看完整画作集",
+                                    children: PageCtrl.getString("seeSeriesWorks"),
                                 }],
                         }],
                 }],
+        }, {
+            tagName: "div",
+            styleRefs: "x-part-info",
+            children: [{
+                    tagName: "img",
+                    props: {
+                        src: series.logo,
+                        title: name
+                    }
+                }, {
+                    tagName: "span",
+                    children: "注：摸凹喵（Mor-Ow Meow）及其形象，连同猫头鱼尾兽图标，都是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有。",
+                }]
         });
     }
 })(PageCtrl || (PageCtrl = {}));
@@ -529,6 +550,8 @@ var PageCtrl;
         "workMorOwMeow#en": "Mor-Ow Meow",
         "workMorOwMeow#fr": "Moh-Aou Miaou",
         "workMorOwMeow#ko": "모오 미야오",
+        seeSeriesWorks: "See all works of the serie",
+        "seeSeriesWorks#zh": "查看系列完整画作集",
     };
     function getString(key) {
         return DeepX.MdBlogs.getLocaleProp(strings, key);

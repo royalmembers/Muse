@@ -336,6 +336,8 @@
         "month": 1
     }, {
         "id": "mao-26-01-p-08",
+        "name": "摸凹喵爱吃鱼",
+        "name#en": "Mor-Ow Meow Likes Fish",
         "year": 2026,
         "month": 1
     }, {
@@ -358,10 +360,12 @@
         "month": 1
     }, {
         "id": "mao-26-01-p-04",
+        "name": "咧嘴笑摸凹喵",
         "year": 2026,
         "month": 1
     }, {
         "id": "mao-26-01-p-03",
+        "name": "居家日常摸凹喵",
         "year": 2026,
         "month": 1
     }, {
