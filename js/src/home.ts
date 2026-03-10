@@ -62,7 +62,8 @@ namespace PageCtrl {
         const rela = id === true ? "./" : "../";
         const sel = typeof id === "string" ? id : undefined;
         menu.forEach(ele => {
-            if (!ele || (ele as any).disable || !ele.name || !ele.id) return;
+            if (!ele || !ele.name || !ele.id) return;
+            if ((ele as any).disable && ele.id !== sel) return;
             const item = document.createElement("li");
             const link = document.createElement("a");
             container.appendChild(item);

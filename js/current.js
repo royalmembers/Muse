@@ -453,7 +453,9 @@ var PageCtrl;
         var rela = id === true ? "./" : "../";
         var sel = typeof id === "string" ? id : undefined;
         menu.forEach(function (ele) {
-            if (!ele || ele.disable || !ele.name || !ele.id)
+            if (!ele || !ele.name || !ele.id)
+                return;
+            if (ele.disable && ele.id !== sel)
                 return;
             var item = document.createElement("li");
             var link = document.createElement("a");
