@@ -17,8 +17,10 @@
             },
             "end": true,
             "related": [
+                "关联文章",
                 {
-                    "name": "来自 Daddy 的文章《海口闪电游》",
+                    "name": "海口闪电游",
+                    "subtitle": "Daddy 的微博文章",
                     "url": "https://weibo.com/ttarticle/p/show?id=2309405165275912994918"
                 }
             ]
@@ -37,8 +39,10 @@
             },
             "end": true,
             "related": [
+                "关联文章",
                 {
-                    "name": "来自 Daddy 的文章《朝鲜王朝》",
+                    "name": "朝鲜王朝",
+                    "subtitle": "Daddy 的微博文章",
                     "url": "https://weibo.com/ttarticle/p/show?id=2309405169776405381633"
                 }
             ],
@@ -60,8 +64,10 @@
             },
             "end": true,
             "related": [
+                "关联文章",
                 {
-                    "name": "来自 Daddy 的文章《雍和宫》",
+                    "name": "雍和宫",
+                    "subtitle": "Daddy 的微博文章",
                     "url": "https://weibo.com/ttarticle/p/show?id=2309405181733422366755" 
                 }
             ],
@@ -82,8 +88,10 @@
             },
             "end": true,
             "related": [
+                "关联文章",
                 {
-                    "name": "来自 Daddy 的文章《青岛》",
+                    "name": "青岛",
+                    "subtitle": "Daddy 的微博文章",
                     "url": "https://weibo.com/ttarticle/p/show?id=2309405190791697400122"
                 }
             ]
@@ -116,8 +124,10 @@
             },
             "end": true,
             "related": [
+                "关联文章",
                 {
-                    "name": "来自 Daddy 的文章《成都》",
+                    "name": "成都",
+                    "subtitle": "Daddy 的微博文章",
                     "url": "https://weibo.com/ttarticle/p/show?id=2309405264019283116204"
                 }
             ]
