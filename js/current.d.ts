@@ -28,17 +28,11 @@ declare namespace PageCtrl {
         month: number;
         url?: string;
     }
-    const menu: ({
+    const menu: {
         id: string;
         name: string;
         "name#zh": string;
-        disable?: undefined;
-    } | {
-        id: string;
-        name: string;
-        "name#zh": string;
-        disable: boolean;
-    })[];
+    }[];
     export function initMenu(id?: (typeof menu)[number]["id"] | boolean): void;
     export function initHome(): void;
     export {};

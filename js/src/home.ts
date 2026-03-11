@@ -34,7 +34,6 @@ namespace PageCtrl {
         id: "blog",
         name: "Blog",
         "name#zh": "博客",
-        disable: true,
     }];
 
     function getAvatarUrl(item: IAvatarInfo) {
