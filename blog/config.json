@@ -107,7 +107,15 @@
             "author": {
                 "painter": "Muse Tuan"
             },
-            "end": true
+            "end": true,
+            "related": [
+                "转载",
+                {
+                    "name": "10岁小学生原创画作IP",
+                    "subtitle": "小红书",
+                    "url": "https://xhslink.com/o/cJ0YmOn4Ix"
+                }
+            ]
         },
         {
             "name": "成都",
