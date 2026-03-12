@@ -12,6 +12,7 @@ namespace PageCtrl {
         "subtitle-cap"?: "small" | "normal" | null;
         icon?: string;
         qr?: string;
+        blog?: string;
         year: number;
         ext?: string;
         ratio?: IImageRatio;
@@ -99,6 +100,59 @@ namespace PageCtrl {
 
     function seriesInPaging(paging: IPaintingPaging) {
         return paging.series || {} as IPaintingSeriesInfo;
+    }
+
+    async function seriesBlog(series: IPaintingSeriesInfo | undefined) {
+        const keyword = series?.blog;
+        if (!keyword) return undefined;
+        const articles = await loadBlogArticles();
+        if (!articles) return undefined;
+        return articles.blog()?.filter(ele => ele && ele.hasKeyword(keyword));
+    }
+
+    async function renderSeriesBLog(paging: IPaintingPaging) {
+        const articles = await seriesBlog(paging?.series);
+        const element = getContainerElement(paging, "blog");
+        if (!element) return;
+        element.innerHTML = "";
+        if (!articles || !articles.length) {
+            element.style.display = "none";
+            return;
+        }
+
+        element.style.display = "";
+        const title = document.createElement("h2");
+        title.innerText = getString('relatedBlog');
+        element.appendChild(title);
+        for (let i = 0; i < articles.length; i++) {
+            const article = articles[i];
+            const link = document.createElement("a");
+            link.className = "link-long-button";
+            link.href = `../blog/?${article.getRoutePath()}`;
+            let tips = article.getName();
+            {
+                const text = document.createElement("span");
+                text.innerText = tips;
+                link.appendChild(text);
+            }
+            let subtitle = article.getSubtitle();
+            if (subtitle) {
+                tips += `\n${subtitle}`;
+                const text = document.createElement("span");
+                text.innerText = subtitle;
+                link.appendChild(text);
+            }
+            {
+                const text = document.createElement("span");
+                tips += `\n${article.dateString}`;
+                text.innerText = article.dateString;
+                link.appendChild(text);
+            }
+            subtitle = article.getIntro();
+            if (subtitle) tips += `\n${subtitle}`;
+            link.title = tips;
+            element.appendChild(link);
+        }
     }
 
     export function hidePopupViewDelay() {
@@ -198,7 +252,7 @@ namespace PageCtrl {
         }
 
         if (imageSize) imageName += " (" + imageSize + ")";
-        imageEle.alt = imageName;
+        imageEle.alt = imageEle.title = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
             (ele("popup-view-img") as HTMLImageElement).src = sourceUrl;
@@ -231,18 +285,20 @@ namespace PageCtrl {
         if (sel) {
             if (sel.id) q = sel.id;
             const col = ((works as any as Record<string, IPaintingInfo[]>)[q] || []).filter(ele => !!ele && !ele.disable);
-            await renderPaintings(col, {
+            const paging = {
                 offset: 0,
                 size: 24,
                 path: "paintings",
                 series: sel
-            });
+            };
+            renderSeriesBLog(paging);
+            await renderPaintings(col, paging);
             if (sel.name && sel.name !== paintingsString) document.title = `${sel.name} - ${paintingsTitleString}`;
             const icon = getSeriesIcon(sel.icon);
             if (iconElement && icon) iconElement.href = icon;
             setElementProp("text-series", null, "series");
         } else {
-            await renderPaintings(works.common, {
+            const paging = {
                 offset: 0,
                 size: 24,
                 path: "paintings",
@@ -250,7 +306,9 @@ namespace PageCtrl {
                     thumb: true,
                     qr: "logos/qr-paintings.png",
                 } as IPaintingSeriesInfo,
-            });
+            };
+            renderSeriesBLog(paging);
+            await renderPaintings(works.common, paging);
             setElementProp("text-series", null, "generalPaintings");
         }
         const series = works.series || [];
@@ -296,7 +354,8 @@ namespace PageCtrl {
 
         initPopupView();
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
-        setElementProp("section-series-title", null, "all");
+        setElementProp("section-series-title", null, "picLibs");
+        setElementProp("text-works-greetings", null, "loveDrawing");
         const share = ele("section-share-title");
         if (share) {
             setElementProp(share, null, "share");

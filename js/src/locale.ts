@@ -15,8 +15,12 @@ namespace PageCtrl {
         "dateToMonth#zh": "YYYY年MM月",
         certHonors: "Honors",
         "certHonors#zh": "小小荣誉",
+        picLibs: "All picture libraries",
+        "picLibs#zh": "全部图集",
         generalPaintings: "General",
         "generalPaintings#zh": "常规",
+        relatedBlog: "Related blog articles",
+        "relatedBlog#zh": "相关博客",
         worksBy: "{1} by {0}",
         "worksBy#zh": "{0}的{1}",
         workMorOwMeow: "摸凹喵",
@@ -25,6 +29,8 @@ namespace PageCtrl {
         "workMorOwMeow#ko": "모오 미야오",
         seeSeriesWorks: "See all works of the serie",
         "seeSeriesWorks#zh": "查看系列完整画作集",
+        loveDrawing: "I love drawing and following are my works.",
+        "loveDrawing#zh": "我爱画画！以下是我的部分作品。",
     }
 
     export function getString(key: keyof typeof strings) {

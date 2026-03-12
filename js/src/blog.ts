@@ -3,6 +3,10 @@ export interface IArticleRenderExtension {
     end: Hje.DescriptionContract[]
 }
 
+const inner = {
+    articles: undefined as Promise<DeepX.MdBlogs.Articles> | undefined,
+};
+
 const seriesMap = {
     "mor-ow-meow": {
         name: "workMorOwMeow" as const,
@@ -11,9 +15,15 @@ const seriesMap = {
     },
 };
 
-export function initBlog() {
-    initMenu("blog");
-    DeepX.MdBlogs.render("blog_content", "./config.json", {
+export function loadBlogArticles(root?: boolean | number) {
+    if (!inner.articles)
+        inner.articles = DeepX.MdBlogs.fetchArticles(`${rootRela(root)}blog/config.json`);
+    return inner.articles;
+}
+
+export async function renderBlog(element: string | HTMLElement, root?: boolean | number) {
+    const articles = await loadBlogArticles(root);
+    DeepX.MdBlogs.render(element, articles, {
         title: true,
         onselect(ev) {
             if (!ev) return;
@@ -29,6 +39,11 @@ export function initBlog() {
             });
         },
     });
+}
+
+export function initBlog() {
+    initMenu("blog");
+    renderBlog("blog_content");
 }
 
 function appendSeriesNotice(key: keyof typeof seriesMap, arr: IArticleRenderExtension, article: DeepX.MdBlogs.ArticleInfo) {

@@ -2,6 +2,8 @@ declare namespace PageCtrl {
     interface IArticleRenderExtension {
         end: Hje.DescriptionContract[];
     }
+    function loadBlogArticles(root?: boolean | number): Promise<DeepX.MdBlogs.Articles>;
+    function renderBlog(element: string | HTMLElement, root?: boolean | number): Promise<void>;
     function initBlog(): void;
 }
 declare namespace PageCtrl {
@@ -53,8 +55,12 @@ declare namespace PageCtrl {
         "dateToMonth#zh": string;
         certHonors: string;
         "certHonors#zh": string;
+        picLibs: string;
+        "picLibs#zh": string;
         generalPaintings: string;
         "generalPaintings#zh": string;
+        relatedBlog: string;
+        "relatedBlog#zh": string;
         worksBy: string;
         "worksBy#zh": string;
         workMorOwMeow: string;
@@ -63,6 +69,8 @@ declare namespace PageCtrl {
         "workMorOwMeow#ko": string;
         seeSeriesWorks: string;
         "seeSeriesWorks#zh": string;
+        loveDrawing: string;
+        "loveDrawing#zh": string;
     };
     export function getString(key: keyof typeof strings): string;
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings): void;
@@ -81,6 +89,7 @@ declare namespace PageCtrl {
         "subtitle-cap"?: "small" | "normal" | null;
         icon?: string;
         qr?: string;
+        blog?: string;
         year: number;
         ext?: string;
         ratio?: IImageRatio;

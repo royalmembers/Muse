@@ -88,7 +88,7 @@ declare namespace DeepX.MdBlogs {
         getName(options?: ILocalePropOptions<string>): any;
         getDescription(optional?: ILocalePropOptions<string>): any;
         home(options?: IArticleLocaleOptions): ArticleInfo;
-        blogs(options?: IArticleLocaleOptions): ArticleInfo[];
+        blog(options?: IArticleLocaleOptions): ArticleInfo[];
         docs(options?: IArticleLocaleOptions): (string | ArticleInfo)[];
         hiddenArticles(options?: IArticleLocaleOptions): ArticleInfo[];
         links(options?: {

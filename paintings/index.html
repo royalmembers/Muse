@@ -15,6 +15,9 @@
     section.x-main-container {
         margin-bottom: 100px;
     }
+    section span#text-works-greetings {
+        color: #999; cursor: default; user-select: none;
+    }
     section.x-bg-outstanding.x-zone-hl > h2 > img, section.x-bg-outstanding.x-zone-hl > h2 > span {
         vertical-align: middle;
     }
@@ -41,6 +44,18 @@
     }
     section.x-part-panel > h2 > img, section.x-part-panel > h2 > span {
         vertical-align: middle;
+    }
+    section#section-works-blog {
+        border-top: 1px solid #333;
+    }
+    section#section-works-blog > a.link-long-button, section#section-works-blog > a.link-long-button:visited {
+        font-size: 16px; padding: 9px 24px;
+    }
+    section#section-works-blog > a.link-long-button:hover {
+        padding: 9px 22px 9px 22px;
+    }
+    section#section-works-blog > a.link-long-button:active {
+        padding: 9px 24px;
     }
     section img#section-works-qr {
         width: 160px; height: 160px; border-radius: 4px; opacity: 0.9;
@@ -79,6 +94,10 @@
         </section>
 	</header>
     <section class="x-main-container" >
+        <section>
+            <span id="text-works-greetings">I love drawing and following are my works.</span>
+            <span> ❤</span>
+        </section>
         <section class="x-zone-hl layout-wide-full x-bg-outstanding">
             <h2>
                 <img id="section-works-title-icon" alt="Paintings" src="../images/logos/mspaint.png" /><span id="section-works-title">Paintings</span><span id="section-works-subtitle"></span>
@@ -92,6 +111,7 @@
                 <button id="section-works-more" class="x-button-more x-button-link" style="display: none; " ><span id="button-works-more">See more</span><img alt="See more" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/images/ele/down_pos_white.png" /></button>
             </div>
         </section>
+        <section id="section-works-blog" style="display: none" ></section>
         <section id="section-works-share" class="x-part-panel x-bg-emphasis">
             <h2><img alt="Share" src="../images/icons/share-w.png" /><span id="section-share-title">Share</span></h2>
             <div>
@@ -99,7 +119,7 @@
             </div>
         </section>
         <section id="section-series-title-container" class="x-zone-hl layout-wide-full x-bg-outstanding">
-            <h2 id="section-series-title">All</h2>
+            <h2 id="section-series-title">Libraries</h2>
         </section>
         <section id="section-series-container" >
 			<a href="./" class="link-long-button"><span>General</span></a>

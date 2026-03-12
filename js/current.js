@@ -37,6 +37,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var PageCtrl;
 (function (PageCtrl) {
+    var inner = {
+        articles: undefined,
+    };
     var seriesMap = {
         "mor-ow-meow": {
             name: "workMorOwMeow",
@@ -44,28 +47,49 @@ var PageCtrl;
             logo: "../images/logos/mao-2026.png",
         },
     };
+    function loadBlogArticles(root) {
+        if (!inner.articles)
+            inner.articles = DeepX.MdBlogs.fetchArticles("".concat(PageCtrl.rootRela(root), "blog/config.json"));
+        return inner.articles;
+    }
+    PageCtrl.loadBlogArticles = loadBlogArticles;
+    function renderBlog(element, root) {
+        return __awaiter(this, void 0, void 0, function () {
+            var articles;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, loadBlogArticles(root)];
+                    case 1:
+                        articles = _a.sent();
+                        DeepX.MdBlogs.render(element, articles, {
+                            title: true,
+                            onselect: function (ev) {
+                                if (!ev)
+                                    return;
+                                var article = ev.article;
+                                var model = ev.children;
+                                if (!article || !model)
+                                    return;
+                                var arr = { end: [] };
+                                if (article.hasKeyword("mor-ow-meow"))
+                                    appendSeriesNotice("mor-ow-meow", arr, article);
+                                if (arr.end.length > 0)
+                                    ev.insertChildren("end", {
+                                        tagName: "section",
+                                        styleRefs: "x-part-blog-related",
+                                        children: arr.end
+                                    });
+                            },
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    PageCtrl.renderBlog = renderBlog;
     function initBlog() {
         PageCtrl.initMenu("blog");
-        DeepX.MdBlogs.render("blog_content", "./config.json", {
-            title: true,
-            onselect: function (ev) {
-                if (!ev)
-                    return;
-                var article = ev.article;
-                var model = ev.children;
-                if (!article || !model)
-                    return;
-                var arr = { end: [] };
-                if (article.hasKeyword("mor-ow-meow"))
-                    appendSeriesNotice("mor-ow-meow", arr, article);
-                if (arr.end.length > 0)
-                    ev.insertChildren("end", {
-                        tagName: "section",
-                        styleRefs: "x-part-blog-related",
-                        children: arr.end
-                    });
-            },
-        });
+        renderBlog("blog_content");
     }
     PageCtrl.initBlog = initBlog;
     function appendSeriesNotice(key, arr, article) {
@@ -543,8 +567,12 @@ var PageCtrl;
         "dateToMonth#zh": "YYYY年MM月",
         certHonors: "Honors",
         "certHonors#zh": "小小荣誉",
+        picLibs: "All picture libraries",
+        "picLibs#zh": "全部图集",
         generalPaintings: "General",
         "generalPaintings#zh": "常规",
+        relatedBlog: "Related blog articles",
+        "relatedBlog#zh": "相关博客",
         worksBy: "{1} by {0}",
         "worksBy#zh": "{0}的{1}",
         workMorOwMeow: "摸凹喵",
@@ -553,6 +581,8 @@ var PageCtrl;
         "workMorOwMeow#ko": "모오 미야오",
         seeSeriesWorks: "See all works of the serie",
         "seeSeriesWorks#zh": "查看系列完整画作集",
+        loveDrawing: "I love drawing and following are my works.",
+        "loveDrawing#zh": "我爱画画！以下是我的部分作品。",
     };
     function getString(key) {
         return DeepX.MdBlogs.getLocaleProp(strings, key);
@@ -687,6 +717,81 @@ var PageCtrl;
     function seriesInPaging(paging) {
         return paging.series || {};
     }
+    function seriesBlog(series) {
+        return __awaiter(this, void 0, void 0, function () {
+            var keyword, articles;
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        keyword = series === null || series === void 0 ? void 0 : series.blog;
+                        if (!keyword)
+                            return [2 /*return*/, undefined];
+                        return [4 /*yield*/, PageCtrl.loadBlogArticles()];
+                    case 1:
+                        articles = _b.sent();
+                        if (!articles)
+                            return [2 /*return*/, undefined];
+                        return [2 /*return*/, (_a = articles.blog()) === null || _a === void 0 ? void 0 : _a.filter(function (ele) { return ele && ele.hasKeyword(keyword); })];
+                }
+            });
+        });
+    }
+    function renderSeriesBLog(paging) {
+        return __awaiter(this, void 0, void 0, function () {
+            var articles, element, title, i, article, link, tips, text, subtitle, text, text;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, seriesBlog(paging === null || paging === void 0 ? void 0 : paging.series)];
+                    case 1:
+                        articles = _a.sent();
+                        element = getContainerElement(paging, "blog");
+                        if (!element)
+                            return [2 /*return*/];
+                        element.innerHTML = "";
+                        if (!articles || !articles.length) {
+                            element.style.display = "none";
+                            return [2 /*return*/];
+                        }
+                        element.style.display = "";
+                        title = document.createElement("h2");
+                        title.innerText = PageCtrl.getString('relatedBlog');
+                        element.appendChild(title);
+                        for (i = 0; i < articles.length; i++) {
+                            article = articles[i];
+                            link = document.createElement("a");
+                            link.className = "link-long-button";
+                            link.href = "../blog/?".concat(article.getRoutePath());
+                            tips = article.getName();
+                            {
+                                text = document.createElement("span");
+                                text.innerText = tips;
+                                link.appendChild(text);
+                            }
+                            subtitle = article.getSubtitle();
+                            if (subtitle) {
+                                tips += "\n".concat(subtitle);
+                                text = document.createElement("span");
+                                text.innerText = subtitle;
+                                link.appendChild(text);
+                            }
+                            {
+                                text = document.createElement("span");
+                                tips += "\n".concat(article.dateString);
+                                text.innerText = article.dateString;
+                                link.appendChild(text);
+                            }
+                            subtitle = article.getIntro();
+                            if (subtitle)
+                                tips += "\n".concat(subtitle);
+                            link.title = tips;
+                            element.appendChild(link);
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
     function hidePopupViewDelay() {
         setTimeout(function () {
             hidePopupView();
@@ -808,7 +913,7 @@ var PageCtrl;
         }
         if (imageSize)
             imageName += " (" + imageSize + ")";
-        imageEle.alt = imageName;
+        imageEle.alt = imageEle.title = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
             PageCtrl.ele("popup-view-img").src = sourceUrl;
@@ -823,7 +928,7 @@ var PageCtrl;
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         return __awaiter(this, void 0, void 0, function () {
-            var ex_1, q, sel, seriesMenu, paintingsString, paintingsTitleString, iconElement, col, icon, series, linkEle, subtitle, i, item, linkEle, icon, spanEle, subtitle, subtitle2, share;
+            var ex_1, q, sel, seriesMenu, paintingsString, paintingsTitleString, iconElement, col, paging, icon, paging, series, linkEle, subtitle, i, item, linkEle, icon, spanEle, subtitle, subtitle2, share;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -854,12 +959,14 @@ var PageCtrl;
                         if (sel.id)
                             q = sel.id;
                         col = (works[q] || []).filter(function (ele) { return !!ele && !ele.disable; });
-                        return [4 /*yield*/, renderPaintings(col, {
-                                offset: 0,
-                                size: 24,
-                                path: "paintings",
-                                series: sel
-                            })];
+                        paging = {
+                            offset: 0,
+                            size: 24,
+                            path: "paintings",
+                            series: sel
+                        };
+                        renderSeriesBLog(paging);
+                        return [4 /*yield*/, renderPaintings(col, paging)];
                     case 5:
                         _a.sent();
                         if (sel.name && sel.name !== paintingsString)
@@ -869,7 +976,8 @@ var PageCtrl;
                             iconElement.href = icon;
                         PageCtrl.setElementProp("text-series", null, "series");
                         return [3 /*break*/, 8];
-                    case 6: return [4 /*yield*/, renderPaintings(works.common, {
+                    case 6:
+                        paging = {
                             offset: 0,
                             size: 24,
                             path: "paintings",
@@ -877,7 +985,9 @@ var PageCtrl;
                                 thumb: true,
                                 qr: "logos/qr-paintings.png",
                             },
-                        })];
+                        };
+                        renderSeriesBLog(paging);
+                        return [4 /*yield*/, renderPaintings(works.common, paging)];
                     case 7:
                         _a.sent();
                         PageCtrl.setElementProp("text-series", null, "generalPaintings");
@@ -926,7 +1036,8 @@ var PageCtrl;
                         }
                         initPopupView();
                         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
-                        PageCtrl.setElementProp("section-series-title", null, "all");
+                        PageCtrl.setElementProp("section-series-title", null, "picLibs");
+                        PageCtrl.setElementProp("text-works-greetings", null, "loveDrawing");
                         share = PageCtrl.ele("section-share-title");
                         if (share) {
                             PageCtrl.setElementProp(share, null, "share");
