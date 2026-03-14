@@ -21,6 +21,8 @@ namespace PageCtrl {
         "generalPaintings#zh": "常规",
         relatedBlog: "Related blog articles",
         "relatedBlog#zh": "相关博客",
+        relatedPaintings: "Related paintings",
+        "relatedPaintings#zh": "相关画作",
         worksBy: "{1} by {0}",
         "worksBy#zh": "{0}的{1}",
         workMorOwMeow: "摸凹喵",

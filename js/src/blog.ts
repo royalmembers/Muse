@@ -54,37 +54,33 @@ function appendSeriesNotice(key: keyof typeof seriesMap, arr: IArticleRenderExte
         tagName: "h2",
         children: [{
             tagName: "span",
-            children: name,
+            children: getString("relatedPaintings"),
         }]
     }, {
-        tagName: "ul",
-        styleRefs: "link-tile-compact",
+        tagName: "div",
         children: [{
-            tagName: "li",
+            tagName: "a",
+            styleRefs: "link-long-button",
+            props: {
+                href: series.url
+            },
             children: [{
-                tagName: "a",
+                tagName: "img",
                 props: {
-                    title: `${getString("seeSeriesWorks")} - ${name}`,
-                    href: series.url
-                },
-                children: [{
-                    tagName: "span",
-                    children: getString("seeSeriesWorks"),
-                }],
+                    src: series.logo,
+                    alt: name
+                }
+            }, {
+                tagName: "span",
+                children: name,
             }],
         }],
     }, {
         tagName: "div",
         styleRefs: "x-part-info",
         children: [{
-            tagName: "img",
-            props: {
-                src: series.logo,
-                title: name
-            }
-        }, {
             tagName: "span",
-            children: "注：摸凹喵（Mor-Ow Meow）及其形象，连同猫头鱼尾兽图标，都是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有。",
+            children: "注：猫头鱼尾兽图标、MuseTuan.com、摸凹喵（Mor-Ow Meow）及其形象，是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有。",
         }]
     })
 }

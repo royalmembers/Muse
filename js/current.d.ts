@@ -61,6 +61,8 @@ declare namespace PageCtrl {
         "generalPaintings#zh": string;
         relatedBlog: string;
         "relatedBlog#zh": string;
+        relatedPaintings: string;
+        "relatedPaintings#zh": string;
         worksBy: string;
         "worksBy#zh": string;
         workMorOwMeow: string;
