@@ -35,6 +35,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var PageCtrl;
 (function (PageCtrl) {
     var inner = {
@@ -135,6 +161,17 @@ var PageCtrl;
 var PageCtrl;
 (function (PageCtrl) {
     var certs = [{
+            id: "tomusic-0201",
+            name: "听闻音乐琴韵风采奖",
+            disable: true,
+            scope: "institution",
+            season: "第8届",
+            year: 2026,
+            month: 2,
+            ranking: "琴韵风采奖",
+            publisher: "听闻音乐工作室",
+            keywords: ["instrumental performance", "match"]
+        }, {
             id: "kawai",
             name: "Kawai 亚洲钢琴大赛",
             scope: "match",
@@ -260,6 +297,7 @@ var PageCtrl;
         }, {
             id: "shminhang-pujiang",
             name: "浦江镇青少年教育培训中心合唱",
+            disable: true,
             scope: "institution",
             year: 2020,
             month: 12,
@@ -649,6 +687,39 @@ var PageCtrl;
         common: [],
         done: false
     };
+    var ImageSeriesPart = /** @class */ (function (_super) {
+        __extends(ImageSeriesPart, _super);
+        function ImageSeriesPart(element, options) {
+            var _this = _super.call(this, element, options) || this;
+            _this.__inner = undefined;
+            if (!(options === null || options === void 0 ? void 0 : options.data))
+                return _this;
+            _this.__inner = __assign({}, options.data);
+            return _this;
+        }
+        ImageSeriesPart.prototype.getSeries = function (id) {
+            if (!id)
+                return undefined;
+            id = id.replace("=", "").replace(" ", "");
+            var series = this.__inner.series || [];
+            for (var i in series) {
+                var item = series[i];
+                if ((item === null || item === void 0 ? void 0 : item.id) !== id || item.disable)
+                    continue;
+                return item;
+            }
+            for (var i in series) {
+                var item = series[i];
+                if (!(item === null || item === void 0 ? void 0 : item.alias) || item.disable || !(item.alias instanceof Array))
+                    continue;
+                if (item.alias.indexOf(id) > -1)
+                    return item;
+            }
+            return undefined;
+        };
+        return ImageSeriesPart;
+    }(Hje.BaseComponent));
+    PageCtrl.ImageSeriesPart = ImageSeriesPart;
     function init(rela) {
         return __awaiter(this, void 0, void 0, function () {
             var res, json;
@@ -737,7 +808,7 @@ var PageCtrl;
     }
     function renderSeriesBLog(paging) {
         return __awaiter(this, void 0, void 0, function () {
-            var articles, element, title, i, article, link, tips, text, subtitle, text, text;
+            var articles, element, title, list, i, article, tips, link, li, text, subtitle, text, text;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, seriesBlog(paging === null || paging === void 0 ? void 0 : paging.series)];
@@ -755,17 +826,24 @@ var PageCtrl;
                         title = document.createElement("h2");
                         title.innerText = PageCtrl.getString('relatedBlog');
                         element.appendChild(title);
+                        list = document.createElement("ul");
+                        list.className = "link-tile-compact";
+                        element.appendChild(list);
                         for (i = 0; i < articles.length; i++) {
                             article = articles[i];
-                            link = document.createElement("a");
-                            link.className = "link-long-button";
-                            link.href = "../blog/?".concat(article.getRoutePath());
                             tips = article.getName();
+                            link = document.createElement("a");
+                            link.href = "../blog/?".concat(article.getRoutePath());
+                            if (!tips)
+                                continue;
+                            li = document.createElement("li");
+                            li.appendChild(link);
                             {
                                 text = document.createElement("span");
                                 text.innerText = tips;
                                 link.appendChild(text);
                             }
+                            list.appendChild(li);
                             subtitle = article.getSubtitle();
                             if (subtitle) {
                                 tips += "\n".concat(subtitle);
@@ -783,8 +861,9 @@ var PageCtrl;
                             if (subtitle)
                                 tips += "\n".concat(subtitle);
                             link.title = tips;
-                            element.appendChild(link);
                         }
+                        if (list.children.length < 1)
+                            element.style.display = "none";
                         return [2 /*return*/];
                 }
             });
@@ -798,7 +877,7 @@ var PageCtrl;
     PageCtrl.hidePopupViewDelay = hidePopupViewDelay;
     function renderPaintings(images, paging) {
         return __awaiter(this, void 0, void 0, function () {
-            var series, container, subtitle, icon, qr, qrContainer;
+            var series, container, subtitle, icon, qr, qrContainer, introContainer, intro;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -842,7 +921,7 @@ var PageCtrl;
                                 container.className = "x-container-pics";
                                 break;
                         }
-                        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, series.name || paging.defaultName || PageCtrl.getString("paintings"));
+                        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, DeepX.MdBlogs.getLocaleProp(series, "name") || paging.defaultName || PageCtrl.getString("paintings"));
                         subtitle = getContainerElement(paging, "subtitle");
                         if (subtitle) {
                             if (series.subtitle)
@@ -860,6 +939,12 @@ var PageCtrl;
                             qr.src = getSeriesIcon(series.qr, paging.root);
                             if (qrContainer)
                                 qrContainer.style.display = series.qr ? "" : "none";
+                        }
+                        introContainer = getContainerElement(paging, "intro");
+                        if (introContainer) {
+                            intro = DeepX.MdBlogs.getLocaleProp(series, "intro") || "";
+                            introContainer.innerText = intro;
+                            introContainer.style.display = intro ? "" : "none";
                         }
                         renderNextWave(images, paging);
                         getContainerElement(paging, "more").addEventListener("click", function () {
@@ -900,7 +985,7 @@ var PageCtrl;
         if (sourceUrl.indexOf("~/") == 0)
             sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
         imageEle.src = thumbUrl;
-        var imageName = imageInfo.name || series.name || paging.defaultName || "";
+        var imageName = DeepX.MdBlogs.getLocaleProp(imageInfo, "name") || DeepX.MdBlogs.getLocaleProp(series, "name") || paging.defaultName || "";
         var imageSize = imageInfo.size || "";
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
@@ -909,16 +994,15 @@ var PageCtrl;
                 imageSize += " 　|　 ";
             imageSize += PageCtrl.monthYear(imageInfo.year, imageInfo.month);
         }
-        if (imageSize)
-            imageName += " (" + imageSize + ")";
+        var imageName2 = imageSize ? "\"".concat(imageName, " (").concat(imageSize, ")") : imageName;
         imageEle.alt = imageEle.title = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
             PageCtrl.ele("popup-view-img").src = sourceUrl;
-            PageCtrl.ele("popup-view-img").alt = imageName;
+            PageCtrl.ele("popup-view-img").alt = imageName2;
             PageCtrl.ele("popup-view-thumb").src = thumbUrl;
-            PageCtrl.ele("popup-view-thumb").alt = imageName;
-            PageCtrl.ele("popup-view-title").innerText = imageInfo.name || series.name || paging.defaultName || "";
+            PageCtrl.ele("popup-view-thumb").alt = imageName2;
+            PageCtrl.ele("popup-view-title").innerText = imageName;
             PageCtrl.ele("popup-view-desc").innerText = imageSize;
             PageCtrl.ele("popup-view").style.display = "";
         });
@@ -926,7 +1010,7 @@ var PageCtrl;
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         return __awaiter(this, void 0, void 0, function () {
-            var ex_1, q, sel, seriesMenu, paintingsString, paintingsTitleString, iconElement, col, paging, icon, paging, series, linkEle, subtitle, i, item, linkEle, icon, spanEle, subtitle, subtitle2, share;
+            var ex_1, q, sel, seriesMenu, paintingsString, paintingsTitleString, iconElement, col, paging, name_1, icon, paging, series, linkEle, subtitle, i, item, itemName, linkEle, icon, spanEle, subtitle, subtitle2, moreSeries, seriesMenuTitle_1, share;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -967,8 +1051,9 @@ var PageCtrl;
                         return [4 /*yield*/, renderPaintings(col, paging)];
                     case 5:
                         _a.sent();
-                        if (sel.name && sel.name !== paintingsString)
-                            document.title = "".concat(sel.name, " - ").concat(paintingsTitleString);
+                        name_1 = DeepX.MdBlogs.getLocaleProp(sel, "name");
+                        if (name_1 && name_1 !== paintingsString)
+                            document.title = "".concat(name_1, " - ").concat(paintingsTitleString);
                         icon = getSeriesIcon(sel.icon);
                         if (iconElement && icon)
                             iconElement.href = icon;
@@ -1005,7 +1090,8 @@ var PageCtrl;
                         }
                         for (i in series) {
                             item = series[i];
-                            if (!item || item.disable || !item.name || !item.id)
+                            itemName = DeepX.MdBlogs.getLocaleProp(item, "name");
+                            if (!item || item.disable || !itemName || !item.id)
                                 continue;
                             linkEle = document.createElement("a");
                             linkEle.className = sel === item ? "link-long-button state-sel" : "link-long-button";
@@ -1013,11 +1099,11 @@ var PageCtrl;
                             if (item.icon) {
                                 icon = document.createElement("img");
                                 icon.src = getSeriesIcon(item.icon);
-                                icon.alt = item.name;
+                                icon.alt = itemName;
                                 linkEle.appendChild(icon);
                             }
                             spanEle = document.createElement("span");
-                            spanEle.title = spanEle.innerText = item.name;
+                            spanEle.title = spanEle.innerText = itemName;
                             if (item["name-cap"] === "small")
                                 spanEle.className = "x-text-cap-small";
                             linkEle.appendChild(spanEle);
@@ -1036,6 +1122,15 @@ var PageCtrl;
                         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
                         PageCtrl.setElementProp("section-series-title", null, "picLibs");
                         PageCtrl.setElementProp("text-works-greetings", null, "loveDrawing");
+                        moreSeries = PageCtrl.ele("link-works-more");
+                        if (moreSeries) {
+                            DeepX.MdBlogs.setElementText(moreSeries, "more");
+                            seriesMenuTitle_1 = PageCtrl.ele("section-series-title-container");
+                            moreSeries.addEventListener("click", function (ev) {
+                                if (seriesMenuTitle_1)
+                                    seriesMenuTitle_1.scrollIntoView({ behavior: "smooth" });
+                            });
+                        }
                         share = PageCtrl.ele("section-share-title");
                         if (share) {
                             PageCtrl.setElementProp(share, null, "share");

@@ -15,9 +15,6 @@
     section.x-main-container {
         margin-bottom: 100px;
     }
-    section span#text-works-greetings {
-        color: #999; cursor: default; user-select: none;
-    }
     section.x-bg-outstanding.x-zone-hl > h2 > img, section.x-bg-outstanding.x-zone-hl > h2 > span {
         vertical-align: middle;
     }
@@ -45,17 +42,23 @@
     section.x-part-panel > h2 > img, section.x-part-panel > h2 > span {
         vertical-align: middle;
     }
+    section#section-works-greetings > span, section#section-works-greetings > a {
+        display: inline-block;
+    }
+    section span#text-works-greetings {
+        color: #999; line-height: 20px; cursor: default; user-select: none;
+    }
+    section span#text-works-greetings + span {
+        margin-left: 10px;
+    }
+    section span#text-works-greetings + span + a {
+        padding-left: 20px; margin-left: 20px; border-left: 1px solid #444;
+    }
     section#section-works-blog {
         border-top: 1px solid #333;
     }
-    section#section-works-blog > a.link-long-button, section#section-works-blog > a.link-long-button:visited {
-        font-size: 16px; padding: 9px 24px;
-    }
-    section#section-works-blog > a.link-long-button:hover {
-        padding: 9px 22px 9px 22px;
-    }
-    section#section-works-blog > a.link-long-button:active {
-        padding: 9px 24px;
+    section#section-works-blog > ul.link-tile-compact, section#section-works-blog > ul.link-tile-compact > li {
+        list-style: none;
     }
     section img#section-works-qr {
         width: 160px; height: 160px; border-radius: 4px; opacity: 0.9;
@@ -80,8 +83,26 @@
     section#section-series-title-container {
         margin-top: 80px;
     }
+    section > div#section-works-intro {
+        color: #CCC; font-size: 16px; width: 780px; height: 200px; padding: 0 0 0 30px; margin-top: 0; border-width: 0 0 0 1px; border-style: none none none solid; border-color: #444;
+        position: absolute; top: 24px; left: 219px; right: 20px; user-select: text;
+    }
     section.x-part-copyright-notice {
         color: #666; cursor: default; user-select: none;
+    }
+    @media screen and (max-width:1110px) {
+    section > div#section-works-intro {
+        width: auto; right: 30px;
+    }
+    }
+    @media screen and (max-width:860px) {
+    section > div#section-works-intro {
+        width: 100%; height: auto; padding: 14px 0 0 0; margin-top: 15px; border-width: 1px 0 0 0; border-style: solid none none none; border-color: #333;
+        position: relative; top: 0; left: 0;
+    }
+    section span#text-works-greetings + span + a {
+        padding-left: 0; margin-left: 0; border-left: 0 none transparent; display: block;
+    }
     }
     </style>
 </head>
@@ -94,9 +115,9 @@
         </section>
 	</header>
     <section class="x-main-container" >
-        <section>
-            <span id="text-works-greetings">I love drawing and following are my works.</span>
-            <span> ❤</span>
+        <section id="section-works-greetings">
+            <span id="text-works-greetings">I love drawing and following are my works.</span><span>❤</span>
+            <a id="link-works-more" href="#" onclick="return false;" >More…</a>
         </section>
         <section class="x-zone-hl layout-wide-full x-bg-outstanding">
             <h2>
@@ -117,6 +138,7 @@
             <div>
                 <img id="section-works-qr" alt="QR code" src="../images/logos/qr-paintings.png" />
             </div>
+            <div id="section-works-intro"></div>
         </section>
         <section id="section-series-title-container" class="x-zone-hl layout-wide-full x-bg-outstanding">
             <h2 id="section-series-title">Libraries</h2>

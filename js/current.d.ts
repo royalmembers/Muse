@@ -90,6 +90,7 @@ declare namespace PageCtrl {
         subtitle?: string;
         "subtitle-cap"?: "small" | "normal" | null;
         icon?: string;
+        intro?: string;
         qr?: string;
         blog?: string;
         year: number;
@@ -117,6 +118,15 @@ declare namespace PageCtrl {
         thumb?: boolean | string;
         keywords?: string[];
         size?: string;
+    }
+    export class ImageSeriesPart extends Hje.BaseComponent {
+        private __inner;
+        constructor(element: any, options?: Hje.ComponentOptionsContract<{
+            series: IPaintingSeriesInfo[];
+            items: Record<string, IPaintingInfo[]>;
+            rela: string;
+        }>);
+        getSeries(id: string): IPaintingSeriesInfo | undefined;
     }
     export function hidePopupViewDelay(): void;
     export function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging): Promise<void>;

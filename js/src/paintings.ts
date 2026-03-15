@@ -11,6 +11,7 @@ namespace PageCtrl {
         subtitle?: string;
         "subtitle-cap"?: "small" | "normal" | null;
         icon?: string;
+        intro?: string;
         qr?: string;
         blog?: string;
         year: number;
@@ -47,6 +48,44 @@ namespace PageCtrl {
         common: [] as IPaintingInfo[],
         done: false
     };
+
+    export class ImageSeriesPart extends Hje.BaseComponent {
+        private __inner = undefined as any as {
+            series: IPaintingSeriesInfo[];
+            items: Record<string, IPaintingInfo[]>;
+            rela: string;
+            done: boolean;
+        };
+
+        constructor(element: any, options?: Hje.ComponentOptionsContract<{
+            series: IPaintingSeriesInfo[];
+            items: Record<string, IPaintingInfo[]>;
+            rela: string;
+        }>) {
+            super(element, options);
+            if (!options?.data) return;
+            this.__inner = { ...options.data } as any;
+        }
+
+        getSeries(id: string) {
+            if (!id) return undefined;
+            id = id.replace("=", "").replace(" ", "");
+            const series = this.__inner.series || [];
+            for (let i in series) {
+                const item = series[i];
+                if (item?.id !== id || item.disable) continue;
+                return item;
+            }
+
+            for (let i in series) {
+                const item = series[i];
+                if (!item?.alias || item.disable || !(item.alias instanceof Array)) continue;
+                if (item.alias.indexOf(id) > -1) return item;
+            }
+
+            return undefined;
+        }
+    }
 
     async function init(rela?: string) {
         if (works.done) return true;
@@ -124,17 +163,23 @@ namespace PageCtrl {
         const title = document.createElement("h2");
         title.innerText = getString('relatedBlog');
         element.appendChild(title);
+        const list = document.createElement("ul");
+        list.className = "link-tile-compact";
+        element.appendChild(list);
         for (let i = 0; i < articles.length; i++) {
             const article = articles[i];
-            const link = document.createElement("a");
-            link.className = "link-long-button";
-            link.href = `../blog/?${article.getRoutePath()}`;
             let tips = article.getName();
+            const link = document.createElement("a");
+            link.href = `../blog/?${article.getRoutePath()}`;
+            if (!tips) continue;
+            const li = document.createElement("li");
+            li.appendChild(link);
             {
                 const text = document.createElement("span");
                 text.innerText = tips;
                 link.appendChild(text);
             }
+            list.appendChild(li);
             let subtitle = article.getSubtitle();
             if (subtitle) {
                 tips += `\n${subtitle}`;
@@ -151,8 +196,9 @@ namespace PageCtrl {
             subtitle = article.getIntro();
             if (subtitle) tips += `\n${subtitle}`;
             link.title = tips;
-            element.appendChild(link);
         }
+
+        if (list.children.length < 1) element.style.display = "none";
     }
 
     export function hidePopupViewDelay() {
@@ -193,7 +239,7 @@ namespace PageCtrl {
                 break;
         }
 
-        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, series.name || paging.defaultName || getString("paintings"));
+        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, DeepX.MdBlogs.getLocaleProp(series, "name") || paging.defaultName || getString("paintings"));
         const subtitle = getContainerElement(paging, "subtitle");
         if (subtitle) {
             if (series.subtitle) DeepX.MdBlogs.setElementProp(subtitle, null, series.subtitle);
@@ -207,10 +253,17 @@ namespace PageCtrl {
         }
 
         const qr = getContainerElement(paging, "qr") as HTMLImageElement;
-        const qrContainer = getContainerElement(paging, "share") as HTMLImageElement;
+        const qrContainer = getContainerElement(paging, "share");
         if (qr) {
             qr.src = getSeriesIcon(series.qr, paging.root);
             if (qrContainer) qrContainer.style.display = series.qr ? "" : "none";
+        }
+
+        const introContainer = getContainerElement(paging, "intro");
+        if (introContainer) {
+            const intro = DeepX.MdBlogs.getLocaleProp(series, "intro") || "";
+            introContainer.innerText = intro;
+            introContainer.style.display = intro ? "" : "none";
         }
 
         renderNextWave(images, paging);
@@ -242,7 +295,7 @@ namespace PageCtrl {
         if (thumbUrl.indexOf("~/") == 0) thumbUrl = thumbUrl.replace("~/", imagesPath + paging.path + "/");
         if (sourceUrl.indexOf("~/") == 0) sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
         imageEle.src = thumbUrl;
-        let imageName = imageInfo.name || series.name || paging.defaultName || "";
+        const imageName = DeepX.MdBlogs.getLocaleProp(imageInfo, "name") || DeepX.MdBlogs.getLocaleProp(series, "name") || paging.defaultName || "";
         let imageSize = imageInfo.size || "";
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
@@ -251,15 +304,15 @@ namespace PageCtrl {
             imageSize += monthYear(imageInfo.year, imageInfo.month);
         }
 
-        if (imageSize) imageName += " (" + imageSize + ")";
+        const imageName2 = imageSize ? `"${imageName} (${imageSize})` : imageName;
         imageEle.alt = imageEle.title = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
             (ele("popup-view-img") as HTMLImageElement).src = sourceUrl;
-            (ele("popup-view-img") as HTMLImageElement).alt = imageName;
+            (ele("popup-view-img") as HTMLImageElement).alt = imageName2;
             (ele("popup-view-thumb") as HTMLImageElement).src = thumbUrl;
-            (ele("popup-view-thumb") as HTMLImageElement).alt = imageName;
-            ele("popup-view-title")!.innerText = imageInfo.name || series.name || paging.defaultName || "";
+            (ele("popup-view-thumb") as HTMLImageElement).alt = imageName2;
+            ele("popup-view-title")!.innerText = imageName;
             ele("popup-view-desc")!.innerText = imageSize;
             ele("popup-view")!.style.display = "";
         });
@@ -293,7 +346,8 @@ namespace PageCtrl {
             };
             renderSeriesBLog(paging);
             await renderPaintings(col, paging);
-            if (sel.name && sel.name !== paintingsString) document.title = `${sel.name} - ${paintingsTitleString}`;
+            const name = DeepX.MdBlogs.getLocaleProp(sel, "name");
+            if (name && name !== paintingsString) document.title = `${name} - ${paintingsTitleString}`;
             const icon = getSeriesIcon(sel.icon);
             if (iconElement && icon) iconElement.href = icon;
             setElementProp("text-series", null, "series");
@@ -325,19 +379,20 @@ namespace PageCtrl {
         }
         for (let i in series) {
             const item = series[i];
-            if (!item || item.disable || !item.name || !item.id) continue;
+            const itemName = DeepX.MdBlogs.getLocaleProp(item, "name");
+            if (!item || item.disable || !itemName || !item.id) continue;
             const linkEle = document.createElement("a");
             linkEle.className = sel === item ? "link-long-button state-sel" : "link-long-button";
             linkEle.href = "./?" + item.id;
             if (item.icon) {
                 const icon = document.createElement("img");
                 icon.src = getSeriesIcon(item.icon);
-                icon.alt = item.name;
+                icon.alt = itemName;
                 linkEle.appendChild(icon);
             }
 
             const spanEle = document.createElement("span");
-            spanEle.title = spanEle.innerText = item.name;
+            spanEle.title = spanEle.innerText = itemName;
             if (item["name-cap"] === "small") spanEle.className = "x-text-cap-small";
             linkEle.appendChild(spanEle);
             if (item.subtitle) {
@@ -356,6 +411,14 @@ namespace PageCtrl {
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         setElementProp("section-series-title", null, "picLibs");
         setElementProp("text-works-greetings", null, "loveDrawing");
+        const moreSeries = ele("link-works-more");
+        if (moreSeries) {
+            DeepX.MdBlogs.setElementText(moreSeries, "more");
+            const seriesMenuTitle = ele("section-series-title-container");
+            moreSeries.addEventListener("click", ev => {
+                if (seriesMenuTitle) seriesMenuTitle.scrollIntoView({ behavior: "smooth" });
+            });
+        }
         const share = ele("section-share-title");
         if (share) {
             setElementProp(share, null, "share");

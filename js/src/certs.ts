@@ -16,6 +16,17 @@ namespace PageCtrl {
     }
     
     const certs: ICertInfo[] = [{
+        id: "tomusic-0201",
+        name: "听闻音乐琴韵风采奖",
+        disable: true,
+        scope: "institution",
+        season: "第8届",
+        year: 2026,
+        month: 2,
+        ranking: "琴韵风采奖",
+        publisher: "听闻音乐工作室",
+        keywords: ["instrumental performance", "match"]
+    }, {
         id: "kawai",
         name: "Kawai 亚洲钢琴大赛",
         scope: "match",
@@ -141,6 +152,7 @@ namespace PageCtrl {
     }, {
         id: "shminhang-pujiang",
         name: "浦江镇青少年教育培训中心合唱",
+        disable: true,
         scope: "institution",
         year: 2020,
         month: 12,
