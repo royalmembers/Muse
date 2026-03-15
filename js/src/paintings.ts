@@ -413,7 +413,7 @@ namespace PageCtrl {
         setElementProp("text-works-greetings", null, "loveDrawing");
         const moreSeries = ele("link-works-more");
         if (moreSeries) {
-            DeepX.MdBlogs.setElementText(moreSeries, "more");
+            DeepX.MdBlogs.setElementText(moreSeries, "seeMore");
             const seriesMenuTitle = ele("section-series-title-container");
             moreSeries.addEventListener("click", ev => {
                 if (seriesMenuTitle) seriesMenuTitle.scrollIntoView({ behavior: "smooth" });

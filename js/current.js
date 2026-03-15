@@ -1124,7 +1124,7 @@ var PageCtrl;
                         PageCtrl.setElementProp("text-works-greetings", null, "loveDrawing");
                         moreSeries = PageCtrl.ele("link-works-more");
                         if (moreSeries) {
-                            DeepX.MdBlogs.setElementText(moreSeries, "more");
+                            DeepX.MdBlogs.setElementText(moreSeries, "seeMore");
                             seriesMenuTitle_1 = PageCtrl.ele("section-series-title-container");
                             moreSeries.addEventListener("click", function (ev) {
                                 if (seriesMenuTitle_1)
