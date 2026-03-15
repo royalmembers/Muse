@@ -27,6 +27,9 @@
     section.x-part-copyright-tuans {
         padding: 24px 0 24px 0; border-width: 1px 0 1px 0; border-style: solid none solid none; border-color: #333;
     }
+    section.x-main-container span#section-works-title {
+        cursor: text; user-select: text;
+    }
     section.x-main-container span.x-text-subtitle {
         color: #888; margin-top: 20px; margin-bottom: 10px; display: block; user-select: none;
     }
@@ -49,10 +52,10 @@
         color: #999; line-height: 20px; cursor: default; user-select: none;
     }
     section span#text-works-greetings + span {
-        margin-left: 10px;
+        color: red; margin-left: 10px; cursor: default; user-select: none;
     }
     section span#text-works-greetings + span + a {
-        padding-left: 20px; margin-left: 20px; border-left: 1px solid #444;
+        padding-left: 20px; margin-left: 20px; border-left: 1px solid #444; user-select: none;
     }
     section#section-works-blog {
         border-top: 1px solid #333;
@@ -101,7 +104,13 @@
         position: relative; top: 0; left: 0;
     }
     section span#text-works-greetings + span + a {
-        padding-left: 0; margin-left: 0; border-left: 0 none transparent; display: block;
+        width: 160px; padding-left: 0; margin-left: 0; border-left: 0 none transparent; display: block;
+    }
+    section span#text-works-greetings + span + a::before {
+        color: #666; content: "[";
+    }
+    section span#text-works-greetings + span + a::after {
+        color: #666; content: "]";
     }
     }
     </style>

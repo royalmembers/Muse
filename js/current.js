@@ -97,8 +97,7 @@ var PageCtrl;
                                 if (!article || !model)
                                     return;
                                 var arr = { end: [] };
-                                if (article.hasKeyword("mor-ow-meow"))
-                                    appendSeriesNotice("mor-ow-meow", arr, article);
+                                appendSeriesNotice(arr, article);
                                 if (arr.end.length > 0)
                                     ev.insertChildren("end", {
                                         tagName: "section",
@@ -118,11 +117,41 @@ var PageCtrl;
         renderBlog("blog_content");
     }
     PageCtrl.initBlog = initBlog;
-    function appendSeriesNotice(key, arr, article) {
-        var series = seriesMap[key || ""];
-        if (!(series === null || series === void 0 ? void 0 : series.name))
+    function appendSeriesNotice(arr, article) {
+        var keywords = article.keywords;
+        if (!(keywords === null || keywords === void 0 ? void 0 : keywords.length))
             return;
-        var name = PageCtrl.getString(series.name);
+        var links = [];
+        for (var i = 0; i < keywords.length; i++) {
+            var keyword = keywords[i];
+            if (!(keyword === null || keyword === void 0 ? void 0 : keyword.value))
+                continue;
+            var series = seriesMap[keyword.value];
+            if (!(series === null || series === void 0 ? void 0 : series.name))
+                continue;
+            var name_1 = PageCtrl.getString(series.name) || series.name;
+            if (!name_1)
+                continue;
+            links.push({
+                tagName: "a",
+                styleRefs: "link-long-button",
+                props: {
+                    href: series.url
+                },
+                children: [{
+                        tagName: "img",
+                        props: {
+                            src: series.logo,
+                            alt: name_1
+                        }
+                    }, {
+                        tagName: "span",
+                        children: name_1,
+                    }],
+            });
+        }
+        if (links.length < 1)
+            return;
         arr.end.push({
             tagName: "h2",
             children: [{
@@ -131,31 +160,20 @@ var PageCtrl;
                 }]
         }, {
             tagName: "div",
-            children: [{
-                    tagName: "a",
-                    styleRefs: "link-long-button",
-                    props: {
-                        href: series.url
-                    },
-                    children: [{
-                            tagName: "img",
-                            props: {
-                                src: series.logo,
-                                alt: name
-                            }
-                        }, {
-                            tagName: "span",
-                            children: name,
-                        }],
-                }],
+            children: links,
         }, {
             tagName: "div",
             styleRefs: "x-part-info",
             children: [{
                     tagName: "span",
-                    children: "注：猫头鱼尾兽图标、MuseTuan.com、摸凹喵（Mor-Ow Meow）及其形象，是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有。",
+                    children: "注：猫头鱼尾兽图标、MuseTuan.com、摸凹喵（Mor-Ow Meow）及其形象，是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有；Kingcean、Jinchen Art、金辰艺术、CompositeJs、金山旭日翼盾、红日黑山徽标，是 Kingcean Tuan、南昌金辰软件有限公司或江西金辰装饰设计工程有限公司的商标或注册商标。",
                 }]
         });
+    }
+    function appendSpecificSeriesNotice(series, arr) {
+        if (!(series === null || series === void 0 ? void 0 : series.name))
+            return;
+        var name = PageCtrl.getString(series.name);
     }
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
@@ -1010,7 +1028,7 @@ var PageCtrl;
     PageCtrl.renderImage = renderImage;
     function initPaint() {
         return __awaiter(this, void 0, void 0, function () {
-            var ex_1, q, sel, seriesMenu, paintingsString, paintingsTitleString, iconElement, col, paging, name_1, icon, paging, series, linkEle, subtitle, i, item, itemName, linkEle, icon, spanEle, subtitle, subtitle2, moreSeries, seriesMenuTitle_1, share;
+            var ex_1, q, sel, seriesMenu, paintingsString, paintingsTitleString, iconElement, col, paging, name_2, icon, paging, series, linkEle, subtitle, i, item, itemName, linkEle, icon, spanEle, subtitle, subtitle2, moreSeries, seriesMenuTitle_1, share;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1051,9 +1069,9 @@ var PageCtrl;
                         return [4 /*yield*/, renderPaintings(col, paging)];
                     case 5:
                         _a.sent();
-                        name_1 = DeepX.MdBlogs.getLocaleProp(sel, "name");
-                        if (name_1 && name_1 !== paintingsString)
-                            document.title = "".concat(name_1, " - ").concat(paintingsTitleString);
+                        name_2 = DeepX.MdBlogs.getLocaleProp(sel, "name");
+                        if (name_2 && name_2 !== paintingsString)
+                            document.title = "".concat(name_2, " - ").concat(paintingsTitleString);
                         icon = getSeriesIcon(sel.icon);
                         if (iconElement && icon)
                             iconElement.href = icon;

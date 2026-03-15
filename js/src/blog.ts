@@ -3,6 +3,12 @@ export interface IArticleRenderExtension {
     end: Hje.DescriptionContract[]
 }
 
+interface IBlogSeriesInfo {
+    name: string;
+    url: string;
+    logo?: string;
+}
+
 const inner = {
     articles: undefined as Promise<DeepX.MdBlogs.Articles> | undefined,
 };
@@ -31,7 +37,7 @@ export async function renderBlog(element: string | HTMLElement, root?: boolean |
             const model = ev.children;
             if (!article || !model) return;
             const arr: IArticleRenderExtension = { end: [] };
-            if (article.hasKeyword("mor-ow-meow")) appendSeriesNotice("mor-ow-meow", arr, article);
+            appendSeriesNotice(arr, article);
             if (arr.end.length > 0) ev.insertChildren("end", {
                 tagName: "section",
                 styleRefs: "x-part-blog-related",
@@ -46,19 +52,18 @@ export function initBlog() {
     renderBlog("blog_content");
 }
 
-function appendSeriesNotice(key: keyof typeof seriesMap, arr: IArticleRenderExtension, article: DeepX.MdBlogs.ArticleInfo) {
-    const series = seriesMap[key || ""];
-    if (!series?.name) return;
-    const name = getString(series.name);
-    arr.end.push({
-        tagName: "h2",
-        children: [{
-            tagName: "span",
-            children: getString("relatedPaintings"),
-        }]
-    }, {
-        tagName: "div",
-        children: [{
+function appendSeriesNotice(arr: IArticleRenderExtension, article: DeepX.MdBlogs.ArticleInfo) {
+    const keywords = article.keywords;
+    if (!keywords?.length) return;
+    const links: Hje.DescriptionContract[] = [];
+    for (let i = 0; i < keywords.length; i++) {
+        const keyword = keywords[i];
+        if (!keyword?.value) continue;
+        const series = seriesMap[keyword.value as keyof typeof seriesMap];
+        if (!series?.name) continue;
+        const name = getString(series.name) || series.name;
+        if (!name) continue;
+        links.push({
             tagName: "a",
             styleRefs: "link-long-button",
             props: {
@@ -74,15 +79,32 @@ function appendSeriesNotice(key: keyof typeof seriesMap, arr: IArticleRenderExte
                 tagName: "span",
                 children: name,
             }],
-        }],
+        });
+    }
+    if (links.length < 1) return;
+    arr.end.push({
+        tagName: "h2",
+        children: [{
+            tagName: "span",
+            children: getString("relatedPaintings"),
+        }]
+    }, {
+        tagName: "div",
+        children: links,
     }, {
         tagName: "div",
         styleRefs: "x-part-info",
         children: [{
             tagName: "span",
-            children: "注：猫头鱼尾兽图标、MuseTuan.com、摸凹喵（Mor-Ow Meow）及其形象，是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有。",
+            children: "注：猫头鱼尾兽图标、MuseTuan.com、摸凹喵（Mor-Ow Meow）及其形象，是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有；Kingcean、Jinchen Art、金辰艺术、CompositeJs、金山旭日翼盾、红日黑山徽标，是 Kingcean Tuan、南昌金辰软件有限公司或江西金辰装饰设计工程有限公司的商标或注册商标。",
         }]
-    })
+    });
+}
+
+function appendSpecificSeriesNotice(series: IBlogSeriesInfo, arr: Hje.DescriptionContract[]) {
+    if (!series?.name) return;
+    const name = getString(series.name as any);
+    
 }
 
 }
