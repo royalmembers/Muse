@@ -62,7 +62,6 @@ namespace PageCtrl {
             mainStyle: string[];
             select?: IPaintingSeriesInfo;
             urls: IImageSeriesPartData["urls"];
-            defaultName?: string;
             siteName?: string;
         };
 
@@ -87,7 +86,6 @@ namespace PageCtrl {
                 imageRela,
                 mainStyle,
                 urls: data.urls,
-                defaultName: strings.pics,
                 siteName: strings.site,
             };
             const self = this;
@@ -224,13 +222,9 @@ namespace PageCtrl {
                     alt: DeepX.MdBlogs.getLocaleProp(id, "name", mkt),
                 },
             });
-            if (id.hideName && this.__inner.defaultName) {
-                title.push(span(this.__inner.defaultName));
-            } else {
-                title.push(span(DeepX.MdBlogs.getLocaleProp(id, "name", mkt)));
-                text = DeepX.MdBlogs.getLocaleProp(id, "subtitle", mkt);
-                if (text) title.push(span(text));
-            }
+            title.push(span(DeepX.MdBlogs.getLocaleProp(id, "name", mkt)));
+            text = DeepX.MdBlogs.getLocaleProp(id, "subtitle", mkt);
+            if (text) title.push(span(text));
             this.childModel("title", { children: title });
             const share = sharePanel({
                 qr: id.qr || this.__inner.urls?.qr,
@@ -359,9 +353,12 @@ namespace PageCtrl {
             }
             const enableRoute = seriesLink === "./";
             if (seriesLink) {
-                if (seriesLink.endsWith("=")) seriesLink += value.id;
-                else if (enableRoute && value.hideName && value === this.__inner.series[0]) seriesLink = "./";
-                else seriesLink += "?" + value.id;
+                if (seriesLink.endsWith("="))
+                    seriesLink += value.id;
+                else if (enableRoute && (value.id === "default" || value.id === "index") && value === this.__inner.series[0])
+                    seriesLink = "./";
+                else
+                    seriesLink += "?" + value.id;
             }
             return {
                 url: seriesLink,
@@ -703,9 +700,9 @@ namespace PageCtrl {
         };
     }
 
-    function span(text: string | Hje.DescriptionContract[], styleRefs?: string | string[]): Hje.DescriptionContract {
+    function span(text: string | Hje.DescriptionContract[], styleRefs?: string | string[], tagName?: string): Hje.DescriptionContract {
         return {
-            tagName: "span",
+            tagName: tagName || "span",
             styleRefs,
             children: text,
         };
@@ -716,13 +713,13 @@ namespace PageCtrl {
         if (typeof text === "string") return {
             tagName: tagName || "div",
             styleRefs,
-            children: [span(text)]
+            children: [span(text, undefined, "p")]
         };
         if (!(text instanceof Array) || !text.length) return null;
         const children = text.map(ele => {
-            if (typeof ele === "number") return span(ele.toString(10));
+            if (typeof ele === "number") return span(ele.toString(10), undefined, "p");
             if (!ele || typeof ele !== "string") return null;
-            return span(ele);
+            return span(ele, undefined, "p");
         }).filter(ele => !!ele);
         return children.length ? {
             tagName: tagName || "div",

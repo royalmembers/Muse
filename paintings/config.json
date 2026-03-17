@@ -22,7 +22,7 @@
         "ratio": "p",
         "thumb": true
     }],
-    "common": [{
+    "default": [{
         "id": "rescue",
         "name": "飞行拯救生命",
         "name#en": "Rescue by flying",

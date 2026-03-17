@@ -15,6 +15,9 @@
     section.x-main-container {
         margin-bottom: 100px;
     }
+    section.x-main-container > main {
+        min-height: 420px;
+    }
     section.x-zone-hl > h1 {
         font-size: 20px; font-weight: normal;
     }
@@ -74,6 +77,15 @@
         color: #CCC; font-size: 16px; width: 780px; height: 200px; padding: 0 0 0 30px; margin-top: 0; border-width: 0 0 0 1px; border-style: none none none solid; border-color: #444;
         position: absolute; top: 24px; left: 219px; right: 20px; user-select: text;
     }
+    section.x-part-blog-share > div.x-part-blog-note > p, section.x-part-blog-note > p {
+        margin: 10px 0;
+    }
+    section.x-part-blog-share > div.x-part-blog-note > p:first-child, section.x-part-blog-note > p:first-child {
+        margin-top: 0;
+    }
+    section.x-part-blog-share > div.x-part-blog-note > p:last-child, section.x-part-blog-note > p:last-child {
+        margin-bottom: 0;
+    }
     section.x-part-greetings > span:first-child {
         color: #999; line-height: 20px;
     }
@@ -82,9 +94,6 @@
     }
     section.x-part-greetings > span:first-child + span + a {
         padding-left: 20px; margin-left: 20px; border-left: 1px solid #444;
-    }
-    section#section-works-container {
-        min-height: 420px;
     }
     section.x-part-copyright-notice {
         color: #666; cursor: default; user-select: none;

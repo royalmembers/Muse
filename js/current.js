@@ -633,8 +633,8 @@ var PageCtrl;
         "certHonors#zh": "小小荣誉",
         picLibs: "All picture libraries",
         "picLibs#zh": "全部图集",
-        generalPaintings: "General",
-        "generalPaintings#zh": "常规",
+        generalPaintings: "General pictures",
+        "generalPaintings#zh": "常规画作",
         relatedBlog: "Related blog articles",
         "relatedBlog#zh": "相关博客",
         relatedPaintings: "Related paintings",
@@ -880,7 +880,13 @@ var PageCtrl;
                     case 0:
                         PageCtrl.initMenu("paintings");
                         Hje.render("main-container", {
-                            children: DeepX.MdBlogs.getLocaleString("loading")
+                            children: [{
+                                    tagName: "p",
+                                    children: [{
+                                            tagName: "em",
+                                            children: DeepX.MdBlogs.getLocaleString("loading"),
+                                        }],
+                                }],
                         });
                         _b.label = 1;
                     case 1:
@@ -898,16 +904,14 @@ var PageCtrl;
                             control: PageCtrl.ImageSeriesPart,
                             data: {
                                 series: __spreadArray([{
-                                        id: "common",
-                                        name: "常规",
-                                        "name#en": "Common",
+                                        id: "default",
+                                        name: PageCtrl.getString("generalPaintings"),
                                         qr: "logos/qr-paintings.png",
-                                        hideName: true,
                                         year: 2020,
                                         thumb: true
                                     }, PageCtrl.getString("series")], works.series, true),
                                 items: works,
-                                select: DeepX.MdBlogs.firstQuery(),
+                                select: DeepX.MdBlogs.firstQuery() || true,
                                 blogRela: "../blog/",
                                 imageRela: "../images/",
                                 itemUrl: function (item, kind) {
@@ -972,7 +976,7 @@ var PageCtrl;
                                                         component.scrollAllMenuIntoView();
                                                 }
                                             },
-                                            children: DeepX.MdBlogs.getLocaleString("seeMore"),
+                                            children: PageCtrl.getString("picLibs"),
                                         }]
                                 }
                             },
@@ -1015,7 +1019,6 @@ var PageCtrl;
                 imageRela: imageRela,
                 mainStyle: mainStyle,
                 urls: data.urls,
-                defaultName: strings.pics,
                 siteName: strings.site,
             };
             var self = _this;
@@ -1168,15 +1171,10 @@ var PageCtrl;
                         alt: DeepX.MdBlogs.getLocaleProp(id, "name", mkt),
                     },
                 });
-            if (id.hideName && this.__inner.defaultName) {
-                title.push(span(this.__inner.defaultName));
-            }
-            else {
-                title.push(span(DeepX.MdBlogs.getLocaleProp(id, "name", mkt)));
-                text = DeepX.MdBlogs.getLocaleProp(id, "subtitle", mkt);
-                if (text)
-                    title.push(span(text));
-            }
+            title.push(span(DeepX.MdBlogs.getLocaleProp(id, "name", mkt)));
+            text = DeepX.MdBlogs.getLocaleProp(id, "subtitle", mkt);
+            if (text)
+                title.push(span(text));
             this.childModel("title", { children: title });
             var share = (_c = sharePanel({
                 qr: id.qr || ((_a = this.__inner.urls) === null || _a === void 0 ? void 0 : _a.qr),
@@ -1336,7 +1334,7 @@ var PageCtrl;
             if (seriesLink) {
                 if (seriesLink.endsWith("="))
                     seriesLink += value.id;
-                else if (enableRoute && value.hideName && value === this.__inner.series[0])
+                else if (enableRoute && (value.id === "default" || value.id === "index") && value === this.__inner.series[0])
                     seriesLink = "./";
                 else
                     seriesLink += "?" + value.id;
@@ -1690,9 +1688,9 @@ var PageCtrl;
                 }],
         };
     }
-    function span(text, styleRefs) {
+    function span(text, styleRefs, tagName) {
         return {
-            tagName: "span",
+            tagName: tagName || "span",
             styleRefs: styleRefs,
             children: text,
         };
@@ -1704,16 +1702,16 @@ var PageCtrl;
             return {
                 tagName: tagName || "div",
                 styleRefs: styleRefs,
-                children: [span(text)]
+                children: [span(text, undefined, "p")]
             };
         if (!(text instanceof Array) || !text.length)
             return null;
         var children = text.map(function (ele) {
             if (typeof ele === "number")
-                return span(ele.toString(10));
+                return span(ele.toString(10), undefined, "p");
             if (!ele || typeof ele !== "string")
                 return null;
-            return span(ele);
+            return span(ele, undefined, "p");
         }).filter(function (ele) { return !!ele; });
         return children.length ? {
             tagName: tagName || "div",

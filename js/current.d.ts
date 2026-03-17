@@ -95,7 +95,6 @@ declare namespace PageCtrl {
         subtitle?: string;
         "subtitle-cap"?: ITitleCapKind;
         defaultItemName?: string;
-        hideName?: boolean;
         icon?: string;
         intro?: string;
         qr?: string;

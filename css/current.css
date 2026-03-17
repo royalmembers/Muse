@@ -134,6 +134,7 @@ section.x-container-pics, main.x-container-pics {
     gap: 6px;
     grid-template-columns: repeat(6, 1fr);
     user-select: none;
+    align-content: start;
 }
 section.x-container-pics > img, main.x-container-pics > img {
     background-color: #333;

@@ -13,7 +13,6 @@ namespace PageCtrl {
         subtitle?: string;
         "subtitle-cap"?: ITitleCapKind;
         defaultItemName?: string;
-        hideName?: boolean;
         icon?: string;
         intro?: string;
         qr?: string;
@@ -175,7 +174,13 @@ namespace PageCtrl {
     export async function initPaint() {
         initMenu("paintings");
         Hje.render("main-container", {
-            children: DeepX.MdBlogs.getLocaleString("loading")
+            children: [{
+                tagName: "p",
+                children: [{
+                    tagName: "em",
+                    children: DeepX.MdBlogs.getLocaleString("loading"),
+                }],
+            }],
         });
         try {
             await init();
@@ -186,16 +191,14 @@ namespace PageCtrl {
             control: ImageSeriesPart,
             data: {
                 series: [{
-                    id: "common",
-                    name: "常规",
-                    "name#en": "Common",
+                    id: "default",
+                    name: getString("generalPaintings"),
                     qr: "logos/qr-paintings.png",
-                    hideName: true,
                     year: 2020,
                     thumb: true
                 }, getString("series"), ...works.series],
                 items: works as any,
-                select: DeepX.MdBlogs.firstQuery(),
+                select: DeepX.MdBlogs.firstQuery() || true,
                 blogRela: "../blog/",
                 imageRela: "../images/",
                 itemUrl(item, kind) {
@@ -259,7 +262,7 @@ namespace PageCtrl {
                                 if (component) component.scrollAllMenuIntoView();
                             }
                         },
-                        children: DeepX.MdBlogs.getLocaleString("seeMore"),
+                        children: getString("picLibs"),
                     }]
                 }
             } as IImageSeriesPartData,
