@@ -942,6 +942,7 @@ var PageCtrl;
                                 strings: {
                                     pics: PageCtrl.getString("paintings"),
                                     all: PageCtrl.getString("picLibs"),
+                                    site: PageCtrl.getString("worksBy").replace("{0}", "Muse").replace("{1}", PageCtrl.getString("paintings")),
                                 },
                                 urls: {
                                     share: "./icons/share-w.png",
@@ -1015,6 +1016,7 @@ var PageCtrl;
                 mainStyle: mainStyle,
                 urls: data.urls,
                 defaultName: strings.pics,
+                siteName: strings.site,
             };
             var self = _this;
             var select = data.select;
@@ -1080,15 +1082,17 @@ var PageCtrl;
                 }].filter(function (ele) { return !!ele; });
             _this.refreshChild(undefined, function () {
                 setTimeout(function () {
-                    if (!select)
+                    if (!select || self.__inner.select)
                         return;
-                    var sel = _this.selectSeries(select);
+                    var sel = self.selectSeries(select);
                     if (!sel)
                         return;
-                    var _a = _this.getSeriesLinkInfo(sel), url = _a.url, kind = _a.kind;
+                    var _a = self.getSeriesLinkInfo(sel), url = _a.url, kind = _a.kind;
                     if (kind !== "route" || !url)
                         return false;
                     history.replaceState(sel, "", url);
+                    if (self.__inner.siteName)
+                        document.title = "".concat(DeepX.MdBlogs.getLocaleProp(sel, "name", mktOptions), " - ").concat(self.__inner.siteName);
                 }, 100);
             });
             return _this;
@@ -1238,7 +1242,7 @@ var PageCtrl;
                                 return {
                                     name: ele.getName(mkt),
                                     subtitle: subtitle.length ? subtitle : undefined,
-                                    url: rela.relative("../blog/".concat(ele.getRoutePath(mkt))).value,
+                                    url: "".concat(rela.value, "?").concat(ele.getRoutePath(mkt)),
                                 };
                             }));
                             if (((_c = links === null || links === void 0 ? void 0 : links.children) === null || _c === void 0 ? void 0 : _c.length) !== 2)
@@ -1306,8 +1310,11 @@ var PageCtrl;
                                 self.scrollContentIntoView();
                                 return;
                             }
-                            if (ele !== old)
+                            if (ele !== old) {
                                 history.pushState(ele, "", seriesLink);
+                                if (inner.siteName)
+                                    document.title = "".concat(name, " - ").concat(inner.siteName);
+                            }
                             PageCtrl.scrollToTop();
                         }
                     },
@@ -1521,7 +1528,7 @@ var PageCtrl;
                 props: {
                     loading: "lazy",
                     src: thumb,
-                    title: name,
+                    title: item.year && typeof item.year === "number" && item.year > 2000 ? "".concat(name, "\n").concat(item.year.toString(10)) : name,
                     alt: name,
                 },
                 style: item.disable ? { display: "none" } : null,

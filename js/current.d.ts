@@ -165,6 +165,7 @@ declare namespace PageCtrl {
         strings?: {
             all?: string;
             pics?: string;
+            site?: string;
         };
         urls?: {
             share?: string;

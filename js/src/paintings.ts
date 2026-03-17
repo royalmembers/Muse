@@ -230,6 +230,7 @@ namespace PageCtrl {
                 strings: {
                     pics: getString("paintings"),
                     all: getString("picLibs"),
+                    site: getString("worksBy").replace("{0}", "Muse").replace("{1}", getString("paintings")),
                 },
                 urls: {
                     share: "./icons/share-w.png",

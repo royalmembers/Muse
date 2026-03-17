@@ -35,6 +35,7 @@ namespace PageCtrl {
         strings?: {
             all?: string;
             pics?: string;
+            site?: string;
         };
         urls?: {
             share?: string;
@@ -62,6 +63,7 @@ namespace PageCtrl {
             select?: IPaintingSeriesInfo;
             urls: IImageSeriesPartData["urls"];
             defaultName?: string;
+            siteName?: string;
         };
 
         constructor(element: any, options?: Hje.ComponentOptionsContract<IImageSeriesPartData>) {
@@ -86,6 +88,7 @@ namespace PageCtrl {
                 mainStyle,
                 urls: data.urls,
                 defaultName: strings.pics,
+                siteName: strings.site,
             };
             const self = this;
             let select = data.select;
@@ -147,12 +150,14 @@ namespace PageCtrl {
             }].filter(ele => !!ele);
             this.refreshChild(undefined, () => {
                 setTimeout(() => {
-                    if (!select) return;
-                    const sel = this.selectSeries(select);
+                    if (!select || self.__inner.select) return;
+                    const sel = self.selectSeries(select);
                     if (!sel) return;
-                    const { url, kind } = this.getSeriesLinkInfo(sel);
+                    const { url, kind } = self.getSeriesLinkInfo(sel);
                     if (kind !== "route" || !url) return false;
                     history.replaceState(sel, "", url);
+                    if (self.__inner.siteName)
+                        document.title = `${DeepX.MdBlogs.getLocaleProp(sel, "name", mktOptions)} - ${self.__inner.siteName}`;
                 }, 100);
             });
         }
@@ -276,7 +281,7 @@ namespace PageCtrl {
                 return {
                     name: ele.getName(mkt),
                     subtitle: subtitle.length ? subtitle : undefined,
-                    url: rela.relative(`../blog/${ele.getRoutePath(mkt)}`).value,
+                    url: `${rela.value}?${ele.getRoutePath(mkt)}`,
                 };
             }));
             if (links?.children?.length !== 2) return;
@@ -331,7 +336,10 @@ namespace PageCtrl {
                                 self.scrollContentIntoView();
                                 return;
                             }
-                            if (ele !== old) history.pushState(ele, "", seriesLink);
+                            if (ele !== old) {
+                                history.pushState(ele, "", seriesLink);
+                                if (inner.siteName) document.title = `${name} - ${inner.siteName}`;
+                            }
                             scrollToTop();
                         }
                     },
@@ -528,7 +536,7 @@ namespace PageCtrl {
                 props: {
                     loading: "lazy",
                     src: thumb,
-                    title: name,
+                    title: item.year && typeof item.year === "number" && item.year > 2000 ? `${name}\n${item.year.toString(10)}` : name,
                     alt: name,
                 },
                 style: item.disable ? { display: "none" } : null,
