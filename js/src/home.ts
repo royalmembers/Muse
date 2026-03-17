@@ -56,6 +56,12 @@ namespace PageCtrl {
 
     export function initMenu(id?: (typeof menu)[number]["id"] | boolean) {
         const container = ele("top-menu");
+        const cover = ele("popup-view");
+        if (cover) {
+            cover.addEventListener("click", hidePopupView);
+            cover.addEventListener("touchend", hidePopupViewDelay);
+        }
+
         if (!container) return;
         container.innerHTML = "";
         const rela = id === true ? "./" : "../";
@@ -71,6 +77,16 @@ namespace PageCtrl {
             link.innerText = DeepX.MdBlogs.getLocaleProp(ele, "name");
             if (ele.id === sel) item.className = "state-sel";
         });
+    }
+
+    export function hidePopupView() {
+        ele("popup-view")!.style.display = "none";
+    }
+
+    export function hidePopupViewDelay() {
+        setTimeout(() => {
+            hidePopupView();
+        }, 200);
     }
 
     export function initHome() {
@@ -111,7 +127,6 @@ namespace PageCtrl {
             path: "paintings",
             root: true
         });
-        initPopupView();
         videosModel("home");
         if (typeof DeepX === "undefined") return;
         DeepX.MdBlogs.setElementText("title-about", "about");

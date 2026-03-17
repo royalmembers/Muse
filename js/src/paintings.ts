@@ -2,22 +2,27 @@ namespace PageCtrl {
 
     type IImageRatio = "p" | "page" | "v" | "vertical" | "h" | "horizontal" | "s" | "square" | "w" | "wide";
 
+    export type ITitleCapKind = "small" | "normal" | null;
+
     export interface IPaintingSeriesInfo {
         id: string;
         alias?: string[] | null;
-        disable?: string;
+        disable?: boolean;
         name: string;
-        "name-cap"?: "small" | "normal" | null;
+        "name-cap"?: ITitleCapKind;
         subtitle?: string;
-        "subtitle-cap"?: "small" | "normal" | null;
+        "subtitle-cap"?: ITitleCapKind;
+        defaultItemName?: string;
+        hideName?: boolean;
         icon?: string;
         intro?: string;
         qr?: string;
         blog?: string;
         year: number;
-        ext?: string;
         ratio?: IImageRatio;
         thumb?: boolean;
+        links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
+        [property: string]: any;
     }
 
     interface IPaintingPaging {
@@ -49,44 +54,6 @@ namespace PageCtrl {
         done: false
     };
 
-    export class ImageSeriesPart extends Hje.BaseComponent {
-        private __inner = undefined as any as {
-            series: IPaintingSeriesInfo[];
-            items: Record<string, IPaintingInfo[]>;
-            rela: string;
-            done: boolean;
-        };
-
-        constructor(element: any, options?: Hje.ComponentOptionsContract<{
-            series: IPaintingSeriesInfo[];
-            items: Record<string, IPaintingInfo[]>;
-            rela: string;
-        }>) {
-            super(element, options);
-            if (!options?.data) return;
-            this.__inner = { ...options.data } as any;
-        }
-
-        getSeries(id: string) {
-            if (!id) return undefined;
-            id = id.replace("=", "").replace(" ", "");
-            const series = this.__inner.series || [];
-            for (let i in series) {
-                const item = series[i];
-                if (item?.id !== id || item.disable) continue;
-                return item;
-            }
-
-            for (let i in series) {
-                const item = series[i];
-                if (!item?.alias || item.disable || !(item.alias instanceof Array)) continue;
-                if (item.alias.indexOf(id) > -1) return item;
-            }
-
-            return undefined;
-        }
-    }
-
     async function init(rela?: string) {
         if (works.done) return true;
         const res = await fetch(`${rela || "../paintings/"}config.json`);
@@ -114,97 +81,8 @@ namespace PageCtrl {
         getContainerElement(paging, "more").style.display = paging.offset < images.length ? "" : "none";
     }
 
-    function getSeries(id: string) {
-        if (!id) return undefined;
-        id = id.replace("=", "").replace(" ", "");
-        const series = works.series || [];
-        for (let i in series) {
-            const item = series[i];
-            if (item?.id !== id || item.disable) continue;
-            return item;
-        }
-
-        for (let i in series) {
-            const item = series[i];
-            if (!item?.alias || item.disable || !(item.alias instanceof Array)) continue;
-            if (item.alias.indexOf(id) > -1) return item;
-        }
-
-        return undefined;
-    }
-
-    function getSeriesIcon(icon: string | undefined, root?: boolean) {
-        return `${rootRela(root)}images/${(icon || "logos/mspaint.png")}`;
-    }
-
     function seriesInPaging(paging: IPaintingPaging) {
         return paging.series || {} as IPaintingSeriesInfo;
-    }
-
-    async function seriesBlog(series: IPaintingSeriesInfo | undefined) {
-        const keyword = series?.blog;
-        if (!keyword) return undefined;
-        const articles = await loadBlogArticles();
-        if (!articles) return undefined;
-        return articles.blog()?.filter(ele => ele && ele.hasKeyword(keyword));
-    }
-
-    async function renderSeriesBLog(paging: IPaintingPaging) {
-        const articles = await seriesBlog(paging?.series);
-        const element = getContainerElement(paging, "blog");
-        if (!element) return;
-        element.innerHTML = "";
-        if (!articles || !articles.length) {
-            element.style.display = "none";
-            return;
-        }
-
-        element.style.display = "";
-        const title = document.createElement("h2");
-        title.innerText = getString('relatedBlog');
-        element.appendChild(title);
-        const list = document.createElement("ul");
-        list.className = "link-tile-compact";
-        element.appendChild(list);
-        for (let i = 0; i < articles.length; i++) {
-            const article = articles[i];
-            let tips = article.getName();
-            const link = document.createElement("a");
-            link.href = `../blog/?${article.getRoutePath()}`;
-            if (!tips) continue;
-            const li = document.createElement("li");
-            li.appendChild(link);
-            {
-                const text = document.createElement("span");
-                text.innerText = tips;
-                link.appendChild(text);
-            }
-            list.appendChild(li);
-            let subtitle = article.getSubtitle();
-            if (subtitle) {
-                tips += `\n${subtitle}`;
-                const text = document.createElement("span");
-                text.innerText = subtitle;
-                link.appendChild(text);
-            }
-            {
-                const text = document.createElement("span");
-                tips += `\n${article.dateString}`;
-                text.innerText = article.dateString;
-                link.appendChild(text);
-            }
-            subtitle = article.getIntro();
-            if (subtitle) tips += `\n${subtitle}`;
-            link.title = tips;
-        }
-
-        if (list.children.length < 1) element.style.display = "none";
-    }
-
-    export function hidePopupViewDelay() {
-        setTimeout(() => {
-            hidePopupView();
-        }, 200);
     }
 
     export async function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging) {
@@ -246,34 +124,10 @@ namespace PageCtrl {
             subtitle.className = series["subtitle-cap"] === "small" ? "x-text-cap-small" : "";
         }
 
-        const icon = getContainerElement(paging, "title-icon") as HTMLImageElement;
-        if (icon) {
-            icon.src = getSeriesIcon(series.icon, paging.root);
-            icon.style.display = series.icon ? "" : "none";
-        }
-
-        const qr = getContainerElement(paging, "qr") as HTMLImageElement;
-        const qrContainer = getContainerElement(paging, "share");
-        if (qr) {
-            qr.src = getSeriesIcon(series.qr, paging.root);
-            if (qrContainer) qrContainer.style.display = series.qr ? "" : "none";
-        }
-
-        const introContainer = getContainerElement(paging, "intro");
-        if (introContainer) {
-            const intro = DeepX.MdBlogs.getLocaleProp(series, "intro") || "";
-            introContainer.innerText = intro;
-            introContainer.style.display = intro ? "" : "none";
-        }
-
         renderNextWave(images, paging);
         getContainerElement(paging, "more")!.addEventListener("click", function () {
             renderNextWave(images, paging);
         });
-    }
-
-    export function hidePopupView() {
-        ele("popup-view")!.style.display = "none";
     }
 
     export function renderImage(containerEle: HTMLElement, imageInfo: IPaintingInfo, paging: IPaintingPaging) {
@@ -319,128 +173,100 @@ namespace PageCtrl {
     }
 
     export async function initPaint() {
-        DeepX.MdBlogs.setElementText("section-works-container", "loading");
+        initMenu("paintings");
+        Hje.render("main-container", {
+            children: DeepX.MdBlogs.getLocaleString("loading")
+        });
         try {
             await init();
         } catch (ex) {
             DeepX.MdBlogs.setElementText("section-works-container", "loadFailed");
         }
-
-        let q = DeepX.MdBlogs.firstQuery();
-        const sel = getSeries(q);
-        const seriesMenu = ele("section-series-container")!;
-        seriesMenu.innerHTML = "";
-        const paintingsString = getString("paintings");
-        const paintingsTitleString = getString("worksBy").replace("{0}", "Muse").replace("{1}", paintingsString);
-        document.title = paintingsTitleString;
-        const iconElement = ele("ph-link-icon") as HTMLLinkElement;
-        if (iconElement) iconElement.href = "../images/logos/logo-2026-paint.png";
-        if (sel) {
-            if (sel.id) q = sel.id;
-            const col = ((works as any as Record<string, IPaintingInfo[]>)[q] || []).filter(ele => !!ele && !ele.disable);
-            const paging = {
-                offset: 0,
-                size: 24,
-                path: "paintings",
-                series: sel
-            };
-            renderSeriesBLog(paging);
-            await renderPaintings(col, paging);
-            const name = DeepX.MdBlogs.getLocaleProp(sel, "name");
-            if (name && name !== paintingsString) document.title = `${name} - ${paintingsTitleString}`;
-            const icon = getSeriesIcon(sel.icon);
-            if (iconElement && icon) iconElement.href = icon;
-            setElementProp("text-series", null, "series");
-        } else {
-            const paging = {
-                offset: 0,
-                size: 24,
-                path: "paintings",
-                series: {
-                    thumb: true,
+        const component = Hje.render("main-container", {
+            control: ImageSeriesPart,
+            data: {
+                series: [{
+                    id: "common",
+                    name: "常规",
+                    "name#en": "Common",
                     qr: "logos/qr-paintings.png",
-                } as IPaintingSeriesInfo,
-            };
-            renderSeriesBLog(paging);
-            await renderPaintings(works.common, paging);
-            setElementProp("text-series", null, "generalPaintings");
-        }
-        const series = works.series || [];
-        {
-            const linkEle = document.createElement("a");
-            linkEle.className = sel ? "link-long-button" : "link-long-button state-sel";
-            linkEle.href = "./";
-            linkEle.innerText = getString("generalPaintings");
-            seriesMenu.appendChild(linkEle);
-            const subtitle = document.createElement("span");
-            subtitle.className = "x-text-subtitle";
-            subtitle.innerText = getString("series");
-            seriesMenu.appendChild(subtitle);
-        }
-        for (let i in series) {
-            const item = series[i];
-            const itemName = DeepX.MdBlogs.getLocaleProp(item, "name");
-            if (!item || item.disable || !itemName || !item.id) continue;
-            const linkEle = document.createElement("a");
-            linkEle.className = sel === item ? "link-long-button state-sel" : "link-long-button";
-            linkEle.href = "./?" + item.id;
-            if (item.icon) {
-                const icon = document.createElement("img");
-                icon.src = getSeriesIcon(item.icon);
-                icon.alt = itemName;
-                linkEle.appendChild(icon);
-            }
+                    hideName: true,
+                    year: 2020,
+                    thumb: true
+                }, getString("series"), ...works.series],
+                items: works as any,
+                select: DeepX.MdBlogs.firstQuery(),
+                blogRela: "../blog/",
+                imageRela: "../images/",
+                itemUrl(item, kind) {
+                    return kind === "source"
+                        ? `./paintings/${item.year}/${item.id}.webp`
+                        : `./paintings/thumbnails/${item.year}/${item.id}.webp`;
+                },
+                click(data) {
+                    let imageSize = data.item.size || "";
+                    if (imageSize && imageSize.indexOf("x") > 0)
+                        imageSize = imageSize.replace("x", "cm × ") + "cm";
+                    if (data.item.year) {
+                        if (imageSize) imageSize += " 　|　 ";
+                        imageSize += monthYear(data.item.year, data.item.month);
+                    }
 
-            const spanEle = document.createElement("span");
-            spanEle.title = spanEle.innerText = itemName;
-            if (item["name-cap"] === "small") spanEle.className = "x-text-cap-small";
-            linkEle.appendChild(spanEle);
-            if (item.subtitle) {
-                const subtitle = document.createElement("span");
-                subtitle.title = subtitle.innerText = item.subtitle;
-                if (item["subtitle-cap"] === "small") subtitle.className = "x-text-cap-small";
-                const subtitle2 = document.createElement("span");
-                subtitle2.appendChild(subtitle);
-                linkEle.appendChild(subtitle2);
-            }
-
-            seriesMenu.appendChild(linkEle);
-        }
-
-        initPopupView();
-        DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
-        setElementProp("section-series-title", null, "picLibs");
-        setElementProp("text-works-greetings", null, "loveDrawing");
-        const moreSeries = ele("link-works-more");
-        if (moreSeries) {
-            DeepX.MdBlogs.setElementText(moreSeries, "seeMore");
-            const seriesMenuTitle = ele("section-series-title-container");
-            moreSeries.addEventListener("click", ev => {
-                if (seriesMenuTitle) seriesMenuTitle.scrollIntoView({ behavior: "smooth" });
-            });
-        }
-        const share = ele("section-share-title");
-        if (share) {
-            setElementProp(share, null, "share");
-            if (typeof navigator === 'object' && typeof navigator.share === "function") {
-                share.className = "x-text-link";
-                share.addEventListener("click", ev => {
-                    navigator.share({
-                        title: document.title,
-                        url: sel && q ? `./?${q}` : "./"
-                    });
-                });
-            }
-        }
-
-        initMenu("paintings");
-    }
-
-    export function initPopupView() {
-        const c = ele("popup-view");
-        if (!c) return;
-        c.addEventListener("click", hidePopupView);
-        c.addEventListener("touchend", hidePopupViewDelay);
+                    const name = data.info.name;
+                    const desc = imageSize ? `"${name} (${imageSize})` : name;
+                    (ele("popup-view-img") as HTMLImageElement).src = data.info.url;
+                    (ele("popup-view-img") as HTMLImageElement).alt = desc;
+                    (ele("popup-view-thumb") as HTMLImageElement).src = data.info.thumb;
+                    (ele("popup-view-thumb") as HTMLImageElement).alt = desc;
+                    ele("popup-view-title")!.innerText = name;
+                    ele("popup-view-desc")!.innerText = imageSize;
+                    ele("popup-view")!.style.display = "";
+                },
+                styles: {
+                    header: ["x-zone-hl", "layout-wide-full", "x-bg-outstanding"],
+                    next: ["x-zone-actions"],
+                    share: ["x-part-panel", "x-bg-emphasis"],
+                },
+                strings: {
+                    pics: getString("paintings"),
+                    all: getString("picLibs"),
+                },
+                urls: {
+                    share: "./icons/share-w.png",
+                    qr: "./logos/qr-paintings.png",
+                    series: "./",
+                },
+                mkt: Hje.getQuery("mkt") || true,
+                page: 24,
+                before: {
+                    tagName: "section",
+                    styleRefs: "x-part-greetings",
+                    children: [{
+                        tagName: "span",
+                        children: getString("loveDrawing"),
+                    }, {
+                        tagName: "span",
+                        children: "❤",
+                    }, {
+                        tagName: "a",
+                        props: {
+                            href: "#",
+                        },
+                        on: {
+                            click(ev: MouseEvent) {
+                                ev.preventDefault();
+                                if (component) component.scrollAllMenuIntoView();
+                            }
+                        },
+                        children: DeepX.MdBlogs.getLocaleString("seeMore"),
+                    }]
+                }
+            } as IImageSeriesPartData,
+        })?.control() as ImageSeriesPart;
+        window.addEventListener("popstate", function(ev) {
+            if (!component || !ev?.state) return;
+            component.selectSeries(ev.state);
+        });
     }
 
 }

@@ -36,6 +36,8 @@ declare namespace PageCtrl {
         "name#zh": string;
     }[];
     export function initMenu(id?: (typeof menu)[number]["id"] | boolean): void;
+    export function hidePopupView(): void;
+    export function hidePopupViewDelay(): void;
     export function initHome(): void;
     export {};
 }
@@ -74,29 +76,35 @@ declare namespace PageCtrl {
         loveDrawing: string;
         "loveDrawing#zh": string;
     };
-    export function getString(key: keyof typeof strings): string;
+    export function getString(key: keyof typeof strings, mktOptions?: {
+        mkt?: string | boolean;
+    }): string;
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings): void;
     export function monthYear(year: number, month?: number | null): string;
     export {};
 }
 declare namespace PageCtrl {
     type IImageRatio = "p" | "page" | "v" | "vertical" | "h" | "horizontal" | "s" | "square" | "w" | "wide";
+    export type ITitleCapKind = "small" | "normal" | null;
     export interface IPaintingSeriesInfo {
         id: string;
         alias?: string[] | null;
-        disable?: string;
+        disable?: boolean;
         name: string;
-        "name-cap"?: "small" | "normal" | null;
+        "name-cap"?: ITitleCapKind;
         subtitle?: string;
-        "subtitle-cap"?: "small" | "normal" | null;
+        "subtitle-cap"?: ITitleCapKind;
+        defaultItemName?: string;
+        hideName?: boolean;
         icon?: string;
         intro?: string;
         qr?: string;
         blog?: string;
         year: number;
-        ext?: string;
         ratio?: IImageRatio;
         thumb?: boolean;
+        links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
+        [property: string]: any;
     }
     interface IPaintingPaging {
         id?: string;
@@ -119,21 +127,82 @@ declare namespace PageCtrl {
         keywords?: string[];
         size?: string;
     }
-    export class ImageSeriesPart extends Hje.BaseComponent {
-        private __inner;
-        constructor(element: any, options?: Hje.ComponentOptionsContract<{
-            series: IPaintingSeriesInfo[];
-            items: Record<string, IPaintingInfo[]>;
-            rela: string;
-        }>);
-        getSeries(id: string): IPaintingSeriesInfo | undefined;
-    }
-    export function hidePopupViewDelay(): void;
     export function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging): Promise<void>;
-    export function hidePopupView(): void;
     export function renderImage(containerEle: HTMLElement, imageInfo: IPaintingInfo, paging: IPaintingPaging): void;
     export function initPaint(): Promise<void>;
-    export function initPopupView(): void;
+    export {};
+}
+declare namespace PageCtrl {
+    type IImageUrlKind = 'thumb' | 'source';
+    export interface IImageClickInfo {
+        item: IPaintingInfo;
+        component: ImageCollectionPart;
+        info: {
+            name: string;
+            url: string;
+            thumb: string;
+        };
+    }
+    export interface IImageCollectionPartOptions {
+        itemUrl?(item: IPaintingInfo, kind: IImageUrlKind): string | undefined;
+        click?(data: IImageClickInfo, ev: MouseEvent): void;
+        mkt?: string | boolean;
+        page?: number;
+    }
+    export interface IImageSeriesPartData extends IImageCollectionPartOptions {
+        series: (IPaintingSeriesInfo | string | DeepX.MdBlogs.IArticleLabelInfo)[];
+        items: Record<string, IPaintingInfo[]>;
+        select?: string | boolean;
+        blogRela?: string | Hje.RelativePathInfo;
+        imageRela?: string | Hje.RelativePathInfo;
+        styles?: {
+            header?: string | string[];
+            main?: string | string[];
+            next?: string | string[];
+            related?: string | string[];
+            share?: string | string[];
+        };
+        strings?: {
+            all?: string;
+            pics?: string;
+        };
+        urls?: {
+            share?: string;
+            qr?: string;
+            series?: string;
+        };
+        before?: Hje.DescriptionContract;
+        after?: Hje.DescriptionContract;
+    }
+    export interface IImageCollectionPartData extends IImageCollectionPartOptions {
+        rela?: string | Hje.RelativePathInfo;
+        items: IPaintingInfo[];
+        defaultName?: string;
+    }
+    export class ImageSeriesPart extends Hje.BaseComponent {
+        private __inner;
+        constructor(element: any, options?: Hje.ComponentOptionsContract<IImageSeriesPartData>);
+        get series(): IPaintingSeriesInfo[];
+        getSeries(id: string): IPaintingSeriesInfo | undefined;
+        selectSeries(id: string | IPaintingSeriesInfo): IPaintingSeriesInfo | undefined;
+        scrollContentIntoView(): false | undefined;
+        scrollAllMenuIntoView(): false | undefined;
+        private refreshRelated;
+        private genSeriesMenu;
+        private getSeriesLinkInfo;
+    }
+    export class ImageCollectionPart extends Hje.BaseComponent {
+        private __inner;
+        constructor(element: any, options?: Hje.ComponentOptionsContract<IImageCollectionPartData>);
+        get length(): IPaintingInfo[];
+        getItem(index: number): IPaintingInfo | undefined;
+        pushWithoutRender(...items: IPaintingInfo[]): number;
+        push(...items: IPaintingInfo[]): number;
+        clear(): void;
+        nextPage(): boolean;
+        indexOf(item: string | IPaintingInfo): number;
+        private genItemModel;
+    }
     export {};
 }
 declare namespace PageCtrl {

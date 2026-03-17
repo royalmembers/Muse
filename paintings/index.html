@@ -15,10 +15,22 @@
     section.x-main-container {
         margin-bottom: 100px;
     }
-    section.x-bg-outstanding.x-zone-hl > h2 > img, section.x-bg-outstanding.x-zone-hl > h2 > span {
+    section.x-zone-hl > h1 {
+        font-size: 20px; font-weight: normal;
+    }
+    section.x-zone-hl > h1 > img, section.x-zone-hl > h1 > span {
         vertical-align: middle;
     }
-    section.x-bg-outstanding.x-zone-hl > h2 > img:first-child {
+    section > section + section + section.x-zone-hl:has(> h1) {
+        margin-top: 80px;
+    }
+    section.x-zone-hl > h1 > span {
+        cursor: text; user-select: text;
+    }
+    section.x-zone-hl > h1 > span + span {
+        color: rgba(240, 240, 240, 0.6); font-size: 16px; font-weight: lighter; margin-left: 20px;
+    }
+    section > h1 > img:first-child {
         width: 32px; height: 32px; margin-right: 10px;
     }
     section.x-zone-actions > div {
@@ -27,10 +39,8 @@
     section.x-part-copyright-tuans {
         padding: 24px 0 24px 0; border-width: 1px 0 1px 0; border-style: solid none solid none; border-color: #333;
     }
-    section.x-main-container span#section-works-title {
-        cursor: text; user-select: text;
-    }
-    section.x-main-container span.x-text-subtitle {
+    section.x-main-container span.x-text-subtitle,
+    section.x-zone-hl + section > span.grouping-header {
         color: #888; margin-top: 20px; margin-bottom: 10px; display: block; user-select: none;
     }
     section.x-part-panel {
@@ -51,68 +61,51 @@
     section#section-works-greetings > span, section#section-works-greetings > a {
         display: inline-block;
     }
-    section span#text-works-greetings {
-        color: #999; line-height: 20px;
+    section.x-part-blog-related > h2 {
+        padding: 15px 0 0 0; border-top: 1px solid #333; cursor: default; user-select: none;
     }
-    section span#text-works-greetings + span {
-        color: red; margin-left: 10px;
-    }
-    section span#text-works-greetings + span + a {
-        padding-left: 20px; margin-left: 20px; border-left: 1px solid #444;
-    }
-    section#section-works-blog {
-        border-top: 1px solid #333;
-    }
-    section#section-works-blog > ul.link-tile-compact, section#section-works-blog > ul.link-tile-compact > li {
+    section.x-part-blog-related > ul.link-tile-compact, section.x-part-blog-related > ul.link-tile-compact > li {
         list-style: none;
     }
-    section img#section-works-qr {
+    section.x-part-blog-share > h2:first-child + div > img {
         width: 160px; height: 160px; border-radius: 4px; opacity: 0.9;
     }
-    span.x-text-link {
-        text-decoration: underline dotted #666; cursor: pointer;
+    section.x-part-blog-share > div.x-part-blog-note {
+        color: #CCC; font-size: 16px; width: 780px; height: 200px; padding: 0 0 0 30px; margin-top: 0; border-width: 0 0 0 1px; border-style: none none none solid; border-color: #444;
+        position: absolute; top: 24px; left: 219px; right: 20px; user-select: text;
     }
-    span.x-text-link:hover {
-        color: #F5B;
+    section.x-part-greetings > span:first-child {
+        color: #999; line-height: 20px;
     }
-    span#text-series {
-        color: #AAA; font-size: 14px; font-weight: normal;
-        background: rgba(0, 0, 0, 0.2); padding: 0 8px; border: 1px solid rgba(128, 128, 128, 0.4); border-radius: 4px;
-        position: absolute; top: 1px; right: 0;
+    section.x-part-greetings > span:first-child + span {
+        color: red; margin-left: 10px;
+    }
+    section.x-part-greetings > span:first-child + span + a {
+        padding-left: 20px; margin-left: 20px; border-left: 1px solid #444;
     }
     section#section-works-container {
         min-height: 420px;
-    }
-    span#section-works-subtitle {
-        color: rgba(240, 240, 240, 0.6); font-size: 16px; font-weight: lighter; margin-left: 20px;
-    }
-    section#section-series-title-container {
-        margin-top: 80px;
-    }
-    section > div#section-works-intro {
-        color: #CCC; font-size: 16px; width: 780px; height: 200px; padding: 0 0 0 30px; margin-top: 0; border-width: 0 0 0 1px; border-style: none none none solid; border-color: #444;
-        position: absolute; top: 24px; left: 219px; right: 20px; user-select: text;
     }
     section.x-part-copyright-notice {
         color: #666; cursor: default; user-select: none;
     }
     @media screen and (max-width:1110px) {
-    section > div#section-works-intro {
+    section.x-part-blog-share > div.x-part-blog-note {
         width: auto; right: 30px;
     }
     }
     @media screen and (max-width:860px) {
-    section > div#section-works-intro {
+    section.x-part-blog-share > div.x-part-blog-note {
         width: 100%; height: auto; padding: 14px 0 0 0; margin-top: 15px; border-width: 1px 0 0 0; border-style: solid none none none; border-color: #333;
         position: relative; top: 0; left: 0;
     }
-    section span#text-works-greetings + span + a {
+    section.x-part-greetings > span:first-child + span + a {
         width: 160px; padding-left: 0; margin-left: 0; border-left: 0 none transparent; display: block;
     }
-    section span#text-works-greetings + span + a::before {
+    section.x-part-greetings > span:first-child + span + a::before {
         color: #666; content: "[";
     }
-    section span#text-works-greetings + span + a::after {
+    section.x-part-greetings > span:first-child + span + a::after {
         color: #666; content: "]";
     }
     }
@@ -126,36 +119,8 @@
             </ul>
         </section>
 	</header>
-    <section class="x-main-container" >
-        <section id="section-works-greetings">
-            <span id="text-works-greetings">I love drawing and following are my works.</span><span>❤</span>
-            <a id="link-works-more" href="#" onclick="return false;" >See more</a>
-        </section>
-        <section class="x-zone-hl layout-wide-full x-bg-outstanding">
-            <h2>
-                <img id="section-works-title-icon" alt="Paintings" src="../images/logos/mspaint.png" /><span id="section-works-title">Paintings</span><span id="section-works-subtitle"></span>
-                <span id="text-series">Series</span>
-            </h2>
-        </section>
-        <section id="section-works-container" class="x-container-pics" >
-        </section>
-        <section class="x-zone-actions">
-            <div>
-                <button id="section-works-more" class="x-button-more x-button-link" style="display: none; " ><span id="button-works-more">See more</span><img alt="See more" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/images/ele/down_pos_white.png" /></button>
-            </div>
-        </section>
-        <section id="section-works-blog" style="display: none" ></section>
-        <section id="section-works-share" class="x-part-panel x-bg-emphasis">
-            <h2><img alt="Share" src="../images/icons/share-w.png" /><span id="section-share-title">Share</span></h2>
-            <div>
-                <img id="section-works-qr" alt="QR code" src="../images/logos/qr-paintings.png" />
-            </div>
-            <div id="section-works-intro"></div>
-        </section>
-        <section id="section-series-title-container" class="x-zone-hl layout-wide-full x-bg-outstanding">
-            <h2 id="section-series-title">Libraries</h2>
-        </section>
-        <section id="section-series-container" >
+    <section id="main-container" class="x-main-container" >
+        <section>
 			<a href="./" class="link-long-button"><span>General</span></a>
             <span class="x-text-subtitle">Series</span>
 			<a href="./?mao" class="link-long-button"><span>摸凹喵</span><span><span class="x-text-cap-small">Mor-Ow Meow</span></span></a>

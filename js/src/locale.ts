@@ -35,8 +35,8 @@ namespace PageCtrl {
         "loveDrawing#zh": "我爱画画！以下是我的部分作品。",
     }
 
-    export function getString(key: keyof typeof strings) {
-        return DeepX.MdBlogs.getLocaleProp(strings, key) as string;
+    export function getString(key: keyof typeof strings, mktOptions?: { mkt?: string | boolean }) {
+        return DeepX.MdBlogs.getLocaleProp(strings, key, mktOptions) as string;
     }
 
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings) {
