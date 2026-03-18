@@ -340,11 +340,9 @@ namespace PageCtrl {
                         src: inner.imageRela.relative(ele.icon),
                     }
                 });
-                let cap = DeepX.MdBlogs.getLocaleProp(ele, "name-cap", inner.mkt) as ITitleCapKind;
-                labels.push(span(name, cap === "small" ? "x-text-cap-small" : undefined));
+                labels.push(span(name, capStyleRef(ele, "name-cap", inner.mkt)));
                 const desc = DeepX.MdBlogs.getLocaleProp(ele, "subtitle", inner.mkt);
-                cap = DeepX.MdBlogs.getLocaleProp(ele, "subtitle-cap", inner.mkt) as ITitleCapKind;
-                if (desc) labels.push(span([span(desc)], cap === "small" ? "x-text-cap-small" : undefined));
+                if (desc) labels.push(span([span(desc)], capStyleRef(ele, "subtitle-cap", inner.mkt)));
                 const styleRefs = ["link-long-button"];
                 if (selected === ele.id) styleRefs.push("state-sel");
                 const { url: seriesLink, kind } = self.getSeriesLinkInfo(ele);
@@ -525,11 +523,12 @@ namespace PageCtrl {
             }
             const col = this.__inner.items;
             let j = 0;
-            for (let i = first; i < this.__inner.items.length; i++) {
+            let i = first;
+            for (; i < this.__inner.items.length; i++) {
                 const item = col[i];
                 if (item.disable) continue;
                 if (j >= pageSize) {
-                    this.__inner.nextIndex = first + j;
+                    this.__inner.nextIndex = i;
                     return true;
                 }
 
@@ -539,7 +538,7 @@ namespace PageCtrl {
                 this.appendChild(null as any as string, element);
             }
 
-            this.__inner.nextIndex = first + j;
+            this.__inner.nextIndex = i;
             return false;
         }
 
@@ -555,6 +554,12 @@ namespace PageCtrl {
             }
 
             return -1;
+        }
+
+        imageRelative(url: string) {
+            if (!url || typeof url !== "string") return null;
+            if (url.indexOf("://") >= 0) return url;
+            return this.__inner.rela.relative(url)?.value;
         }
 
         private genItemModel(item: IPaintingInfo) {
@@ -594,6 +599,17 @@ namespace PageCtrl {
                 },
                 data: item,
             } as Hje.DescriptionContract;
+        }
+    }
+
+    export function capStyleRef(ele: any, key: string, options?: { mkt?: string | boolean }) {
+        const cap = DeepX.MdBlogs.getLocaleProp(ele, key, options) as ITitleCapKind;
+        if (!cap) return undefined;
+        switch (cap.toLowerCase()) {
+            case "small":
+                return "x-text-cap-small";
+            default:
+                return undefined;
         }
     }
 

@@ -26,10 +26,7 @@ namespace PageCtrl {
 
     interface IPaintingPaging {
         id?: string;
-        offset: number;
         size: number;
-        path: string;
-        defaultName?: string;
         root?: boolean;
         series?: IPaintingSeriesInfo;
     }
@@ -53,127 +50,9 @@ namespace PageCtrl {
         done: false
     };
 
-    async function init(rela?: string) {
+    async function init(element?: HTMLElement | string, rela?: string) {
         if (works.done) return true;
-        const res = await fetch(`${rela || "../paintings/"}config.json`);
-        const json = await res.json();
-        if (!json) return false;
-        works = json;
-        works.done = true;
-        return true;
-    }
-
-    function getContainerElement(paging: IPaintingPaging, suffix?: string) {
-        return ele(`${paging?.id || "section-works"}-${suffix || "container"}`)!;
-    }
-
-    function renderNextWave(images: IPaintingInfo[], paging: IPaintingPaging) {
-        const containerEle = getContainerElement(paging);
-        for (let i = paging.offset; i < Math.min(paging.offset + paging.size, images.length); i++) {
-            const imageInfo = images[i];
-            if (!imageInfo || imageInfo.disable) continue;
-            try {
-                renderImage(containerEle, imageInfo, paging);
-            } catch (ex) { }
-        }
-        paging.offset += paging.size;
-        getContainerElement(paging, "more").style.display = paging.offset < images.length ? "" : "none";
-    }
-
-    function seriesInPaging(paging: IPaintingPaging) {
-        return paging.series || {} as IPaintingSeriesInfo;
-    }
-
-    export async function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging) {
-        if (!paging) return;
-        if (paging.root) await init("./paintings/");
-        else await init();
-        if (images === true) images = works.default || [];
-        const series = seriesInPaging(paging);
-        const container = getContainerElement(paging);
-        container.innerHTML = "";
-        switch (series.ratio) {
-            case "w":
-            case "wide":
-                container.className = "x-container-pics x-image-ratio-w";
-                break;
-            case "s":
-            case "square":
-                container.className = "x-container-pics x-image-ratio-s";
-                break;
-            case "p":
-            case "page":
-                container.className = "x-container-pics x-image-ratio-p";
-                break;
-            case "h":
-            case "horizontal":
-                container.className = "x-container-pics x-image-ratio-h";
-                break;
-            case "v":
-            case "vertical":
-            default:
-                container.className = "x-container-pics";
-                break;
-        }
-
-        DeepX.MdBlogs.setElementProp(getContainerElement(paging, "title"), null, DeepX.MdBlogs.getLocaleProp(series, "name") || paging.defaultName || getString("paintings"));
-        const subtitle = getContainerElement(paging, "subtitle");
-        if (subtitle) {
-            if (series.subtitle) DeepX.MdBlogs.setElementProp(subtitle, null, series.subtitle);
-            subtitle.className = series["subtitle-cap"] === "small" ? "x-text-cap-small" : "";
-        }
-
-        renderNextWave(images, paging);
-        getContainerElement(paging, "more")!.addEventListener("click", function () {
-            renderNextWave(images, paging);
-        });
-    }
-
-    export function renderImage(containerEle: HTMLElement, imageInfo: IPaintingInfo, paging: IPaintingPaging) {
-        const imageEle = document.createElement("img");
-        imageEle.loading = "lazy";
-        let sourceUrl = imageInfo.url;
-        const series = seriesInPaging(paging);
-        const ext = "." + (series.ext || "webp");
-        if (!sourceUrl) {
-            if (imageInfo.id && imageInfo.year) sourceUrl = "~/" + imageInfo.year + "/" + imageInfo.id + ext;
-            else return;
-        }
-
-        let thumbUrl = imageInfo.thumb;
-        if (thumbUrl === undefined) thumbUrl = series.thumb;
-        if (thumbUrl === true) thumbUrl = sourceUrl.replace("~/", "~/thumbnails/");
-        else if (!thumbUrl) thumbUrl = sourceUrl;
-        const imagesPath = rootRela(paging.root) + "images/";
-        if (thumbUrl.indexOf("~/") == 0) thumbUrl = thumbUrl.replace("~/", imagesPath + paging.path + "/");
-        if (sourceUrl.indexOf("~/") == 0) sourceUrl = sourceUrl.replace("~/", imagesPath + paging.path + "/");
-        imageEle.src = thumbUrl;
-        const imageName = DeepX.MdBlogs.getLocaleProp(imageInfo, "name") || DeepX.MdBlogs.getLocaleProp(series, "name") || paging.defaultName || "";
-        let imageSize = imageInfo.size || "";
-        if (imageSize && imageSize.indexOf("x") > 0)
-            imageSize = imageSize.replace("x", "cm × ") + "cm";
-        if (imageInfo.year) {
-            if (imageSize) imageSize += " 　|　 ";
-            imageSize += monthYear(imageInfo.year, imageInfo.month);
-        }
-
-        const imageName2 = imageSize ? `"${imageName} (${imageSize})` : imageName;
-        imageEle.alt = imageEle.title = imageName;
-        containerEle.appendChild(imageEle);
-        imageEle.addEventListener("click", function (ev) {
-            showPopupView({
-                name: imageName,
-                url: sourceUrl,
-                thumb: thumbUrl,
-                tips: imageName2,
-                desc: imageSize
-            });
-        });
-    }
-
-    export async function initPaint() {
-        initMenu("paintings");
-        Hje.render("main-container", {
+        const c = element ? Hje.render(element, {
             children: [{
                 tagName: "p",
                 children: [{
@@ -181,12 +60,101 @@ namespace PageCtrl {
                     children: DeepX.MdBlogs.getLocaleString("loading"),
                 }],
             }],
-        });
+        }) : undefined;
         try {
-            await init();
-        } catch (ex) {
-            DeepX.MdBlogs.setElementText("section-works-container", "loadFailed");
+            const res = await fetch(`${rela || "../paintings/"}config.json`);
+            const json = await res.json();
+            if (!json) return false;
+            works = json;
+            works.done = true;
+            return true;
+        } catch {
+            if (c) {
+                c.model().children = [{
+                    tagName: "span",
+                    children: DeepX.MdBlogs.getLocaleString("loadFailed"),
+                }];
+                c.refresh();
+            }
+            return false;
         }
+    }
+
+    export async function renderPaintings(options: IPaintingPaging) {
+        if (!options) return;
+        const container = getContainerElement(options);
+        if (options.root) await init(container, "./paintings/");
+        else await init(container);
+        setElementProp(getContainerElement(options, "title"), null, "paintings");
+        let images = options.series?.id ? works[options.series.id as keyof typeof works] : undefined;
+        if (!images || !(images instanceof Array)) images = works.default || [];
+        const mkt = Hje.getQuery("mkt") || undefined;
+        const mktOptions = mkt !== undefined ? { mkt } : undefined;
+        const c = Hje.render(container, {
+            control: ImageCollectionPart,
+            data: {
+                rela: options.root ? "./images/" : "../images/",
+                items: [],
+                defaultName: DeepX.MdBlogs.getLocaleString("pic"),
+                mkt,
+                page: options.size || 24,
+                itemUrl: getImageUrl,
+                click: onItemClick,
+            } as IImageCollectionPartData,
+        })?.control() as ImageCollectionPart;
+        if (!c) return;
+        c.pushWithoutRender(...images);
+        const menu = getContainerElement(options, "menu");
+        if (menu && works.series?.length) {
+            const link = options.root ? "./paintings/" : "../paintings/";
+            const children = works.series.map(ele => {
+                if (!ele?.id || ele.disable) return null;
+                const name = DeepX.MdBlogs.getLocaleProp(ele, "name", mktOptions);
+                if (!name) return null;
+                const label: Hje.DescriptionContract[] = [];
+                let text = DeepX.MdBlogs.getLocaleProp(ele, "icon", mktOptions);
+                if (text) label.push({
+                    tagName: "img",
+                    props: {
+                        alt: name,
+                        src: c.imageRelative(text),
+                    }
+                });
+                label.push({
+                    tagName: "span",
+                    styleRefs: capStyleRef(ele, "name-cap", mktOptions),
+                    children: name,
+                });
+                text = DeepX.MdBlogs.getLocaleProp(ele, "subtitle", mktOptions);
+                if (text) label.push({
+                    tagName: "span",
+                    styleRefs: capStyleRef(ele, "subtitle-cap", mktOptions),
+                    children: text,
+                });
+                return {
+                    tagName: "a",
+                    styleRefs: "link-long-button",
+                    props: {
+                        href: `${link}?${ele.id}`
+                    },
+                    children: label,
+                };
+            }).filter(ele => !!ele);
+            Hje.render(menu, { children });
+        }
+
+        if (!c.nextPage()) return;
+        const more = getContainerElement(options, "more");
+        if (!more) return;
+        more.style.display = "";
+        more.addEventListener("click", function () {
+            if (!c.nextPage()) more.style.display = "none";
+        });
+    }
+
+    export async function initPaint() {
+        initMenu("paintings");
+        await init("main-container");
         const component = Hje.render("main-container", {
             control: ImageSeriesPart,
             data: {
@@ -198,33 +166,11 @@ namespace PageCtrl {
                     thumb: true
                 }, getString("series"), ...works.series],
                 items: works as any,
-                select: DeepX.MdBlogs.firstQuery() || true,
+                select: DeepX.MdBlogs.firstQuery() || undefined,
                 blogRela: "../blog/",
                 imageRela: "../images/",
-                itemUrl(item, kind) {
-                    return kind === "source"
-                        ? `./paintings/${item.year}/${item.id}.webp`
-                        : `./paintings/thumbnails/${item.year}/${item.id}.webp`;
-                },
-                click(data) {
-                    let imageSize = data.item.size || "";
-                    if (imageSize && imageSize.indexOf("x") > 0)
-                        imageSize = imageSize.replace("x", "cm × ") + "cm";
-                    if (data.item.year) {
-                        if (imageSize) imageSize += " 　|　 ";
-                        imageSize += monthYear(data.item.year, data.item.month);
-                    }
-
-                    const name = data.info.name;
-                    const desc = imageSize ? `"${name} (${imageSize})` : name;
-                    (ele("popup-view-img") as HTMLImageElement).src = data.info.url;
-                    (ele("popup-view-img") as HTMLImageElement).alt = desc;
-                    (ele("popup-view-thumb") as HTMLImageElement).src = data.info.thumb;
-                    (ele("popup-view-thumb") as HTMLImageElement).alt = desc;
-                    ele("popup-view-title")!.innerText = name;
-                    ele("popup-view-desc")!.innerText = imageSize;
-                    ele("popup-view")!.style.display = "";
-                },
+                itemUrl: getImageUrl,
+                click: onItemClick,
                 selected(info, c) {
                     (ele("ph-link-icon") as HTMLLinkElement).href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
                 },
@@ -273,6 +219,36 @@ namespace PageCtrl {
         window.addEventListener("popstate", function(ev) {
             if (!component || !ev?.state) return;
             component.selectSeries(ev.state);
+        });
+    }
+
+    function getContainerElement(paging: IPaintingPaging, suffix?: string) {
+        return ele(`${paging?.id || "section-works"}-${suffix || "container"}`)!;
+    }
+
+    function getImageUrl(item: IPaintingInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]) {
+        return kind === "source"
+            ? `./paintings/${item.year}/${item.id}.webp`
+            : `./paintings/thumbnails/${item.year}/${item.id}.webp`;
+    }
+
+    function onItemClick(data: IImageClickInfo) {
+        let imageSize = data.item.size || "";
+        if (imageSize && imageSize.indexOf("x") > 0)
+            imageSize = imageSize.replace("x", "cm × ") + "cm";
+        if (data.item.year) {
+            if (imageSize) imageSize += " 　|　 ";
+            imageSize += monthYear(data.item.year, data.item.month);
+        }
+
+        const name = data.info.name;
+        const desc = imageSize ? `"${name} (${imageSize})` : name;
+        showPopupView({
+            name: name,
+            url: data.info.url,
+            thumb: data.info.thumb,
+            tips: desc,
+            desc: imageSize
         });
     }
 

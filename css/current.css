@@ -141,6 +141,16 @@ div#popup-view > div.priority-subtitle > strong {
     font-weight: normal;
     font-style: normal;
 }
+button.x-button-more {
+    background-image: url(https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/images/ele/down_pos_white.png);
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: right 12px center;
+    padding-right: 36px;
+}
+a.link-tile-compact, button.link-button-normal {
+    backdrop-filter: blur(4px);
+}
 section > div.x-copyright-spec {
     color: #F9F9F9; text-align: center; width: 220px; position: absolute; top: 40px; left: 0;
 }

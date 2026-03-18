@@ -116,10 +116,7 @@ declare namespace PageCtrl {
     }
     interface IPaintingPaging {
         id?: string;
-        offset: number;
         size: number;
-        path: string;
-        defaultName?: string;
         root?: boolean;
         series?: IPaintingSeriesInfo;
     }
@@ -135,8 +132,7 @@ declare namespace PageCtrl {
         keywords?: string[];
         size?: string;
     }
-    export function renderPaintings(images: IPaintingInfo[] | true, paging: IPaintingPaging): Promise<void>;
-    export function renderImage(containerEle: HTMLElement, imageInfo: IPaintingInfo, paging: IPaintingPaging): void;
+    export function renderPaintings(options: IPaintingPaging): Promise<void>;
     export function initPaint(): Promise<void>;
     export {};
 }
@@ -212,8 +208,12 @@ declare namespace PageCtrl {
         clear(): void;
         nextPage(): boolean;
         indexOf(item: string | IPaintingInfo): number;
+        imageRelative(url: string): string | null;
         private genItemModel;
     }
+    export function capStyleRef(ele: any, key: string, options?: {
+        mkt?: string | boolean;
+    }): "x-text-cap-small" | undefined;
     export {};
 }
 declare namespace PageCtrl {

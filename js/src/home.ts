@@ -141,10 +141,8 @@ namespace PageCtrl {
                 });
             }
         } catch (ex) { }
-        renderPaintings(true, {
-            offset: 0,
+        renderPaintings({
             size: 12,
-            path: "paintings",
             root: true
         });
         videosModel("home");
