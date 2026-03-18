@@ -49,7 +49,7 @@ namespace PageCtrl {
 
     let works = {
         series: [] as IPaintingSeriesInfo[],
-        common: [] as IPaintingInfo[],
+        default: [] as IPaintingInfo[],
         done: false
     };
 
@@ -88,7 +88,7 @@ namespace PageCtrl {
         if (!paging) return;
         if (paging.root) await init("./paintings/");
         else await init();
-        if (images === true) images = works.common || [];
+        if (images === true) images = works.default || [];
         const series = seriesInPaging(paging);
         const container = getContainerElement(paging);
         container.innerHTML = "";
@@ -161,13 +161,13 @@ namespace PageCtrl {
         imageEle.alt = imageEle.title = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
-            (ele("popup-view-img") as HTMLImageElement).src = sourceUrl;
-            (ele("popup-view-img") as HTMLImageElement).alt = imageName2;
-            (ele("popup-view-thumb") as HTMLImageElement).src = thumbUrl;
-            (ele("popup-view-thumb") as HTMLImageElement).alt = imageName2;
-            ele("popup-view-title")!.innerText = imageName;
-            ele("popup-view-desc")!.innerText = imageSize;
-            ele("popup-view")!.style.display = "";
+            showPopupView({
+                name: imageName,
+                url: sourceUrl,
+                thumb: thumbUrl,
+                tips: imageName2,
+                desc: imageSize
+            });
         });
     }
 
@@ -225,6 +225,9 @@ namespace PageCtrl {
                     ele("popup-view-desc")!.innerText = imageSize;
                     ele("popup-view")!.style.display = "";
                 },
+                selected(info, c) {
+                    (ele("ph-link-icon") as HTMLLinkElement).href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
+                },
                 styles: {
                     header: ["x-zone-hl", "layout-wide-full", "x-bg-outstanding"],
                     next: ["x-zone-actions"],
@@ -259,7 +262,7 @@ namespace PageCtrl {
                         on: {
                             click(ev: MouseEvent) {
                                 ev.preventDefault();
-                                if (component) component.scrollAllMenuIntoView();
+                                if (component) component.scrollMenuIntoView();
                             }
                         },
                         children: getString("picLibs"),

@@ -38,6 +38,13 @@ declare namespace PageCtrl {
     export function initMenu(id?: (typeof menu)[number]["id"] | boolean): void;
     export function hidePopupView(): void;
     export function hidePopupViewDelay(): void;
+    export function showPopupView(info: {
+        url: string;
+        thumb?: string;
+        name: string;
+        tips?: string;
+        desc: string;
+    }): void;
     export function initHome(): void;
     export {};
 }
@@ -49,6 +56,8 @@ declare namespace PageCtrl {
         "share#zh": string;
         photoTaken: string;
         "photoTaken#zh": string;
+        general: string;
+        "general#zh": string;
         paintings: string;
         "paintings#zh": string;
         series: string;
@@ -173,6 +182,7 @@ declare namespace PageCtrl {
         };
         before?: Hje.DescriptionContract;
         after?: Hje.DescriptionContract;
+        selected?(info: IPaintingSeriesInfo, component: ImageSeriesPart): void;
     }
     export interface IImageCollectionPartData extends IImageCollectionPartOptions {
         rela?: string | Hje.RelativePathInfo;
@@ -186,7 +196,8 @@ declare namespace PageCtrl {
         getSeries(id: string): IPaintingSeriesInfo | undefined;
         selectSeries(id: string | IPaintingSeriesInfo): IPaintingSeriesInfo | undefined;
         scrollContentIntoView(): false | undefined;
-        scrollAllMenuIntoView(): false | undefined;
+        scrollMenuIntoView(): false | undefined;
+        imageRelative(url: string): string | null;
         private refreshRelated;
         private genSeriesMenu;
         private getSeriesLinkInfo;

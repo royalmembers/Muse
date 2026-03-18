@@ -556,6 +556,20 @@ var PageCtrl;
         }, 200);
     }
     PageCtrl.hidePopupViewDelay = hidePopupViewDelay;
+    function showPopupView(info) {
+        if (!(info === null || info === void 0 ? void 0 : info.url) || !info.name) {
+            hidePopupView();
+            return;
+        }
+        PageCtrl.ele("popup-view-img").src = info.url;
+        PageCtrl.ele("popup-view-img").alt = info.tips || info.name;
+        PageCtrl.ele("popup-view-thumb").src = info.thumb || info.url;
+        PageCtrl.ele("popup-view-thumb").alt = info.tips || info.name;
+        PageCtrl.ele("popup-view-title").innerText = info.name;
+        PageCtrl.ele("popup-view-desc").innerText = info.desc;
+        PageCtrl.ele("popup-view").style.display = "";
+    }
+    PageCtrl.showPopupView = showPopupView;
     function initHome() {
         var container = PageCtrl.ele("section-avatars");
         container.innerHTML = "";
@@ -623,6 +637,8 @@ var PageCtrl;
         "share#zh": "分享",
         photoTaken: "Photo taken on {0}.",
         "photoTaken#zh": "本照片拍摄于{0}年",
+        general: "General",
+        "general#zh": "常规",
         paintings: "Paintings",
         "paintings#zh": "画作",
         series: "Series",
@@ -714,7 +730,7 @@ var PageCtrl;
 (function (PageCtrl) {
     var works = {
         series: [],
-        common: [],
+        default: [],
         done: false
     };
     function init(rela) {
@@ -779,7 +795,7 @@ var PageCtrl;
                         _a.label = 4;
                     case 4:
                         if (images === true)
-                            images = works.common || [];
+                            images = works.default || [];
                         series = seriesInPaging(paging);
                         container = getContainerElement(paging);
                         container.innerHTML = "";
@@ -861,13 +877,13 @@ var PageCtrl;
         imageEle.alt = imageEle.title = imageName;
         containerEle.appendChild(imageEle);
         imageEle.addEventListener("click", function (ev) {
-            PageCtrl.ele("popup-view-img").src = sourceUrl;
-            PageCtrl.ele("popup-view-img").alt = imageName2;
-            PageCtrl.ele("popup-view-thumb").src = thumbUrl;
-            PageCtrl.ele("popup-view-thumb").alt = imageName2;
-            PageCtrl.ele("popup-view-title").innerText = imageName;
-            PageCtrl.ele("popup-view-desc").innerText = imageSize;
-            PageCtrl.ele("popup-view").style.display = "";
+            PageCtrl.showPopupView({
+                name: imageName,
+                url: sourceUrl,
+                thumb: thumbUrl,
+                tips: imageName2,
+                desc: imageSize
+            });
         });
     }
     PageCtrl.renderImage = renderImage;
@@ -938,6 +954,9 @@ var PageCtrl;
                                     PageCtrl.ele("popup-view-desc").innerText = imageSize;
                                     PageCtrl.ele("popup-view").style.display = "";
                                 },
+                                selected: function (info, c) {
+                                    PageCtrl.ele("ph-link-icon").href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
+                                },
                                 styles: {
                                     header: ["x-zone-hl", "layout-wide-full", "x-bg-outstanding"],
                                     next: ["x-zone-actions"],
@@ -973,7 +992,7 @@ var PageCtrl;
                                                 click: function (ev) {
                                                     ev.preventDefault();
                                                     if (component)
-                                                        component.scrollAllMenuIntoView();
+                                                        component.scrollMenuIntoView();
                                                 }
                                             },
                                             children: PageCtrl.getString("picLibs"),
@@ -1010,6 +1029,7 @@ var PageCtrl;
             var imageRela = toRela(data.imageRela || "../images/");
             var styles = data.styles || {};
             var strings = data.strings || {};
+            var urls = data.urls || {};
             var mainStyle = mergeArray(["x-container-pics"], styles.main);
             _this.__inner = {
                 series: seriesCol,
@@ -1018,8 +1038,9 @@ var PageCtrl;
                 mkt: mktOptions,
                 imageRela: imageRela,
                 mainStyle: mainStyle,
-                urls: data.urls,
+                urls: urls,
                 siteName: strings.site,
+                selected: data.selected,
             };
             var self = _this;
             var select = data.select;
@@ -1027,62 +1048,73 @@ var PageCtrl;
                 select = (_a = _this.series[0]) === null || _a === void 0 ? void 0 : _a.id;
             else if (!select || typeof select !== "string")
                 select = undefined;
-            _this.currentModel.children = [data.before, genHeader([{
-                        tagName: "span",
-                        children: strings.pics,
-                    }], styles.header, "h1", "title", "title-container"), {
-                    key: "gallery",
-                    tagName: "main",
-                    control: ImageCollectionPart,
-                    styleRefs: mainStyle,
-                    data: {
-                        rela: imageRela,
-                        itemUrl: data.itemUrl,
-                        click: data.click,
-                        mkt: data.mkt,
-                        defaultName: strings.pics,
-                        page: data.page,
-                    },
-                }, {
-                    key: "actions",
-                    tagName: "section",
-                    style: { display: "none" },
-                    styleRefs: mergeArray(["x-part-blog-next"], styles.next),
-                    children: [{
-                            tagName: "div",
+            _this.currentModel.children = [{
+                    tagName: "article",
+                    children: [data.before, genHeader([{
+                                tagName: "span",
+                                children: strings.pics,
+                            }], styles.header, "h1", "title", "title-container"), {
+                            key: "gallery",
+                            tagName: "main",
+                            control: ImageCollectionPart,
+                            styleRefs: mainStyle,
+                            data: {
+                                rela: imageRela,
+                                itemUrl: data.itemUrl,
+                                click: data.click,
+                                mkt: data.mkt,
+                                defaultName: strings.pics,
+                                page: data.page,
+                            },
+                        }, {
+                            key: "actions",
+                            tagName: "section",
+                            style: { display: "none" },
+                            styleRefs: mergeArray(["x-part-blog-next"], styles.next),
                             children: [{
-                                    tagName: "button",
-                                    styleRefs: ["x-button-more", "link-button-normal"],
-                                    children: [span(DeepX.MdBlogs.getLocaleString("seeMore", data.mkt))],
-                                    on: {
-                                        click: function () {
-                                            var gallery = self.childControl("gallery");
-                                            if (!gallery)
-                                                return;
-                                            var hasNextPage = gallery.nextPage();
-                                            if (hasNextPage)
-                                                return;
-                                            self.childModel("actions", {
-                                                style: { display: "none" },
-                                            });
-                                        },
-                                    },
+                                    tagName: "div",
+                                    children: [{
+                                            tagName: "button",
+                                            styleRefs: ["x-button-more", "link-button-normal"],
+                                            children: [span(DeepX.MdBlogs.getLocaleString("seeMore", data.mkt))],
+                                            on: {
+                                                click: function () {
+                                                    var gallery = self.childControl("gallery");
+                                                    if (!gallery)
+                                                        return;
+                                                    var hasNextPage = gallery.nextPage();
+                                                    if (hasNextPage)
+                                                        return;
+                                                    self.childModel("actions", {
+                                                        style: { display: "none" },
+                                                    });
+                                                },
+                                            },
+                                        }]
                                 }]
-                        }]
+                        }, {
+                            key: "related",
+                            tagName: "section",
+                            style: { display: "none" },
+                            styleRefs: mergeArray(["x-part-blog-related"], styles.related),
+                            children: [],
+                        }, {
+                            key: "share",
+                            tagName: "section",
+                            styleRefs: mergeArray(["x-part-blog-share"], styles.share),
+                            style: { display: "none" },
+                        }, data.after,].filter(function (ele) { return !!ele; })
                 }, {
-                    key: "related",
-                    tagName: "section",
-                    style: { display: "none" },
-                    styleRefs: mergeArray(["x-part-blog-related"], styles.related),
-                    children: [],
-                }, sharePanel(data.urls, null, imageRela, styles.share, mktOptions), data.after, genHeader([{
-                        tagName: "span",
-                        children: PageCtrl.getString("picLibs", mktOptions),
-                    }], styles.header, "h1", undefined, "menu"), {
-                    key: "all",
-                    tagName: "section",
-                    children: select ? [] : _this.genSeriesMenu(select),
-                }].filter(function (ele) { return !!ele; });
+                    tagName: "nav",
+                    children: [genHeader([{
+                                tagName: "span",
+                                children: PageCtrl.getString("picLibs", mktOptions),
+                            }], styles.header, "h1", undefined, "menu"), {
+                            key: "all",
+                            tagName: "section",
+                            children: select ? [] : _this.genSeriesMenu(select),
+                        }].filter(function (ele) { return !!ele; })
+                }];
             _this.refreshChild(undefined, function () {
                 setTimeout(function () {
                     if (!select || self.__inner.select)
@@ -1090,12 +1122,12 @@ var PageCtrl;
                     var sel = self.selectSeries(select);
                     if (!sel)
                         return;
-                    var _a = self.getSeriesLinkInfo(sel), url = _a.url, kind = _a.kind;
+                    var _a = self.getSeriesLinkInfo(sel), url = _a.url, kind = _a.kind, title = _a.title;
                     if (kind !== "route" || !url)
                         return false;
                     history.replaceState(sel, "", url);
                     if (self.__inner.siteName)
-                        document.title = "".concat(DeepX.MdBlogs.getLocaleProp(sel, "name", mktOptions), " - ").concat(self.__inner.siteName);
+                        document.title = title;
                 }, 100);
             });
             return _this;
@@ -1136,7 +1168,7 @@ var PageCtrl;
             return undefined;
         };
         ImageSeriesPart.prototype.selectSeries = function (id) {
-            var _a, _b, _c;
+            var _a, _b;
             if (!id)
                 return undefined;
             if (typeof id === "string") {
@@ -1176,16 +1208,21 @@ var PageCtrl;
             if (text)
                 title.push(span(text));
             this.childModel("title", { children: title });
-            var share = (_c = sharePanel({
+            var info = this.getSeriesLinkInfo(id);
+            var share = sharePanel({
                 qr: id.qr || ((_a = this.__inner.urls) === null || _a === void 0 ? void 0 : _a.qr),
-                share: (_b = this.__inner.urls) === null || _b === void 0 ? void 0 : _b.share
-            }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, undefined, mkt)) === null || _c === void 0 ? void 0 : _c.children;
+                share: (_b = this.__inner.urls) === null || _b === void 0 ? void 0 : _b.share,
+                page: info.url,
+            }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, info.title, undefined, mkt);
             this.childModel("share", {
-                style: { display: share ? "" : "none" },
-                children: share || []
+                style: { display: share.length ? "" : "none" },
+                children: share,
             });
             this.refreshRelated();
             this.childModel("all", { children: this.genSeriesMenu(id.id) });
+            var h = this.__inner.selected;
+            if (typeof h === "function")
+                h(id, this);
             return id;
         };
         ImageSeriesPart.prototype.scrollContentIntoView = function () {
@@ -1195,12 +1232,20 @@ var PageCtrl;
                 return false;
             element.scrollIntoView({ behavior: "smooth" });
         };
-        ImageSeriesPart.prototype.scrollAllMenuIntoView = function () {
+        ImageSeriesPart.prototype.scrollMenuIntoView = function () {
             var _a;
             var element = (_a = this.childContext("menu")) === null || _a === void 0 ? void 0 : _a.element();
             if (!element)
                 return false;
             element.scrollIntoView({ behavior: "smooth" });
+        };
+        ImageSeriesPart.prototype.imageRelative = function (url) {
+            var _a;
+            if (!url || typeof url !== "string")
+                return null;
+            if (url.indexOf("://") >= 0)
+                return url;
+            return (_a = this.__inner.imageRela.relative(url)) === null || _a === void 0 ? void 0 : _a.value;
         };
         ImageSeriesPart.prototype.refreshRelated = function () {
             return __awaiter(this, void 0, void 0, function () {
@@ -1229,14 +1274,13 @@ var PageCtrl;
                             mkt = this.__inner.mkt;
                             rela = this.__inner.blogRela;
                             links = genLinkList(PageCtrl.getString("relatedBlog", mkt), articles.map(function (ele) {
-                                var _a;
                                 var subtitle = [];
                                 var text = ele.getSubtitle(mkt);
                                 if (text)
                                     subtitle.push(text);
-                                var year = (_a = ele.dateObj) === null || _a === void 0 ? void 0 : _a.year;
-                                if (year)
-                                    subtitle.push(year.toString(10));
+                                var date = ele.dateString;
+                                if (date)
+                                    subtitle.push(date);
                                 return {
                                     name: ele.getName(mkt),
                                     subtitle: subtitle.length ? subtitle : undefined,
@@ -1257,18 +1301,28 @@ var PageCtrl;
         ImageSeriesPart.prototype.genSeriesMenu = function (selected) {
             var self = this;
             var inner = self.__inner;
-            return inner.series.map(function (ele) {
+            var arr = [];
+            var label;
+            inner.series.forEach(function (ele) {
                 if (!ele)
-                    return null;
-                if (typeof ele === "string")
-                    return span(ele, "grouping-header");
+                    return;
+                if (typeof ele === "string") {
+                    label = ele;
+                    return;
+                }
                 var name = DeepX.MdBlogs.getLocaleProp(ele, "name", inner.mkt);
                 if (!name)
                     return null;
-                if (ele.disable === "label" || ele.disable === "header")
-                    return span(name, "grouping-header");
+                if (ele.disable === "label" || ele.disable === "header") {
+                    label = name;
+                    return;
+                }
                 if (ele.disable || !ele.id)
-                    return null;
+                    return;
+                if (label) {
+                    arr.push(span(label, "grouping-header"));
+                    label = undefined;
+                }
                 var labels = [];
                 if (ele.icon)
                     labels.push({
@@ -1289,7 +1343,7 @@ var PageCtrl;
                     styleRefs.push("state-sel");
                 var _a = self.getSeriesLinkInfo(ele), seriesLink = _a.url, kind = _a.kind;
                 var enableRoute = kind === "route";
-                return {
+                arr.push({
                     tagName: "a",
                     styleRefs: styleRefs,
                     props: {
@@ -1316,12 +1370,14 @@ var PageCtrl;
                             PageCtrl.scrollToTop();
                         }
                     },
-                };
-            }).filter(function (ele) { return !!ele; });
+                });
+            });
+            return arr;
         };
         ImageSeriesPart.prototype.getSeriesLinkInfo = function (value) {
             var _a;
-            var seriesLink = (_a = this.__inner.urls) === null || _a === void 0 ? void 0 : _a.series;
+            var inner = this.__inner;
+            var seriesLink = (_a = inner.urls) === null || _a === void 0 ? void 0 : _a.series;
             if (seriesLink) {
                 if (seriesLink === "?" || seriesLink === ".")
                     seriesLink = "./";
@@ -1334,12 +1390,13 @@ var PageCtrl;
             if (seriesLink) {
                 if (seriesLink.endsWith("="))
                     seriesLink += value.id;
-                else if (enableRoute && (value.id === "default" || value.id === "index") && value === this.__inner.series[0])
+                else if (enableRoute && (value.id === "default" || value.id === "index") && value === inner.series[0])
                     seriesLink = "./";
                 else
                     seriesLink += "?" + value.id;
             }
             return {
+                title: "".concat(DeepX.MdBlogs.getLocaleProp(value, "name", inner.mkt), " - ").concat(inner.siteName),
                 url: seriesLink,
                 kind: enableRoute ? "route" : (seriesLink ? "link" : "func"),
             };
@@ -1640,16 +1697,15 @@ var PageCtrl;
         });
         return container;
     }
-    function sharePanel(urls, intro, rela, styleRefs, mktOptions) {
+    function sharePanel(urls, intro, rela, title, styleRefs, mktOptions) {
         if (!urls)
             urls = {};
+        var arr = [];
+        var introElement = multipleLines(intro, "x-part-blog-note");
         if (!urls.qr) {
-            var introElement_1 = multipleLines(intro);
-            return introElement_1 ? {
-                tagName: "section",
-                styleRefs: mergeArray(["x-part-blog-note"], styleRefs),
-                children: [introElement_1],
-            } : null;
+            if (introElement)
+                arr.push(introElement);
+            return arr;
         }
         var header = (urls === null || urls === void 0 ? void 0 : urls.share) ? [{
                 tagName: "img",
@@ -1657,11 +1713,26 @@ var PageCtrl;
                     alt: PageCtrl.getString("share", mktOptions),
                     src: rela.relative(urls.share).value,
                 }
-            }, span(PageCtrl.getString("share", mktOptions))] : [span(PageCtrl.getString("share", mktOptions))];
-        var container = genHeader(header, mergeArray(["x-part-blog-share"], styleRefs), "h2");
-        container.key = "share";
-        var col = container.children;
-        col.push({
+            }] : [];
+        header.push(urls.page && title && hasShareApi()
+            ? {
+                tagName: "a",
+                children: PageCtrl.getString("share", mktOptions),
+                on: {
+                    click: function () {
+                        navigator.share({
+                            title: title,
+                            url: urls.page
+                        });
+                    },
+                },
+            }
+            : span(PageCtrl.getString("share", mktOptions)));
+        arr.push({
+            tagName: "h2",
+            children: header,
+        });
+        arr.push({
             tagName: "div",
             children: [{
                     tagName: "img",
@@ -1671,10 +1742,9 @@ var PageCtrl;
                     },
                 }]
         });
-        var introElement = multipleLines(intro, "x-part-blog-note");
         if (introElement)
-            col.push(introElement);
-        return container;
+            arr.push(introElement);
+        return arr;
     }
     function genHeader(children, styleRefs, tagName, key, containerKey) {
         return {
@@ -1738,6 +1808,16 @@ var PageCtrl;
                 }
             });
         });
+    }
+    function hasShareApi() {
+        try {
+            if (typeof navigator !== "object")
+                return false;
+            return typeof navigator.share === "function";
+        }
+        catch (_a) {
+            return false;
+        }
     }
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;

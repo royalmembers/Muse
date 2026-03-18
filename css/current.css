@@ -19,9 +19,28 @@ button.link-button-normal > span {
 button.link-button-normal > span + img {
     width: 16px; height: 16px; vertical-align: middle; margin-left: 8px;
 }
+body > section > article > section, body > section > article > main,
+body > section > article > h1, body > section > article > h2, body > section > article > h3, body > section > article > h4,
+body > section > article > section.layout-wide-full > h1, body > section > article > section.layout-wide-full > h2,
+body > section > article > section.layout-wide-full > h3, body > section > article > section.layout-wide-full > h4,
+body > section > nav > section, body > section > nav > main,
+body > section > nav > h1, body > section > nav > h2, body > section > nav > h3, body > section > nav > h4,
+body > section > nav > section.layout-wide-full > h1, body > section > nav > section.layout-wide-full > h2,
+body > section > nav > section.layout-wide-full > h3, body > section > nav > section.layout-wide-full > h4 {
+    max-width: 1200px;
+    margin: 20px auto;
+    position: relative;
+    box-sizing: content-box;
+}
 body > section.x-part-content > section > a.link-long-button > span + span,
 body > section.x-part-content > section.link-tile-wide > a > span + span,
-body > section.x-main-container > section > a.link-long-button > span + span {
+body > section.x-main-container > section > a.link-long-button > span + span,
+body > section.x-part-content > article > section > a.link-long-button > span + span,
+body > section.x-part-content > article > section.link-tile-wide > a > span + span,
+body > section.x-main-container > article > section > a.link-long-button > span + span,
+body > section.x-part-content > nav > section > a.link-long-button > span + span,
+body > section.x-part-content > nav > section.link-tile-wide > a > span + span,
+body > section.x-main-container > nav > section > a.link-long-button > span + span {
     color: #888;
     font-size: 16px;
     margin-left: 16px;
@@ -127,6 +146,14 @@ section > div.x-copyright-spec {
 }
 section > div.x-copyright-spec > img:first-child {
     width: 220px; height: 220px; border-radius: 6px; 
+}
+body > section > article > section.layout-wide-full.x-zone-hl > h1,
+body > section > nav > section.layout-wide-full.x-zone-hl > h1,
+body > section > article > section.layout-wide-full.x-zone-hl > h2,
+body > section > nav > section.layout-wide-full.x-zone-hl > h2 {
+    padding: 0;
+    margin: 0 auto;
+    line-height: 30px;
 }
 section.x-container-pics, main.x-container-pics {
     margin: 20px auto;

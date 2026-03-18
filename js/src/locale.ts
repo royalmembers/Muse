@@ -7,6 +7,8 @@ namespace PageCtrl {
         "share#zh": "分享",
         photoTaken: "Photo taken on {0}.",
         "photoTaken#zh": "本照片拍摄于{0}年",
+        general: "General",
+        "general#zh": "常规",
         paintings: "Paintings",
         "paintings#zh": "画作",
         series: "Series",

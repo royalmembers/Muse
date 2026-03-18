@@ -15,8 +15,12 @@
     section.x-main-container {
         margin-bottom: 100px;
     }
-    section.x-main-container > main {
+    section.x-main-container > main, section.x-main-container > article > main {
         min-height: 420px;
+    }
+    body > section > article > section.layout-wide-full, body > section > nav > section.layout-wide-full {
+        max-width: none;
+        margin: 0 -20px;
     }
     section.x-zone-hl > h1 {
         font-size: 20px; font-weight: normal;
@@ -24,7 +28,7 @@
     section.x-zone-hl > h1 > img, section.x-zone-hl > h1 > span {
         vertical-align: middle;
     }
-    section > section + section + section.x-zone-hl:has(> h1) {
+    section > section + section + section.x-zone-hl:has(> h1), body > section > article + nav {
         margin-top: 80px;
     }
     section.x-zone-hl > h1 > span {
@@ -58,11 +62,18 @@
     section.x-part-panel > h2 > img, section.x-part-panel > h2 > span {
         vertical-align: middle;
     }
-    section#section-works-greetings {
-        cursor: default; user-select: none;
+    section.x-part-panel > h2 > a, section.x-part-panel > h2 > a:visited,
+    section.x-part-panel > h2 > a:hover, section.x-part-panel > h2 > a:active {
+        vertical-align: middle; text-decoration: underline dotted #666; cursor: pointer;
     }
-    section#section-works-greetings > span, section#section-works-greetings > a {
-        display: inline-block;
+    section.x-part-panel > h2 > a, section.x-part-panel > h2 > a:visited {
+        color: #DDD;
+    }
+    section.x-part-panel > h2 > a:hover {
+        color: #F5B;
+    }
+    section.x-part-panel > h2 > a:active {
+        color: #C6B;
     }
     section.x-part-blog-related > h2 {
         padding: 15px 0 0 0; border-top: 1px solid #333; cursor: default; user-select: none;
@@ -74,8 +85,11 @@
         width: 160px; height: 160px; border-radius: 4px; opacity: 0.9;
     }
     section.x-part-blog-share > div.x-part-blog-note {
-        color: #CCC; font-size: 16px; width: 780px; height: 200px; padding: 0 0 0 30px; margin-top: 0; border-width: 0 0 0 1px; border-style: none none none solid; border-color: #444;
-        position: absolute; top: 24px; left: 219px; right: 20px; user-select: text;
+        color: #CCC; font-size: 16px; cursor: text; user-select: text;
+    }
+    section.x-part-blog-share > div + div.x-part-blog-note {
+        width: 780px; height: 200px; padding: 0 0 0 30px; margin-top: 0; border-width: 0 0 0 1px; border-style: none none none solid; border-color: #444;
+        position: absolute; top: 24px; left: 219px; right: 20px;
     }
     section.x-part-blog-share > div.x-part-blog-note > p, section.x-part-blog-note > p {
         margin: 10px 0;
@@ -99,12 +113,12 @@
         color: #666; cursor: default; user-select: none;
     }
     @media screen and (max-width:1110px) {
-    section.x-part-blog-share > div.x-part-blog-note {
+    section.x-part-blog-share > div + div.x-part-blog-note {
         width: auto; right: 30px;
     }
     }
     @media screen and (max-width:860px) {
-    section.x-part-blog-share > div.x-part-blog-note {
+    section.x-part-blog-share > div + div.x-part-blog-note {
         width: 100%; height: auto; padding: 14px 0 0 0; margin-top: 15px; border-width: 1px 0 0 0; border-style: solid none none none; border-color: #333;
         position: relative; top: 0; left: 0;
     }

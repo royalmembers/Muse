@@ -89,6 +89,26 @@ namespace PageCtrl {
         }, 200);
     }
 
+    export function showPopupView(info: {
+        url: string;
+        thumb?: string;
+        name: string;
+        tips?: string;
+        desc: string;
+    }) {
+        if (!info?.url || !info.name) {
+            hidePopupView();
+            return;
+        }
+        (ele("popup-view-img") as HTMLImageElement).src = info.url;
+        (ele("popup-view-img") as HTMLImageElement).alt = info.tips || info.name;
+        (ele("popup-view-thumb") as HTMLImageElement).src = info.thumb || info.url;
+        (ele("popup-view-thumb") as HTMLImageElement).alt = info.tips || info.name;
+        ele("popup-view-title")!.innerText = info.name;
+        ele("popup-view-desc")!.innerText = info.desc;
+        ele("popup-view")!.style.display = "";
+    }
+
     export function initHome() {
         let container = ele("section-avatars")!;
         container.innerHTML = "";
@@ -135,7 +155,7 @@ namespace PageCtrl {
         DeepX.MdBlogs.setElementText("button-blog", "blog");
         setElementProp("link-certs", null, "certHonors");
         setElementProp("title-works-series", null, "series");
-        setElementProp("title-works-common", null, "generalPaintings");
+        setElementProp("title-works-common", null, "general");
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         initMenu(true);
     }

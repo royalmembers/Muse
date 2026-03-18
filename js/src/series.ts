@@ -44,6 +44,7 @@ namespace PageCtrl {
         };
         before?: Hje.DescriptionContract;
         after?: Hje.DescriptionContract;
+        selected?(info: IPaintingSeriesInfo, component: ImageSeriesPart): void;
     }
 
     export interface IImageCollectionPartData extends IImageCollectionPartOptions {
@@ -63,6 +64,7 @@ namespace PageCtrl {
             select?: IPaintingSeriesInfo;
             urls: IImageSeriesPartData["urls"];
             siteName?: string;
+            selected?: (info: IPaintingSeriesInfo, component: ImageSeriesPart) => void;
         };
 
         constructor(element: any, options?: Hje.ComponentOptionsContract<IImageSeriesPartData>) {
@@ -77,6 +79,7 @@ namespace PageCtrl {
             const imageRela = toRela(data.imageRela || "../images/");
             const styles = data.styles || {};
             const strings = data.strings || {};
+            const urls = data.urls || {};
             const mainStyle = mergeArray(["x-container-pics"], styles.main);
             this.__inner = {
                 series: seriesCol,
@@ -85,77 +88,89 @@ namespace PageCtrl {
                 mkt: mktOptions,
                 imageRela,
                 mainStyle,
-                urls: data.urls,
+                urls: urls,
                 siteName: strings.site,
+                selected: data.selected,
             };
             const self = this;
             let select = data.select;
             if (select === true || select === undefined) select = this.series[0]?.id;
             else if (!select || typeof select !== "string") select = undefined;
-            this.currentModel.children = [data.before, genHeader([{
-                tagName: "span",
-                children: strings.pics,
-            }], styles.header, "h1", "title", "title-container"), {
-                key: "gallery",
-                tagName: "main",
-                control: ImageCollectionPart,
-                styleRefs: mainStyle,
-                data: {
-                    rela: imageRela,
-                    itemUrl: data.itemUrl,
-                    click: data.click,
-                    mkt: data.mkt,
-                    defaultName: strings.pics,
-                    page: data.page,
-                } as IImageCollectionPartData,
-            }, {
-                key: "actions",
-                tagName: "section",
-                style: { display: "none" },
-                styleRefs: mergeArray(["x-part-blog-next"], styles.next),
-                children: [{
-                    tagName: "div",
+            this.currentModel.children = [{
+                tagName: "article",
+                children: [data.before, genHeader([{
+                    tagName: "span",
+                    children: strings.pics,
+                }], styles.header, "h1", "title", "title-container"), {
+                    key: "gallery",
+                    tagName: "main",
+                    control: ImageCollectionPart,
+                    styleRefs: mainStyle,
+                    data: {
+                        rela: imageRela,
+                        itemUrl: data.itemUrl,
+                        click: data.click,
+                        mkt: data.mkt,
+                        defaultName: strings.pics,
+                        page: data.page,
+                    } as IImageCollectionPartData,
+                }, {
+                    key: "actions",
+                    tagName: "section",
+                    style: { display: "none" },
+                    styleRefs: mergeArray(["x-part-blog-next"], styles.next),
                     children: [{
-                        tagName: "button",
-                        styleRefs: ["x-button-more", "link-button-normal"],
-                        children: [span(DeepX.MdBlogs.getLocaleString("seeMore", data.mkt))],
-                        on: {
-                            click() {
-                                const gallery = self.childControl("gallery") as ImageCollectionPart;
-                                if (!gallery) return;
-                                const hasNextPage = gallery.nextPage();
-                                if (hasNextPage) return;
-                                self.childModel("actions", {
-                                    style: { display: "none" },
-                                });
+                        tagName: "div",
+                        children: [{
+                            tagName: "button",
+                            styleRefs: ["x-button-more", "link-button-normal"],
+                            children: [span(DeepX.MdBlogs.getLocaleString("seeMore", data.mkt))],
+                            on: {
+                                click() {
+                                    const gallery = self.childControl("gallery") as ImageCollectionPart;
+                                    if (!gallery) return;
+                                    const hasNextPage = gallery.nextPage();
+                                    if (hasNextPage) return;
+                                    self.childModel("actions", {
+                                        style: { display: "none" },
+                                    });
+                                },
                             },
-                        },
+                        }]
                     }]
-                }]
-            }, {
-                key: "related",
-                tagName: "section",
-                style: { display: "none" },
-                styleRefs: mergeArray(["x-part-blog-related"], styles.related),
-                children: [],
-            }, sharePanel(data.urls, null, imageRela, styles.share, mktOptions), data.after, genHeader([{
-                tagName: "span",
-                children: getString("picLibs", mktOptions),
-            }], styles.header, "h1", undefined, "menu"), {
-                key: "all",
-                tagName: "section",
-                children: select ? [] : this.genSeriesMenu(select),
-            }].filter(ele => !!ele);
+                }, {
+                    key: "related",
+                    tagName: "section",
+                    style: { display: "none" },
+                    styleRefs: mergeArray(["x-part-blog-related"], styles.related),
+                    children: [],
+                }, {
+                    key: "share",
+                    tagName: "section",
+                    styleRefs: mergeArray(["x-part-blog-share"], styles.share),
+                    style: { display: "none" },
+                }, data.after,
+            ].filter(ele => !!ele)}, {
+                tagName: "nav",
+                children: [genHeader([{
+                    tagName: "span",
+                    children: getString("picLibs", mktOptions),
+                }], styles.header, "h1", undefined, "menu"), {
+                    key: "all",
+                    tagName: "section",
+                    children: select ? [] : this.genSeriesMenu(select),
+                }].filter(ele => !!ele)
+            }];
             this.refreshChild(undefined, () => {
                 setTimeout(() => {
                     if (!select || self.__inner.select) return;
                     const sel = self.selectSeries(select);
                     if (!sel) return;
-                    const { url, kind } = self.getSeriesLinkInfo(sel);
+                    const { url, kind, title } = self.getSeriesLinkInfo(sel);
                     if (kind !== "route" || !url) return false;
                     history.replaceState(sel, "", url);
                     if (self.__inner.siteName)
-                        document.title = `${DeepX.MdBlogs.getLocaleProp(sel, "name", mktOptions)} - ${self.__inner.siteName}`;
+                        document.title = title;
                 }, 100);
             });
         }
@@ -226,16 +241,20 @@ namespace PageCtrl {
             text = DeepX.MdBlogs.getLocaleProp(id, "subtitle", mkt);
             if (text) title.push(span(text));
             this.childModel("title", { children: title });
+            const info = this.getSeriesLinkInfo(id);
             const share = sharePanel({
                 qr: id.qr || this.__inner.urls?.qr,
-                share: this.__inner.urls?.share
-            }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, undefined, mkt)?.children;
+                share: this.__inner.urls?.share,
+                page: info.url,
+            }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, info.title, undefined, mkt);
             this.childModel("share", {
-                style: { display: share ? "" : "none" },
-                children: share || []
+                style: { display: share.length ? "" : "none" },
+                children: share,
             });
             this.refreshRelated();
             this.childModel("all", { children: this.genSeriesMenu(id.id) });
+            const h = this.__inner.selected;
+            if (typeof h === "function") h(id, this);
             return id;
         }
 
@@ -245,10 +264,16 @@ namespace PageCtrl {
             element.scrollIntoView({ behavior: "smooth" });
         }
 
-        scrollAllMenuIntoView() {
+        scrollMenuIntoView() {
             const element = this.childContext("menu")?.element() as HTMLElement | undefined;
             if (!element) return false;
             element.scrollIntoView({ behavior: "smooth" });
+        }
+
+        imageRelative(url: string) {
+            if (!url || typeof url !== "string") return null;
+            if (url.indexOf("://") >= 0) return url;
+            return this.__inner.imageRela.relative(url)?.value;
         }
 
         private async refreshRelated() {
@@ -270,8 +295,8 @@ namespace PageCtrl {
                 const subtitle: string[] = [];
                 let text = ele.getSubtitle(mkt);
                 if (text) subtitle.push(text);
-                const year = ele.dateObj?.year;
-                if (year) subtitle.push(year.toString(10));
+                const date = ele.dateString;
+                if (date) subtitle.push(date);
                 return {
                     name: ele.getName(mkt),
                     subtitle: subtitle.length ? subtitle : undefined,
@@ -288,13 +313,25 @@ namespace PageCtrl {
         private genSeriesMenu(selected?: string) {
             const self = this;
             const inner = self.__inner;
-            return inner.series.map(ele => {
-                if (!ele) return null;
-                if (typeof ele === "string") return span(ele, "grouping-header");
+            const arr: Hje.DescriptionContract[] = [];
+            let label: string | undefined;
+            inner.series.forEach(ele => {
+                if (!ele) return;
+                if (typeof ele === "string") {
+                    label = ele;
+                    return;
+                }
                 const name = DeepX.MdBlogs.getLocaleProp(ele, "name", inner.mkt);
                 if (!name) return null;
-                if (ele.disable === "label" || ele.disable === "header") return span(name, "grouping-header");
-                if (ele.disable || !ele.id) return null;
+                if (ele.disable === "label" || ele.disable === "header") {
+                    label = name;
+                    return;
+                }
+                if (ele.disable || !ele.id) return;
+                if (label) {
+                    arr.push(span(label, "grouping-header"));
+                    label = undefined;
+                }
                 const labels: Hje.DescriptionContract[] = [];
                 if (ele.icon) labels.push({
                     tagName: "img",
@@ -312,7 +349,7 @@ namespace PageCtrl {
                 if (selected === ele.id) styleRefs.push("state-sel");
                 const { url: seriesLink, kind } = self.getSeriesLinkInfo(ele);
                 const enableRoute = kind === "route";
-                return {
+                arr.push({
                     tagName: "a",
                     styleRefs,
                     props: {
@@ -337,15 +374,18 @@ namespace PageCtrl {
                             scrollToTop();
                         }
                     },
-                };
-            }).filter(ele => !!ele);
+                });
+            });
+            return arr;
         }
 
         private getSeriesLinkInfo(value: IPaintingSeriesInfo): {
+            title: string;
             url: string | undefined;
             kind: "route" | "link" | "func",
         } {
-            let seriesLink = this.__inner.urls?.series;
+            const inner = this.__inner;
+            let seriesLink = inner.urls?.series;
             if (seriesLink) {
                 if (seriesLink === "?" || seriesLink === ".") seriesLink = "./";
                 else if (seriesLink.endsWith("?")) seriesLink = seriesLink.substring(0, seriesLink.length - 1);
@@ -355,12 +395,13 @@ namespace PageCtrl {
             if (seriesLink) {
                 if (seriesLink.endsWith("="))
                     seriesLink += value.id;
-                else if (enableRoute && (value.id === "default" || value.id === "index") && value === this.__inner.series[0])
+                else if (enableRoute && (value.id === "default" || value.id === "index") && value === inner.series[0])
                     seriesLink = "./";
                 else
                     seriesLink += "?" + value.id;
             }
             return {
+                title: `${DeepX.MdBlogs.getLocaleProp(value, "name", inner.mkt)} - ${inner.siteName}`,
                 url: seriesLink,
                 kind: enableRoute ? "route" : (seriesLink ? "link" : "func"),
             };
@@ -642,32 +683,50 @@ namespace PageCtrl {
     }
 
     function sharePanel(
-        urls: { share?: string; qr?: string } | undefined,
+        urls: {
+            share?: string;
+            qr?: string;
+            page?: string;
+        } | undefined,
         intro: string | undefined | null,
         rela: Hje.RelativePathInfo,
+        title: string,
         styleRefs?: string | string[],
-        mktOptions?: { mkt?: string | boolean }): Hje.DescriptionContract | null {
+        mktOptions?: { mkt?: string | boolean }) {
         if (!urls) urls = {};
+        const arr: Hje.DescriptionContract[] = [];
+        const introElement = multipleLines(intro, "x-part-blog-note");
         if (!urls.qr) {
-            const introElement = multipleLines(intro); 
-            return introElement ? {
-                tagName: "section",
-                styleRefs: mergeArray(["x-part-blog-note"], styleRefs),
-                children: [introElement],
-            } : null;
+            if (introElement) arr.push(introElement);
+            return arr;
         }
 
-        const header = urls?.share ? [{
+        const header: Hje.DescriptionContract[] = urls?.share ? [{
             tagName: "img",
             props: {
                 alt: getString("share", mktOptions),
                 src: rela.relative(urls.share).value,
             }
-        }, span(getString("share", mktOptions))] : [span(getString("share", mktOptions))];
-        const container = genHeader(header, mergeArray(["x-part-blog-share"], styleRefs), "h2");
-        (container as Hje.DescriptionContract).key = "share";
-        const col = container.children;
-        col.push({
+        }] : [];
+        header.push(urls.page && title && hasShareApi()
+            ? {
+                tagName: "a",
+                children: getString("share", mktOptions),
+                on: {
+                    click() {
+                        navigator.share({
+                            title: title,
+                            url: urls.page
+                        });
+                    },
+                },
+            }
+            : span(getString("share", mktOptions)));
+        arr.push({
+            tagName: "h2",
+            children: header,
+        })
+        arr.push({
             tagName: "div",
             children: [{
                 tagName: "img",
@@ -677,9 +736,8 @@ namespace PageCtrl {
                 },
             }]
         });
-        const introElement = multipleLines(intro, "x-part-blog-note"); 
-        if (introElement) col.push(introElement);
-        return container;
+        if (introElement) arr.push(introElement);
+        return arr;
     }
 
     function genHeader(
@@ -734,6 +792,15 @@ namespace PageCtrl {
         const articles = await loadBlogArticles();
         if (!articles) return undefined;
         return articles.blog()?.filter(ele => ele && ele.hasKeyword(keyword));
+    }
+
+    function hasShareApi() {
+        try {
+            if (typeof navigator !== "object") return false;
+            return typeof navigator.share === "function";
+        } catch {
+            return false;
+        }
     }
 
 }
