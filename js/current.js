@@ -622,7 +622,7 @@ var PageCtrl;
         DeepX.MdBlogs.setElementText("button-blog", "blog");
         PageCtrl.setElementProp("link-certs", null, "certHonors");
         PageCtrl.setElementProp("title-works-series", null, "series");
-        PageCtrl.setElementProp("title-works-common", null, "generalPaintings");
+        PageCtrl.setElementProp("title-works-common", null, "general");
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
         initMenu(true);
     }
