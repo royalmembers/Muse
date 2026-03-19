@@ -63,4 +63,47 @@ namespace PageCtrl {
         return obj;
     }
 
+    export function loadingModel(failed?: boolean, context?: Hje.ViewGeneratingContextContract<any>) {
+        const m = {
+            tagName: "p",
+            children: [failed ? {
+                tagName: "span",
+                children: DeepX.MdBlogs.getLocaleString("loadFailed"),
+            } : {
+                tagName: "em",
+                children: DeepX.MdBlogs.getLocaleString("loading"),
+            }],
+        };
+        if (context) {
+            context.model().children = [m];
+            context.refresh();
+        }
+        return m;
+    }
+
+    export async function fetchMainData<T = any>(url: string, element?: HTMLElement | string): Promise<{
+        data?: T,
+        context?: Hje.ViewGeneratingContextContract<any>
+    }> {
+        if (!url) return {};
+        const c = element ? Hje.render(element, {
+            children: [loadingModel()],
+        }) : undefined;
+        try {
+            const res = await fetch(url);
+            const json = await res.json();
+            if (!json) {
+                loadingModel(true, c);
+                return { context: c }
+            }
+            return {
+                data: json as T,
+                context: c
+            };
+        } catch {
+            loadingModel(true, c);
+            return { context: c };
+        }
+    }
+
 }

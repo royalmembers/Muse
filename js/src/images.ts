@@ -1,27 +1,66 @@
 namespace PageCtrl {
 
     type IImageUrlKind = 'thumb' | 'source';
+    type IImageRatio = "p" | "page" | "v" | "vertical" | "h" | "horizontal" | "s" | "square" | "w" | "wide";
+
+    export type ITitleCaseKind = "upper" | "lower" | "capital" | "small" | "normal" | "none" | null;
+
+    export interface IImageSeriesInfo {
+        id: string;
+        alias?: string[] | null;
+        disable?: boolean;
+        name: string;
+        subtitle?: string;
+        options: {
+            nameCase?: ITitleCaseKind;
+            subtitleCase?: ITitleCaseKind;
+            qr?: string;
+            defaultItemName?: string;
+        },
+        icon?: string;
+        intro?: string;
+        blog?: string;
+        year: number;
+        ratio?: IImageRatio;
+        thumb?: boolean;
+        links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
+        [property: string]: any;
+    }
+
+    export interface IImageItemInfo {
+        id: string;
+        disable?: boolean;
+        name?: string;
+        year: number;
+        month?: number;
+        day?: number;
+        url?: string;
+        thumb?: boolean | string;
+        keywords?: string[];
+        size?: string;
+        data?: any;
+    }
 
     export interface IImageClickInfo {
-        item: IPaintingInfo;
+        item: IImageItemInfo;
         component: ImageCollectionPart;
         info: {
             name: string;
             url: string;
-            thumb: string;
+            thumb?: string;
         };
     }
 
     export interface IImageCollectionPartOptions {
-        itemUrl?(item: IPaintingInfo, kind: IImageUrlKind): string | undefined;
+        itemUrl?(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
         click?(data: IImageClickInfo, ev: MouseEvent): void;
         mkt?: string | boolean;
         page?: number;
     }
 
     export interface IImageSeriesPartData extends IImageCollectionPartOptions {
-        series: (IPaintingSeriesInfo | string | DeepX.MdBlogs.IArticleLabelInfo)[];
-        items: Record<string, IPaintingInfo[]>;
+        series: (IImageSeriesInfo | string | DeepX.MdBlogs.IArticleLabelInfo)[];
+        items: Record<string, IImageItemInfo[]>;
         select?: string | boolean;
         blogRela?: string | Hje.RelativePathInfo;
         imageRela?: string | Hje.RelativePathInfo;
@@ -44,27 +83,38 @@ namespace PageCtrl {
         };
         before?: Hje.DescriptionContract;
         after?: Hje.DescriptionContract;
-        selected?(info: IPaintingSeriesInfo, component: ImageSeriesPart): void;
+        selected?(info: IImageSeriesInfo, component: ImageSeriesPart): void;
     }
 
     export interface IImageCollectionPartData extends IImageCollectionPartOptions {
         rela?: string | Hje.RelativePathInfo;
-        items: IPaintingInfo[];
+        items: IImageItemInfo[];
         defaultName?: string;
+    }
+
+    export interface IRelatedInfoPartData {
+        title?: string;
+        links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
+        images?: IImageItemInfo[];
+        imageRela?: string | Hje.RelativePathInfo;
+        defaultImageName?: string;
+        mkt?: string | boolean;
+        itemUrl?(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
+        click?(data: IImageClickInfo, ev: MouseEvent): void;
     }
 
     export class ImageSeriesPart extends Hje.BaseComponent {
         private __inner: {
-            series: (IPaintingSeriesInfo | string | DeepX.MdBlogs.IArticleLabelInfo)[];
-            items: Record<string, IPaintingInfo[]>;
+            series: (IImageSeriesInfo | string | DeepX.MdBlogs.IArticleLabelInfo)[];
+            items: Record<string, IImageItemInfo[]>;
             blogRela: Hje.RelativePathInfo;
             imageRela: Hje.RelativePathInfo;
             mkt?: { mkt: string | boolean };
             mainStyle: string[];
-            select?: IPaintingSeriesInfo;
+            select?: IImageSeriesInfo;
             urls: IImageSeriesPartData["urls"];
             siteName?: string;
-            selected?: (info: IPaintingSeriesInfo, component: ImageSeriesPart) => void;
+            selected?: (info: IImageSeriesInfo, component: ImageSeriesPart) => void;
         };
 
         constructor(element: any, options?: Hje.ComponentOptionsContract<IImageSeriesPartData>) {
@@ -161,27 +211,27 @@ namespace PageCtrl {
                     children: select ? [] : this.genSeriesMenu(select),
                 }].filter(ele => !!ele)
             }];
-            this.refreshChild(undefined, () => {
-                setTimeout(() => {
-                    if (!select || self.__inner.select) return;
-                    const sel = self.selectSeries(select);
-                    if (!sel) return;
-                    const { url, kind, title } = self.getSeriesLinkInfo(sel);
-                    if (kind !== "route" || !url) return false;
-                    history.replaceState(sel, "", url);
-                    if (self.__inner.siteName)
-                        document.title = title;
-                }, 100);
-            });
+            this.currentModel.onLoad = () => {
+                delete this.currentModel.onLoad;
+                if (!select || self.__inner.select) return;
+                const sel = self.selectSeries(select);
+                if (!sel) return;
+                const { url, kind, title } = self.getSeriesLinkInfo(sel);
+                if (kind !== "route" || !url) return false;
+                history.replaceState(sel, "", url);
+                if (self.__inner.siteName)
+                    document.title = title;
+            };
+            this.refreshChild();
         }
 
         get series() {
             const col = this.__inner.series;
-            const arr: IPaintingSeriesInfo[] = [];
+            const arr: IImageSeriesInfo[] = [];
             for (let i = 0; i < col.length; i++) {
                 const series = col[i];
                 if (!series || typeof series === "string" || series.disable) continue;
-                arr.push(series as IPaintingSeriesInfo);
+                arr.push(series as IImageSeriesInfo);
             }
 
             return arr;
@@ -206,7 +256,7 @@ namespace PageCtrl {
             return undefined;
         }
 
-        selectSeries(id: string | IPaintingSeriesInfo) {
+        selectSeries(id: string | IImageSeriesInfo) {
             if (!id) return undefined;
             if (typeof id === "string") {
                 const sel = this.getSeries(id);
@@ -233,7 +283,7 @@ namespace PageCtrl {
             if (text) title.push({
                 tagName: "img",
                 props: {
-                    src: rela.relative(text),
+                    src: relativePath(rela, text),
                     alt: DeepX.MdBlogs.getLocaleProp(id, "name", mkt),
                 },
             });
@@ -243,10 +293,10 @@ namespace PageCtrl {
             this.childModel("title", { children: title });
             const info = this.getSeriesLinkInfo(id);
             const share = sharePanel({
-                qr: id.qr || this.__inner.urls?.qr,
+                qr: DeepX.MdBlogs.getLocaleProp(id.options, "qr", mkt) || this.__inner.urls?.qr,
                 share: this.__inner.urls?.share,
                 page: info.url,
-            }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, info.title, undefined, mkt);
+            }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, info.title, mkt);
             this.childModel("share", {
                 style: { display: share.length ? "" : "none" },
                 children: share,
@@ -270,10 +320,8 @@ namespace PageCtrl {
             element.scrollIntoView({ behavior: "smooth" });
         }
 
-        imageRelative(url: string) {
-            if (!url || typeof url !== "string") return null;
-            if (url.indexOf("://") >= 0) return url;
-            return this.__inner.imageRela.relative(url)?.value;
+        imageRelative(url: string | undefined) {
+            return relativePath(this.__inner.imageRela, url);
         }
 
         private async refreshRelated() {
@@ -337,12 +385,12 @@ namespace PageCtrl {
                     tagName: "img",
                     props: {
                         alt: name,
-                        src: inner.imageRela.relative(ele.icon),
+                        src: relativePath(inner.imageRela, ele.icon),
                     }
                 });
-                labels.push(span(name, capStyleRef(ele, "name-cap", inner.mkt)));
+                labels.push(span(name, caseStyleRef(ele.options, "nameCase", inner.mkt)));
                 const desc = DeepX.MdBlogs.getLocaleProp(ele, "subtitle", inner.mkt);
-                if (desc) labels.push(span([span(desc)], capStyleRef(ele, "subtitle-cap", inner.mkt)));
+                if (desc) labels.push(span([span(desc)], caseStyleRef(ele.options, "subtitleCase", inner.mkt)));
                 const styleRefs = ["link-long-button"];
                 if (selected === ele.id) styleRefs.push("state-sel");
                 const { url: seriesLink, kind } = self.getSeriesLinkInfo(ele);
@@ -377,7 +425,7 @@ namespace PageCtrl {
             return arr;
         }
 
-        private getSeriesLinkInfo(value: IPaintingSeriesInfo): {
+        private getSeriesLinkInfo(value: IImageSeriesInfo): {
             title: string;
             url: string | undefined;
             kind: "route" | "link" | "func",
@@ -408,9 +456,9 @@ namespace PageCtrl {
 
     export class ImageCollectionPart extends Hje.BaseComponent {
         private __inner: {
-            items: IPaintingInfo[];
+            items: IImageItemInfo[];
             rela: Hje.RelativePathInfo;
-            itemUrl(item: IPaintingInfo, kind: IImageUrlKind): string | undefined;
+            itemUrl(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
             click?(data: IImageClickInfo, ev: MouseEvent): void;
             mkt?: { mkt: string | boolean };
             defaultName?: string;
@@ -466,7 +514,7 @@ namespace PageCtrl {
             return index < 0 ? undefined : this.__inner.items[index];
         }
 
-        pushWithoutRender(...items: IPaintingInfo[]) {
+        pushWithoutRender(...items: IImageItemInfo[]) {
             let j = 0;
             for (let i = 0; i < items.length; i++) {
                 const item = items[i];
@@ -480,7 +528,7 @@ namespace PageCtrl {
             return j;
         }
 
-        push(...items: IPaintingInfo[]) {
+        push(...items: IImageItemInfo[]) {
             const pageSize = this.__inner.pageSize || Number.MAX_SAFE_INTEGER;
             let j = 0;
             let k = 0;
@@ -542,7 +590,7 @@ namespace PageCtrl {
             return false;
         }
 
-        indexOf(item: string | IPaintingInfo) {
+        indexOf(item: string | IImageItemInfo) {
             const col = this.__inner.items;
             if (!item) return -1;
             if (typeof item !== "string") {
@@ -556,23 +604,21 @@ namespace PageCtrl {
             return -1;
         }
 
-        imageRelative(url: string) {
-            if (!url || typeof url !== "string") return null;
-            if (url.indexOf("://") >= 0) return url;
-            return this.__inner.rela.relative(url)?.value;
+        imageRelative(url: string | undefined) {
+            return relativePath(this.__inner.rela, url);
         }
 
-        private genItemModel(item: IPaintingInfo) {
+        private genItemModel(item: IImageItemInfo) {
             if (!item) return undefined;
             const inner = this.__inner;
             const self = this;
             const name = DeepX.MdBlogs.getLocaleProp(item, "name", inner.mkt) || this.__inner.defaultName;
             let url = inner.itemUrl(item, "source");
             if (!url) return undefined;
-            url = inner.rela.relative(url).value;
+            url = relativePath(inner.rela, url) || url;
             let thumb = item.thumb && typeof item.thumb === "string" ? item.thumb : undefined;
             if (!thumb && item.thumb !== false) thumb = inner.itemUrl(item, "thumb");
-            if (thumb) thumb = inner.rela.relative(thumb).value;
+            if (thumb) thumb = relativePath(inner.rela, thumb);
             else thumb = url;
             return {
                 tagName: "img",
@@ -602,12 +648,117 @@ namespace PageCtrl {
         }
     }
 
-    export function capStyleRef(ele: any, key: string, options?: { mkt?: string | boolean }) {
-        const cap = DeepX.MdBlogs.getLocaleProp(ele, key, options) as ITitleCapKind;
+    export class RelatedInfoPart extends Hje.BaseComponent {
+        constructor(element: any, options?: Hje.ComponentOptionsContract<IRelatedInfoPartData>) {
+            super(element, options);
+            const data = options?.data || {};
+            this.currentModel.children = [data.title ? genHeader(data.title) : null, {
+                tagName: "section",
+                key: "gallery",
+                control: ImageCollectionPart,
+                data: {
+                    rela: data.imageRela,
+                    mkt: data.mkt,
+                    defaultName: data.defaultImageName,
+                    click: data.click,
+                    itemUrl: data.itemUrl,
+                } as IImageCollectionPartData,
+                styleRefs: ["x-container-pics"],
+                style: { display: "none" },
+            }, {
+                tagName: "section",
+                key: "links",
+                style: { display: "none" },
+            }].filter(ele => !!ele);
+            this.currentModel.onLoad = () => {
+                delete this.currentModel.onLoad;
+                if (!data.links && !data.images) return;
+                this.setData(data.links, data.images);
+            };
+            this.refreshChild();
+        }
+
+        setData(links: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[] | null | undefined, images: IImageItemInfo[] | null | undefined) {
+            const menu = genLinkListChildren(links);
+            let count = menu?.length || 0;
+            this.childModel("links", {
+                children: menu || [],
+                style: { display: menu ? "" : "none" },
+            });
+            const gallery = this.childControl("gallery") as ImageCollectionPart;
+            if (!gallery) return count;
+            gallery.clear();
+            const styleInfo = { display: "none" };
+            if (images && images instanceof Array) {
+                const count2 = gallery.push(...images);
+                if (count2 > 0) styleInfo.display = "";
+                count += count2;
+            }
+            gallery.style(styleInfo);
+            return count;
+        }
+    }
+
+    export function seriesList(col: IImageSeriesInfo[], imageRela: string | Hje.RelativePathInfo | ImageSeriesPart | ImageCollectionPart, link?: string, options?: {
+        mkt?: string | boolean;
+    }) {
+        if (!link) link = "./";
+        if (!col) return null;
+        let imageUrl: (value: string | undefined) => string | undefined;
+        if (!imageRela) imageUrl = value => value;
+        else if (typeof imageRela === "string") imageUrl = value => relativePath(toRela(imageRela), value);
+        else if (imageRela instanceof Hje.RelativePathInfo) imageUrl = value => relativePath(imageRela, value);
+        else if (imageRela instanceof ImageCollectionPart) imageUrl = value => imageRela.imageRelative(value);
+        else if (imageRela instanceof ImageSeriesPart) imageUrl = value => imageRela.imageRelative(value);
+        else imageUrl = value => value;
+        return col.map(ele => {
+            if (!ele?.id || ele.disable) return null;
+            const name = DeepX.MdBlogs.getLocaleProp(ele, "name", options);
+            if (!name) return null;
+            const label: Hje.DescriptionContract[] = [];
+            let text = imageUrl(DeepX.MdBlogs.getLocaleProp(ele, "icon", options));
+            if (text) label.push({
+                tagName: "img",
+                props: {
+                    alt: name,
+                    src: text,
+                }
+            });
+            label.push({
+                tagName: "span",
+                styleRefs: caseStyleRef(ele.options, "nameCase", options),
+                children: name,
+            });
+            text = DeepX.MdBlogs.getLocaleProp(ele, "subtitle", options);
+            if (text) label.push({
+                tagName: "span",
+                styleRefs: caseStyleRef(ele.options, "subtitleCase", options),
+                children: text,
+            });
+            return {
+                tagName: "a",
+                styleRefs: "link-long-button",
+                props: {
+                    href: `${link}?${ele.id}`
+                },
+                children: label,
+            };
+        }).filter(ele => !!ele);
+    }
+
+    function caseStyleRef(ele: any, key: string, options?: { mkt?: string | boolean }) {
+        if (!ele) return undefined;
+        const cap = DeepX.MdBlogs.getLocaleProp(ele, key || "nameCase", options) as ITitleCaseKind;
         if (!cap) return undefined;
         switch (cap.toLowerCase()) {
+            case "upper":
+                return "x-text-case-upper";
+            case "lower":
+                return "x-text-case-lower";
+            case "captial":
+                return "x-text-case-capital";
             case "small":
-                return "x-text-cap-small";
+                return "x-text-case-small";
             default:
                 return undefined;
         }
@@ -652,12 +803,29 @@ namespace PageCtrl {
         }
     }
 
-    function genLinkList(title: string, list: {
+    function genLinkList(title: string | null, list: ({
         name: string;
         subtitle?: string | null | (string | number | null | undefined)[];
         url: string | { type: string; value: string; };
         newWindow?: boolean;
-    }[] | DeepX.MdBlogs.IArticleRelatedLinkItemInfo[] | undefined) {
+    } | DeepX.MdBlogs.IArticleRelatedLinkItemInfo | null | undefined)[] | null | undefined) {
+        const elements = genLinkListChildren(list);
+        if (!elements?.length) return null;
+        const container = title ? genHeader(title) : { children: [] as Hje.DescriptionContract[] };
+        container.children.push({
+            tagName: "ul",
+            styleRefs: "link-tile-compact",
+            children: elements,
+        });
+        return container;
+    }
+
+    function genLinkListChildren(list: ({
+        name: string;
+        subtitle?: string | null | (string | number | null | undefined)[];
+        url: string | { type: string; value: string; };
+        newWindow?: boolean;
+    } | DeepX.MdBlogs.IArticleRelatedLinkItemInfo | null | undefined)[] | null | undefined) {
         if (!list?.length || !(list instanceof Array)) return null;
         const elements = list.map(ele => {
             if (!ele?.name || !ele.url || typeof ele.url !== "string") return null;
@@ -689,13 +857,7 @@ namespace PageCtrl {
             } as Hje.DescriptionContract;
         }).filter(ele => !!ele);
         if (!elements.length) return null;
-        const container = genHeader(title);
-        container.children.push({
-            tagName: "ul",
-            styleRefs: "link-tile-compact",
-            children: elements,
-        });
-        return container;
+        return elements;
     }
 
     function sharePanel(
@@ -707,7 +869,6 @@ namespace PageCtrl {
         intro: string | undefined | null,
         rela: Hje.RelativePathInfo,
         title: string,
-        styleRefs?: string | string[],
         mktOptions?: { mkt?: string | boolean }) {
         if (!urls) urls = {};
         const arr: Hje.DescriptionContract[] = [];
@@ -721,7 +882,7 @@ namespace PageCtrl {
             tagName: "img",
             props: {
                 alt: getString("share", mktOptions),
-                src: rela.relative(urls.share).value,
+                src: relativePath(rela, urls.share),
             }
         }] : [];
         header.push(urls.page && title && hasShareApi()
@@ -748,7 +909,7 @@ namespace PageCtrl {
                 tagName: "img",
                 props: {
                     alt: "QR code",
-                    src: rela.relative(urls.qr),
+                    src: relativePath(rela, urls.qr),
                 },
             }]
         });
@@ -802,7 +963,13 @@ namespace PageCtrl {
         } : null;
     }
 
-    async function getArticles(series: IPaintingSeriesInfo) {
+    function relativePath(rela: Hje.RelativePathInfo, url: string | undefined) {
+        if (!url || typeof url !== "string") return undefined;
+        if (url.indexOf("://") >= 0) return url;
+        return rela.relative(url)?.value || url;
+    }
+
+    async function getArticles(series: IImageSeriesInfo) {
         const keyword = series?.blog;
         if (!keyword) return undefined;
         const articles = await loadBlogArticles();

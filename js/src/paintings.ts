@@ -1,83 +1,25 @@
 namespace PageCtrl {
 
-    type IImageRatio = "p" | "page" | "v" | "vertical" | "h" | "horizontal" | "s" | "square" | "w" | "wide";
-
-    export type ITitleCapKind = "small" | "normal" | null;
-
-    export interface IPaintingSeriesInfo {
-        id: string;
-        alias?: string[] | null;
-        disable?: boolean;
-        name: string;
-        "name-cap"?: ITitleCapKind;
-        subtitle?: string;
-        "subtitle-cap"?: ITitleCapKind;
-        defaultItemName?: string;
-        icon?: string;
-        intro?: string;
-        qr?: string;
-        blog?: string;
-        year: number;
-        ratio?: IImageRatio;
-        thumb?: boolean;
-        links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
-        [property: string]: any;
-    }
-
     interface IPaintingPaging {
         id?: string;
         size: number;
         root?: boolean;
-        series?: IPaintingSeriesInfo;
-    }
-
-    export interface IPaintingInfo {
-        id: string;
-        disable?: boolean;
-        name?: string;
-        year: number;
-        month?: number;
-        day?: number;
-        url?: string;
-        thumb?: boolean | string;
-        keywords?: string[];
-        size?: string;
+        series?: IImageSeriesInfo;
     }
 
     let works = {
-        series: [] as IPaintingSeriesInfo[],
-        default: [] as IPaintingInfo[],
+        series: [] as IImageSeriesInfo[],
+        default: [] as IImageItemInfo[],
         done: false
     };
 
     async function init(element?: HTMLElement | string, rela?: string) {
         if (works.done) return true;
-        const c = element ? Hje.render(element, {
-            children: [{
-                tagName: "p",
-                children: [{
-                    tagName: "em",
-                    children: DeepX.MdBlogs.getLocaleString("loading"),
-                }],
-            }],
-        }) : undefined;
-        try {
-            const res = await fetch(`${rela || "../paintings/"}config.json`);
-            const json = await res.json();
-            if (!json) return false;
-            works = json;
-            works.done = true;
-            return true;
-        } catch {
-            if (c) {
-                c.model().children = [{
-                    tagName: "span",
-                    children: DeepX.MdBlogs.getLocaleString("loadFailed"),
-                }];
-                c.refresh();
-            }
-            return false;
-        }
+        const { data } = await fetchMainData(`${rela || "../paintings/"}config.json`, element);
+        if (!data) return false;
+        works = data;
+        works.done = true;
+        return true;
     }
 
     export async function renderPaintings(options: IPaintingPaging) {
@@ -99,48 +41,16 @@ namespace PageCtrl {
                 mkt,
                 page: options.size || 24,
                 itemUrl: getImageUrl,
-                click: onItemClick,
+                click: onImageItemClick,
             } as IImageCollectionPartData,
         })?.control() as ImageCollectionPart;
         if (!c) return;
         c.pushWithoutRender(...images);
         const menu = getContainerElement(options, "menu");
         if (menu && works.series?.length) {
-            const link = options.root ? "./paintings/" : "../paintings/";
-            const children = works.series.map(ele => {
-                if (!ele?.id || ele.disable) return null;
-                const name = DeepX.MdBlogs.getLocaleProp(ele, "name", mktOptions);
-                if (!name) return null;
-                const label: Hje.DescriptionContract[] = [];
-                let text = DeepX.MdBlogs.getLocaleProp(ele, "icon", mktOptions);
-                if (text) label.push({
-                    tagName: "img",
-                    props: {
-                        alt: name,
-                        src: c.imageRelative(text),
-                    }
-                });
-                label.push({
-                    tagName: "span",
-                    styleRefs: capStyleRef(ele, "name-cap", mktOptions),
-                    children: name,
-                });
-                text = DeepX.MdBlogs.getLocaleProp(ele, "subtitle", mktOptions);
-                if (text) label.push({
-                    tagName: "span",
-                    styleRefs: capStyleRef(ele, "subtitle-cap", mktOptions),
-                    children: text,
-                });
-                return {
-                    tagName: "a",
-                    styleRefs: "link-long-button",
-                    props: {
-                        href: `${link}?${ele.id}`
-                    },
-                    children: label,
-                };
-            }).filter(ele => !!ele);
-            Hje.render(menu, { children });
+            Hje.render(menu, {
+                children: seriesList(works.series, c, options.root ? "./paintings/" : "../paintings/", mktOptions) || [],
+            });
         }
 
         if (!c.nextPage()) return;
@@ -170,7 +80,7 @@ namespace PageCtrl {
                 blogRela: "../blog/",
                 imageRela: "../images/",
                 itemUrl: getImageUrl,
-                click: onItemClick,
+                click: onImageItemClick,
                 selected(info, c) {
                     (ele("ph-link-icon") as HTMLLinkElement).href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
                 },
@@ -222,17 +132,7 @@ namespace PageCtrl {
         });
     }
 
-    function getContainerElement(paging: IPaintingPaging, suffix?: string) {
-        return ele(`${paging?.id || "section-works"}-${suffix || "container"}`)!;
-    }
-
-    function getImageUrl(item: IPaintingInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]) {
-        return kind === "source"
-            ? `./paintings/${item.year}/${item.id}.webp`
-            : `./paintings/thumbnails/${item.year}/${item.id}.webp`;
-    }
-
-    function onItemClick(data: IImageClickInfo) {
+    export function onImageItemClick(data: IImageClickInfo) {
         let imageSize = data.item.size || "";
         if (imageSize && imageSize.indexOf("x") > 0)
             imageSize = imageSize.replace("x", "cm × ") + "cm";
@@ -250,6 +150,16 @@ namespace PageCtrl {
             tips: desc,
             desc: imageSize
         });
+    }
+
+    function getImageUrl(item: IImageItemInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]) {
+        return kind === "source"
+            ? `./paintings/${item.year}/${item.id}.webp`
+            : `./paintings/thumbnails/${item.year}/${item.id}.webp`;
+    }
+
+    function getContainerElement(paging: IPaintingPaging, suffix?: string) {
+        return ele(`${paging?.id || "section-works"}-${suffix || "container"}`)!;
     }
 
 }

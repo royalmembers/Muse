@@ -21,6 +21,8 @@ namespace PageCtrl {
         "picLibs#zh": "全部图集",
         generalPaintings: "General pictures",
         "generalPaintings#zh": "常规画作",
+        related: "Related",
+        "related#zh": "相关",
         relatedBlog: "Related blog articles",
         "relatedBlog#zh": "相关博客",
         relatedPaintings: "Related paintings",

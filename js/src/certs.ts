@@ -4,6 +4,15 @@ namespace PageCtrl {
         id: string;
         disable?: boolean;
         name: string;
+        /**
+         * The level and kind of the honor.
+         * - match: 大型赛事（区域型或以上）。
+         * - interest: 兴趣班、小型活动、商业娱乐活动。
+         * - pro: 行业专业赛事。
+         * - variety: 综艺录制。
+         * - institution: 培训机构、俱乐部。
+         * - school: 学校。
+         */
         scope?: "match" | "interest" | "pro" | "variety" | "institution" | "school",
         season?: string;
         year: number;
@@ -12,165 +21,23 @@ namespace PageCtrl {
         ranking: string;
         publisher?: string;
         img?: string | false;
-        keywords?: string[]
+        keywords?: string[];
+        links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
+        images?: IImageItemInfo[];
     }
     
-    const certs: ICertInfo[] = [{
-        id: "tomusic-0201",
-        name: "听闻音乐琴韵风采奖",
-        disable: true,
-        scope: "institution",
-        season: "第8届",
-        year: 2026,
-        month: 2,
-        ranking: "琴韵风采奖",
-        publisher: "听闻音乐工作室",
-        keywords: ["instrumental performance", "match"]
-    }, {
-        id: "kawai",
-        name: "Kawai 亚洲钢琴大赛",
-        scope: "match",
-        season: "第8届",
-        year: 2025,
-        month: 4,
-        group: "上海赛区业余组儿童A组",
-        ranking: "三等奖",
-        publisher: "柏斯音乐基金会",
-        keywords: ["instrumental performance", "match"]
-    }, {
-        id: "shnu3ps-honor",
-        name: "上师三附小“英语学科大闯关”",
-        scope: "school",
-        year: 2025,
-        month: 4,
-        group: "四年级比赛",
-        ranking: "背记小达人",
-        publisher: "上海师范大学附属闵行第三小学",
-        keywords: ["subject"]
-    }, {
-        id: "shnu3ps-match",
-        name: "上师三附小艺术单项比赛",
-        scope: "school",
-        season: "第7届",
-        year: 2025,
-        month: 3,
-        group: "钢琴专场",
-        ranking: "三等奖",
-        publisher: "上海师范大学附属闵行第三小学",
-        keywords: ["instrumental performance", "match"]
-    }, {
-        id: "vivace",
-        name: "Vivace 国际钢琴大赛",
-        scope: "match",
-        season: "2024",
-        year: 2024,
-        month: 6,
-        group: "上海赛区少儿A组",
-        ranking: "二等奖",
-        publisher: "法国中法艺术协会",
-        keywords: ["instrumental performance", "match"]
-    }, {
-        id: "shnu3ps-honor",
-        name: "红领巾奖章",
-        scope: "school",
-        season: "2023-2024学年",
-        year: 2024,
-        month: 1,
-        ranking: "个人一星章",
-        publisher: "中国少年先锋队上海师范大学附属闵行第三小学工作委员会",
-        keywords: ["medal"]
-    }, {
-        id: "kawai",
-        name: "Kawai 亚洲钢琴大赛",
-        scope: "match",
-        season: "第7届",
-        year: 2023,
-        month: 4,
-        group: "上海赛区业余组儿童B组",
-        ranking: "二等奖",
-        publisher: "柏斯音乐基金会",
-        keywords: ["instrumental performance", "match"]
-    }, {
-        id: "shnu3ps-match",
-        name: "上师三附小“未来星电视台”小记者评比",
-        scope: "school",
-        year: 2023,
-        month: 3,
-        ranking: "一等奖",
-        publisher: "上海师范大学附属闵行第三小学",
-        keywords: []
-    }, {
-        id: "shnu3ps-match",
-        name: "上师三附小“一起创造献冬奥”评比",
-        scope: "school",
-        year: 2022,
-        month: 3,
-        ranking: "一等奖",
-        publisher: "上海师范大学附属闵行第三小学",
-        keywords: ["fine art", "match"]
-    }, {
-        id: "caa",
-        name: "美院之路全国青少年美术大赛",
-        scope: "match",
-        season: "第3届",
-        year: 2021,
-        month: 8,
-        group: "综合艺术类",
-        ranking: "三等奖",
-        publisher: "中国美术学院",
-        keywords: ["fine art", "match"]
-    }, {
-        id: "xiamen",
-        name: "厦门音乐季钢琴公开赛",
-        scope: "match",
-        season: "2021",
-        year: 2021,
-        month: 7,
-        group: "上海赛区幼儿组",
-        ranking: "三等奖",
-        publisher: "厦门市思明区人民政府",
-        keywords: ["instrumental performance", "match"]
-    }, {
-        id: "shminhang-creative",
-        name: "闵行区青少年科技创新大赛",
-        scope: "match",
-        season: "第36届",
-        year: 2021,
-        month: 5,
-        group: "科学幻想画幼儿组",
-        ranking: "二等奖",
-        publisher: "上海市闵行区教育局 上海市闵行区科学技术协会",
-        keywords: ["fine art", "match"]
-    }, {
-        id: "papajohns",
-        name: "棒约翰欢乐比萨学堂",
-        scope: "interest",
-        year: 2021,
-        ranking: "未来Pizza大师",
-        publisher: "上海棒约翰餐饮管理有限公司",
-        keywords: ["cook"]
-    }, {
-        id: "shminhang-pujiang",
-        name: "浦江镇青少年教育培训中心合唱",
-        disable: true,
-        scope: "institution",
-        year: 2020,
-        month: 12,
-        ranking: "勤奋学员",
-        publisher: "中国福利会少年宫上海闵行区浦江镇青少年教育培训中心",
-        keywords: ["sing"]
-    }, {
-        id: "taolicup",
-        name: "海外桃李杯",
-        scope: "match",
-        season: "第11届",
-        year: 2020,
-        month: 9,
-        group: "学前组",
-        ranking: "二等奖",
-        publisher: "深圳市五洲行艺术团有限责任公司",
-        keywords: ["dance", "match"]
-    }];
+    const inner: {
+        certs?: ICertInfo[];
+        related?: RelatedInfoPart;
+    } = {};
+
+    async function init() {
+        const res = await fetch("./config.json");
+        const json = await res.json();
+        if (!json?.certs) return false;
+        inner.certs = json.certs;
+        return true;
+    }
 
     function showCert(item: ICertInfo, details: string | HTMLElement) {
         let arr : Hje.DescriptionContract[] = [{
@@ -211,6 +78,9 @@ namespace PageCtrl {
             children: [{ tagName: "section", children: arr }],
             props: { style: { display: "" } }
         });
+        if (!inner.related) return;
+        const count = inner.related.setData(item.links, item.images);
+        inner.related.element().style.display = count > 0 ? "" : "none";
     }
 
     function addCertEvent(item: ICertInfo, model: Hje.DescriptionContract, details: string | HTMLElement) {
@@ -229,6 +99,8 @@ namespace PageCtrl {
     }
 
     function certsModel(arr: Hje.DescriptionContract[], id: string | null, details: string | HTMLElement, onlyMatch?: boolean) {
+        const certs = inner.certs;
+        if (!certs) return undefined;
         let info;
         let year;
         if (arr.length > 1) arr.splice(0);
@@ -268,18 +140,43 @@ namespace PageCtrl {
         return info;
     }
 
-    export function initCerts() {
-        let arr: Hje.DescriptionContract[] = [];
-        let details = ele("part-cert")!;
+    export async function initCerts() {
+        const c = Hje.render("part-certs", {
+            children: [loadingModel()]
+        });
+        if (!await init()) {
+            loadingModel(true, c);
+            return;
+        }
+        const certs = inner.certs;
+        if (!c) return;
+        const arr: Hje.DescriptionContract[] = [];
+        const details = ele("part-cert")!;
         let id = DeepX.MdBlogs.firstQuery();
-        let info = certsModel(arr, id, details);
+        inner.related = Hje.render("part-related", {
+            control: RelatedInfoPart,
+            data: {
+                title: getString("related"),
+                imageRela: "../images/",
+                defaultImageName: DeepX.MdBlogs.getLocaleString("pic"),
+                click: onImageItemClick,
+                itemUrl(item, kind) {
+                    return kind === "source"
+                        ? `./${item.data?.kind || "photos"}/${item.year}/${item.id}.webp`
+                        : `./${item.data?.kind || "photos"}/thumbnails/${item.year}/${item.id}.webp`;
+                },
+            } as IRelatedInfoPartData,
+        })?.control() as RelatedInfoPart;
+        const info = certsModel(arr, id, details);
         if (id && info) showCert(info, details);
-        let c = Hje.render("part-certs", { children: arr })!;
+        c.model().children = arr;
+        c.refresh();
         let checkbox = ele("checkbox-certs") as HTMLInputElement;
         if (checkbox) checkbox.addEventListener("change", function (ev) {
             certsModel(arr, id, details, checkbox.checked);
             c.refresh();
         });
+
         window.addEventListener("popstate", function (ev) {
             id = (ev.state || {}).id;
             const selInfo = parseFirstQuery(id);
@@ -288,6 +185,7 @@ namespace PageCtrl {
                 return;
             }
 
+            if (!certs) return;
             for (let i = 0; i < certs.length; i++) {
                 let item = certs[i];
                 if (!item || item.id !== selInfo.id || item.year !== selInfo.year) continue;
@@ -297,5 +195,4 @@ namespace PageCtrl {
         });
         initMenu("certs");
     }
-
 }

@@ -239,7 +239,16 @@ main.x-container-pics span#section-works-more:active > span:first-child + img {
 section > a.link-long-button.state-sel {
     background-color: transparent; border-color: rgba(128,128,128,0.3) rgba(128,128,128,0.3) rgba(128,128,128,0.4) rgba(128,128,128,0.3);
 }
-span.x-text-cap-small {
+span.x-text-case-upper {
+    text-transform: uppercase;
+}
+span.x-text-case-lower {
+    text-transform: lowercase;
+}
+span.x-text-case-capital {
+    text-transform: capitalize;
+}
+span.x-text-case-small {
     font-variant-caps: small-caps;
 }
 @media screen and (max-width:1110px) {

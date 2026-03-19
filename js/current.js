@@ -35,15 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -59,6 +50,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var PageCtrl;
 (function (PageCtrl) {
     var inner = {
@@ -176,162 +176,26 @@ var PageCtrl;
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
 (function (PageCtrl) {
-    var certs = [{
-            id: "tomusic-0201",
-            name: "听闻音乐琴韵风采奖",
-            disable: true,
-            scope: "institution",
-            season: "第8届",
-            year: 2026,
-            month: 2,
-            ranking: "琴韵风采奖",
-            publisher: "听闻音乐工作室",
-            keywords: ["instrumental performance", "match"]
-        }, {
-            id: "kawai",
-            name: "Kawai 亚洲钢琴大赛",
-            scope: "match",
-            season: "第8届",
-            year: 2025,
-            month: 4,
-            group: "上海赛区业余组儿童A组",
-            ranking: "三等奖",
-            publisher: "柏斯音乐基金会",
-            keywords: ["instrumental performance", "match"]
-        }, {
-            id: "shnu3ps-honor",
-            name: "上师三附小“英语学科大闯关”",
-            scope: "school",
-            year: 2025,
-            month: 4,
-            group: "四年级比赛",
-            ranking: "背记小达人",
-            publisher: "上海师范大学附属闵行第三小学",
-            keywords: ["subject"]
-        }, {
-            id: "shnu3ps-match",
-            name: "上师三附小艺术单项比赛",
-            scope: "school",
-            season: "第7届",
-            year: 2025,
-            month: 3,
-            group: "钢琴专场",
-            ranking: "三等奖",
-            publisher: "上海师范大学附属闵行第三小学",
-            keywords: ["instrumental performance", "match"]
-        }, {
-            id: "vivace",
-            name: "Vivace 国际钢琴大赛",
-            scope: "match",
-            season: "2024",
-            year: 2024,
-            month: 6,
-            group: "上海赛区少儿A组",
-            ranking: "二等奖",
-            publisher: "法国中法艺术协会",
-            keywords: ["instrumental performance", "match"]
-        }, {
-            id: "shnu3ps-honor",
-            name: "红领巾奖章",
-            scope: "school",
-            season: "2023-2024学年",
-            year: 2024,
-            month: 1,
-            ranking: "个人一星章",
-            publisher: "中国少年先锋队上海师范大学附属闵行第三小学工作委员会",
-            keywords: ["medal"]
-        }, {
-            id: "kawai",
-            name: "Kawai 亚洲钢琴大赛",
-            scope: "match",
-            season: "第7届",
-            year: 2023,
-            month: 4,
-            group: "上海赛区业余组儿童B组",
-            ranking: "二等奖",
-            publisher: "柏斯音乐基金会",
-            keywords: ["instrumental performance", "match"]
-        }, {
-            id: "shnu3ps-match",
-            name: "上师三附小“未来星电视台”小记者评比",
-            scope: "school",
-            year: 2023,
-            month: 3,
-            ranking: "一等奖",
-            publisher: "上海师范大学附属闵行第三小学",
-            keywords: []
-        }, {
-            id: "shnu3ps-match",
-            name: "上师三附小“一起创造献冬奥”评比",
-            scope: "school",
-            year: 2022,
-            month: 3,
-            ranking: "一等奖",
-            publisher: "上海师范大学附属闵行第三小学",
-            keywords: ["fine art", "match"]
-        }, {
-            id: "caa",
-            name: "美院之路全国青少年美术大赛",
-            scope: "match",
-            season: "第3届",
-            year: 2021,
-            month: 8,
-            group: "综合艺术类",
-            ranking: "三等奖",
-            publisher: "中国美术学院",
-            keywords: ["fine art", "match"]
-        }, {
-            id: "xiamen",
-            name: "厦门音乐季钢琴公开赛",
-            scope: "match",
-            season: "2021",
-            year: 2021,
-            month: 7,
-            group: "上海赛区幼儿组",
-            ranking: "三等奖",
-            publisher: "厦门市思明区人民政府",
-            keywords: ["instrumental performance", "match"]
-        }, {
-            id: "shminhang-creative",
-            name: "闵行区青少年科技创新大赛",
-            scope: "match",
-            season: "第36届",
-            year: 2021,
-            month: 5,
-            group: "科学幻想画幼儿组",
-            ranking: "二等奖",
-            publisher: "上海市闵行区教育局 上海市闵行区科学技术协会",
-            keywords: ["fine art", "match"]
-        }, {
-            id: "papajohns",
-            name: "棒约翰欢乐比萨学堂",
-            scope: "interest",
-            year: 2021,
-            ranking: "未来Pizza大师",
-            publisher: "上海棒约翰餐饮管理有限公司",
-            keywords: ["cook"]
-        }, {
-            id: "shminhang-pujiang",
-            name: "浦江镇青少年教育培训中心合唱",
-            disable: true,
-            scope: "institution",
-            year: 2020,
-            month: 12,
-            ranking: "勤奋学员",
-            publisher: "中国福利会少年宫上海闵行区浦江镇青少年教育培训中心",
-            keywords: ["sing"]
-        }, {
-            id: "taolicup",
-            name: "海外桃李杯",
-            scope: "match",
-            season: "第11届",
-            year: 2020,
-            month: 9,
-            group: "学前组",
-            ranking: "二等奖",
-            publisher: "深圳市五洲行艺术团有限责任公司",
-            keywords: ["dance", "match"]
-        }];
+    var inner = {};
+    function init() {
+        return __awaiter(this, void 0, void 0, function () {
+            var res, json;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch("./config.json")];
+                    case 1:
+                        res = _a.sent();
+                        return [4 /*yield*/, res.json()];
+                    case 2:
+                        json = _a.sent();
+                        if (!(json === null || json === void 0 ? void 0 : json.certs))
+                            return [2 /*return*/, false];
+                        inner.certs = json.certs;
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    }
     function showCert(item, details) {
         var arr = [{
                 tagName: "div",
@@ -376,6 +240,10 @@ var PageCtrl;
             children: [{ tagName: "section", children: arr }],
             props: { style: { display: "" } }
         });
+        if (!inner.related)
+            return;
+        var count = inner.related.setData(item.links, item.images);
+        inner.related.element().style.display = count > 0 ? "" : "none";
     }
     function addCertEvent(item, model, details) {
         if (!details)
@@ -397,6 +265,9 @@ var PageCtrl;
         };
     }
     function certsModel(arr, id, details, onlyMatch) {
+        var certs = inner.certs;
+        if (!certs)
+            return undefined;
         var info;
         var year;
         if (arr.length > 1)
@@ -438,35 +309,75 @@ var PageCtrl;
         return info;
     }
     function initCerts() {
-        var arr = [];
-        var details = PageCtrl.ele("part-cert");
-        var id = DeepX.MdBlogs.firstQuery();
-        var info = certsModel(arr, id, details);
-        if (id && info)
-            showCert(info, details);
-        var c = Hje.render("part-certs", { children: arr });
-        var checkbox = PageCtrl.ele("checkbox-certs");
-        if (checkbox)
-            checkbox.addEventListener("change", function (ev) {
-                certsModel(arr, id, details, checkbox.checked);
-                c.refresh();
+        return __awaiter(this, void 0, void 0, function () {
+            var c, certs, arr, details, id, info, checkbox;
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        c = Hje.render("part-certs", {
+                            children: [PageCtrl.loadingModel()]
+                        });
+                        return [4 /*yield*/, init()];
+                    case 1:
+                        if (!(_b.sent())) {
+                            PageCtrl.loadingModel(true, c);
+                            return [2 /*return*/];
+                        }
+                        certs = inner.certs;
+                        if (!c)
+                            return [2 /*return*/];
+                        arr = [];
+                        details = PageCtrl.ele("part-cert");
+                        id = DeepX.MdBlogs.firstQuery();
+                        inner.related = (_a = Hje.render("part-related", {
+                            control: PageCtrl.RelatedInfoPart,
+                            data: {
+                                title: PageCtrl.getString("related"),
+                                imageRela: "../images/",
+                                defaultImageName: DeepX.MdBlogs.getLocaleString("pic"),
+                                click: PageCtrl.onImageItemClick,
+                                itemUrl: function (item, kind) {
+                                    var _a, _b;
+                                    return kind === "source"
+                                        ? "./".concat(((_a = item.data) === null || _a === void 0 ? void 0 : _a.kind) || "photos", "/").concat(item.year, "/").concat(item.id, ".webp")
+                                        : "./".concat(((_b = item.data) === null || _b === void 0 ? void 0 : _b.kind) || "photos", "/thumbnails/").concat(item.year, "/").concat(item.id, ".webp");
+                                },
+                            },
+                        })) === null || _a === void 0 ? void 0 : _a.control();
+                        info = certsModel(arr, id, details);
+                        if (id && info)
+                            showCert(info, details);
+                        c.model().children = arr;
+                        c.refresh();
+                        checkbox = PageCtrl.ele("checkbox-certs");
+                        if (checkbox)
+                            checkbox.addEventListener("change", function (ev) {
+                                certsModel(arr, id, details, checkbox.checked);
+                                c.refresh();
+                            });
+                        window.addEventListener("popstate", function (ev) {
+                            id = (ev.state || {}).id;
+                            var selInfo = PageCtrl.parseFirstQuery(id);
+                            if (!selInfo.id) {
+                                details.style.display = "none";
+                                return;
+                            }
+                            if (!certs)
+                                return;
+                            for (var i = 0; i < certs.length; i++) {
+                                var item = certs[i];
+                                if (!item || item.id !== selInfo.id || item.year !== selInfo.year)
+                                    continue;
+                                showCert(item, details);
+                                return;
+                            }
+                        });
+                        PageCtrl.initMenu("certs");
+                        return [2 /*return*/];
+                }
             });
-        window.addEventListener("popstate", function (ev) {
-            id = (ev.state || {}).id;
-            var selInfo = PageCtrl.parseFirstQuery(id);
-            if (!selInfo.id) {
-                details.style.display = "none";
-                return;
-            }
-            for (var i = 0; i < certs.length; i++) {
-                var item = certs[i];
-                if (!item || item.id !== selInfo.id || item.year !== selInfo.year)
-                    continue;
-                showCert(item, details);
-                return;
-            }
         });
-        PageCtrl.initMenu("certs");
     }
     PageCtrl.initCerts = initCerts;
 })(PageCtrl || (PageCtrl = {}));
@@ -628,368 +539,6 @@ var PageCtrl;
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
 (function (PageCtrl) {
-    var strings = {
-        all: "All",
-        "all#zh": "全部",
-        share: "Share",
-        "share#zh": "分享",
-        photoTaken: "Photo taken on {0}.",
-        "photoTaken#zh": "本照片拍摄于{0}年",
-        general: "General",
-        "general#zh": "常规",
-        paintings: "Paintings",
-        "paintings#zh": "画作",
-        series: "Series",
-        "series#zh": "系列",
-        dateToMonth: "MMM YYYY",
-        "dateToMonth#zh": "YYYY年MM月",
-        certHonors: "Honors",
-        "certHonors#zh": "小小荣誉",
-        picLibs: "All picture libraries",
-        "picLibs#zh": "全部图集",
-        generalPaintings: "General pictures",
-        "generalPaintings#zh": "常规画作",
-        relatedBlog: "Related blog articles",
-        "relatedBlog#zh": "相关博客",
-        relatedPaintings: "Related paintings",
-        "relatedPaintings#zh": "相关画作",
-        worksBy: "{1} by {0}",
-        "worksBy#zh": "{0}的{1}",
-        workMorOwMeow: "摸凹喵",
-        "workMorOwMeow#en": "Mor-Ow Meow",
-        "workMorOwMeow#fr": "Moh-Aou Miaou",
-        "workMorOwMeow#ko": "모오 미야오",
-        seeSeriesWorks: "See all works of the serie",
-        "seeSeriesWorks#zh": "查看系列完整画作集",
-        loveDrawing: "I love drawing and following are my works.",
-        "loveDrawing#zh": "我爱画画！以下是我的部分作品。",
-    };
-    function getString(key, mktOptions) {
-        return DeepX.MdBlogs.getLocaleProp(strings, key, mktOptions);
-    }
-    PageCtrl.getString = getString;
-    function setElementProp(element, prop, key) {
-        return DeepX.MdBlogs.setElementProp(element, prop, DeepX.MdBlogs.getLocaleProp(strings, key));
-    }
-    PageCtrl.setElementProp = setElementProp;
-    function monthYear(year, month) {
-        if (typeof month !== "number" || isNaN(month) || month < 1 || month > 13)
-            return "'" + year.toString(10);
-        var template = getString("dateToMonth").replace("YYYY", year.toString(10));
-        if (template.includes("MMM")) {
-            switch (month) {
-                case 1:
-                    template = template.replace("MMM", "Jan");
-                    break;
-                case 2:
-                    template = template.replace("MMM", "Feb");
-                    break;
-                case 3:
-                    template = template.replace("MMM", "Mar");
-                    break;
-                case 4:
-                    template = template.replace("MMM", "Apr");
-                    break;
-                case 5:
-                    template = template.replace("MMM", "May");
-                    break;
-                case 6:
-                    template = template.replace("MMM", "Jun");
-                    break;
-                case 7:
-                    template = template.replace("MMM", "Jul");
-                    break;
-                case 8:
-                    template = template.replace("MMM", "Aug");
-                    break;
-                case 9:
-                    template = template.replace("MMM", "Sep");
-                    break;
-                case 10:
-                    template = template.replace("MMM", "Oct");
-                    break;
-                case 11:
-                    template = template.replace("MMM", "Nov");
-                    break;
-                case 12:
-                    template = template.replace("MMM", "Dec");
-                    break;
-                case 13:
-                    template = template.replace("MMM", "Und");
-                    break;
-            }
-        }
-        template = template.replace("MM", month.toString(10));
-        return template;
-    }
-    PageCtrl.monthYear = monthYear;
-})(PageCtrl || (PageCtrl = {}));
-var PageCtrl;
-(function (PageCtrl) {
-    var works = {
-        series: [],
-        default: [],
-        done: false
-    };
-    function init(element, rela) {
-        return __awaiter(this, void 0, void 0, function () {
-            var c, res, json, _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (works.done)
-                            return [2 /*return*/, true];
-                        c = element ? Hje.render(element, {
-                            children: [{
-                                    tagName: "p",
-                                    children: [{
-                                            tagName: "em",
-                                            children: DeepX.MdBlogs.getLocaleString("loading"),
-                                        }],
-                                }],
-                        }) : undefined;
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 4, , 5]);
-                        return [4 /*yield*/, fetch("".concat(rela || "../paintings/", "config.json"))];
-                    case 2:
-                        res = _b.sent();
-                        return [4 /*yield*/, res.json()];
-                    case 3:
-                        json = _b.sent();
-                        if (!json)
-                            return [2 /*return*/, false];
-                        works = json;
-                        works.done = true;
-                        return [2 /*return*/, true];
-                    case 4:
-                        _a = _b.sent();
-                        if (c) {
-                            c.model().children = [{
-                                    tagName: "span",
-                                    children: DeepX.MdBlogs.getLocaleString("loadFailed"),
-                                }];
-                            c.refresh();
-                        }
-                        return [2 /*return*/, false];
-                    case 5: return [2 /*return*/];
-                }
-            });
-        });
-    }
-    function renderPaintings(options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var container, images, mkt, mktOptions, c, menu, link_1, children, more;
-            var _a, _b, _c;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
-                    case 0:
-                        if (!options)
-                            return [2 /*return*/];
-                        container = getContainerElement(options);
-                        if (!options.root) return [3 /*break*/, 2];
-                        return [4 /*yield*/, init(container, "./paintings/")];
-                    case 1:
-                        _d.sent();
-                        return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, init(container)];
-                    case 3:
-                        _d.sent();
-                        _d.label = 4;
-                    case 4:
-                        PageCtrl.setElementProp(getContainerElement(options, "title"), null, "paintings");
-                        images = ((_a = options.series) === null || _a === void 0 ? void 0 : _a.id) ? works[options.series.id] : undefined;
-                        if (!images || !(images instanceof Array))
-                            images = works.default || [];
-                        mkt = Hje.getQuery("mkt") || undefined;
-                        mktOptions = mkt !== undefined ? { mkt: mkt } : undefined;
-                        c = (_b = Hje.render(container, {
-                            control: PageCtrl.ImageCollectionPart,
-                            data: {
-                                rela: options.root ? "./images/" : "../images/",
-                                items: [],
-                                defaultName: DeepX.MdBlogs.getLocaleString("pic"),
-                                mkt: mkt,
-                                page: options.size || 24,
-                                itemUrl: getImageUrl,
-                                click: onItemClick,
-                            },
-                        })) === null || _b === void 0 ? void 0 : _b.control();
-                        if (!c)
-                            return [2 /*return*/];
-                        c.pushWithoutRender.apply(c, images);
-                        menu = getContainerElement(options, "menu");
-                        if (menu && ((_c = works.series) === null || _c === void 0 ? void 0 : _c.length)) {
-                            link_1 = options.root ? "./paintings/" : "../paintings/";
-                            children = works.series.map(function (ele) {
-                                if (!(ele === null || ele === void 0 ? void 0 : ele.id) || ele.disable)
-                                    return null;
-                                var name = DeepX.MdBlogs.getLocaleProp(ele, "name", mktOptions);
-                                if (!name)
-                                    return null;
-                                var label = [];
-                                var text = DeepX.MdBlogs.getLocaleProp(ele, "icon", mktOptions);
-                                if (text)
-                                    label.push({
-                                        tagName: "img",
-                                        props: {
-                                            alt: name,
-                                            src: c.imageRelative(text),
-                                        }
-                                    });
-                                label.push({
-                                    tagName: "span",
-                                    styleRefs: PageCtrl.capStyleRef(ele, "name-cap", mktOptions),
-                                    children: name,
-                                });
-                                text = DeepX.MdBlogs.getLocaleProp(ele, "subtitle", mktOptions);
-                                if (text)
-                                    label.push({
-                                        tagName: "span",
-                                        styleRefs: PageCtrl.capStyleRef(ele, "subtitle-cap", mktOptions),
-                                        children: text,
-                                    });
-                                return {
-                                    tagName: "a",
-                                    styleRefs: "link-long-button",
-                                    props: {
-                                        href: "".concat(link_1, "?").concat(ele.id)
-                                    },
-                                    children: label,
-                                };
-                            }).filter(function (ele) { return !!ele; });
-                            Hje.render(menu, { children: children });
-                        }
-                        if (!c.nextPage())
-                            return [2 /*return*/];
-                        more = getContainerElement(options, "more");
-                        if (!more)
-                            return [2 /*return*/];
-                        more.style.display = "";
-                        more.addEventListener("click", function () {
-                            if (!c.nextPage())
-                                more.style.display = "none";
-                        });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    }
-    PageCtrl.renderPaintings = renderPaintings;
-    function initPaint() {
-        return __awaiter(this, void 0, void 0, function () {
-            var component;
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        PageCtrl.initMenu("paintings");
-                        return [4 /*yield*/, init("main-container")];
-                    case 1:
-                        _b.sent();
-                        component = (_a = Hje.render("main-container", {
-                            control: PageCtrl.ImageSeriesPart,
-                            data: {
-                                series: __spreadArray([{
-                                        id: "default",
-                                        name: PageCtrl.getString("generalPaintings"),
-                                        qr: "logos/qr-paintings.png",
-                                        year: 2020,
-                                        thumb: true
-                                    }, PageCtrl.getString("series")], works.series, true),
-                                items: works,
-                                select: DeepX.MdBlogs.firstQuery() || undefined,
-                                blogRela: "../blog/",
-                                imageRela: "../images/",
-                                itemUrl: getImageUrl,
-                                click: onItemClick,
-                                selected: function (info, c) {
-                                    PageCtrl.ele("ph-link-icon").href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
-                                },
-                                styles: {
-                                    header: ["x-zone-hl", "layout-wide-full", "x-bg-outstanding"],
-                                    next: ["x-zone-actions"],
-                                    share: ["x-part-panel", "x-bg-emphasis"],
-                                },
-                                strings: {
-                                    pics: PageCtrl.getString("paintings"),
-                                    all: PageCtrl.getString("picLibs"),
-                                    site: PageCtrl.getString("worksBy").replace("{0}", "Muse").replace("{1}", PageCtrl.getString("paintings")),
-                                },
-                                urls: {
-                                    share: "./icons/share-w.png",
-                                    qr: "./logos/qr-paintings.png",
-                                    series: "./",
-                                },
-                                mkt: Hje.getQuery("mkt") || true,
-                                page: 24,
-                                before: {
-                                    tagName: "section",
-                                    styleRefs: "x-part-greetings",
-                                    children: [{
-                                            tagName: "span",
-                                            children: PageCtrl.getString("loveDrawing"),
-                                        }, {
-                                            tagName: "span",
-                                            children: "❤",
-                                        }, {
-                                            tagName: "a",
-                                            props: {
-                                                href: "#",
-                                            },
-                                            on: {
-                                                click: function (ev) {
-                                                    ev.preventDefault();
-                                                    if (component)
-                                                        component.scrollMenuIntoView();
-                                                }
-                                            },
-                                            children: PageCtrl.getString("picLibs"),
-                                        }]
-                                }
-                            },
-                        })) === null || _a === void 0 ? void 0 : _a.control();
-                        window.addEventListener("popstate", function (ev) {
-                            if (!component || !(ev === null || ev === void 0 ? void 0 : ev.state))
-                                return;
-                            component.selectSeries(ev.state);
-                        });
-                        return [2 /*return*/];
-                }
-            });
-        });
-    }
-    PageCtrl.initPaint = initPaint;
-    function getContainerElement(paging, suffix) {
-        return PageCtrl.ele("".concat((paging === null || paging === void 0 ? void 0 : paging.id) || "section-works", "-").concat(suffix || "container"));
-    }
-    function getImageUrl(item, kind) {
-        return kind === "source"
-            ? "./paintings/".concat(item.year, "/").concat(item.id, ".webp")
-            : "./paintings/thumbnails/".concat(item.year, "/").concat(item.id, ".webp");
-    }
-    function onItemClick(data) {
-        var imageSize = data.item.size || "";
-        if (imageSize && imageSize.indexOf("x") > 0)
-            imageSize = imageSize.replace("x", "cm × ") + "cm";
-        if (data.item.year) {
-            if (imageSize)
-                imageSize += " 　|　 ";
-            imageSize += PageCtrl.monthYear(data.item.year, data.item.month);
-        }
-        var name = data.info.name;
-        var desc = imageSize ? "\"".concat(name, " (").concat(imageSize, ")") : name;
-        PageCtrl.showPopupView({
-            name: name,
-            url: data.info.url,
-            thumb: data.info.thumb,
-            tips: desc,
-            desc: imageSize
-        });
-    }
-})(PageCtrl || (PageCtrl = {}));
-var PageCtrl;
-(function (PageCtrl) {
     var ImageSeriesPart = /** @class */ (function (_super) {
         __extends(ImageSeriesPart, _super);
         function ImageSeriesPart(element, options) {
@@ -1091,21 +640,21 @@ var PageCtrl;
                             children: select ? [] : _this.genSeriesMenu(select),
                         }].filter(function (ele) { return !!ele; })
                 }];
-            _this.refreshChild(undefined, function () {
-                setTimeout(function () {
-                    if (!select || self.__inner.select)
-                        return;
-                    var sel = self.selectSeries(select);
-                    if (!sel)
-                        return;
-                    var _a = self.getSeriesLinkInfo(sel), url = _a.url, kind = _a.kind, title = _a.title;
-                    if (kind !== "route" || !url)
-                        return false;
-                    history.replaceState(sel, "", url);
-                    if (self.__inner.siteName)
-                        document.title = title;
-                }, 100);
-            });
+            _this.currentModel.onLoad = function () {
+                delete _this.currentModel.onLoad;
+                if (!select || self.__inner.select)
+                    return;
+                var sel = self.selectSeries(select);
+                if (!sel)
+                    return;
+                var _a = self.getSeriesLinkInfo(sel), url = _a.url, kind = _a.kind, title = _a.title;
+                if (kind !== "route" || !url)
+                    return false;
+                history.replaceState(sel, "", url);
+                if (self.__inner.siteName)
+                    document.title = title;
+            };
+            _this.refreshChild();
             return _this;
         }
         Object.defineProperty(ImageSeriesPart.prototype, "series", {
@@ -1175,7 +724,7 @@ var PageCtrl;
                 title.push({
                     tagName: "img",
                     props: {
-                        src: rela.relative(text),
+                        src: relativePath(rela, text),
                         alt: DeepX.MdBlogs.getLocaleProp(id, "name", mkt),
                     },
                 });
@@ -1186,10 +735,10 @@ var PageCtrl;
             this.childModel("title", { children: title });
             var info = this.getSeriesLinkInfo(id);
             var share = sharePanel({
-                qr: id.qr || ((_a = this.__inner.urls) === null || _a === void 0 ? void 0 : _a.qr),
+                qr: DeepX.MdBlogs.getLocaleProp(id.options, "qr", mkt) || ((_a = this.__inner.urls) === null || _a === void 0 ? void 0 : _a.qr),
                 share: (_b = this.__inner.urls) === null || _b === void 0 ? void 0 : _b.share,
                 page: info.url,
-            }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, info.title, undefined, mkt);
+            }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, info.title, mkt);
             this.childModel("share", {
                 style: { display: share.length ? "" : "none" },
                 children: share,
@@ -1216,12 +765,7 @@ var PageCtrl;
             element.scrollIntoView({ behavior: "smooth" });
         };
         ImageSeriesPart.prototype.imageRelative = function (url) {
-            var _a;
-            if (!url || typeof url !== "string")
-                return null;
-            if (url.indexOf("://") >= 0)
-                return url;
-            return (_a = this.__inner.imageRela.relative(url)) === null || _a === void 0 ? void 0 : _a.value;
+            return relativePath(this.__inner.imageRela, url);
         };
         ImageSeriesPart.prototype.refreshRelated = function () {
             return __awaiter(this, void 0, void 0, function () {
@@ -1305,13 +849,13 @@ var PageCtrl;
                         tagName: "img",
                         props: {
                             alt: name,
-                            src: inner.imageRela.relative(ele.icon),
+                            src: relativePath(inner.imageRela, ele.icon),
                         }
                     });
-                labels.push(span(name, capStyleRef(ele, "name-cap", inner.mkt)));
+                labels.push(span(name, caseStyleRef(ele.options, "nameCase", inner.mkt)));
                 var desc = DeepX.MdBlogs.getLocaleProp(ele, "subtitle", inner.mkt);
                 if (desc)
-                    labels.push(span([span(desc)], capStyleRef(ele, "subtitle-cap", inner.mkt)));
+                    labels.push(span([span(desc)], caseStyleRef(ele.options, "subtitleCase", inner.mkt)));
                 var styleRefs = ["link-long-button"];
                 if (selected === ele.id)
                     styleRefs.push("state-sel");
@@ -1537,12 +1081,7 @@ var PageCtrl;
             return -1;
         };
         ImageCollectionPart.prototype.imageRelative = function (url) {
-            var _a;
-            if (!url || typeof url !== "string")
-                return null;
-            if (url.indexOf("://") >= 0)
-                return url;
-            return (_a = this.__inner.rela.relative(url)) === null || _a === void 0 ? void 0 : _a.value;
+            return relativePath(this.__inner.rela, url);
         };
         ImageCollectionPart.prototype.genItemModel = function (item) {
             if (!item)
@@ -1553,12 +1092,12 @@ var PageCtrl;
             var url = inner.itemUrl(item, "source");
             if (!url)
                 return undefined;
-            url = inner.rela.relative(url).value;
+            url = relativePath(inner.rela, url) || url;
             var thumb = item.thumb && typeof item.thumb === "string" ? item.thumb : undefined;
             if (!thumb && item.thumb !== false)
                 thumb = inner.itemUrl(item, "thumb");
             if (thumb)
-                thumb = inner.rela.relative(thumb).value;
+                thumb = relativePath(inner.rela, thumb);
             else
                 thumb = url;
             return {
@@ -1591,18 +1130,138 @@ var PageCtrl;
         return ImageCollectionPart;
     }(Hje.BaseComponent));
     PageCtrl.ImageCollectionPart = ImageCollectionPart;
-    function capStyleRef(ele, key, options) {
-        var cap = DeepX.MdBlogs.getLocaleProp(ele, key, options);
+    var RelatedInfoPart = /** @class */ (function (_super) {
+        __extends(RelatedInfoPart, _super);
+        function RelatedInfoPart(element, options) {
+            var _this = _super.call(this, element, options) || this;
+            var data = (options === null || options === void 0 ? void 0 : options.data) || {};
+            _this.currentModel.children = [data.title ? genHeader(data.title) : null, {
+                    tagName: "section",
+                    key: "gallery",
+                    control: ImageCollectionPart,
+                    data: {
+                        rela: data.imageRela,
+                        mkt: data.mkt,
+                        defaultName: data.defaultImageName,
+                        click: data.click,
+                        itemUrl: data.itemUrl,
+                    },
+                    styleRefs: ["x-container-pics"],
+                    style: { display: "none" },
+                }, {
+                    tagName: "section",
+                    key: "links",
+                    style: { display: "none" },
+                }].filter(function (ele) { return !!ele; });
+            _this.currentModel.onLoad = function () {
+                delete _this.currentModel.onLoad;
+                if (!data.links && !data.images)
+                    return;
+                _this.setData(data.links, data.images);
+            };
+            _this.refreshChild();
+            return _this;
+        }
+        RelatedInfoPart.prototype.setData = function (links, images) {
+            var menu = genLinkListChildren(links);
+            var count = (menu === null || menu === void 0 ? void 0 : menu.length) || 0;
+            this.childModel("links", {
+                children: menu || [],
+                style: { display: menu ? "" : "none" },
+            });
+            var gallery = this.childControl("gallery");
+            if (!gallery)
+                return count;
+            gallery.clear();
+            var styleInfo = { display: "none" };
+            if (images && images instanceof Array) {
+                var count2 = gallery.push.apply(gallery, images);
+                if (count2 > 0)
+                    styleInfo.display = "";
+                count += count2;
+            }
+            gallery.style(styleInfo);
+            return count;
+        };
+        return RelatedInfoPart;
+    }(Hje.BaseComponent));
+    PageCtrl.RelatedInfoPart = RelatedInfoPart;
+    function seriesList(col, imageRela, link, options) {
+        if (!link)
+            link = "./";
+        if (!col)
+            return null;
+        var imageUrl;
+        if (!imageRela)
+            imageUrl = function (value) { return value; };
+        else if (typeof imageRela === "string")
+            imageUrl = function (value) { return relativePath(toRela(imageRela), value); };
+        else if (imageRela instanceof Hje.RelativePathInfo)
+            imageUrl = function (value) { return relativePath(imageRela, value); };
+        else if (imageRela instanceof ImageCollectionPart)
+            imageUrl = function (value) { return imageRela.imageRelative(value); };
+        else if (imageRela instanceof ImageSeriesPart)
+            imageUrl = function (value) { return imageRela.imageRelative(value); };
+        else
+            imageUrl = function (value) { return value; };
+        return col.map(function (ele) {
+            if (!(ele === null || ele === void 0 ? void 0 : ele.id) || ele.disable)
+                return null;
+            var name = DeepX.MdBlogs.getLocaleProp(ele, "name", options);
+            if (!name)
+                return null;
+            var label = [];
+            var text = imageUrl(DeepX.MdBlogs.getLocaleProp(ele, "icon", options));
+            if (text)
+                label.push({
+                    tagName: "img",
+                    props: {
+                        alt: name,
+                        src: text,
+                    }
+                });
+            label.push({
+                tagName: "span",
+                styleRefs: caseStyleRef(ele.options, "nameCase", options),
+                children: name,
+            });
+            text = DeepX.MdBlogs.getLocaleProp(ele, "subtitle", options);
+            if (text)
+                label.push({
+                    tagName: "span",
+                    styleRefs: caseStyleRef(ele.options, "subtitleCase", options),
+                    children: text,
+                });
+            return {
+                tagName: "a",
+                styleRefs: "link-long-button",
+                props: {
+                    href: "".concat(link, "?").concat(ele.id)
+                },
+                children: label,
+            };
+        }).filter(function (ele) { return !!ele; });
+    }
+    PageCtrl.seriesList = seriesList;
+    function caseStyleRef(ele, key, options) {
+        if (!ele)
+            return undefined;
+        var cap = DeepX.MdBlogs.getLocaleProp(ele, key || "nameCase", options);
         if (!cap)
             return undefined;
         switch (cap.toLowerCase()) {
+            case "upper":
+                return "x-text-case-upper";
+            case "lower":
+                return "x-text-case-lower";
+            case "captial":
+                return "x-text-case-capital";
             case "small":
-                return "x-text-cap-small";
+                return "x-text-case-small";
             default:
                 return undefined;
         }
     }
-    PageCtrl.capStyleRef = capStyleRef;
     function toRela(rela) {
         return (rela && rela instanceof Hje.RelativePathInfo)
             ? rela
@@ -1645,6 +1304,18 @@ var PageCtrl;
         }
     }
     function genLinkList(title, list) {
+        var elements = genLinkListChildren(list);
+        if (!(elements === null || elements === void 0 ? void 0 : elements.length))
+            return null;
+        var container = title ? genHeader(title) : { children: [] };
+        container.children.push({
+            tagName: "ul",
+            styleRefs: "link-tile-compact",
+            children: elements,
+        });
+        return container;
+    }
+    function genLinkListChildren(list) {
         if (!(list === null || list === void 0 ? void 0 : list.length) || !(list instanceof Array))
             return null;
         var elements = list.map(function (ele) {
@@ -1684,15 +1355,9 @@ var PageCtrl;
         }).filter(function (ele) { return !!ele; });
         if (!elements.length)
             return null;
-        var container = genHeader(title);
-        container.children.push({
-            tagName: "ul",
-            styleRefs: "link-tile-compact",
-            children: elements,
-        });
-        return container;
+        return elements;
     }
-    function sharePanel(urls, intro, rela, title, styleRefs, mktOptions) {
+    function sharePanel(urls, intro, rela, title, mktOptions) {
         if (!urls)
             urls = {};
         var arr = [];
@@ -1706,7 +1371,7 @@ var PageCtrl;
                 tagName: "img",
                 props: {
                     alt: PageCtrl.getString("share", mktOptions),
-                    src: rela.relative(urls.share).value,
+                    src: relativePath(rela, urls.share),
                 }
             }] : [];
         header.push(urls.page && title && hasShareApi()
@@ -1733,7 +1398,7 @@ var PageCtrl;
                     tagName: "img",
                     props: {
                         alt: "QR code",
-                        src: rela.relative(urls.qr),
+                        src: relativePath(rela, urls.qr),
                     },
                 }]
         });
@@ -1784,6 +1449,14 @@ var PageCtrl;
             children: children,
         } : null;
     }
+    function relativePath(rela, url) {
+        var _a;
+        if (!url || typeof url !== "string")
+            return undefined;
+        if (url.indexOf("://") >= 0)
+            return url;
+        return ((_a = rela.relative(url)) === null || _a === void 0 ? void 0 : _a.value) || url;
+    }
     function getArticles(series) {
         return __awaiter(this, void 0, void 0, function () {
             var keyword, articles;
@@ -1813,6 +1486,309 @@ var PageCtrl;
         catch (_a) {
             return false;
         }
+    }
+})(PageCtrl || (PageCtrl = {}));
+var PageCtrl;
+(function (PageCtrl) {
+    var strings = {
+        all: "All",
+        "all#zh": "全部",
+        share: "Share",
+        "share#zh": "分享",
+        photoTaken: "Photo taken on {0}.",
+        "photoTaken#zh": "本照片拍摄于{0}年",
+        general: "General",
+        "general#zh": "常规",
+        paintings: "Paintings",
+        "paintings#zh": "画作",
+        series: "Series",
+        "series#zh": "系列",
+        dateToMonth: "MMM YYYY",
+        "dateToMonth#zh": "YYYY年MM月",
+        certHonors: "Honors",
+        "certHonors#zh": "小小荣誉",
+        picLibs: "All picture libraries",
+        "picLibs#zh": "全部图集",
+        generalPaintings: "General pictures",
+        "generalPaintings#zh": "常规画作",
+        related: "Related",
+        "related#zh": "相关",
+        relatedBlog: "Related blog articles",
+        "relatedBlog#zh": "相关博客",
+        relatedPaintings: "Related paintings",
+        "relatedPaintings#zh": "相关画作",
+        worksBy: "{1} by {0}",
+        "worksBy#zh": "{0}的{1}",
+        workMorOwMeow: "摸凹喵",
+        "workMorOwMeow#en": "Mor-Ow Meow",
+        "workMorOwMeow#fr": "Moh-Aou Miaou",
+        "workMorOwMeow#ko": "모오 미야오",
+        seeSeriesWorks: "See all works of the serie",
+        "seeSeriesWorks#zh": "查看系列完整画作集",
+        loveDrawing: "I love drawing and following are my works.",
+        "loveDrawing#zh": "我爱画画！以下是我的部分作品。",
+    };
+    function getString(key, mktOptions) {
+        return DeepX.MdBlogs.getLocaleProp(strings, key, mktOptions);
+    }
+    PageCtrl.getString = getString;
+    function setElementProp(element, prop, key) {
+        return DeepX.MdBlogs.setElementProp(element, prop, DeepX.MdBlogs.getLocaleProp(strings, key));
+    }
+    PageCtrl.setElementProp = setElementProp;
+    function monthYear(year, month) {
+        if (typeof month !== "number" || isNaN(month) || month < 1 || month > 13)
+            return "'" + year.toString(10);
+        var template = getString("dateToMonth").replace("YYYY", year.toString(10));
+        if (template.includes("MMM")) {
+            switch (month) {
+                case 1:
+                    template = template.replace("MMM", "Jan");
+                    break;
+                case 2:
+                    template = template.replace("MMM", "Feb");
+                    break;
+                case 3:
+                    template = template.replace("MMM", "Mar");
+                    break;
+                case 4:
+                    template = template.replace("MMM", "Apr");
+                    break;
+                case 5:
+                    template = template.replace("MMM", "May");
+                    break;
+                case 6:
+                    template = template.replace("MMM", "Jun");
+                    break;
+                case 7:
+                    template = template.replace("MMM", "Jul");
+                    break;
+                case 8:
+                    template = template.replace("MMM", "Aug");
+                    break;
+                case 9:
+                    template = template.replace("MMM", "Sep");
+                    break;
+                case 10:
+                    template = template.replace("MMM", "Oct");
+                    break;
+                case 11:
+                    template = template.replace("MMM", "Nov");
+                    break;
+                case 12:
+                    template = template.replace("MMM", "Dec");
+                    break;
+                case 13:
+                    template = template.replace("MMM", "Und");
+                    break;
+            }
+        }
+        template = template.replace("MM", month.toString(10));
+        return template;
+    }
+    PageCtrl.monthYear = monthYear;
+})(PageCtrl || (PageCtrl = {}));
+var PageCtrl;
+(function (PageCtrl) {
+    var works = {
+        series: [],
+        default: [],
+        done: false
+    };
+    function init(element, rela) {
+        return __awaiter(this, void 0, void 0, function () {
+            var data;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (works.done)
+                            return [2 /*return*/, true];
+                        return [4 /*yield*/, PageCtrl.fetchMainData("".concat(rela || "../paintings/", "config.json"), element)];
+                    case 1:
+                        data = (_a.sent()).data;
+                        if (!data)
+                            return [2 /*return*/, false];
+                        works = data;
+                        works.done = true;
+                        return [2 /*return*/, true];
+                }
+            });
+        });
+    }
+    function renderPaintings(options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var container, images, mkt, mktOptions, c, menu, more;
+            var _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        if (!options)
+                            return [2 /*return*/];
+                        container = getContainerElement(options);
+                        if (!options.root) return [3 /*break*/, 2];
+                        return [4 /*yield*/, init(container, "./paintings/")];
+                    case 1:
+                        _d.sent();
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, init(container)];
+                    case 3:
+                        _d.sent();
+                        _d.label = 4;
+                    case 4:
+                        PageCtrl.setElementProp(getContainerElement(options, "title"), null, "paintings");
+                        images = ((_a = options.series) === null || _a === void 0 ? void 0 : _a.id) ? works[options.series.id] : undefined;
+                        if (!images || !(images instanceof Array))
+                            images = works.default || [];
+                        mkt = Hje.getQuery("mkt") || undefined;
+                        mktOptions = mkt !== undefined ? { mkt: mkt } : undefined;
+                        c = (_b = Hje.render(container, {
+                            control: PageCtrl.ImageCollectionPart,
+                            data: {
+                                rela: options.root ? "./images/" : "../images/",
+                                items: [],
+                                defaultName: DeepX.MdBlogs.getLocaleString("pic"),
+                                mkt: mkt,
+                                page: options.size || 24,
+                                itemUrl: getImageUrl,
+                                click: onImageItemClick,
+                            },
+                        })) === null || _b === void 0 ? void 0 : _b.control();
+                        if (!c)
+                            return [2 /*return*/];
+                        c.pushWithoutRender.apply(c, images);
+                        menu = getContainerElement(options, "menu");
+                        if (menu && ((_c = works.series) === null || _c === void 0 ? void 0 : _c.length)) {
+                            Hje.render(menu, {
+                                children: PageCtrl.seriesList(works.series, c, options.root ? "./paintings/" : "../paintings/", mktOptions) || [],
+                            });
+                        }
+                        if (!c.nextPage())
+                            return [2 /*return*/];
+                        more = getContainerElement(options, "more");
+                        if (!more)
+                            return [2 /*return*/];
+                        more.style.display = "";
+                        more.addEventListener("click", function () {
+                            if (!c.nextPage())
+                                more.style.display = "none";
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    PageCtrl.renderPaintings = renderPaintings;
+    function initPaint() {
+        return __awaiter(this, void 0, void 0, function () {
+            var component;
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        PageCtrl.initMenu("paintings");
+                        return [4 /*yield*/, init("main-container")];
+                    case 1:
+                        _b.sent();
+                        component = (_a = Hje.render("main-container", {
+                            control: PageCtrl.ImageSeriesPart,
+                            data: {
+                                series: __spreadArray([{
+                                        id: "default",
+                                        name: PageCtrl.getString("generalPaintings"),
+                                        qr: "logos/qr-paintings.png",
+                                        year: 2020,
+                                        thumb: true
+                                    }, PageCtrl.getString("series")], works.series, true),
+                                items: works,
+                                select: DeepX.MdBlogs.firstQuery() || undefined,
+                                blogRela: "../blog/",
+                                imageRela: "../images/",
+                                itemUrl: getImageUrl,
+                                click: onImageItemClick,
+                                selected: function (info, c) {
+                                    PageCtrl.ele("ph-link-icon").href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
+                                },
+                                styles: {
+                                    header: ["x-zone-hl", "layout-wide-full", "x-bg-outstanding"],
+                                    next: ["x-zone-actions"],
+                                    share: ["x-part-panel", "x-bg-emphasis"],
+                                },
+                                strings: {
+                                    pics: PageCtrl.getString("paintings"),
+                                    all: PageCtrl.getString("picLibs"),
+                                    site: PageCtrl.getString("worksBy").replace("{0}", "Muse").replace("{1}", PageCtrl.getString("paintings")),
+                                },
+                                urls: {
+                                    share: "./icons/share-w.png",
+                                    qr: "./logos/qr-paintings.png",
+                                    series: "./",
+                                },
+                                mkt: Hje.getQuery("mkt") || true,
+                                page: 24,
+                                before: {
+                                    tagName: "section",
+                                    styleRefs: "x-part-greetings",
+                                    children: [{
+                                            tagName: "span",
+                                            children: PageCtrl.getString("loveDrawing"),
+                                        }, {
+                                            tagName: "span",
+                                            children: "❤",
+                                        }, {
+                                            tagName: "a",
+                                            props: {
+                                                href: "#",
+                                            },
+                                            on: {
+                                                click: function (ev) {
+                                                    ev.preventDefault();
+                                                    if (component)
+                                                        component.scrollMenuIntoView();
+                                                }
+                                            },
+                                            children: PageCtrl.getString("picLibs"),
+                                        }]
+                                }
+                            },
+                        })) === null || _a === void 0 ? void 0 : _a.control();
+                        window.addEventListener("popstate", function (ev) {
+                            if (!component || !(ev === null || ev === void 0 ? void 0 : ev.state))
+                                return;
+                            component.selectSeries(ev.state);
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    PageCtrl.initPaint = initPaint;
+    function onImageItemClick(data) {
+        var imageSize = data.item.size || "";
+        if (imageSize && imageSize.indexOf("x") > 0)
+            imageSize = imageSize.replace("x", "cm × ") + "cm";
+        if (data.item.year) {
+            if (imageSize)
+                imageSize += " 　|　 ";
+            imageSize += PageCtrl.monthYear(data.item.year, data.item.month);
+        }
+        var name = data.info.name;
+        var desc = imageSize ? "\"".concat(name, " (").concat(imageSize, ")") : name;
+        PageCtrl.showPopupView({
+            name: name,
+            url: data.info.url,
+            thumb: data.info.thumb,
+            tips: desc,
+            desc: imageSize
+        });
+    }
+    PageCtrl.onImageItemClick = onImageItemClick;
+    function getImageUrl(item, kind) {
+        return kind === "source"
+            ? "./paintings/".concat(item.year, "/").concat(item.id, ".webp")
+            : "./paintings/thumbnails/".concat(item.year, "/").concat(item.id, ".webp");
+    }
+    function getContainerElement(paging, suffix) {
+        return PageCtrl.ele("".concat((paging === null || paging === void 0 ? void 0 : paging.id) || "section-works", "-").concat(suffix || "container"));
     }
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
@@ -1873,6 +1849,62 @@ var PageCtrl;
         return obj;
     }
     PageCtrl.parseFirstQuery = parseFirstQuery;
+    function loadingModel(failed, context) {
+        var m = {
+            tagName: "p",
+            children: [failed ? {
+                    tagName: "span",
+                    children: DeepX.MdBlogs.getLocaleString("loadFailed"),
+                } : {
+                    tagName: "em",
+                    children: DeepX.MdBlogs.getLocaleString("loading"),
+                }],
+        };
+        if (context) {
+            context.model().children = [m];
+            context.refresh();
+        }
+        return m;
+    }
+    PageCtrl.loadingModel = loadingModel;
+    function fetchMainData(url, element) {
+        return __awaiter(this, void 0, void 0, function () {
+            var c, res, json, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!url)
+                            return [2 /*return*/, {}];
+                        c = element ? Hje.render(element, {
+                            children: [loadingModel()],
+                        }) : undefined;
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 4, , 5]);
+                        return [4 /*yield*/, fetch(url)];
+                    case 2:
+                        res = _b.sent();
+                        return [4 /*yield*/, res.json()];
+                    case 3:
+                        json = _b.sent();
+                        if (!json) {
+                            loadingModel(true, c);
+                            return [2 /*return*/, { context: c }];
+                        }
+                        return [2 /*return*/, {
+                                data: json,
+                                context: c
+                            }];
+                    case 4:
+                        _a = _b.sent();
+                        loadingModel(true, c);
+                        return [2 /*return*/, { context: c }];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    }
+    PageCtrl.fetchMainData = fetchMainData;
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
 (function (PageCtrl) {
