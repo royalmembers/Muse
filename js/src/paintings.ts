@@ -40,7 +40,7 @@ namespace PageCtrl {
                 defaultName: DeepX.MdBlogs.getLocaleString("pic"),
                 mkt,
                 page: options.size || 24,
-                itemUrl: getImageUrl,
+                itemUrl: getPaintingImageUrl,
                 click: onImageItemClick,
             } as IImageCollectionPartData,
         })?.control() as ImageCollectionPart;
@@ -79,7 +79,7 @@ namespace PageCtrl {
                 select: DeepX.MdBlogs.firstQuery() || undefined,
                 blogRela: "../blog/",
                 imageRela: "../images/",
-                itemUrl: getImageUrl,
+                itemUrl: getPaintingImageUrl,
                 click: onImageItemClick,
                 selected(info, c) {
                     (ele("ph-link-icon") as HTMLLinkElement).href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
@@ -134,8 +134,6 @@ namespace PageCtrl {
 
     export function onImageItemClick(data: IImageClickInfo) {
         let imageSize = data.item.size || "";
-        if (imageSize && imageSize.indexOf("x") > 0)
-            imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (data.item.year) {
             if (imageSize) imageSize += " 　|　 ";
             imageSize += monthYear(data.item.year, data.item.month);
@@ -152,7 +150,7 @@ namespace PageCtrl {
         });
     }
 
-    function getImageUrl(item: IImageItemInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]) {
+    function getPaintingImageUrl(item: IImageItemInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]) {
         return kind === "source"
             ? `./paintings/${item.year}/${item.id}.webp`
             : `./paintings/thumbnails/${item.year}/${item.id}.webp`;

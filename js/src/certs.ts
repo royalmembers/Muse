@@ -160,11 +160,7 @@ namespace PageCtrl {
                 imageRela: "../images/",
                 defaultImageName: DeepX.MdBlogs.getLocaleString("pic"),
                 click: onImageItemClick,
-                itemUrl(item, kind) {
-                    return kind === "source"
-                        ? `./${item.data?.kind || "photos"}/${item.year}/${item.id}.webp`
-                        : `./${item.data?.kind || "photos"}/thumbnails/${item.year}/${item.id}.webp`;
-                },
+                itemUrl: getImageUrl,
             } as IRelatedInfoPartData,
         })?.control() as RelatedInfoPart;
         const info = certsModel(arr, id, details);

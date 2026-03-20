@@ -106,4 +106,10 @@ namespace PageCtrl {
         }
     }
 
+    export function getImageUrl(item: IImageItemInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]) {
+        return kind === "source"
+            ? `./${item.data?.kind || "photos"}/${item.year}/${item.id}.webp`
+            : `./${item.data?.kind || "photos"}/thumbnails/${item.year}/${item.id}.webp`;
+    }
+
 }

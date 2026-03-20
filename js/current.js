@@ -337,12 +337,7 @@ var PageCtrl;
                                 imageRela: "../images/",
                                 defaultImageName: DeepX.MdBlogs.getLocaleString("pic"),
                                 click: PageCtrl.onImageItemClick,
-                                itemUrl: function (item, kind) {
-                                    var _a, _b;
-                                    return kind === "source"
-                                        ? "./".concat(((_a = item.data) === null || _a === void 0 ? void 0 : _a.kind) || "photos", "/").concat(item.year, "/").concat(item.id, ".webp")
-                                        : "./".concat(((_b = item.data) === null || _b === void 0 ? void 0 : _b.kind) || "photos", "/thumbnails/").concat(item.year, "/").concat(item.id, ".webp");
-                                },
+                                itemUrl: PageCtrl.getImageUrl,
                             },
                         })) === null || _a === void 0 ? void 0 : _a.control();
                         info = certsModel(arr, id, details);
@@ -395,7 +390,7 @@ var PageCtrl;
         { year: 2018, month: 10 },
         { year: 2017, month: 4 },
         { year: 2016, month: 6 },
-        { year: 2015, month: 9 }
+        { year: 2015, month: 10 }
     ];
     var menu = [{
             id: "certs",
@@ -420,7 +415,7 @@ var PageCtrl;
                 url += "0";
             url += item.month;
         }
-        url += item.year > 2025 ? ".webp" : ".jpg";
+        url += item.year > 2025 || item.year === 2015 ? ".webp" : ".jpg";
         return url;
     }
     function showAvatar(item) {
@@ -1649,7 +1644,7 @@ var PageCtrl;
                                 defaultName: DeepX.MdBlogs.getLocaleString("pic"),
                                 mkt: mkt,
                                 page: options.size || 24,
-                                itemUrl: getImageUrl,
+                                itemUrl: getPaintingImageUrl,
                                 click: onImageItemClick,
                             },
                         })) === null || _b === void 0 ? void 0 : _b.control();
@@ -1703,7 +1698,7 @@ var PageCtrl;
                                 select: DeepX.MdBlogs.firstQuery() || undefined,
                                 blogRela: "../blog/",
                                 imageRela: "../images/",
-                                itemUrl: getImageUrl,
+                                itemUrl: getPaintingImageUrl,
                                 click: onImageItemClick,
                                 selected: function (info, c) {
                                     PageCtrl.ele("ph-link-icon").href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
@@ -1764,8 +1759,6 @@ var PageCtrl;
     PageCtrl.initPaint = initPaint;
     function onImageItemClick(data) {
         var imageSize = data.item.size || "";
-        if (imageSize && imageSize.indexOf("x") > 0)
-            imageSize = imageSize.replace("x", "cm × ") + "cm";
         if (data.item.year) {
             if (imageSize)
                 imageSize += " 　|　 ";
@@ -1782,7 +1775,7 @@ var PageCtrl;
         });
     }
     PageCtrl.onImageItemClick = onImageItemClick;
-    function getImageUrl(item, kind) {
+    function getPaintingImageUrl(item, kind) {
         return kind === "source"
             ? "./paintings/".concat(item.year, "/").concat(item.id, ".webp")
             : "./paintings/thumbnails/".concat(item.year, "/").concat(item.id, ".webp");
@@ -1905,6 +1898,13 @@ var PageCtrl;
         });
     }
     PageCtrl.fetchMainData = fetchMainData;
+    function getImageUrl(item, kind) {
+        var _a, _b;
+        return kind === "source"
+            ? "./".concat(((_a = item.data) === null || _a === void 0 ? void 0 : _a.kind) || "photos", "/").concat(item.year, "/").concat(item.id, ".webp")
+            : "./".concat(((_b = item.data) === null || _b === void 0 ? void 0 : _b.kind) || "photos", "/thumbnails/").concat(item.year, "/").concat(item.id, ".webp");
+    }
+    PageCtrl.getImageUrl = getImageUrl;
 })(PageCtrl || (PageCtrl = {}));
 var PageCtrl;
 (function (PageCtrl) {

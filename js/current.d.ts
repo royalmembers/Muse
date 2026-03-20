@@ -275,6 +275,7 @@ declare namespace PageCtrl {
         data?: T;
         context?: Hje.ViewGeneratingContextContract<any>;
     }>;
+    function getImageUrl(item: IImageItemInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]): string;
 }
 declare namespace PageCtrl {
     interface IElementBag {

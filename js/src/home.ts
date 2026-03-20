@@ -19,7 +19,7 @@ namespace PageCtrl {
         { year: 2018, month: 10 },
         { year: 2017, month: 4 },
         { year: 2016, month: 6 },
-        { year: 2015, month: 9 }
+        { year: 2015, month: 10 }
     ];
 
     const menu = [{
@@ -44,7 +44,7 @@ namespace PageCtrl {
             if (item.month < 10) url += "0";
             url += item.month;
         }
-        url += item.year > 2025 ? ".webp" : ".jpg";
+        url += item.year > 2025 || item.year === 2015 ? ".webp" : ".jpg";
         return url;
     }
 
