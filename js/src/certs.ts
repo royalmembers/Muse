@@ -108,7 +108,9 @@ namespace PageCtrl {
         const selInfo = parseFirstQuery(id);
         for (let i = 0; i < certs.length; i++) {
             let item = certs[i];
-            if (!item || !item.name || item.disable) continue;
+            if (!item || !item.name) continue;
+            if (selInfo.id && selInfo.year && selInfo.id === item.id && selInfo.year === item.year) info = item;
+            if (item.disable) continue;
             if (onlyMatch && item.scope !== "match" && item.scope !== "pro" && item.scope !== "variety") continue;
             if (item.year && item.year !== year && !isNaN(item.year)) {
                 arr.push({
@@ -131,9 +133,6 @@ namespace PageCtrl {
                 ]
             };
             addCertEvent(item, m, details);
-            if (selInfo.id) {
-                if (selInfo.id === item.id && selInfo.year === item.year) info = item;
-            }
             arr.push(m);
         }
 

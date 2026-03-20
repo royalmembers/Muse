@@ -148,7 +148,7 @@ button.x-button-more {
     background-position: right 12px center;
     padding-right: 36px;
 }
-a.link-tile-compact, button.link-button-normal {
+button.link-button-normal, ul.link-tile-compact > li > a, a.link-tile-compact {
     backdrop-filter: blur(4px);
 }
 section > div.x-copyright-spec {

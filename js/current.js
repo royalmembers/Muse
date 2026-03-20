@@ -276,7 +276,11 @@ var PageCtrl;
         var selInfo = PageCtrl.parseFirstQuery(id);
         for (var i = 0; i < certs.length; i++) {
             var item = certs[i];
-            if (!item || !item.name || item.disable)
+            if (!item || !item.name)
+                continue;
+            if (selInfo.id && selInfo.year && selInfo.id === item.id && selInfo.year === item.year)
+                info = item;
+            if (item.disable)
                 continue;
             if (onlyMatch && item.scope !== "match" && item.scope !== "pro" && item.scope !== "variety")
                 continue;
@@ -300,10 +304,6 @@ var PageCtrl;
                 ]
             };
             addCertEvent(item, m, details);
-            if (selInfo.id) {
-                if (selInfo.id === item.id && selInfo.year === item.year)
-                    info = item;
-            }
             arr.push(m);
         }
         return info;
