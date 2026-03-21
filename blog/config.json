@@ -16,6 +16,10 @@
                 "photographer": "Kingcean Tuan"
             },
             "end": true,
+            "thumb": {
+                "common": "./2025/haikou/20250510_092849_n.webp",
+                "wide": "./2025/haikou/20250510_092849_w.webp"
+            },
             "related": [
                 "关联文章",
                 {
@@ -38,6 +42,10 @@
                 "photographer": "Kingcean Tuan"
             },
             "end": true,
+            "thumb": {
+                "common": "./2025/korea/20250522_123429_n.webp",
+                "wide": "./2025/korea/20250522_123429_w.webp"
+            },
             "related": [
                 "关联文章",
                 {
@@ -63,6 +71,10 @@
                 "photographer": ["Kingcean Tuan", "Muse Tuan"]
             },
             "end": true,
+            "thumb": {
+                "common": "./2025/yonghe/20250621_131607_n.webp",
+                "wide": "./2025/yonghe/20250621_131607_w.webp"
+            },
             "related": [
                 "关联文章",
                 {
@@ -87,6 +99,10 @@
                 "author": "Muse Tuan"
             },
             "end": true,
+            "thumb": {
+                "common": "./2025/tsingtao/20250717_084549_n.webp",
+                "wide": "./2025/tsingtao/20250717_084549_w.webp"
+            },
             "related": [
                 "关联文章",
                 {
@@ -108,6 +124,10 @@
                 "painter": "Muse Tuan"
             },
             "end": true,
+            "thumb": {
+                "common": "./2026/mao/thumb-nb.webp",
+                "wide": "./2026/mao/thumb-wb.webp"
+            },
             "related": [
                 "转载",
                 {
@@ -131,6 +151,10 @@
                 "painter": "Muse Tuan"
             },
             "end": true,
+            "thumb": {
+                "common": "./2026/chengdu/thumbnails/20260203_175411.webp",
+                "wide": "./2026/chengdu/thumbnails/20260203_175411_w.webp"
+            },
             "related": [
                 "关联文章",
                 {
@@ -152,6 +176,10 @@
                 "author": "Muse Tuan",
                 "photographer": "Kingcean Tuan",
                 "painter": "Muse Tuan"
+            },
+            "thumb": {
+                "common": "./2026/horse/20260217_200654_n.webp",
+                "wide": "./2026/horse/20260217_200654_w.webp"
             }
         },
         {
