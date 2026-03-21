@@ -74,13 +74,13 @@ declare namespace PageCtrl {
             subtitleCase?: ITitleCaseKind;
             qr?: string;
             defaultItemName?: string | boolean;
+            ratio?: IImageRatio;
             thumb?: boolean;
         };
         icon?: string;
         intro?: string;
         blog?: string;
         year: number;
-        ratio?: IImageRatio;
         links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
         [property: string]: any;
     }

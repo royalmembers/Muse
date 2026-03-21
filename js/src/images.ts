@@ -16,13 +16,13 @@ namespace PageCtrl {
             subtitleCase?: ITitleCaseKind;
             qr?: string;
             defaultItemName?: string | boolean;
+            ratio?: IImageRatio;
             thumb?: boolean;
         },
         icon?: string;
         intro?: string;
         blog?: string;
         year: number;
-        ratio?: IImageRatio;
         links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
         [property: string]: any;
     }
@@ -273,7 +273,7 @@ namespace PageCtrl {
             const mkt = this.__inner.mkt;
             this.__inner.select = id;
             gallery.clear();
-            gallery.styleRefs(mergeArray(this.__inner.mainStyle, ratioClassName(id.ratio)));
+            gallery.styleRefs(mergeArray(this.__inner.mainStyle, ratioClassName(id.options?.ratio)));
             gallery.setDefaultName(DeepX.MdBlogs.getLocaleProp(id.options, "defaultItemName", mkt) || this.__inner.defaultItemName);
             gallery.pushWithoutRender(...items);
             const hasNextPage = gallery.nextPage();

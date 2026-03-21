@@ -192,7 +192,11 @@
             "author": {
                 "author": "Muse Tuan"
             },
-            "end": true
+            "end": true,
+            "thumb": {
+                "common": "./2026/yuanxiao/20260303_214408_n.webp",
+                "wide": "./2026/yuanxiao/20260303_214408_w.webp"
+            }
         },
         {
             "name": "古装和民族服饰",
@@ -206,7 +210,11 @@
             "author": {
                 "painter": "Muse Tuan"
             },
-            "end": true
+            "end": true,
+            "thumb": {
+                "common": "./2026/mao/thumb-nb.webp",
+                "wide": "./2026/mao/thumb-wb.webp"
+            }
         }
     ],
     "links": [

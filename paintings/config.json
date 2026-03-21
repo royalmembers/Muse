@@ -10,7 +10,9 @@
             "nameCase#en": "small",
             "nameCase#fr": "small",
             "subtitleCase": "small",
-            "qr": "logos/qr-mao.webp"
+            "qr": "logos/qr-mao.webp",
+            "ratio": "p",
+            "thumb": true
         },
         "subtitle": "Mor-Ow Meow",
         "subtitle#en": "摸凹喵",
@@ -20,9 +22,7 @@
         "intro": "这是一只可爱的小猫猫，有着齐刘海和双马尾，眼睛不大、嘴巴可小可大有弹性，是不是萌萌哒，是不是超有趣，是不是很像小时候的我？",
         "icon": "logos/mao-2026.png",
         "blog": "mor-ow-meow",
-        "year": 2026,
-        "ratio": "p",
-        "thumb": true
+        "year": 2026
     }],
     "default": [{
         "id": "rescue",
@@ -106,6 +106,22 @@
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260321-p1",
+        "name": "摸凹喵小红帽",
+        "name#en": "Mor-Ow Meow Dressed as Little Red Riding Hood",
+        "year": 2026,
+        "month": 3,
+        "day": 21,
+        "keywords": ["卡通形象"]
+    }, {
+        "id": "mao-260319-p1",
+        "name": "摸凹喵鹦鹉",
+        "name#en": "Mor-Ow Meow Dressed as Parrot",
+        "year": 2026,
+        "month": 3,
+        "day": 19,
+        "keywords": ["动物装扮"]
+    }, {
         "id": "mao-260308-p1",
         "name": "欧洲贵族摸凹喵",
         "name#en": "Mor-Ow Meow Dressed as European Aristocrat",

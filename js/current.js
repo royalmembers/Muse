@@ -693,7 +693,7 @@ var PageCtrl;
             return undefined;
         };
         ImageSeriesPart.prototype.selectSeries = function (id) {
-            var _a, _b;
+            var _a, _b, _c;
             if (!id)
                 return undefined;
             if (typeof id === "string") {
@@ -711,7 +711,7 @@ var PageCtrl;
             var mkt = this.__inner.mkt;
             this.__inner.select = id;
             gallery.clear();
-            gallery.styleRefs(mergeArray(this.__inner.mainStyle, ratioClassName(id.ratio)));
+            gallery.styleRefs(mergeArray(this.__inner.mainStyle, ratioClassName((_a = id.options) === null || _a === void 0 ? void 0 : _a.ratio)));
             gallery.setDefaultName(DeepX.MdBlogs.getLocaleProp(id.options, "defaultItemName", mkt) || this.__inner.defaultItemName);
             gallery.pushWithoutRender.apply(gallery, items);
             var hasNextPage = gallery.nextPage();
@@ -736,8 +736,8 @@ var PageCtrl;
             this.childModel("title", { children: title });
             var info = this.getSeriesLinkInfo(id);
             var share = sharePanel({
-                qr: DeepX.MdBlogs.getLocaleProp(id.options, "qr", mkt) || ((_a = this.__inner.urls) === null || _a === void 0 ? void 0 : _a.qr),
-                share: (_b = this.__inner.urls) === null || _b === void 0 ? void 0 : _b.share,
+                qr: DeepX.MdBlogs.getLocaleProp(id.options, "qr", mkt) || ((_b = this.__inner.urls) === null || _b === void 0 ? void 0 : _b.qr),
+                share: (_c = this.__inner.urls) === null || _c === void 0 ? void 0 : _c.share,
                 page: info.url,
             }, DeepX.MdBlogs.getLocaleProp(id, "intro", mkt), rela, info.title, mkt);
             this.childModel("share", {
