@@ -15,14 +15,14 @@ namespace PageCtrl {
             nameCase?: ITitleCaseKind;
             subtitleCase?: ITitleCaseKind;
             qr?: string;
-            defaultItemName?: string;
+            defaultItemName?: string | boolean;
+            thumb?: boolean;
         },
         icon?: string;
         intro?: string;
         blog?: string;
         year: number;
         ratio?: IImageRatio;
-        thumb?: boolean;
         links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
         [property: string]: any;
     }
@@ -114,6 +114,7 @@ namespace PageCtrl {
             select?: IImageSeriesInfo;
             urls: IImageSeriesPartData["urls"];
             siteName?: string;
+            defaultItemName?: string;
             selected?: (info: IImageSeriesInfo, component: ImageSeriesPart) => void;
         };
 
@@ -140,6 +141,7 @@ namespace PageCtrl {
                 mainStyle,
                 urls: urls,
                 siteName: strings.site,
+                defaultItemName: strings.pics,
                 selected: data.selected,
             };
             const self = this;
@@ -268,16 +270,17 @@ namespace PageCtrl {
             const items = this.__inner.items[id.id];
             const gallery = this.childControl("gallery") as ImageCollectionPart;
             if (!gallery) return id;
+            const mkt = this.__inner.mkt;
             this.__inner.select = id;
             gallery.clear();
             gallery.styleRefs(mergeArray(this.__inner.mainStyle, ratioClassName(id.ratio)));
+            gallery.setDefaultName(DeepX.MdBlogs.getLocaleProp(id.options, "defaultItemName", mkt) || this.__inner.defaultItemName);
             gallery.pushWithoutRender(...items);
             const hasNextPage = gallery.nextPage();
             this.childModel("actions", {
                 style: { display: hasNextPage ? "" : "none" },
             });
             const rela = this.__inner.imageRela;
-            const mkt = this.__inner.mkt;
             const title: Hje.DescriptionContract[] = [];
             let text = DeepX.MdBlogs.getLocaleProp(id, "icon", mkt);
             if (text) title.push({
@@ -508,6 +511,10 @@ namespace PageCtrl {
 
         get length() {
             return this.__inner.items;
+        }
+
+        setDefaultName(value: string) {
+            this.__inner.defaultName = value;
         }
 
         getItem(index: number) {

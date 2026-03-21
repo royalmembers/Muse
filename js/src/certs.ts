@@ -177,6 +177,8 @@ namespace PageCtrl {
             const selInfo = parseFirstQuery(id);
             if (!selInfo.id) {
                 details.style.display = "none";
+                const relatedElement = inner.related?.element();
+                if (relatedElement) relatedElement.style.display = "none";
                 return;
             }
 

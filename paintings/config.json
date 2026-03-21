@@ -9,7 +9,8 @@
         "options": {
             "nameCase#en": "small",
             "nameCase#fr": "small",
-            "subtitleCase": "small"
+            "subtitleCase": "small",
+            "qr": "logos/qr-mao.webp"
         },
         "subtitle": "Mor-Ow Meow",
         "subtitle#en": "摸凹喵",
@@ -18,7 +19,6 @@
         "subtitle#ja": "Mor-Ow Meow / モル オウ ニャー",
         "intro": "这是一只可爱的小猫猫，有着齐刘海和双马尾，眼睛不大、嘴巴可小可大有弹性，是不是萌萌哒，是不是超有趣，是不是很像小时候的我？",
         "icon": "logos/mao-2026.png",
-        "qr": "logos/qr-mao.webp",
         "blog": "mor-ow-meow",
         "year": 2026,
         "ratio": "p",

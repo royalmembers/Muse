@@ -73,14 +73,14 @@ declare namespace PageCtrl {
             nameCase?: ITitleCaseKind;
             subtitleCase?: ITitleCaseKind;
             qr?: string;
-            defaultItemName?: string;
+            defaultItemName?: string | boolean;
+            thumb?: boolean;
         };
         icon?: string;
         intro?: string;
         blog?: string;
         year: number;
         ratio?: IImageRatio;
-        thumb?: boolean;
         links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
         [property: string]: any;
     }
@@ -171,6 +171,7 @@ declare namespace PageCtrl {
         private __inner;
         constructor(element: any, options?: Hje.ComponentOptionsContract<IImageCollectionPartData>);
         get length(): IImageItemInfo[];
+        setDefaultName(value: string): void;
         getItem(index: number): IImageItemInfo | undefined;
         pushWithoutRender(...items: IImageItemInfo[]): number;
         push(...items: IImageItemInfo[]): number;

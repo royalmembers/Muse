@@ -352,10 +352,14 @@ var PageCtrl;
                                 c.refresh();
                             });
                         window.addEventListener("popstate", function (ev) {
+                            var _a;
                             id = (ev.state || {}).id;
                             var selInfo = PageCtrl.parseFirstQuery(id);
                             if (!selInfo.id) {
                                 details.style.display = "none";
+                                var relatedElement = (_a = inner.related) === null || _a === void 0 ? void 0 : _a.element();
+                                if (relatedElement)
+                                    relatedElement.style.display = "none";
                                 return;
                             }
                             if (!certs)
@@ -560,6 +564,7 @@ var PageCtrl;
                 mainStyle: mainStyle,
                 urls: urls,
                 siteName: strings.site,
+                defaultItemName: strings.pics,
                 selected: data.selected,
             };
             var self = _this;
@@ -703,16 +708,17 @@ var PageCtrl;
             var gallery = this.childControl("gallery");
             if (!gallery)
                 return id;
+            var mkt = this.__inner.mkt;
             this.__inner.select = id;
             gallery.clear();
             gallery.styleRefs(mergeArray(this.__inner.mainStyle, ratioClassName(id.ratio)));
+            gallery.setDefaultName(DeepX.MdBlogs.getLocaleProp(id.options, "defaultItemName", mkt) || this.__inner.defaultItemName);
             gallery.pushWithoutRender.apply(gallery, items);
             var hasNextPage = gallery.nextPage();
             this.childModel("actions", {
                 style: { display: hasNextPage ? "" : "none" },
             });
             var rela = this.__inner.imageRela;
-            var mkt = this.__inner.mkt;
             var title = [];
             var text = DeepX.MdBlogs.getLocaleProp(id, "icon", mkt);
             if (text)
@@ -969,6 +975,9 @@ var PageCtrl;
             enumerable: false,
             configurable: true
         });
+        ImageCollectionPart.prototype.setDefaultName = function (value) {
+            this.__inner.defaultName = value;
+        };
         ImageCollectionPart.prototype.getItem = function (index) {
             return index < 0 ? undefined : this.__inner.items[index];
         };
@@ -1728,7 +1737,7 @@ var PageCtrl;
                                             children: PageCtrl.getString("loveDrawing"),
                                         }, {
                                             tagName: "span",
-                                            children: "❤",
+                                            children: "♥️",
                                         }, {
                                             tagName: "a",
                                             props: {

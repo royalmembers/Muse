@@ -109,7 +109,7 @@ namespace PageCtrl {
                         children: getString("loveDrawing"),
                     }, {
                         tagName: "span",
-                        children: "❤",
+                        children: "♥️",
                     }, {
                         tagName: "a",
                         props: {
