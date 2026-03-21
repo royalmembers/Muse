@@ -155,6 +155,18 @@
             }
         },
         {
+            "name": "元宵放烟花",
+            "name#en": "Fireworks in Lantern Festival",
+            "dir": "yuanxiao",
+            "file": true,
+            "date": "20260307",
+            "location": "上海",
+            "author": {
+                "author": "Muse Tuan"
+            },
+            "end": true
+        },
+        {
             "name": "古装和民族服饰",
             "name#en": "Ancient Costume",
             "subtitle": "摸凹喵",

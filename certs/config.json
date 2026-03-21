@@ -22,8 +22,7 @@
         }]
     }, {
         "id": "tomusic-0201",
-        "name": "听闻音乐琴韵风采奖",
-        "disable": true,
+        "name": "听闻音乐",
         "scope": "institution",
         "season": "第8届",
         "year": 2026,
