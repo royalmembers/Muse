@@ -106,9 +106,17 @@
         "keywords": ["watercolor"]
     }],
     "mao": [{
-        "id": "mao-260322-p2",
+        "id": "mao-260322-p3",
         "disable": true,
-        "name": "帮助小红帽的摸凹喵猎人",
+        "name": "摸凹喵知名双尾美人鱼",
+        "name#en": "Mor-Ow Meow Dressed as Mermaid with Two Tails",
+        "year": 2026,
+        "month": 3,
+        "day": 22,
+        "keywords": ["卡通形象"]
+    }, {
+        "id": "mao-260322-p2",
+        "name": "救助小红帽和奶奶的摸凹喵猎人",
         "name#en": "Mor-Ow Meow Dressed as Huntsman in Little Red Riding Hood",
         "year": 2026,
         "month": 3,
