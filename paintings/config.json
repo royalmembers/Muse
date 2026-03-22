@@ -108,7 +108,7 @@
     "mao": [{
         "id": "mao-260322-p2",
         "disable": true,
-        "name": "摸凹喵小红帽猎人",
+        "name": "帮助小红帽的摸凹喵猎人",
         "name#en": "Mor-Ow Meow Dressed as Huntsman in Little Red Riding Hood",
         "year": 2026,
         "month": 3,
@@ -116,7 +116,7 @@
         "keywords": ["卡通形象"]
     }, {
         "id": "mao-260322-p1",
-        "name": "摸凹喵小红帽老奶娘",
+        "name": "小红帽的摸凹喵奶奶",
         "name#en": "Mor-Ow Meow Dressed as Grandmother in Little Red Riding Hood",
         "year": 2026,
         "month": 3,
@@ -124,12 +124,12 @@
         "keywords": ["卡通形象"]
     }, {
         "id": "mao-260321-p2",
-        "name": "摸凹喵小红帽大灰狼",
+        "name": "吃小红帽奶奶的摸凹喵大灰狼",
         "name#en": "Mor-Ow Meow Dressed as the Wolf in Little Red Riding Hood",
         "year": 2026,
         "month": 3,
         "day": 21,
-        "keywords": ["卡通形象"]
+        "keywords": ["卡通形象", "动物装扮"]
     }, {
         "id": "mao-260321-p1",
         "name": "摸凹喵小红帽",
@@ -137,7 +137,7 @@
         "year": 2026,
         "month": 3,
         "day": 21,
-        "keywords": ["卡通形象"]
+        "keywords": ["卡通形象", "民族服饰"]
     }, {
         "id": "mao-260319-p1",
         "name": "摸凹喵鹦鹉",
