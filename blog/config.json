@@ -201,10 +201,8 @@
             }
         },
         {
-            "name": "古装和民族服饰",
-            "name#en": "Ancient Costume",
-            "subtitle": "摸凹喵",
-            "subtitle#en": "Mor-Ow Meow",
+            "name": "古装和民族服饰 - 摸凹喵",
+            "name#en": "Ancient Mor-Ow Meow",
             "dir": "costume",
             "file": true,
             "keywords": ["mor-ow-meow"],
@@ -219,13 +217,11 @@
             }
         },
         {
-            "name": "小红帽",
-            "name#en": "Little Red Riding Hood",
-            "subtitle": "摸凹喵",
-            "subtitle#en": "Mor-Ow Meow",
+            "name": "小红帽 x 摸凹喵",
+            "name#en": "Little Red Riding Hood x Mor-Ow Meow",
             "dir": "little-red-riding-hood",
             "file": true,
-            "keywords": ["mor-ow-meow"],
+            "keywords": ["mor-ow-meow", "fairy-tales"],
             "date": "20260322",
             "author": {
                 "painter": "Muse Tuan"
@@ -237,7 +233,10 @@
             },
             "related": [
                 {
-                    "name": "原文转载",
+                    "name": "小红帽",
+                    "name#en": "Little Red Riding Hood",
+                    "subtitle": "原文转载 仅供参考",
+                    "subtitle#en": "Reproduced FYI",
                     "url": "https://12dlabs.github.io/stories/fairy-tales/?little-red-riding-hood"
                 }
             ]
@@ -258,6 +257,7 @@
         "keywords": [
             { "name": "Trip", "name#zh": "旅行", "value": "trip" },
             { "name": "Mor-Ow Meow", "name#zh": "摸凹喵", "name#fr": "Moh-Aou Miaou", "name#ko": "모오 미야오", "value": "mor-ow-meow" },
+            { "name": "Fairy Tales", "name#zh": "童话", "value": "fairy-tales" },
             { "name": "Intro", "name#zh": "介绍", "value": "intro" }
         ]
     }

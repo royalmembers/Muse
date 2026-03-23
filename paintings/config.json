@@ -27,12 +27,12 @@
     "default": [{
         "id": "rescue",
         "name": "飞行拯救生命",
-        "name#en": "Rescue by flying",
+        "name#en": "Rescue by Flying",
         "year": 2026,
         "month": 2,
         "day": 27,
         "size": "A3",
-        "keywords": []
+        "keywords": ["watercolor", "mor-ow-meow"]
     }, {
         "id": "countryside",
         "name": "乡村景色",
@@ -55,12 +55,14 @@
     }, {
         "id": "gold-medal",
         "name": "金牌时刻",
+        "name#en": "Gold Medal Moment",
         "year": 2024,
         "month": 8,
         "keywords": ["watercolor"]
     }, {
         "id": "magpie",
         "name": "喜上眉梢",
+        "name#en": "Lucky Magpie",
         "year": 2024,
         "keywords": ["chinese-brush"]
     }, {
@@ -109,7 +111,7 @@
         "id": "mao-260322-p3",
         "disable": true,
         "name": "摸凹喵知名双尾美人鱼",
-        "name#en": "Mor-Ow Meow Dressed as Mermaid with Two Tails",
+        "name#en": "Mor-Ow Meow Mermaid with Two Tails",
         "year": 2026,
         "month": 3,
         "day": 22,
@@ -117,7 +119,7 @@
     }, {
         "id": "mao-260322-p2",
         "name": "救出小红帽和奶奶的摸凹喵猎人",
-        "name#en": "Mor-Ow Meow Dressed as Huntsman in Little Red Riding Hood",
+        "name#en": "Mor-Ow Meow Huntsman in Little Red Riding Hood",
         "year": 2026,
         "month": 3,
         "day": 22,
@@ -125,7 +127,7 @@
     }, {
         "id": "mao-260322-p1",
         "name": "小红帽的摸凹喵奶奶",
-        "name#en": "Mor-Ow Meow Dressed as Grandmother in Little Red Riding Hood",
+        "name#en": "Mor-Ow Meow Grandmother of Little Red Riding Hood",
         "year": 2026,
         "month": 3,
         "day": 22,
@@ -133,7 +135,7 @@
     }, {
         "id": "mao-260321-p2",
         "name": "吃小红帽奶奶的摸凹喵大灰狼",
-        "name#en": "Mor-Ow Meow Dressed as the Wolf in Little Red Riding Hood",
+        "name#en": "Mor-Ow Meow Wolf in Little Red Riding Hood",
         "year": 2026,
         "month": 3,
         "day": 21,
@@ -141,7 +143,7 @@
     }, {
         "id": "mao-260321-p1",
         "name": "摸凹喵小红帽",
-        "name#en": "Mor-Ow Meow Dressed as Little Red Riding Hood",
+        "name#en": "Little Mor-Ow Meow Red Riding Hood",
         "year": 2026,
         "month": 3,
         "day": 21,
@@ -149,7 +151,7 @@
     }, {
         "id": "mao-260319-p1",
         "name": "摸凹喵鹦鹉",
-        "name#en": "Mor-Ow Meow Dressed as Parrot",
+        "name#en": "Mor-Ow Meow Parrot",
         "year": 2026,
         "month": 3,
         "day": 19,
@@ -157,7 +159,7 @@
     }, {
         "id": "mao-260308-p1",
         "name": "欧洲贵族摸凹喵",
-        "name#en": "Mor-Ow Meow Dressed as European Aristocrat",
+        "name#en": "Mor-Ow Meow European Aristocrat",
         "year": 2026,
         "month": 3,
         "day": 8,
@@ -186,7 +188,7 @@
     }, {
         "id": "mao-260225-p1",
         "name": "摸凹喵龙",
-        "name#en": "Mor-Ow Meow Dressed as Loong",
+        "name#en": "Mor-Ow Meow Loong",
         "year": 2026,
         "month": 2,
         "day": 24,
@@ -194,7 +196,7 @@
     }, {
         "id": "mao-260223-p2",
         "name": "摸凹喵蛇",
-        "name#en": "Mor-Ow Meow Dressed as Snake",
+        "name#en": "Mor-Ow Meow Snake",
         "year": 2026,
         "month": 2,
         "day": 23,
@@ -202,7 +204,7 @@
     }, {
         "id": "mao-260223-p1",
         "name": "摸凹喵彩虹马",
-        "name#en": "Mor-Ow Meow Dressed as Sunshine Horse",
+        "name#en": "Mor-Ow Meow Sunshine Horse",
         "year": 2026,
         "month": 2,
         "day": 23,
@@ -210,6 +212,7 @@
     }, {
         "id": "mao-260221-p1",
         "name": "土家族摸凹喵",
+        "name#en": "Mor-Ow Meow Tujia",
         "year": 2026,
         "month": 2,
         "day": 21,
@@ -217,7 +220,7 @@
     }, {
         "id": "mao-260220-p2",
         "name": "摸凹喵警官",
-        "name#en": "Mor-Ow Meow Dressed as Police Officer",
+        "name#en": "Mor-Ow Meow Police Officer",
         "year": 2026,
         "month": 2,
         "day": 20,
@@ -225,7 +228,7 @@
     }, {
         "id": "mao-260220-p1",
         "name": "摸凹喵敦煌",
-        "name#en": "Mor-Ow Meow Dressed as Dunhuang Dancer",
+        "name#en": "Mor-Ow Meow Dunhuang Dancer",
         "year": 2026,
         "month": 2,
         "day": 20,
@@ -269,6 +272,7 @@
     }, {
         "id": "mao-260208-p2",
         "name": "蝴蝶翩翩古装摸凹喵",
+        "name#en": "The Ancient Mor-Ow Meow with Butterflies",
         "year": 2026,
         "month": 2,
         "day": 8,
@@ -276,6 +280,7 @@
     }, {
         "id": "mao-260208-p1",
         "name": "大红华丽古装摸凹喵",
+        "name#en": "The Red Ancient Mor-Ow Meow",
         "year": 2026,
         "month": 2,
         "day": 8,
@@ -283,7 +288,7 @@
     }, {
         "id": "mao-260207-p3",
         "name": "摸凹喵短尾猫吊坠",
-        "name#en": "Pendant Mor-Ow Meow Dressed as Bobtail Cat",
+        "name#en": "Pendant Mor-Ow Meow Bobtail Cat",
         "year": 2026,
         "month": 2,
         "day": 7,
@@ -291,7 +296,7 @@
     }, {
         "id": "mao-260207-p2",
         "name": "摸凹喵狐狸吊坠",
-        "name#en": "Pendant Mor-Ow Meow Dressed as Fox",
+        "name#en": "Pendant Mor-Ow Meow Fox",
         "year": 2026,
         "month": 2,
         "day": 7,
@@ -305,6 +310,7 @@
     }, {
         "id": "mao-260205-p8",
         "name": "摸凹喵花朵狮",
+        "name#en": "Mor-Ow Meow Lion Flower",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -312,7 +318,7 @@
     }, {
         "id": "mao-260205-p7",
         "name": "摸凹喵小熊猫吊坠",
-        "name#en": "Pendant Mor-Ow Meow Dressed as Red Panda",
+        "name#en": "Pendant Mor-Ow Meow Red Panda",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -320,7 +326,7 @@
     }, {
         "id": "mao-260205-p6",
         "name": "摸凹喵花豹",
-        "name#en": "Mor-Ow Meow Dressed as Leopard",
+        "name#en": "Mor-Ow Meow Leopard",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -328,7 +334,7 @@
     }, {
         "id": "mao-260205-p4",
         "name": "摸凹喵熊猫",
-        "name#en": "Mor-Ow Meow Dressed as Panda",
+        "name#en": "Mor-Ow Meow Panda",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -336,7 +342,7 @@
     }, {
         "id": "mao-260205-p3",
         "name": "摸凹喵熊猫",
-        "name#en": "Mor-Ow Meow Dressed as Panda",
+        "name#en": "Mor-Ow Meow Panda",
         "year": 2026,
         "month": 2,
         "day": 5,
@@ -351,6 +357,7 @@
     }, {
         "id": "mao-260205-p1",
         "name": "摸凹喵与摇钱树",
+        "name#en": "Mor-Ow Meow and Money Tree",
         "year": 2026,
         "month": 2,
         "day": 5
@@ -415,11 +422,13 @@
     }, {
         "id": "mao-26-01-p-04",
         "name": "咧嘴笑摸凹喵",
+        "name#en": "Mor-Ow Meow is Laughing",
         "year": 2026,
         "month": 1
     }, {
         "id": "mao-26-01-p-03",
         "name": "居家日常摸凹喵",
+        "name#en": "Mor-Ow Meow at Home",
         "year": 2026,
         "month": 1
     }, {
