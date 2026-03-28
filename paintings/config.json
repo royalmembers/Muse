@@ -108,6 +108,22 @@
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260327-p1",
+        "name": "白雪摸凹喵共主",
+        "name#en": "Mor-Ow Meow Snow White",
+        "year": 2026,
+        "month": 3,
+        "day": 27,
+        "keywords": ["卡通形象"]
+    }, {
+        "id": "mao-260325-p2",
+        "name": "摸凹喵小朋友",
+        "name#en": "Mor-Ow Meow Little",
+        "year": 2026,
+        "month": 3,
+        "day": 25,
+        "keywords": ["卡通形象"]
+    }, {
         "id": "mao-260322-p3",
         "disable": true,
         "name": "摸凹喵知名双尾美人鱼",
