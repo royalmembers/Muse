@@ -945,11 +945,13 @@ var PageCtrl;
                 defaultName: data.defaultName,
                 pageSize: pageSize,
                 nextIndex: 0,
+                renderedCount: 0,
             };
             var pageSize2 = pageSize || Number.MAX_SAFE_INTEGER;
             if ((_a = options === null || options === void 0 ? void 0 : options.data) === null || _a === void 0 ? void 0 : _a.items) {
+                var i = 0;
                 var j = 0;
-                for (var i = 0; i < options.data.items.length; i++) {
+                for (; i < options.data.items.length; i++) {
                     var item = options.data.items[i];
                     var element_1 = self.genItemModel(item);
                     if (!element_1)
@@ -962,7 +964,8 @@ var PageCtrl;
                     j++;
                     elements.push(element_1);
                 }
-                _this.__inner.nextIndex = j;
+                _this.__inner.nextIndex = i;
+                _this.__inner.renderedCount = j;
             }
             _this.currentModel.children = elements;
             _this.refreshChild();
@@ -1026,12 +1029,13 @@ var PageCtrl;
         ImageCollectionPart.prototype.clear = function () {
             this.__inner.items = [];
             this.__inner.nextIndex = 0;
+            this.__inner.renderedCount = 0;
             this.currentModel.children = [];
             this.refreshChild();
         };
         ImageCollectionPart.prototype.nextPage = function () {
             var pageSize = this.__inner.pageSize;
-            var first = this.__inner.nextIndex;
+            var first = this.__inner.renderedCount;
             if (first < 0)
                 first = 0;
             if (!pageSize || pageSize <= 0) {
@@ -1050,13 +1054,14 @@ var PageCtrl;
             }
             var col = this.__inner.items;
             var j = 0;
-            var i = first;
+            var i = this.__inner.nextIndex;
             for (; i < this.__inner.items.length; i++) {
                 var item = col[i];
                 if (item.disable)
                     continue;
                 if (j >= pageSize) {
                     this.__inner.nextIndex = i;
+                    this.__inner.renderedCount += j;
                     return true;
                 }
                 var element = this.genItemModel(item);
@@ -1066,6 +1071,7 @@ var PageCtrl;
                 this.appendChild(null, element);
             }
             this.__inner.nextIndex = i;
+            this.__inner.renderedCount += j;
             return false;
         };
         ImageCollectionPart.prototype.indexOf = function (item) {

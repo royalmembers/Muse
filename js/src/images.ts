@@ -468,6 +468,7 @@ namespace PageCtrl {
             defaultName?: string;
             pageSize?: number;
             nextIndex: number;
+            renderedCount: number;
         };
         constructor(element: any, options?: Hje.ComponentOptionsContract<IImageCollectionPartData>) {
             super(element, options);
@@ -488,11 +489,13 @@ namespace PageCtrl {
                 defaultName: data.defaultName,
                 pageSize: pageSize,
                 nextIndex: 0,
+                renderedCount: 0,
             };
             const pageSize2 = pageSize || Number.MAX_SAFE_INTEGER;
             if (options?.data?.items) {
+                let i = 0;
                 let j = 0;
-                for (let i = 0; i < options.data.items.length; i++) {
+                for (; i < options.data.items.length; i++) {
                     const item = options.data.items[i];
                     const element = self.genItemModel(item);
                     if (!element) continue;
@@ -503,7 +506,8 @@ namespace PageCtrl {
                     elements.push(element);
                 }
 
-                this.__inner.nextIndex = j;
+                this.__inner.nextIndex = i;
+                this.__inner.renderedCount = j;
             }
 
             this.currentModel.children = elements;
@@ -558,13 +562,14 @@ namespace PageCtrl {
         clear() {
             this.__inner.items = [];
             this.__inner.nextIndex = 0;
+            this.__inner.renderedCount = 0;
             this.currentModel.children = [];
             this.refreshChild();
         }
 
         nextPage() {
             let pageSize = this.__inner.pageSize;
-            let first = this.__inner.nextIndex;
+            let first = this.__inner.renderedCount;
             if (first < 0) first = 0;
             if (!pageSize || pageSize <= 0) {
                 pageSize = Number.MAX_SAFE_INTEGER;
@@ -579,12 +584,13 @@ namespace PageCtrl {
             }
             const col = this.__inner.items;
             let j = 0;
-            let i = first;
+            let i = this.__inner.nextIndex;
             for (; i < this.__inner.items.length; i++) {
                 const item = col[i];
                 if (item.disable) continue;
                 if (j >= pageSize) {
                     this.__inner.nextIndex = i;
+                    this.__inner.renderedCount += j;
                     return true;
                 }
 
@@ -595,6 +601,7 @@ namespace PageCtrl {
             }
 
             this.__inner.nextIndex = i;
+            this.__inner.renderedCount += j;
             return false;
         }
 

@@ -125,7 +125,7 @@
         "keywords": ["卡通形象"]
     }, {
         "id": "mao-260325-p2",
-        "name": "摸凹喵小小狗",
+        "name": "摸凹喵小小牛",
         "name#en": "Mor-Ow Meow Little Puppy",
         "year": 2026,
         "month": 3,
@@ -421,6 +421,12 @@
         "year": 2026,
         "month": 2,
         "day": 2
+    }, {
+        "id": "mao-26-01-p-10",
+        "name": "摸凹喵大脸版",
+        "name#en": "Mo-Ow Meow Big Face",
+        "year": 2026,
+        "month": 1
     }, {
         "id": "mao-26-01-p-09",
         "name": "摸凹喵骑车",
