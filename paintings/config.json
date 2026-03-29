@@ -108,8 +108,16 @@
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260328-p1",
+        "name": "摸凹喵灰姑娘",
+        "name#en": "Mor-Ow Meow Cinderella",
+        "year": 2026,
+        "month": 3,
+        "day": 28,
+        "keywords": ["卡通形象"]
+    }, {
         "id": "mao-260327-p1",
-        "name": "白雪摸凹喵共主",
+        "name": "白雪摸凹喵公主",
         "name#en": "Mor-Ow Meow Snow White",
         "year": 2026,
         "month": 3,
@@ -117,12 +125,20 @@
         "keywords": ["卡通形象"]
     }, {
         "id": "mao-260325-p2",
-        "name": "摸凹喵小朋友",
-        "name#en": "Mor-Ow Meow Little",
+        "name": "摸凹喵小小狗",
+        "name#en": "Mor-Ow Meow Little Puppy",
         "year": 2026,
         "month": 3,
         "day": 25,
-        "keywords": ["卡通形象"]
+        "keywords": ["幼年版", "动物装扮"]
+    }, {
+        "id": "mao-260325-p1",
+        "name": "摸凹喵小小兔",
+        "name#en": "Mor-Ow Meow Little Rabit",
+        "year": 2026,
+        "month": 3,
+        "day": 25,
+        "keywords": ["幼年版", "动物装扮"]
     }, {
         "id": "mao-260322-p3",
         "disable": true,
@@ -452,12 +468,14 @@
         "name": "晒太阳的摸凹喵",
         "name#en": "Mor-Ow Meow Sunbathing",
         "year": 2026,
-        "month": 1
+        "month": 1,
+        "keywords": ["幼年版"]
     }, {
         "id": "mao-26-01-p-01",
         "name": "摸凹喵诞生",
         "name#en": "Baby Mor-Ow Meow",
         "year": 2026,
-        "month": 1
+        "month": 1,
+        "keywords": ["幼年版"]
     }]
 }

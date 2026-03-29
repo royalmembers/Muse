@@ -82,6 +82,7 @@ declare namespace PageCtrl {
         blog?: string;
         year: number;
         links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
+        data?: Record<string, any>;
         [property: string]: any;
     }
     export interface IImageItemInfo {
