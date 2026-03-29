@@ -34,6 +34,30 @@
         "size": "A3",
         "keywords": ["watercolor", "mor-ow-meow"]
     }, {
+        "id": "sunrise-251029",
+        "name": "日出湖景",
+        "name#en": "Sunrise Lake",
+        "year": 2025,
+        "month": 10,
+        "day": 29,
+        "keywords": ["digit-pen"]
+    }, {
+        "id": "octopus-250816",
+        "name": "可爱的小章鱼",
+        "name#en": "Lovely Octopus",
+        "year": 2025,
+        "month": 8,
+        "day": 16,
+        "keywords": ["digit-pen"]
+    }, {
+        "id": "parrot-250804",
+        "name": "小鹦鹉",
+        "name#en": "Little Parrot",
+        "year": 2025,
+        "month": 8,
+        "day": 4,
+        "keywords": ["digit-pen"]
+    }, {
         "id": "countryside",
         "name": "乡村景色",
         "name#en": "Countryside Scenery",
