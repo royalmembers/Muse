@@ -126,8 +126,8 @@
             },
             "end": true,
             "thumb": {
-                "common": "./2026/mao/thumb-nb.webp",
-                "wide": "./2026/mao/thumb-wb.webp"
+                "common": "./2026/mao/thumbnails/avatar.webp",
+                "wide": "./2026/mao/thumbnails/avatar-w.webp"
             },
             "related": [
                 "转载",
@@ -212,8 +212,8 @@
             },
             "end": true,
             "thumb": {
-                "common": "./2026/mao/thumb-nb.webp",
-                "wide": "./2026/mao/thumb-wb.webp"
+                "common": "./2026/mao/thumbnails/costume.webp",
+                "wide": "./2026/mao/thumbnails/costume-w.webp"
             }
         },
         {
@@ -228,8 +228,8 @@
             },
             "end": true,
             "thumb": {
-                "common": "./2026/mao/thumb-nb.webp",
-                "wide": "./2026/mao/thumb-wb.webp"
+                "common": "./2026/mao/thumbnails/little-red-riding-hood.webp",
+                "wide": "./2026/mao/thumbnails/little-red-riding-hood-w.webp"
             },
             "related": [
                 {
