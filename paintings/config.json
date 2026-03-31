@@ -132,6 +132,30 @@
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260330-p3",
+        "name": "梦游仙境摸凹喵白皇后",
+        "name#en": "The White Queen Mor-Ow Meow Mirana in Wonderland",
+        "year": 2026,
+        "month": 3,
+        "day": 30,
+        "keywords": ["卡通形象"]
+    }, {
+        "id": "mao-260330-p2",
+        "name": "梦游仙境摸凹喵红皇后",
+        "name#en": "The Red Queen Mor-Ow Meow Iracebeth in Wonderland",
+        "year": 2026,
+        "month": 3,
+        "day": 30,
+        "keywords": ["卡通形象"]
+    }, {
+        "id": "mao-260330-p1",
+        "name": "梦游仙境摸凹喵爱丽丝",
+        "name#en": "Mor-Ow Meow Alice in Wonderland",
+        "year": 2026,
+        "month": 3,
+        "day": 30,
+        "keywords": ["卡通形象"]
+    }, {
         "id": "mao-260328-p1",
         "name": "摸凹喵灰姑娘",
         "name#en": "Mor-Ow Meow Cinderella",

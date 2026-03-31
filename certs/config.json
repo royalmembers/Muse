@@ -224,5 +224,37 @@
             "size": "6.3Mpx 3:2",
             "keywords": []
         }]
+    }, {
+        "id": "sendking",
+        "name": "“我的超能力，就是超有想象力”",
+        "scope": "match",
+        "season": "2020年",
+        "year": 2020,
+        "month": 6,
+        "group": "六一画作创意",
+        "ranking": "最佳创意奖",
+        "publisher": "湖南盛大金禧金融服务有限公司",
+        "keywords": ["fine art", "match"],
+        "images": [{
+            "id": "defend-dream",
+            "name": "守护梦想",
+            "name#en": "Defend Dream",
+            "year": 2020,
+            "month": 5,
+            "day": 24,
+            "keywords": ["watercolor"],
+            "data": { "kind": "paintings" }
+        }]
+    }, {
+        "id": "cwikids-530",
+        "name": "中福会幼儿园多手多足亲自活动",
+        "disable": true,
+        "scope": "school",
+        "year": 2019,
+        "month": 5,
+        "group": "小班",
+        "ranking": "优异",
+        "publisher": "中福会幼儿园",
+        "keywords": ["event"]
     }]
 }
