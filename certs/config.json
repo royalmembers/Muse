@@ -1,5 +1,25 @@
 {
     "certs": [{
+        "id": "shnu3ps-match",
+        "name": "上师三附小艺术单项比赛",
+        "scope": "school",
+        "season": "第8届",
+        "year": 2026,
+        "month": 3,
+        "group": "钢琴专场",
+        "ranking": "一等奖",
+        "publisher": "上海师范大学附属闵行第三小学",
+        "keywords": ["instrumental performance", "match"]
+    },{
+        "id": "shnu3ps-honor",
+        "name": "“传承雷锋精神，绽放文明之花”活动",
+        "scope": "school",
+        "season": "2025学年第二学期",
+        "year": 2026,
+        "month": 3,
+        "ranking": "小小志愿者",
+        "publisher": "上海师范大学附属闵行第三小学"
+    }, {
         "id": "paint-0316",
         "name": "“红色印记”上海市青少年绘画征集活动",
         "scope": "match",

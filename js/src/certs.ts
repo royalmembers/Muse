@@ -63,7 +63,7 @@ namespace PageCtrl {
             styleRefs: ["x-part-cert-img", "x-bg-emphasis"],
             children: [{
                 tagName: "img",
-                props: { alt: item.name, src: "../images/certs/" + item.year.toString(10) + "/" + (typeof item.img === "string" ? item.img : (item.id + ".jpg")) }
+                props: { alt: item.name, src: `../images/certs/${item.year.toString(10)}/${typeof item.img === "string" ? item.img : (item.id + (item.year > 2025 ? ".webp" : ".jpg"))}` }
             }]
         });
         let year = [{ tagName: "span", children: item.year.toString(10) + "年" }]
