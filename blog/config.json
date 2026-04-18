@@ -50,8 +50,13 @@
                 "关联文章",
                 {
                     "name": "朝鲜王朝",
-                    "subtitle": "Daddy 的微博文章",
-                    "url": "https://weibo.com/ttarticle/p/show?id=2309405169776405381633"
+                    "subtitle": "Daddy 的游记",
+                    "url": "https://kingcean.github.io/trip/?2025/korea",
+                    "data": {
+                        "links": {
+                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405169776405381633"
+                        }
+                    }
                 }
             ],
             "notes": [
@@ -79,8 +84,13 @@
                 "关联文章",
                 {
                     "name": "雍和宫",
-                    "subtitle": "Daddy 的微博文章",
-                    "url": "https://weibo.com/ttarticle/p/show?id=2309405181733422366755" 
+                    "subtitle": "Daddy 的游记",
+                    "url": "https://kingcean.github.io/trip/?2025/yonghe",
+                    "data": {
+                        "links": {
+                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405181733422366755"
+                        }
+                    }
                 }
             ],
             "notes": [
@@ -109,7 +119,12 @@
                 {
                     "name": "青岛",
                     "subtitle": "Daddy 的微博文章",
-                    "url": "https://weibo.com/ttarticle/p/show?id=2309405190791697400122"
+                    "url": "https://kingcean.github.io/trip/?2025/tsingtao",
+                    "data": {
+                        "links": {
+                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405190791697400122"
+                        }
+                    }
                 }
             ]
         },
