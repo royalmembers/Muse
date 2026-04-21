@@ -158,7 +158,12 @@
                     "subtitle": "小红书",
                     "url": "https://xhslink.com/o/cJ0YmOn4Ix"
                 }
-            ]
+            ],
+            "options": {
+                "banner": {
+                    "url": "./2026/mao/thumbnails/banner.webp"
+                }
+            }
         },
         {
             "name": "成都",
@@ -275,6 +280,7 @@
             "file": true,
             "keywords": ["starna"],
             "date": "20260416",
+            "location": "上海",
             "author": {
                 "painter": "Muse Tuan"
             },
@@ -282,6 +288,11 @@
             "thumb": {
                 "common": "./2026/starna/thumbnails/avatar.webp",
                 "wide": "./2026/starna/thumbnails/avatar-w.webp"
+            },
+            "options": {
+                "banner": {
+                    "url": "./2026/starna/thumbnails/banner.webp"
+                }
             }
         }
     ],

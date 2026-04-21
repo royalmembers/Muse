@@ -57,7 +57,7 @@ section.x-part-copyright-tuans > section {
     text-align: center; user-select: none;
 }
 section.x-part-copyright-tuans > section > img {
-    width: 128px; height: 128px; opacity: 0.9; cursor: default;
+    width: 128px; height: 128px; border-radius: 64px; opacity: 0.9; cursor: default; backdrop-filter: blur(4px);
 }
 section#part-avatar {
     padding: 100px 20px 20px 20px;

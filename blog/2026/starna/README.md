@@ -2,6 +2,10 @@
 
 大大的耳朵、大大的眼睛、卷曲的发型，穿着精致的衣服，擅长装扮，青春洋溢芬芳优雅。
 
+![手绘稿](./thumbnails/20260421_175011.webp)
+
+![在手机上绘图](./thumbnails/20260421_180031.webp)
+
 依旧是熟悉的电子手绘，配色细腻明亮。
 
 ![星娜喵](../../../images/paintings/2026/mao-260416-p1.webp)
@@ -13,6 +17,8 @@
 ![星娜喵](../../../images/paintings/2026/mao-260416-p4.webp)
 
 ![星娜喵](../../../images/paintings/2026/mao-260416-p5.webp)
+
+![星娜喵](../../../images/paintings/2026/mao-260416-p6.webp)
 
 ![星娜喵](../../../images/paintings/2026/mao-260416-p7.webp)
 

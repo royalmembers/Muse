@@ -734,10 +734,10 @@ var PageCtrl;
                         alt: DeepX.MdBlogs.getLocaleProp(id, "name", mkt),
                     },
                 });
-            title.push(span(DeepX.MdBlogs.getLocaleProp(id, "name", mkt)));
+            title.push(span(DeepX.MdBlogs.getLocaleProp(id, "name", mkt), caseStyleRef(id.options, "subtitleCase", mkt)));
             text = DeepX.MdBlogs.getLocaleProp(id, "subtitle", mkt);
             if (text)
-                title.push(span(text));
+                title.push(span(text, caseStyleRef(id.options, "subtitleCase", mkt)));
             this.childModel("title", { children: title });
             var info = this.getSeriesLinkInfo(id);
             var share = sharePanel({

@@ -579,33 +579,7 @@
         "keywords": ["幼年版"]
     }],
     "starna": [{
-        "id": "mao-260416-p1",
-        "name": "Starna",
-        "year": 2026,
-        "month": 4
-    }, {
-        "id": "mao-260416-p2",
-        "name": "Starna",
-        "year": 2026,
-        "month": 4
-    }, {
-        "id": "mao-260416-p3",
-        "name": "Starna",
-        "year": 2026,
-        "month": 4
-    }, {
-        "id": "mao-260416-p4",
-        "name": "Starna",
-        "year": 2026,
-        "month": 4
-    }, {
-        "id": "mao-260416-p5",
-        "name": "Starna",
-        "year": 2026,
-        "month": 4
-    }, {
-        "id": "mao-260416-p6",
-        "disable": true,
+        "id": "mao-260416-p8",
         "name": "Starna",
         "year": 2026,
         "month": 4
@@ -615,7 +589,32 @@
         "year": 2026,
         "month": 4
     }, {
-        "id": "mao-260416-p8",
+        "id": "mao-260416-p6",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260416-p5",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260416-p4",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260416-p3",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260416-p2",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260416-p1",
         "name": "Starna",
         "year": 2026,
         "month": 4
