@@ -155,7 +155,7 @@
     }],
     "mao": [{
         "id": "mao-260412-p2",
-        "name": "摸凹喵",
+        "name": "摸凹喵小矮人",
         "name#en": "Mor-Ow Meow",
         "year": 2026,
         "month": 4,
@@ -163,7 +163,7 @@
         "keywords": ["卡通形象"]
     }, {
         "id": "mao-260412-p1",
-        "name": "摸凹喵",
+        "name": "摸凹喵昕调香",
         "name#en": "Mor-Ow Meow",
         "year": 2026,
         "month": 4,
@@ -579,8 +579,15 @@
         "keywords": ["幼年版"]
     }],
     "starna": [{
+        "id": "mao-260421-p1",
+        "name": "气气星娜喵",
+        "name#en": "Angry Starna",
+        "year": 2026,
+        "month": 4
+    }, {
         "id": "mao-260416-p8",
-        "name": "Starna",
+        "name": "星娜兔兔喵",
+        "name#en": "Starna Rabbit",
         "year": 2026,
         "month": 4
     }, {

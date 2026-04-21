@@ -152,6 +152,10 @@
                 "wide": "./2026/mao/thumbnails/avatar-w.webp"
             },
             "related": [
+                {
+                    "name": "星娜喵诞生",
+                    "url": "?2026/starna"
+                },
                 "转载",
                 {
                     "name": "10岁小学生原创画作IP",
@@ -289,6 +293,18 @@
                 "common": "./2026/starna/thumbnails/avatar.webp",
                 "wide": "./2026/starna/thumbnails/avatar-w.webp"
             },
+            "related": [
+                {
+                    "name": "摸凹喵诞生",
+                    "url": "?2026/mao"
+                },
+                "转载",
+                {
+                    "name": "星娜喵",
+                    "subtitle": "小红书",
+                    "url": "http://xhslink.com/o/4FyEUZOsbf3"
+                }
+            ],
             "options": {
                 "banner": {
                     "url": "./2026/starna/thumbnails/banner.webp"
