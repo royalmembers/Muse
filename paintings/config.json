@@ -1,7 +1,7 @@
 {
     "series": [{
         "id": "mao",
-        "alias": ["meow", "mor-ow-meow"],
+        "alias": ["meow", "mor-ow-meow", "moaomiao"],
         "name": "摸凹喵",
         "name#en": "Mor-Ow Meow",
         "name#fr": "Moh-Aou Miaou",
@@ -21,6 +21,22 @@
         "subtitle#ja": "Mor-Ow Meow / モル オウ ニャー",
         "intro": "这是一只可爱的小猫猫，有着齐刘海和双马尾，眼睛不大、嘴巴可小可大有弹性，是不是萌萌哒，是不是超有趣，是不是很像小时候的我？",
         "icon": "logos/mao-2026.png",
+        "blog": "mor-ow-meow",
+        "year": 2026
+    }, {
+        "id": "starna",
+        "alias": ["xingna"],
+        "name": "Starna",
+        "name#zh": "Starna",
+        "options": {
+            "nameCase": "small",
+            "subtitleCase": "small",
+            "qr": "logos/qr-starna.webp",
+            "ratio": "p",
+            "thumb": true
+        },
+        "intro": "这是一只美丽可爱的猫猫，有大大的耳朵、大大的眼睛、卷曲的发型，穿着精致的衣服，擅长装扮，芬芳优雅。",
+        "icon": "logos/starna-2026.png",
         "blog": "mor-ow-meow",
         "year": 2026
     }],
@@ -132,6 +148,22 @@
         "keywords": ["watercolor"]
     }],
     "mao": [{
+        "id": "mao-260412-p2",
+        "name": "摸凹喵",
+        "name#en": "Mor-Ow Meow",
+        "year": 2026,
+        "month": 4,
+        "day": 12,
+        "keywords": ["卡通形象"]
+    }, {
+        "id": "mao-260412-p1",
+        "name": "摸凹喵",
+        "name#en": "Mor-Ow Meow",
+        "year": 2026,
+        "month": 4,
+        "day": 12,
+        "keywords": ["卡通形象"]
+    }, {
         "id": "mao-260405-p1",
         "name": "摸凹喵邪恶王后",
         "name#en": "The Evil Queen Mor-Ow Meow",
@@ -539,5 +571,41 @@
         "year": 2026,
         "month": 1,
         "keywords": ["幼年版"]
+    }],
+    "starna": [{
+        "id": "mao-260414-p1",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260414-p2",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260414-p3",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260414-p4",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260414-p5",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260414-p7",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
+        "id": "mao-260414-p8",
+        "name": "Starna",
+        "year": 2026,
+        "month": 4
     }]
 }

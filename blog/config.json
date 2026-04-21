@@ -24,8 +24,13 @@
                 "关联文章",
                 {
                     "name": "海口闪电游",
-                    "subtitle": "Daddy 的微博文章",
-                    "url": "https://weibo.com/ttarticle/p/show?id=2309405165275912994918"
+                    "subtitle": "Daddy 的游记",
+                    "url": "https://kingcean.github.io/trip/?2025/hainan",
+                    "data": {
+                        "links": {
+                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405165275912994918"
+                        }
+                    }
                 }
             ]
         },
@@ -54,7 +59,8 @@
                     "url": "https://kingcean.github.io/trip/?2025/korea",
                     "data": {
                         "links": {
-                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405169776405381633"
+                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405169776405381633",
+                            "xhs": "http://xhslink.com/o/4LEz6Sy3lif"
                         }
                     }
                 }
@@ -88,7 +94,8 @@
                     "url": "https://kingcean.github.io/trip/?2025/yonghe",
                     "data": {
                         "links": {
-                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405181733422366755"
+                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405181733422366755",
+                            "xhs": "http://xhslink.com/o/7ksBuOGpV9G"
                         }
                     }
                 }
@@ -118,7 +125,7 @@
                 "关联文章",
                 {
                     "name": "青岛",
-                    "subtitle": "Daddy 的微博文章",
+                    "subtitle": "Daddy 的游记",
                     "url": "https://kingcean.github.io/trip/?2025/tsingtao",
                     "data": {
                         "links": {
@@ -175,8 +182,13 @@
                 "关联文章",
                 {
                     "name": "成都",
-                    "subtitle": "Daddy 的微博文章",
-                    "url": "https://weibo.com/ttarticle/p/show?id=2309405264019283116204"
+                    "subtitle": "Daddy 的游记",
+                    "url": "https://kingcean.github.io/trip/?2026/chengdu",
+                    "data": {
+                        "links": {
+                            "weibo": "https://weibo.com/ttarticle/p/show?id=2309405264019283116204"
+                        }
+                    }
                 }
             ]
         },
