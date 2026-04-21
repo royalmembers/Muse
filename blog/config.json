@@ -267,6 +267,22 @@
                     "url": "https://12dlabs.github.io/stories/fairy-tales/?little-red-riding-hood"
                 }
             ]
+        },
+        {
+            "name": "星娜喵诞生",
+            "name#en": "Starna Borns",
+            "dir": "starna",
+            "file": true,
+            "keywords": ["starna"],
+            "date": "20260416",
+            "author": {
+                "painter": "Muse Tuan"
+            },
+            "end": true,
+            "thumb": {
+                "common": "./2026/starna/thumbnails/avatar.webp",
+                "wide": "./2026/starna/thumbnails/avatar-w.webp"
+            }
         }
     ],
     "links": [
