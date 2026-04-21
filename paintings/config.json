@@ -28,6 +28,7 @@
         "alias": ["xingna", "xingnamiao"],
         "name": "Starna",
         "name#zh": "星娜喵",
+        "name#ja": "星娜喵",
         "options": {
             "nameCase": "small",
             "subtitleCase": "small",
@@ -37,7 +38,7 @@
         },
         "subtitle#zh": "Starna",
         "subtitle#ko": "星娜喵",
-        "subtitle#ja": "星娜喵",
+        "subtitle#ja": "Starna",
         "subtitle#mn": "星娜喵",
         "subtitle#ii": "星娜喵",
         "intro": "这是一只美丽可爱的猫猫，有大大的耳朵、大大的眼睛、卷曲的发型，穿着精致的衣服，擅长装扮，青春洋溢芬芳优雅。",

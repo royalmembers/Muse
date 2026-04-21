@@ -33,6 +33,8 @@ namespace PageCtrl {
         "workMorOwMeow#en": "Mor-Ow Meow",
         "workMorOwMeow#fr": "Moh-Aou Miaou",
         "workMorOwMeow#ko": "모오 미야오",
+        workStarna: "Starna",
+        "workStarna#zh": "星娜喵",
         seeSeriesWorks: "See all works of the serie",
         "seeSeriesWorks#zh": "查看系列完整画作集",
         loveDrawing: "I love drawing and following are my works.",

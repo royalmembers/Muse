@@ -299,7 +299,8 @@
         ],
         "keywords": [
             { "name": "Trip", "name#zh": "旅行", "value": "trip" },
-            { "name": "Mor-Ow Meow", "name#zh": "摸凹喵", "name#fr": "Moh-Aou Miaou", "name#ko": "모오 미야오", "value": "mor-ow-meow" },
+            { "name": "Mor-Ow Meow", "name#zh": "摸凹喵", "name#fr": "Moh-Aou Miaou", "name#ko": "모오 미야오", "name#ja": "摸凹喵", "value": "mor-ow-meow" },
+            { "name": "Starna", "name#zh": "星娜喵", "name#ja": "星娜喵", "value": "starna" },
             { "name": "Fairy Tales", "name#zh": "童话", "value": "fairy-tales" },
             { "name": "Intro", "name#zh": "介绍", "value": "intro" }
         ]

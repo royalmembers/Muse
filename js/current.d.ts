@@ -232,6 +232,8 @@ declare namespace PageCtrl {
         "workMorOwMeow#en": string;
         "workMorOwMeow#fr": string;
         "workMorOwMeow#ko": string;
+        workStarna: string;
+        "workStarna#zh": string;
         seeSeriesWorks: string;
         "seeSeriesWorks#zh": string;
         loveDrawing: string;

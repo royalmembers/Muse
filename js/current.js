@@ -70,6 +70,11 @@ var PageCtrl;
             url: "../paintings/?mao",
             logo: "../images/logos/mao-2026.png",
         },
+        "starna": {
+            name: "workStarna",
+            url: "../paintings/?starna",
+            logo: "../images/logos/starna-2026.png"
+        },
     };
     function loadBlogArticles(root) {
         if (!inner.articles)
@@ -164,7 +169,7 @@ var PageCtrl;
             styleRefs: "x-part-info",
             children: [{
                     tagName: "span",
-                    children: "注：猫头鱼尾兽图标、MuseTuan.com、摸凹喵（Mor-Ow Meow）及其形象，是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有；Kingcean、Jinchen Art、金辰艺术、CompositeJs、金山旭日翼盾、红日黑山徽标，是 Kingcean Tuan、南昌金辰软件有限公司或江西金辰装饰设计工程有限公司的商标或注册商标；其它商标分别归属其所拥有的组织。",
+                    children: "注：猫头鱼尾兽图标、MuseTuan.com、摸凹喵（Mor-Ow Meow）及其形象、星娜喵（Starna）及其形象，是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有；Kingcean、Jinchen Art、金辰艺术、CompositeJs、金山旭日翼盾、红日黑山徽标，是 Kingcean Tuan、南昌金辰软件有限公司或江西金辰装饰设计工程有限公司的商标或注册商标；其它商标分别归属其所拥有的组织。",
                 }]
         });
     }
@@ -1533,6 +1538,8 @@ var PageCtrl;
         "workMorOwMeow#en": "Mor-Ow Meow",
         "workMorOwMeow#fr": "Moh-Aou Miaou",
         "workMorOwMeow#ko": "모오 미야오",
+        workStarna: "Starna",
+        "workStarna#zh": "星娜喵",
         seeSeriesWorks: "See all works of the serie",
         "seeSeriesWorks#zh": "查看系列完整画作集",
         loveDrawing: "I love drawing and following are my works.",
