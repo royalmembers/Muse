@@ -30,7 +30,7 @@ namespace PageCtrl {
         setElementProp(getContainerElement(options, "title"), null, "paintings");
         let images = options.series?.id ? works[options.series.id as keyof typeof works] : undefined;
         if (!images || !(images instanceof Array)) images = works.default || [];
-        const mkt = Hje.getQuery("mkt") || undefined;
+        const mkt = Hje.getQuery("mkt") || Hje.getQuery("lang") || undefined;
         const mktOptions = mkt !== undefined ? { mkt } : undefined;
         const c = Hje.render(container, {
             control: ImageCollectionPart,
@@ -80,7 +80,22 @@ namespace PageCtrl {
                 blogRela: "../blog/",
                 imageRela: "../images/",
                 itemUrl: getPaintingImageUrl,
-                click: onImageItemClick,
+                click: clickData => {
+                    const imageSize = getImageSizeDesc(clickData)
+                    const name = clickData.info.name;
+                    const desc = imageSize ? `"${name} (${imageSize})` : name;
+                    showPopupView({
+                        name: name,
+                        url: clickData.info.url,
+                        thumb: clickData.info.thumb,
+                        tips: desc,
+                        desc: imageSize,
+                        close(ev) {
+                            component.closeImage(ev);
+                        }
+                    });
+                },
+                close: hidePopupView,
                 selected(info, c) {
                     (ele("ph-link-icon") as HTMLLinkElement).href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
                 },
@@ -99,7 +114,7 @@ namespace PageCtrl {
                     qr: "./logos/qr-paintings.png",
                     series: "./",
                 },
-                mkt: Hje.getQuery("mkt") || true,
+                mkt: Hje.getQuery("mkt") || Hje.getQuery("lang") || true,
                 page: 24,
                 before: {
                     tagName: "section",
@@ -126,19 +141,11 @@ namespace PageCtrl {
                 }
             } as IImageSeriesPartData,
         })?.control() as ImageSeriesPart;
-        window.addEventListener("popstate", function(ev) {
-            if (!component || !ev?.state) return;
-            component.selectSeries(ev.state);
-        });
+        component.registerHistoryPop();
     }
 
     export function onImageItemClick(data: IImageClickInfo) {
-        let imageSize = data.item.size || "";
-        if (data.item.year) {
-            if (imageSize) imageSize += " 　|　 ";
-            imageSize += monthYear(data.item.year, data.item.month);
-        }
-
+        const imageSize = getImageSizeDesc(data)
         const name = data.info.name;
         const desc = imageSize ? `"${name} (${imageSize})` : name;
         showPopupView({
@@ -146,8 +153,16 @@ namespace PageCtrl {
             url: data.info.url,
             thumb: data.info.thumb,
             tips: desc,
-            desc: imageSize
+            desc: imageSize,
         });
+    }
+
+    function getImageSizeDesc(data: IImageClickInfo) {
+        let imageSize = data.item.size || "";
+        if (!data.item.year) return imageSize;
+        if (imageSize) imageSize += " 　|　 ";
+        imageSize += monthYear(data.item.year, data.item.month);
+        return imageSize;
     }
 
     function getPaintingImageUrl(item: IImageItemInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]) {

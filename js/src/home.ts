@@ -22,6 +22,10 @@ namespace PageCtrl {
         { year: 2015, month: 10 }
     ];
 
+    const inner: {
+        closePopView?(ev?: MouseEvent): void;
+    } = {};
+
     const menu = [{
         id: "certs",
         name: "Honors",
@@ -58,8 +62,8 @@ namespace PageCtrl {
         const container = ele("top-menu");
         const cover = ele("popup-view");
         if (cover) {
-            cover.addEventListener("click", hidePopupView);
-            cover.addEventListener("touchend", hidePopupViewDelay);
+            cover.addEventListener("click", closePopupView);
+            cover.addEventListener("touchend", closePopupViewDelay);
         }
 
         if (!container) return;
@@ -80,12 +84,22 @@ namespace PageCtrl {
     }
 
     export function hidePopupView() {
+        delete inner.closePopView;
         ele("popup-view")!.style.display = "none";
     }
 
-    export function hidePopupViewDelay() {
-        setTimeout(() => {
+    export function closePopupView() {
+        if (typeof inner.closePopView === "function") {
+            inner.closePopView();
+            delete inner.closePopView;
+        } else {
             hidePopupView();
+        }
+    }
+
+    export function closePopupViewDelay() {
+        setTimeout(() => {
+            closePopupView();
         }, 200);
     }
 
@@ -95,6 +109,7 @@ namespace PageCtrl {
         name: string;
         tips?: string;
         desc: string;
+        close?(ev?: MouseEvent): void;
     }) {
         if (!info?.url || !info.name) {
             hidePopupView();
@@ -107,6 +122,7 @@ namespace PageCtrl {
         ele("popup-view-title")!.innerText = info.name;
         ele("popup-view-desc")!.innerText = info.desc;
         ele("popup-view")!.style.display = "";
+        inner.closePopView = info.close;
     }
 
     export function initHome() {

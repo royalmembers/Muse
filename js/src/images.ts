@@ -55,6 +55,7 @@ namespace PageCtrl {
     export interface IImageCollectionPartOptions {
         itemUrl?(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
         click?(data: IImageClickInfo, ev: MouseEvent): void;
+        close?(ev: MouseEvent): void;
         mkt?: string | boolean;
         page?: number;
     }
@@ -101,7 +102,8 @@ namespace PageCtrl {
         defaultImageName?: string;
         mkt?: string | boolean;
         itemUrl?(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
-        click?(data: IImageClickInfo, ev: MouseEvent): void;
+        click?(data: IImageClickInfo, ev?: MouseEvent): void;
+        close?(ev?: MouseEvent): void;
     }
 
     export class ImageSeriesPart extends Hje.BaseComponent {
@@ -116,6 +118,7 @@ namespace PageCtrl {
             urls: IImageSeriesPartData["urls"];
             siteName?: string;
             defaultItemName?: string;
+            needBack?: boolean;
             selected?: (info: IImageSeriesInfo, component: ImageSeriesPart) => void;
         };
 
@@ -162,7 +165,21 @@ namespace PageCtrl {
                     data: {
                         rela: imageRela,
                         itemUrl: data.itemUrl,
-                        click: data.click,
+                        click: data.click ? (d, ev) => {
+                            if (typeof data.click === "function") data.click(d, ev);
+                            const selectItem = self.__inner.select;
+                            if (!d.component || !d.item?.id || !selectItem) return;
+                            const { url, kind } = self.getSeriesLinkInfo(selectItem);
+                            if (kind !== "route" || !url || !url.includes("?")) return;
+                            const selectImage = Hje.getQuery("id");
+                            if (selectImage) {
+                                history.replaceState(new ImageHistoryState(selectItem, d.item), "", `${url}&id=${d.item.id}`);
+                            } else {
+                                self.__inner.needBack = true;
+                                history.pushState(new ImageHistoryState(selectItem, d.item), "", `${url}&id=${d.item.id}`);
+                            }
+                        } : undefined,
+                        close: data.close,
                         mkt: data.mkt,
                         defaultName: strings.pics,
                         page: data.page,
@@ -221,9 +238,22 @@ namespace PageCtrl {
                 if (!sel) return;
                 const { url, kind, title } = self.getSeriesLinkInfo(sel);
                 if (kind !== "route" || !url) return false;
-                history.replaceState(sel, "", url);
                 if (self.__inner.siteName)
                     document.title = title;
+                const imageId = Hje.getQuery("id");
+                if (!imageId || !url.includes("?")) {
+                    history.replaceState(new ImageHistoryState(sel), "", url);
+                    return;
+                }
+                const gallery = self.childControl("gallery") as ImageCollectionPart;
+                if (!gallery) {
+                    history.replaceState(new ImageHistoryState(sel), "", url);
+                    return;
+                }
+                const url2 = `${url}&id=${imageId}`;
+                const imageSelected = gallery.getItem(imageId);
+                history.replaceState(new ImageHistoryState(sel, imageSelected), "", url2);
+                if (imageSelected?.id) gallery.openImage(imageSelected.id);
             };
             this.refreshChild();
         }
@@ -328,6 +358,39 @@ namespace PageCtrl {
             return relativePath(this.__inner.imageRela, url);
         }
 
+        closeImage(ev?: MouseEvent) {
+            if (this.__inner.needBack) {
+                history.back();
+                return;
+            }
+            const gallery = this.childControl("gallery") as ImageCollectionPart;
+            if (!gallery) return;
+            gallery.closeImage(ev);
+        }
+
+        registerHistoryPop() {
+            const self = this;
+            window.addEventListener("popstate", function(ev) {
+                delete self.__inner.needBack;
+                const stateInfo = ev?.state as ImageHistoryState | undefined;
+                if (!stateInfo?.series) return;
+                self.selectSeries(stateInfo.series);
+                const gallery = self.childControl("gallery") as ImageCollectionPart;
+                if (!gallery) return;
+                if (!stateInfo.image?.id) {
+                    gallery.closeImage();
+                    const imageId = Hje.getQuery("id");
+                    if (imageId) {
+                        const { url } = self.getSeriesLinkInfo(stateInfo.series);
+                        this.history.replaceState(new ImageHistoryState(stateInfo.series), "", url);
+                    }
+                } else {
+                    console.log("open image");
+                    gallery.openImage(stateInfo.image);
+                }
+            });
+        }
+
         private async refreshRelated() {
             const series = this.__inner.select;
             if (!series) return;
@@ -418,7 +481,7 @@ namespace PageCtrl {
                                 return;
                             }
                             if (ele !== old) {
-                                history.pushState(ele, "", seriesLink);
+                                history.pushState(new ImageHistoryState(ele), "", seriesLink);
                                 if (inner.siteName) document.title = `${name} - ${inner.siteName}`;
                             }
                             scrollToTop();
@@ -463,7 +526,8 @@ namespace PageCtrl {
             items: IImageItemInfo[];
             rela: Hje.RelativePathInfo;
             itemUrl(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
-            click?(data: IImageClickInfo, ev: MouseEvent): void;
+            click?(data: IImageClickInfo, ev?: MouseEvent): void;
+            close?(ev?: MouseEvent): void;
             mkt?: { mkt: string | boolean };
             defaultName?: string;
             pageSize?: number;
@@ -485,6 +549,7 @@ namespace PageCtrl {
                     return undefined
                 }),
                 click: data.click,
+                close: data.close,
                 mkt: data.mkt !== undefined ? { mkt: data.mkt } : undefined,
                 defaultName: data.defaultName,
                 pageSize: pageSize,
@@ -522,8 +587,16 @@ namespace PageCtrl {
             this.__inner.defaultName = value;
         }
 
-        getItem(index: number) {
-            return index < 0 ? undefined : this.__inner.items[index];
+        getItem(index: number | string) {
+            if (typeof index === "number")
+                return index < 0 ? undefined : this.__inner.items[index];
+            if (!index || typeof index !== "string") return undefined;
+            const col = this.__inner.items;
+            for (let i = 0; i < col.length; i++) {
+                const item = col[i];
+                if (index === col[i]?.id) return item;
+            }
+            return undefined;
         }
 
         pushWithoutRender(...items: IImageItemInfo[]) {
@@ -623,6 +696,39 @@ namespace PageCtrl {
             return relativePath(this.__inner.rela, url);
         }
 
+        openImage(item: IImageItemInfo | string, ev?: MouseEvent) {
+            if (!item) return;
+            if (typeof item === "string") {
+                const item2 = this.getItem(item);
+                if (!item2) return;
+                item = item2;
+            }
+            const inner = this.__inner;
+            const self = this;
+            const name = DeepX.MdBlogs.getLocaleProp(item, "name", inner.mkt) || this.__inner.defaultName;
+            let url = inner.itemUrl(item, "source");
+            if (!url) return undefined;
+            url = relativePath(inner.rela, url) || url;
+            let thumb = item.thumb && typeof item.thumb === "string" ? item.thumb : undefined;
+            if (!thumb && item.thumb !== false) thumb = inner.itemUrl(item, "thumb");
+            if (thumb) thumb = relativePath(inner.rela, thumb);
+            else thumb = url;
+            if (typeof inner.click !== "function") return;
+            inner.click({
+                item,
+                component: self,
+                info: {
+                    name,
+                    url,
+                    thumb,
+                }
+            }, ev);
+        }
+
+        closeImage(ev?: MouseEvent) {
+            if (typeof this.__inner.close === "function") this.__inner.close(ev);
+        }
+
         private genItemModel(item: IImageItemInfo) {
             if (!item) return undefined;
             const inner = this.__inner;
@@ -676,6 +782,7 @@ namespace PageCtrl {
                     mkt: data.mkt,
                     defaultName: data.defaultImageName,
                     click: data.click,
+                    close: data.close,
                     itemUrl: data.itemUrl,
                 } as IImageCollectionPartData,
                 styleRefs: ["x-container-pics"],
@@ -711,6 +818,11 @@ namespace PageCtrl {
             }
             gallery.style(styleInfo);
             return count;
+        }
+    }
+
+    class ImageHistoryState {
+        constructor(public series: IImageSeriesInfo, public image?: IImageItemInfo) {
         }
     }
 

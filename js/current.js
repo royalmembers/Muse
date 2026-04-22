@@ -401,6 +401,7 @@ var PageCtrl;
         { year: 2016, month: 6 },
         { year: 2015, month: 10 }
     ];
+    var inner = {};
     var menu = [{
             id: "certs",
             name: "Honors",
@@ -437,8 +438,8 @@ var PageCtrl;
         var container = PageCtrl.ele("top-menu");
         var cover = PageCtrl.ele("popup-view");
         if (cover) {
-            cover.addEventListener("click", hidePopupView);
-            cover.addEventListener("touchend", hidePopupViewDelay);
+            cover.addEventListener("click", closePopupView);
+            cover.addEventListener("touchend", closePopupViewDelay);
         }
         if (!container)
             return;
@@ -462,15 +463,26 @@ var PageCtrl;
     }
     PageCtrl.initMenu = initMenu;
     function hidePopupView() {
+        delete inner.closePopView;
         PageCtrl.ele("popup-view").style.display = "none";
     }
     PageCtrl.hidePopupView = hidePopupView;
-    function hidePopupViewDelay() {
-        setTimeout(function () {
+    function closePopupView() {
+        if (typeof inner.closePopView === "function") {
+            inner.closePopView();
+            delete inner.closePopView;
+        }
+        else {
             hidePopupView();
+        }
+    }
+    PageCtrl.closePopupView = closePopupView;
+    function closePopupViewDelay() {
+        setTimeout(function () {
+            closePopupView();
         }, 200);
     }
-    PageCtrl.hidePopupViewDelay = hidePopupViewDelay;
+    PageCtrl.closePopupViewDelay = closePopupViewDelay;
     function showPopupView(info) {
         if (!(info === null || info === void 0 ? void 0 : info.url) || !info.name) {
             hidePopupView();
@@ -483,6 +495,7 @@ var PageCtrl;
         PageCtrl.ele("popup-view-title").innerText = info.name;
         PageCtrl.ele("popup-view-desc").innerText = info.desc;
         PageCtrl.ele("popup-view").style.display = "";
+        inner.closePopView = info.close;
     }
     PageCtrl.showPopupView = showPopupView;
     function initHome() {
@@ -591,7 +604,26 @@ var PageCtrl;
                             data: {
                                 rela: imageRela,
                                 itemUrl: data.itemUrl,
-                                click: data.click,
+                                click: data.click ? function (d, ev) {
+                                    var _a;
+                                    if (typeof data.click === "function")
+                                        data.click(d, ev);
+                                    var selectItem = self.__inner.select;
+                                    if (!d.component || !((_a = d.item) === null || _a === void 0 ? void 0 : _a.id) || !selectItem)
+                                        return;
+                                    var _b = self.getSeriesLinkInfo(selectItem), url = _b.url, kind = _b.kind;
+                                    if (kind !== "route" || !url || !url.includes("?"))
+                                        return;
+                                    var selectImage = Hje.getQuery("id");
+                                    if (selectImage) {
+                                        history.replaceState(new ImageHistoryState(selectItem, d.item), "", "".concat(url, "&id=").concat(d.item.id));
+                                    }
+                                    else {
+                                        self.__inner.needBack = true;
+                                        history.pushState(new ImageHistoryState(selectItem, d.item), "", "".concat(url, "&id=").concat(d.item.id));
+                                    }
+                                } : undefined,
+                                close: data.close,
                                 mkt: data.mkt,
                                 defaultName: strings.pics,
                                 page: data.page,
@@ -655,9 +687,23 @@ var PageCtrl;
                 var _a = self.getSeriesLinkInfo(sel), url = _a.url, kind = _a.kind, title = _a.title;
                 if (kind !== "route" || !url)
                     return false;
-                history.replaceState(sel, "", url);
                 if (self.__inner.siteName)
                     document.title = title;
+                var imageId = Hje.getQuery("id");
+                if (!imageId || !url.includes("?")) {
+                    history.replaceState(new ImageHistoryState(sel), "", url);
+                    return;
+                }
+                var gallery = self.childControl("gallery");
+                if (!gallery) {
+                    history.replaceState(new ImageHistoryState(sel), "", url);
+                    return;
+                }
+                var url2 = "".concat(url, "&id=").concat(imageId);
+                var imageSelected = gallery.getItem(imageId);
+                history.replaceState(new ImageHistoryState(sel, imageSelected), "", url2);
+                if (imageSelected === null || imageSelected === void 0 ? void 0 : imageSelected.id)
+                    gallery.openImage(imageSelected.id);
             };
             _this.refreshChild();
             return _this;
@@ -773,6 +819,42 @@ var PageCtrl;
         ImageSeriesPart.prototype.imageRelative = function (url) {
             return relativePath(this.__inner.imageRela, url);
         };
+        ImageSeriesPart.prototype.closeImage = function (ev) {
+            if (this.__inner.needBack) {
+                history.back();
+                return;
+            }
+            var gallery = this.childControl("gallery");
+            if (!gallery)
+                return;
+            gallery.closeImage(ev);
+        };
+        ImageSeriesPart.prototype.registerHistoryPop = function () {
+            var self = this;
+            window.addEventListener("popstate", function (ev) {
+                var _a;
+                delete self.__inner.needBack;
+                var stateInfo = ev === null || ev === void 0 ? void 0 : ev.state;
+                if (!(stateInfo === null || stateInfo === void 0 ? void 0 : stateInfo.series))
+                    return;
+                self.selectSeries(stateInfo.series);
+                var gallery = self.childControl("gallery");
+                if (!gallery)
+                    return;
+                if (!((_a = stateInfo.image) === null || _a === void 0 ? void 0 : _a.id)) {
+                    gallery.closeImage();
+                    var imageId = Hje.getQuery("id");
+                    if (imageId) {
+                        var url = self.getSeriesLinkInfo(stateInfo.series).url;
+                        this.history.replaceState(new ImageHistoryState(stateInfo.series), "", url);
+                    }
+                }
+                else {
+                    console.log("open image");
+                    gallery.openImage(stateInfo.image);
+                }
+            });
+        };
         ImageSeriesPart.prototype.refreshRelated = function () {
             return __awaiter(this, void 0, void 0, function () {
                 var series, articlesPromise, elements, links, articles, mkt, rela;
@@ -887,7 +969,7 @@ var PageCtrl;
                                 return;
                             }
                             if (ele !== old) {
-                                history.pushState(ele, "", seriesLink);
+                                history.pushState(new ImageHistoryState(ele), "", seriesLink);
                                 if (inner.siteName)
                                     document.title = "".concat(name, " - ").concat(inner.siteName);
                             }
@@ -946,6 +1028,7 @@ var PageCtrl;
                     return undefined;
                 }),
                 click: data.click,
+                close: data.close,
                 mkt: data.mkt !== undefined ? { mkt: data.mkt } : undefined,
                 defaultName: data.defaultName,
                 pageSize: pageSize,
@@ -987,7 +1070,18 @@ var PageCtrl;
             this.__inner.defaultName = value;
         };
         ImageCollectionPart.prototype.getItem = function (index) {
-            return index < 0 ? undefined : this.__inner.items[index];
+            var _a;
+            if (typeof index === "number")
+                return index < 0 ? undefined : this.__inner.items[index];
+            if (!index || typeof index !== "string")
+                return undefined;
+            var col = this.__inner.items;
+            for (var i = 0; i < col.length; i++) {
+                var item = col[i];
+                if (index === ((_a = col[i]) === null || _a === void 0 ? void 0 : _a.id))
+                    return item;
+            }
+            return undefined;
         };
         ImageCollectionPart.prototype.pushWithoutRender = function () {
             var items = [];
@@ -1098,6 +1192,45 @@ var PageCtrl;
         ImageCollectionPart.prototype.imageRelative = function (url) {
             return relativePath(this.__inner.rela, url);
         };
+        ImageCollectionPart.prototype.openImage = function (item, ev) {
+            if (!item)
+                return;
+            if (typeof item === "string") {
+                var item2 = this.getItem(item);
+                if (!item2)
+                    return;
+                item = item2;
+            }
+            var inner = this.__inner;
+            var self = this;
+            var name = DeepX.MdBlogs.getLocaleProp(item, "name", inner.mkt) || this.__inner.defaultName;
+            var url = inner.itemUrl(item, "source");
+            if (!url)
+                return undefined;
+            url = relativePath(inner.rela, url) || url;
+            var thumb = item.thumb && typeof item.thumb === "string" ? item.thumb : undefined;
+            if (!thumb && item.thumb !== false)
+                thumb = inner.itemUrl(item, "thumb");
+            if (thumb)
+                thumb = relativePath(inner.rela, thumb);
+            else
+                thumb = url;
+            if (typeof inner.click !== "function")
+                return;
+            inner.click({
+                item: item,
+                component: self,
+                info: {
+                    name: name,
+                    url: url,
+                    thumb: thumb,
+                }
+            }, ev);
+        };
+        ImageCollectionPart.prototype.closeImage = function (ev) {
+            if (typeof this.__inner.close === "function")
+                this.__inner.close(ev);
+        };
         ImageCollectionPart.prototype.genItemModel = function (item) {
             if (!item)
                 return undefined;
@@ -1159,6 +1292,7 @@ var PageCtrl;
                         mkt: data.mkt,
                         defaultName: data.defaultImageName,
                         click: data.click,
+                        close: data.close,
                         itemUrl: data.itemUrl,
                     },
                     styleRefs: ["x-container-pics"],
@@ -1201,6 +1335,13 @@ var PageCtrl;
         return RelatedInfoPart;
     }(Hje.BaseComponent));
     PageCtrl.RelatedInfoPart = RelatedInfoPart;
+    var ImageHistoryState = /** @class */ (function () {
+        function ImageHistoryState(series, image) {
+            this.series = series;
+            this.image = image;
+        }
+        return ImageHistoryState;
+    }());
     function seriesList(col, imageRela, link, options) {
         if (!link)
             link = "./";
@@ -1656,7 +1797,7 @@ var PageCtrl;
                         images = ((_a = options.series) === null || _a === void 0 ? void 0 : _a.id) ? works[options.series.id] : undefined;
                         if (!images || !(images instanceof Array))
                             images = works.default || [];
-                        mkt = Hje.getQuery("mkt") || undefined;
+                        mkt = Hje.getQuery("mkt") || Hje.getQuery("lang") || undefined;
                         mktOptions = mkt !== undefined ? { mkt: mkt } : undefined;
                         c = (_b = Hje.render(container, {
                             control: PageCtrl.ImageCollectionPart,
@@ -1721,7 +1862,22 @@ var PageCtrl;
                                 blogRela: "../blog/",
                                 imageRela: "../images/",
                                 itemUrl: getPaintingImageUrl,
-                                click: onImageItemClick,
+                                click: function (clickData) {
+                                    var imageSize = getImageSizeDesc(clickData);
+                                    var name = clickData.info.name;
+                                    var desc = imageSize ? "\"".concat(name, " (").concat(imageSize, ")") : name;
+                                    PageCtrl.showPopupView({
+                                        name: name,
+                                        url: clickData.info.url,
+                                        thumb: clickData.info.thumb,
+                                        tips: desc,
+                                        desc: imageSize,
+                                        close: function (ev) {
+                                            component.closeImage(ev);
+                                        }
+                                    });
+                                },
+                                close: PageCtrl.hidePopupView,
                                 selected: function (info, c) {
                                     PageCtrl.ele("ph-link-icon").href = c.imageRelative(info.icon || "./images/logos/logo-2026-paint.png") || "";
                                 },
@@ -1740,7 +1896,7 @@ var PageCtrl;
                                     qr: "./logos/qr-paintings.png",
                                     series: "./",
                                 },
-                                mkt: Hje.getQuery("mkt") || true,
+                                mkt: Hje.getQuery("mkt") || Hje.getQuery("lang") || true,
                                 page: 24,
                                 before: {
                                     tagName: "section",
@@ -1768,11 +1924,7 @@ var PageCtrl;
                                 }
                             },
                         })) === null || _a === void 0 ? void 0 : _a.control();
-                        window.addEventListener("popstate", function (ev) {
-                            if (!component || !(ev === null || ev === void 0 ? void 0 : ev.state))
-                                return;
-                            component.selectSeries(ev.state);
-                        });
+                        component.registerHistoryPop();
                         return [2 /*return*/];
                 }
             });
@@ -1780,12 +1932,7 @@ var PageCtrl;
     }
     PageCtrl.initPaint = initPaint;
     function onImageItemClick(data) {
-        var imageSize = data.item.size || "";
-        if (data.item.year) {
-            if (imageSize)
-                imageSize += " 　|　 ";
-            imageSize += PageCtrl.monthYear(data.item.year, data.item.month);
-        }
+        var imageSize = getImageSizeDesc(data);
         var name = data.info.name;
         var desc = imageSize ? "\"".concat(name, " (").concat(imageSize, ")") : name;
         PageCtrl.showPopupView({
@@ -1793,10 +1940,19 @@ var PageCtrl;
             url: data.info.url,
             thumb: data.info.thumb,
             tips: desc,
-            desc: imageSize
+            desc: imageSize,
         });
     }
     PageCtrl.onImageItemClick = onImageItemClick;
+    function getImageSizeDesc(data) {
+        var imageSize = data.item.size || "";
+        if (!data.item.year)
+            return imageSize;
+        if (imageSize)
+            imageSize += " 　|　 ";
+        imageSize += PageCtrl.monthYear(data.item.year, data.item.month);
+        return imageSize;
+    }
     function getPaintingImageUrl(item, kind) {
         return kind === "source"
             ? "./paintings/".concat(item.year, "/").concat(item.id, ".webp")

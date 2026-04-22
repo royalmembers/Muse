@@ -48,13 +48,15 @@ declare namespace PageCtrl {
     }[];
     export function initMenu(id?: (typeof menu)[number]["id"] | boolean): void;
     export function hidePopupView(): void;
-    export function hidePopupViewDelay(): void;
+    export function closePopupView(): void;
+    export function closePopupViewDelay(): void;
     export function showPopupView(info: {
         url: string;
         thumb?: string;
         name: string;
         tips?: string;
         desc: string;
+        close?(ev?: MouseEvent): void;
     }): void;
     export function initHome(): void;
     export {};
@@ -110,6 +112,7 @@ declare namespace PageCtrl {
     export interface IImageCollectionPartOptions {
         itemUrl?(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
         click?(data: IImageClickInfo, ev: MouseEvent): void;
+        close?(ev: MouseEvent): void;
         mkt?: string | boolean;
         page?: number;
     }
@@ -153,7 +156,8 @@ declare namespace PageCtrl {
         defaultImageName?: string;
         mkt?: string | boolean;
         itemUrl?(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
-        click?(data: IImageClickInfo, ev: MouseEvent): void;
+        click?(data: IImageClickInfo, ev?: MouseEvent): void;
+        close?(ev?: MouseEvent): void;
     }
     export class ImageSeriesPart extends Hje.BaseComponent {
         private __inner;
@@ -164,6 +168,8 @@ declare namespace PageCtrl {
         scrollContentIntoView(): false | undefined;
         scrollMenuIntoView(): false | undefined;
         imageRelative(url: string | undefined): string | undefined;
+        closeImage(ev?: MouseEvent): void;
+        registerHistoryPop(): void;
         private refreshRelated;
         private genSeriesMenu;
         private getSeriesLinkInfo;
@@ -173,13 +179,15 @@ declare namespace PageCtrl {
         constructor(element: any, options?: Hje.ComponentOptionsContract<IImageCollectionPartData>);
         get length(): IImageItemInfo[];
         setDefaultName(value: string): void;
-        getItem(index: number): IImageItemInfo | undefined;
+        getItem(index: number | string): IImageItemInfo | undefined;
         pushWithoutRender(...items: IImageItemInfo[]): number;
         push(...items: IImageItemInfo[]): number;
         clear(): void;
         nextPage(): boolean;
         indexOf(item: string | IImageItemInfo): number;
         imageRelative(url: string | undefined): string | undefined;
+        openImage(item: IImageItemInfo | string, ev?: MouseEvent): undefined;
+        closeImage(ev?: MouseEvent): void;
         private genItemModel;
     }
     export class RelatedInfoPart extends Hje.BaseComponent {
