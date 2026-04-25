@@ -171,12 +171,13 @@ namespace PageCtrl {
                             if (!d.component || !d.item?.id || !selectItem) return;
                             const { url, kind } = self.getSeriesLinkInfo(selectItem);
                             if (kind !== "route" || !url || !url.includes("?")) return;
+                            const question = url.includes("?") ? "&" : "?";
                             const selectImage = Hje.getQuery("id");
                             if (selectImage) {
-                                history.replaceState(new ImageHistoryState(selectItem, d.item), "", `${url}&id=${d.item.id}`);
+                                history.replaceState(new ImageHistoryState(selectItem, d.item), "", `${url}${question}id=${d.item.id}`);
                             } else {
                                 self.__inner.needBack = true;
-                                history.pushState(new ImageHistoryState(selectItem, d.item), "", `${url}&id=${d.item.id}`);
+                                history.pushState(new ImageHistoryState(selectItem, d.item), "", `${url}${question}id=${d.item.id}`);
                             }
                         } : undefined,
                         close: data.close,

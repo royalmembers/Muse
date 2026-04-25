@@ -614,13 +614,14 @@ var PageCtrl;
                                     var _b = self.getSeriesLinkInfo(selectItem), url = _b.url, kind = _b.kind;
                                     if (kind !== "route" || !url || !url.includes("?"))
                                         return;
+                                    var question = url.includes("?") ? "&" : "?";
                                     var selectImage = Hje.getQuery("id");
                                     if (selectImage) {
-                                        history.replaceState(new ImageHistoryState(selectItem, d.item), "", "".concat(url, "&id=").concat(d.item.id));
+                                        history.replaceState(new ImageHistoryState(selectItem, d.item), "", "".concat(url).concat(question, "id=").concat(d.item.id));
                                     }
                                     else {
                                         self.__inner.needBack = true;
-                                        history.pushState(new ImageHistoryState(selectItem, d.item), "", "".concat(url, "&id=").concat(d.item.id));
+                                        history.pushState(new ImageHistoryState(selectItem, d.item), "", "".concat(url).concat(question, "id=").concat(d.item.id));
                                     }
                                 } : undefined,
                                 close: data.close,
