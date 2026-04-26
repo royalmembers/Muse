@@ -579,6 +579,12 @@
         "keywords": ["幼年版"]
     }],
     "starna": [{
+        "id": "mao-260426-p1",
+        "name": "星娜喵",
+        "name#en": "Starna",
+        "year": 2026,
+        "month": 4
+    }, {
         "id": "mao-260425-p4",
         "name": "星娜喵",
         "name#en": "Starna",
