@@ -37,7 +37,7 @@ namespace PageCtrl {
             data: {
                 rela: options.root ? "./images/" : "../images/",
                 items: [],
-                defaultName: DeepX.MdBlogs.getLocaleString("pic"),
+                defaultName: options.series?.options?.defaultItemName || DeepX.MdBlogs.getLocaleString("pic"),
                 mkt,
                 page: options.size || 24,
                 itemUrl: getPaintingImageUrl,

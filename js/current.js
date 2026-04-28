@@ -764,7 +764,13 @@ var PageCtrl;
             this.__inner.select = id;
             gallery.clear();
             gallery.styleRefs(mergeArray(this.__inner.mainStyle, ratioClassName((_a = id.options) === null || _a === void 0 ? void 0 : _a.ratio)));
-            gallery.setDefaultName(DeepX.MdBlogs.getLocaleProp(id.options, "defaultItemName", mkt) || this.__inner.defaultItemName);
+            var name = DeepX.MdBlogs.getLocaleProp(id, "name", mkt);
+            var defaultName = DeepX.MdBlogs.getLocaleProp(id.options, "defaultItemName", mkt);
+            if (!defaultName)
+                defaultName = this.__inner.defaultItemName || DeepX.MdBlogs.getLocaleString("pic");
+            else if (defaultName === true)
+                defaultName = name;
+            gallery.setDefaultName(name);
             gallery.pushWithoutRender.apply(gallery, items);
             var hasNextPage = gallery.nextPage();
             this.childModel("actions", {
@@ -778,10 +784,10 @@ var PageCtrl;
                     tagName: "img",
                     props: {
                         src: relativePath(rela, text),
-                        alt: DeepX.MdBlogs.getLocaleProp(id, "name", mkt),
+                        alt: name,
                     },
                 });
-            title.push(span(DeepX.MdBlogs.getLocaleProp(id, "name", mkt), caseStyleRef(id.options, "subtitleCase", mkt)));
+            title.push(span(name, caseStyleRef(id.options, "subtitleCase", mkt)));
             text = DeepX.MdBlogs.getLocaleProp(id, "subtitle", mkt);
             if (text)
                 title.push(span(text, caseStyleRef(id.options, "subtitleCase", mkt)));
@@ -1777,9 +1783,9 @@ var PageCtrl;
     function renderPaintings(options) {
         return __awaiter(this, void 0, void 0, function () {
             var container, images, mkt, mktOptions, c, menu, more;
-            var _a, _b, _c;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
+            var _a, _b, _c, _d, _e;
+            return __generator(this, function (_f) {
+                switch (_f.label) {
                     case 0:
                         if (!options)
                             return [2 /*return*/];
@@ -1787,12 +1793,12 @@ var PageCtrl;
                         if (!options.root) return [3 /*break*/, 2];
                         return [4 /*yield*/, init(container, "./paintings/")];
                     case 1:
-                        _d.sent();
+                        _f.sent();
                         return [3 /*break*/, 4];
                     case 2: return [4 /*yield*/, init(container)];
                     case 3:
-                        _d.sent();
-                        _d.label = 4;
+                        _f.sent();
+                        _f.label = 4;
                     case 4:
                         PageCtrl.setElementProp(getContainerElement(options, "title"), null, "paintings");
                         images = ((_a = options.series) === null || _a === void 0 ? void 0 : _a.id) ? works[options.series.id] : undefined;
@@ -1800,23 +1806,23 @@ var PageCtrl;
                             images = works.default || [];
                         mkt = Hje.getQuery("mkt") || Hje.getQuery("lang") || undefined;
                         mktOptions = mkt !== undefined ? { mkt: mkt } : undefined;
-                        c = (_b = Hje.render(container, {
+                        c = (_d = Hje.render(container, {
                             control: PageCtrl.ImageCollectionPart,
                             data: {
                                 rela: options.root ? "./images/" : "../images/",
                                 items: [],
-                                defaultName: DeepX.MdBlogs.getLocaleString("pic"),
+                                defaultName: ((_c = (_b = options.series) === null || _b === void 0 ? void 0 : _b.options) === null || _c === void 0 ? void 0 : _c.defaultItemName) || DeepX.MdBlogs.getLocaleString("pic"),
                                 mkt: mkt,
                                 page: options.size || 24,
                                 itemUrl: getPaintingImageUrl,
                                 click: onImageItemClick,
                             },
-                        })) === null || _b === void 0 ? void 0 : _b.control();
+                        })) === null || _d === void 0 ? void 0 : _d.control();
                         if (!c)
                             return [2 /*return*/];
                         c.pushWithoutRender.apply(c, images);
                         menu = getContainerElement(options, "menu");
-                        if (menu && ((_c = works.series) === null || _c === void 0 ? void 0 : _c.length)) {
+                        if (menu && ((_e = works.series) === null || _e === void 0 ? void 0 : _e.length)) {
                             Hje.render(menu, {
                                 children: PageCtrl.seriesList(works.series, c, options.root ? "./paintings/" : "../paintings/", mktOptions) || [],
                             });

@@ -306,7 +306,11 @@ namespace PageCtrl {
             this.__inner.select = id;
             gallery.clear();
             gallery.styleRefs(mergeArray(this.__inner.mainStyle, ratioClassName(id.options?.ratio)));
-            gallery.setDefaultName(DeepX.MdBlogs.getLocaleProp(id.options, "defaultItemName", mkt) || this.__inner.defaultItemName);
+            const name: string = DeepX.MdBlogs.getLocaleProp(id, "name", mkt);
+            let defaultName = DeepX.MdBlogs.getLocaleProp(id.options, "defaultItemName", mkt) as string | boolean | undefined;
+            if (!defaultName) defaultName = this.__inner.defaultItemName || DeepX.MdBlogs.getLocaleString("pic");
+            else if (defaultName === true) defaultName = name;
+            gallery.setDefaultName(name);
             gallery.pushWithoutRender(...items);
             const hasNextPage = gallery.nextPage();
             this.childModel("actions", {
@@ -319,10 +323,10 @@ namespace PageCtrl {
                 tagName: "img",
                 props: {
                     src: relativePath(rela, text),
-                    alt: DeepX.MdBlogs.getLocaleProp(id, "name", mkt),
+                    alt: name,
                 },
             });
-            title.push(span(DeepX.MdBlogs.getLocaleProp(id, "name", mkt), caseStyleRef(id.options, "subtitleCase", mkt)));
+            title.push(span(name, caseStyleRef(id.options, "subtitleCase", mkt)));
             text = DeepX.MdBlogs.getLocaleProp(id, "subtitle", mkt);
             if (text) title.push(span(text, caseStyleRef(id.options, "subtitleCase", mkt)));
             this.childModel("title", { children: title });

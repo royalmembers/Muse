@@ -32,6 +32,7 @@
         "options": {
             "nameCase": "small",
             "subtitleCase": "small",
+            "defaultItemName": true,
             "qr": "logos/qr-starna.webp",
             "ratio": "p",
             "thumb": true
@@ -580,44 +581,40 @@
     }],
     "starna": [{
         "id": "mao-260427-p1",
-        "name": "星娜喵",
-        "name#en": "Starna",
+        "name": "异瞳星娜喵",
+        "name#en": "Starna heterochromia iridum",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260426-p2",
-        "name": "星娜喵",
-        "name#en": "Starna",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260426-p1",
-        "name": "星娜喵",
-        "name#en": "Starna",
         "year": 2026,
+        "name": "紫罗兰星娜喵",
+        "name#en": "Violet Starna",
         "month": 4
     }, {
         "id": "mao-260425-p4",
-        "name": "星娜喵",
-        "name#en": "Starna",
         "year": 2026,
+        "name": "星娜有翼喵",
+        "name#en": "Starna with wings",
         "month": 4
     }, {
         "id": "mao-260425-p3",
-        "name": "星娜喵",
-        "name#en": "Starna",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260425-p2",
-        "name": "星娜喵",
-        "name#en": "Starna",
+        "name": "美少女战士星娜喵",
+        "name#en": "Starna sailor moon",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260425-p1",
-        "name": "星娜喵",
-        "name#en": "Starna",
+        "name": "校花星娜喵",
+        "name#en": "Campus belle Starna",
         "year": 2026,
         "month": 4
     }, {
@@ -634,37 +631,32 @@
         "month": 4
     }, {
         "id": "mao-260416-p7",
-        "name": "Starna",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260416-p6",
-        "name": "Starna",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260416-p5",
-        "name": "Starna",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260416-p4",
-        "name": "Starna",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260416-p3",
-        "name": "Starna",
         "year": 2026,
         "month": 4
     }, {
         "id": "mao-260416-p2",
-        "name": "Starna",
         "year": 2026,
+        "name": "气质星娜喵",
+        "name#en": "Intellectual Starna",
         "month": 4
     }, {
         "id": "mao-260416-p1",
-        "name": "Starna",
         "year": 2026,
         "month": 4
     }]
