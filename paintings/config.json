@@ -580,6 +580,18 @@
         "keywords": ["幼年版"]
     }],
     "starna": [{
+        "id": "mao-260502-p2",
+        "name": "星娜喵嘴叼灯笼",
+        "name#en": "Starna with Lantern in Mouth",
+        "year": 2026,
+        "month": 5
+    }, {
+        "id": "mao-260502-p1",
+        "name": "云朵星娜喵",
+        "name#en": "Cloud Starna",
+        "year": 2026,
+        "month": 5
+    }, {
         "id": "mao-260427-p1",
         "name": "异瞳星娜喵",
         "name#en": "Starna heterochromia iridum",
