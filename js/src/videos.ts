@@ -1,8 +1,8 @@
 namespace PageCtrl {
 
     interface IElementBag {
-        frame: Hje.ViewGeneratingContextContract<any>;
-        name: Hje.ViewGeneratingContextContract<any>;
+        frame: Hje.ElementComponent;
+        name: Hje.ElementComponent;
     }
 
     export interface IVideoInfo {
@@ -47,39 +47,39 @@ namespace PageCtrl {
         }
     }];
 
-    
-    function playVideo(v: IVideoInfo, frame: Hje.ViewGeneratingContextContract<any>, name: Hje.ViewGeneratingContextContract<any>) {
+    function playVideo(v: IVideoInfo, frame: Hje.ElementComponent, name: Hje.ElementComponent) {
         if (v.links) {
-            (frame.model().children as Hje.DescriptionContract[])[0].props!.src = v.links["iqiyi-embed"] || v.links.iqiyi;
-            frame.refresh();
-            frame.element().style.display = "";
+            frame.updateChild(0, {
+                props: {
+                    src: v.links["iqiyi-embed"] || v.links.iqiyi,
+                    style: { display: "" },
+                },
+            });
         }
 
-        let m = name.model().children as Hje.DescriptionContract[];
-        m.splice(0);
-        m.push({
+        name.setChildren([{
             tagName: "span",
             children: v.name
-        });
-        m.push({
+        }, {
             tagName: "span",
             children: v.year.toString(10)
-        });
-        m.push({
+        }, {
             tagName: "a",
             props: { href: v.links.iqiyi, target: "_blank" },
-            children: DeepX.MdBlogs.getLocaleString("name") === "名称" ? "刷新" : "Refresh",
+            children: DeepX.MdBlogs.getLocaleString("refresh"),
             on: {
-                click(ev: MouseEvent) {
-                    (frame.model().children as Hje.DescriptionContract[])[0].props!.src = "./blank.html";
-                    frame.refresh();
+                click() {
+                    frame.updateChild(0, {
+                        props: {
+                            src: "./blank.html",
+                            style: { display: "none" },
+                        },
+                    });
                     frame.element().style.display = "none";
-                    m.splice(0);
-                    name.refresh();
+                    name.clearChildren();
                 }
             }
-        });
-        name.refresh();
+        }])
     }
 
     export function video(year: number, id: string) {
@@ -118,7 +118,7 @@ namespace PageCtrl {
             let m: Hje.DescriptionContract = {
                 tagName: "a",
                 props: { href: embed ? (prefix + item.year + "/" + item.id) : url },
-                styleRefs: "link-long-button",
+                className: "link-long-button",
                 children: [{
                     tagName: "span",
                     children: item.name
@@ -155,14 +155,11 @@ namespace PageCtrl {
                     allow: "fullscreen; autoplay; encrypted-media; midi; payment"
                 }
             }]
-        })!;
+        }) as Hje.ElementComponent;
         let name = Hje.render("part-video-name", {
             children: []
-        })!;
-        videosModel({
-            frame: frame,
-            name: name
-        });
+        }) as Hje.ElementComponent;
+        videosModel({ frame, name });
         let q = (DeepX.MdBlogs.firstQuery() || "").split("/");
         if (q.length < 2) return;
         let year = parseInt(q[0]);

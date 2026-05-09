@@ -30,7 +30,7 @@ declare namespace PageCtrl {
         img?: string | false;
         keywords?: string[];
         links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
-        images?: IImageItemInfo[];
+        images?: DeepX.MdBlogs.IImageItemInfo[];
     }
     function initCerts(): Promise<void>;
 }
@@ -59,151 +59,6 @@ declare namespace PageCtrl {
         close?(ev?: MouseEvent): void;
     }): void;
     export function initHome(): void;
-    export {};
-}
-declare namespace PageCtrl {
-    type IImageUrlKind = 'thumb' | 'source';
-    type IImageRatio = "p" | "page" | "v" | "vertical" | "h" | "horizontal" | "s" | "square" | "w" | "wide";
-    export type ITitleCaseKind = "upper" | "lower" | "capital" | "small" | "normal" | "none" | null;
-    export interface IImageSeriesInfo {
-        id: string;
-        alias?: string[] | null;
-        disable?: boolean;
-        name: string;
-        subtitle?: string;
-        options: {
-            nameCase?: ITitleCaseKind;
-            subtitleCase?: ITitleCaseKind;
-            qr?: string;
-            defaultItemName?: string | boolean;
-            ratio?: IImageRatio;
-            thumb?: boolean;
-        };
-        icon?: string;
-        intro?: string;
-        blog?: string;
-        year: number;
-        links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
-        data?: Record<string, any>;
-        [property: string]: any;
-    }
-    export interface IImageItemInfo {
-        id: string;
-        disable?: boolean;
-        name?: string;
-        year: number;
-        month?: number;
-        day?: number;
-        url?: string;
-        thumb?: boolean | string;
-        keywords?: string[];
-        size?: string;
-        data?: any;
-    }
-    export interface IImageClickInfo {
-        item: IImageItemInfo;
-        component: ImageCollectionPart;
-        info: {
-            name: string;
-            url: string;
-            thumb?: string;
-        };
-    }
-    export interface IImageCollectionPartOptions {
-        itemUrl?(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
-        click?(data: IImageClickInfo, ev: MouseEvent): void;
-        close?(ev: MouseEvent): void;
-        mkt?: string | boolean;
-        page?: number;
-    }
-    export interface IImageSeriesPartData extends IImageCollectionPartOptions {
-        series: (IImageSeriesInfo | string | DeepX.MdBlogs.IArticleLabelInfo)[];
-        items: Record<string, IImageItemInfo[]>;
-        select?: string | boolean;
-        blogRela?: string | Hje.RelativePathInfo;
-        imageRela?: string | Hje.RelativePathInfo;
-        styles?: {
-            header?: string | string[];
-            main?: string | string[];
-            next?: string | string[];
-            related?: string | string[];
-            share?: string | string[];
-        };
-        strings?: {
-            all?: string;
-            pics?: string;
-            site?: string;
-        };
-        urls?: {
-            share?: string;
-            qr?: string;
-            series?: string;
-        };
-        before?: Hje.DescriptionContract;
-        after?: Hje.DescriptionContract;
-        selected?(info: IImageSeriesInfo, component: ImageSeriesPart): void;
-    }
-    export interface IImageCollectionPartData extends IImageCollectionPartOptions {
-        rela?: string | Hje.RelativePathInfo;
-        items: IImageItemInfo[];
-        defaultName?: string;
-    }
-    export interface IRelatedInfoPartData {
-        title?: string;
-        links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
-        images?: IImageItemInfo[];
-        imageRela?: string | Hje.RelativePathInfo;
-        defaultImageName?: string;
-        mkt?: string | boolean;
-        itemUrl?(item: IImageItemInfo, kind: IImageUrlKind): string | undefined;
-        click?(data: IImageClickInfo, ev?: MouseEvent): void;
-        close?(ev?: MouseEvent): void;
-    }
-    export class ImageSeriesPart extends Hje.BaseComponent {
-        private __inner;
-        constructor(element: any, options?: Hje.ComponentOptionsContract<IImageSeriesPartData>);
-        get series(): IImageSeriesInfo[];
-        getSeries(id: string): IImageSeriesInfo | undefined;
-        selectSeries(id: string | IImageSeriesInfo): IImageSeriesInfo | undefined;
-        scrollContentIntoView(): false | undefined;
-        scrollMenuIntoView(): false | undefined;
-        imageRelative(url: string | undefined): string | undefined;
-        closeImage(ev?: MouseEvent): void;
-        registerHistoryPop(): void;
-        private refreshRelated;
-        private genSeriesMenu;
-        private getSeriesLinkInfo;
-    }
-    export class ImageCollectionPart extends Hje.BaseComponent {
-        private __inner;
-        constructor(element: any, options?: Hje.ComponentOptionsContract<IImageCollectionPartData>);
-        get length(): IImageItemInfo[];
-        setDefaultName(value: string): void;
-        getItem(index: number | string): IImageItemInfo | undefined;
-        pushWithoutRender(...items: IImageItemInfo[]): number;
-        push(...items: IImageItemInfo[]): number;
-        clear(): void;
-        nextPage(): boolean;
-        indexOf(item: string | IImageItemInfo): number;
-        imageRelative(url: string | undefined): string | undefined;
-        openImage(item: IImageItemInfo | string, ev?: MouseEvent): undefined;
-        closeImage(ev?: MouseEvent): void;
-        private genItemModel;
-    }
-    export class RelatedInfoPart extends Hje.BaseComponent {
-        constructor(element: any, options?: Hje.ComponentOptionsContract<IRelatedInfoPartData>);
-        setData(links: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[] | null | undefined, images: IImageItemInfo[] | null | undefined): number;
-    }
-    export function seriesList(col: IImageSeriesInfo[], imageRela: string | Hje.RelativePathInfo | ImageSeriesPart | ImageCollectionPart, link?: string, options?: {
-        mkt?: string | boolean;
-    }): {
-        tagName: string;
-        styleRefs: string;
-        props: {
-            href: string;
-        };
-        children: Hje.DescriptionContract[];
-    }[] | null;
     export {};
 }
 declare namespace PageCtrl {
@@ -258,12 +113,12 @@ declare namespace PageCtrl {
     interface IPaintingPaging {
         id?: string;
         size: number;
-        root?: boolean;
-        series?: IImageSeriesInfo;
+        root?: boolean | number;
+        gallery?: DeepX.MdBlogs.IImageGalleryInfo;
     }
     export function renderPaintings(options: IPaintingPaging): Promise<void>;
     export function initPaint(): Promise<void>;
-    export function onImageItemClick(data: IImageClickInfo): void;
+    export function onImageItemClick(data: DeepX.MdBlogs.IImageClickInfo): void;
     export {};
 }
 declare namespace PageCtrl {
@@ -276,7 +131,7 @@ declare namespace PageCtrl {
         year?: number;
         sub?: string;
     };
-    function loadingModel(failed?: boolean, context?: Hje.ViewGeneratingContextContract<any>): {
+    function loadingModel(failed?: boolean, component?: Hje.ElementComponent): {
         tagName: string;
         children: {
             tagName: string;
@@ -285,14 +140,14 @@ declare namespace PageCtrl {
     };
     function fetchMainData<T = any>(url: string, element?: HTMLElement | string): Promise<{
         data?: T;
-        context?: Hje.ViewGeneratingContextContract<any>;
+        component?: Hje.ElementComponent;
     }>;
-    function getImageUrl(item: IImageItemInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]): string;
+    function getImageUrl(item: DeepX.MdBlogs.IImageItemInfo, options: DeepX.MdBlogs.IImageUrlResolveOptions): string;
 }
 declare namespace PageCtrl {
     interface IElementBag {
-        frame: Hje.ViewGeneratingContextContract<any>;
-        name: Hje.ViewGeneratingContextContract<any>;
+        frame: Hje.ElementComponent;
+        name: Hje.ElementComponent;
     }
     export interface IVideoInfo {
         id: string;

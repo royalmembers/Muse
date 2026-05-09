@@ -23,12 +23,12 @@ namespace PageCtrl {
         img?: string | false;
         keywords?: string[];
         links?: DeepX.MdBlogs.IArticleRelatedLinkItemInfo[];
-        images?: IImageItemInfo[];
+        images?: DeepX.MdBlogs.IImageItemInfo[];
     }
     
     const inner: {
         certs?: ICertInfo[];
-        related?: RelatedInfoPart;
+        related?: DeepX.MdBlogs.RelatedInfoPart;
     } = {};
 
     async function init() {
@@ -42,25 +42,25 @@ namespace PageCtrl {
     function showCert(item: ICertInfo, details: string | HTMLElement) {
         let arr : Hje.DescriptionContract[] = [{
             tagName: "div",
-            styleRefs: "x-part-cert-name",
+            className: "x-part-cert-name",
             children: []
         }];
-        if (item.season) (arr[0].children as Hje.DescriptionContract[]).push({ tagName: "span", styleRefs: "x-part-cert-season", children: item.season });
-        (arr[0].children as Hje.DescriptionContract[]).push({ tagName: "span", styleRefs: "x-part-cert-name", children: item.name });
+        if (item.season) (arr[0].children as Hje.DescriptionContract[]).push({ tagName: "span", className: "x-part-cert-season", children: item.season });
+        (arr[0].children as Hje.DescriptionContract[]).push({ tagName: "span", className: "x-part-cert-name", children: item.name });
         if (item.group) arr.push({
             tagName: "div",
-            styleRefs: "x-part-cert-group",
+            className: "x-part-cert-group",
             children: [{ tagName: "span", children: item.group }]
         });
         arr.push({
             tagName: "div",
-            styleRefs: "x-part-cert-ranking",
+            className: "x-part-cert-ranking",
             children: [{tagName: "span", children: item.ranking }]
         });
         arr = [{ tagName: "div", children: arr }];
         if (item.img !== false) arr.push({
             tagName: "div",
-            styleRefs: ["x-part-cert-img", "x-bg-emphasis"],
+            className: ["x-part-cert-img", "x-bg-emphasis"],
             children: [{
                 tagName: "img",
                 props: { alt: item.name, src: `../images/certs/${item.year.toString(10)}/${typeof item.img === "string" ? item.img : (item.id + (item.year > 2025 ? ".webp" : ".jpg"))}` }
@@ -71,7 +71,7 @@ namespace PageCtrl {
         if (item.publisher) year.splice(0, 0, { tagName: "span", children: item.publisher });
         arr.push({
             tagName: "div",
-            styleRefs: "x-part-cert-year",
+            className: "x-part-cert-year",
             children: year
         });
         Hje.render(details, {
@@ -80,7 +80,7 @@ namespace PageCtrl {
         });
         if (!inner.related) return;
         const count = inner.related.setData(item.links, item.images);
-        inner.related.element().style.display = count > 0 ? "" : "none";
+        inner.related.element.style.display = count > 0 ? "" : "none";
     }
 
     function addCertEvent(item: ICertInfo, model: Hje.DescriptionContract, details: string | HTMLElement) {
@@ -115,7 +115,7 @@ namespace PageCtrl {
             if (item.year && item.year !== year && !isNaN(item.year)) {
                 arr.push({
                     tagName: "span",
-                    styleRefs: "x-part-cert-year",
+                    className: "x-part-cert-year",
                     children: item.year === thisYear ? DeepX.MdBlogs.getLocaleString("thisYear") : item.year.toString(10)
                 });
                 year = item.year;
@@ -123,7 +123,7 @@ namespace PageCtrl {
 
             let m = {
                 tagName: "a",
-                styleRefs: "link-long-button",
+                className: "link-long-button",
                 props: {
                     href: "../certs/?" + item.year.toString(10) + "/" + item.id
                 },
@@ -142,7 +142,7 @@ namespace PageCtrl {
     export async function initCerts() {
         const c = Hje.render("part-certs", {
             children: [loadingModel()]
-        });
+        }) as Hje.ElementComponent;
         if (!await init()) {
             loadingModel(true, c);
             return;
@@ -153,31 +153,31 @@ namespace PageCtrl {
         const details = ele("part-cert")!;
         let id = DeepX.MdBlogs.firstQuery();
         inner.related = Hje.render("part-related", {
-            control: RelatedInfoPart,
+            component: DeepX.MdBlogs.RelatedInfoPart,
             data: {
                 title: getString("related"),
                 imageRela: "../images/",
                 defaultImageName: DeepX.MdBlogs.getLocaleString("pic"),
                 click: onImageItemClick,
                 itemUrl: getImageUrl,
-            } as IRelatedInfoPartData,
-        })?.control() as RelatedInfoPart;
+            } as DeepX.MdBlogs.IRelatedInfoPartData,
+        }) as DeepX.MdBlogs.RelatedInfoPart;
         const info = certsModel(arr, id, details);
         if (id && info) showCert(info, details);
-        c.model().children = arr;
-        c.refresh();
+        c.setChildren(arr);
         let checkbox = ele("checkbox-certs") as HTMLInputElement;
         if (checkbox) checkbox.addEventListener("change", function (ev) {
             certsModel(arr, id, details, checkbox.checked);
-            c.refresh();
+            c.setChildren(arr);
         });
 
         window.addEventListener("popstate", function (ev) {
             id = (ev.state || {}).id;
             const selInfo = parseFirstQuery(id);
+            hidePopupView();
             if (!selInfo.id) {
                 details.style.display = "none";
-                const relatedElement = inner.related?.element();
+                const relatedElement = inner.related?.element;
                 if (relatedElement) relatedElement.style.display = "none";
                 return;
             }

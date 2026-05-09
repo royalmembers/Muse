@@ -140,7 +140,6 @@
             "name#en": "Mor-Ow Meow Borns",
             "dir": "mao",
             "file": true,
-            "keywords": ["mor-ow-meow"],
             "date": "20260131",
             "location": "上海",
             "author": {
@@ -166,7 +165,8 @@
             "options": {
                 "banner": {
                     "url": "./2026/mao/thumbnails/banner.webp"
-                }
+                },
+                "gallery": "mao"
             }
         },
         {
@@ -174,7 +174,7 @@
             "name#en": "Chengdu",
             "dir": "chengdu",
             "file": true,
-            "keywords": ["trip", "mor-ow-meow"],
+            "keywords": ["trip"],
             "date": "20260208",
             "location": "成都",
             "author": {
@@ -199,13 +199,16 @@
                         }
                     }
                 }
-            ]
+            ],
+            "options": {
+                "gallery": "mao"
+            }
         },
         {
             "name": "马年快乐",
             "dir": "horse",
             "file": true,
-            "keywords": ["trip", "mor-ow-meow"],
+            "keywords": ["trip"],
             "date": "20260224",
             "location": "南昌",
             "end": true,
@@ -217,6 +220,9 @@
             "thumb": {
                 "common": "./2026/horse/20260217_200654_n.webp",
                 "wide": "./2026/horse/20260217_200654_w.webp"
+            },
+            "options": {
+                "gallery": "mao"
             }
         },
         {
@@ -241,7 +247,6 @@
             "name#en": "Ancient Mor-Ow Meow",
             "dir": "costume",
             "file": true,
-            "keywords": ["mor-ow-meow"],
             "date": "20260308",
             "author": {
                 "painter": "Muse Tuan"
@@ -250,6 +255,9 @@
             "thumb": {
                 "common": "./2026/mao/thumbnails/costume.webp",
                 "wide": "./2026/mao/thumbnails/costume-w.webp"
+            },
+            "options": {
+                "gallery": "mao"
             }
         },
         {
@@ -257,7 +265,7 @@
             "name#en": "Little Red Riding Hood x Mor-Ow Meow",
             "dir": "little-red-riding-hood",
             "file": true,
-            "keywords": ["mor-ow-meow", "fairy-tales"],
+            "keywords": ["fairy-tales"],
             "date": "20260322",
             "author": {
                 "painter": "Muse Tuan"
@@ -275,14 +283,16 @@
                     "subtitle#en": "Reproduced FYI",
                     "url": "https://12dlabs.github.io/stories/fairy-tales/?little-red-riding-hood"
                 }
-            ]
+            ],
+            "options": {
+                "gallery": "mao"
+            }
         },
         {
             "name": "星娜喵诞生",
             "name#en": "Starna Borns",
             "dir": "starna",
             "file": true,
-            "keywords": ["starna"],
             "date": "20260416",
             "location": "上海",
             "author": {
@@ -308,16 +318,68 @@
             "options": {
                 "banner": {
                     "url": "./2026/starna/thumbnails/banner.webp"
-                }
+                },
+                "gallery": "starna"
             }
         }
     ],
+    "gallery": [{
+        "id": "mao",
+        "alias": ["meow", "mor-ow-meow", "moaomiao"],
+        "name": "摸凹喵",
+        "name#en": "Mor-Ow Meow",
+        "name#fr": "Moh-Aou Miaou",
+        "name#ko": "모오 미야오",
+        "options": {
+            "logo": "../images/logos/mao-2026.png",
+            "nameCase#en": "small",
+            "nameCase#fr": "small",
+            "subtitleCase": "small",
+            "qr": "../images/logos/qr-mao.webp",
+            "ratio": "p",
+            "thumb": true
+        },
+        "subtitle": "Mor-Ow Meow",
+        "subtitle#en": "摸凹喵",
+        "subtitle#fr": "摸凹喵",
+        "subtitle#ko": "摸凹喵 / Mor-Ow Meow",
+        "subtitle#ja": "Mor-Ow Meow / モル オウ ニャー",
+        "intro": "这是一只可爱的小猫猫，有着齐刘海和双马尾，眼睛不大、嘴巴可小可大有弹性，是不是萌萌哒，是不是超有趣，是不是很像小时候的我？",
+        "icon": "../images/logos/mao-2026.png",
+        "year": 2026,
+        "items": "../paintings/config.json"
+    }, {
+        "id": "starna",
+        "alias": ["xingna", "xingnamiao"],
+        "name": "Starna",
+        "name#zh": "星娜喵",
+        "name#ja": "星娜喵",
+        "options": {
+            "logo": "../images/logos/starna-2026.png",
+            "nameCase": "small",
+            "subtitleCase": "small",
+            "defaultItemName": true,
+            "qr": "../images/logos/qr-starna.webp",
+            "ratio": "p",
+            "thumb": true
+        },
+        "subtitle#zh": "Starna",
+        "subtitle#ko": "星娜喵",
+        "subtitle#ja": "Starna",
+        "subtitle#mn": "星娜喵",
+        "subtitle#ii": "星娜喵",
+        "intro": "这是一只美丽可爱的猫猫，有大大的耳朵、大大的眼睛、卷曲的发型，穿着精致的衣服，擅长装扮，青春洋溢芬芳优雅。",
+        "icon": "../images/logos/starna-2026.png",
+        "year": 2026,
+        "items": "../paintings/config.json"
+    }],
     "links": [
     ],
     "redir": {
     },
     "options": {
-        "disableName": true
+        "disableName": true,
+        "galleryTips": "注：猫头鱼尾兽图标、MuseTuan.com、摸凹喵（Mor-Ow Meow）及其形象、星娜喵（Starna）及其形象，是 Muse Tuan 和 Kingcean Tuan 的商标，摸凹喵画作及其衍生品均受知识产权保护，版权所有；Kingcean、Jinchen Art、金辰艺术、CompositeJs、金山旭日翼盾、红日黑山徽标，是 Kingcean Tuan、南昌金辰软件有限公司或江西金辰装饰设计工程有限公司的商标或注册商标；其它商标分别归属其所拥有的组织。"
     },
     "$defs": {
         "contributors": [
@@ -326,8 +388,6 @@
         ],
         "keywords": [
             { "name": "Trip", "name#zh": "旅行", "value": "trip" },
-            { "name": "Mor-Ow Meow", "name#zh": "摸凹喵", "name#fr": "Moh-Aou Miaou", "name#ko": "모오 미야오", "name#ja": "摸凹喵", "value": "mor-ow-meow" },
-            { "name": "Starna", "name#zh": "星娜喵", "name#ja": "星娜喵", "value": "starna" },
             { "name": "Fairy Tales", "name#zh": "童话", "value": "fairy-tales" },
             { "name": "Intro", "name#zh": "介绍", "value": "intro" }
         ]

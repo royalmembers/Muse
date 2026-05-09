@@ -85,7 +85,9 @@ namespace PageCtrl {
 
     export function hidePopupView() {
         delete inner.closePopView;
-        ele("popup-view")!.style.display = "none";
+        const element = ele("popup-view");
+        if (!element) return;
+        element.style.display = "none";
     }
 
     export function closePopupView() {

@@ -63,7 +63,7 @@ namespace PageCtrl {
         return obj;
     }
 
-    export function loadingModel(failed?: boolean, context?: Hje.ViewGeneratingContextContract<any>) {
+    export function loadingModel(failed?: boolean, component?: Hje.ElementComponent) {
         const m = {
             tagName: "p",
             children: [failed ? {
@@ -74,42 +74,41 @@ namespace PageCtrl {
                 children: DeepX.MdBlogs.getLocaleString("loading"),
             }],
         };
-        if (context) {
-            context.model().children = [m];
-            context.refresh();
+        if (component) {
+            component.setChildren([m]);
         }
         return m;
     }
 
     export async function fetchMainData<T = any>(url: string, element?: HTMLElement | string): Promise<{
         data?: T,
-        context?: Hje.ViewGeneratingContextContract<any>
+        component?: Hje.ElementComponent
     }> {
         if (!url) return {};
         const c = element ? Hje.render(element, {
             children: [loadingModel()],
-        }) : undefined;
+        }) as Hje.ElementComponent : undefined;
         try {
             const res = await fetch(url);
             const json = await res.json();
             if (!json) {
                 loadingModel(true, c);
-                return { context: c }
+                return { component: c }
             }
             return {
                 data: json as T,
-                context: c
+                component: c
             };
         } catch {
             loadingModel(true, c);
-            return { context: c };
+            return { component: c };
         }
     }
 
-    export function getImageUrl(item: IImageItemInfo, kind: Parameters<NonNullable<IImageCollectionPartOptions["itemUrl"]>>[1]) {
-        return kind === "source"
-            ? `./${item.data?.kind || "photos"}/${item.year}/${item.id}.webp`
-            : `./${item.data?.kind || "photos"}/thumbnails/${item.year}/${item.id}.webp`;
+    export function getImageUrl(item: DeepX.MdBlogs.IImageItemInfo, options: DeepX.MdBlogs.IImageUrlResolveOptions) {
+        return options.kind === "source"
+            ? `../images/${item.data?.kind || "photos"}/${item.year}/${item.id}.webp`
+            : `../images/${item.data?.kind || "photos"}/thumbnails/${item.year}/${item.id}.webp`;
     }
 
 }
