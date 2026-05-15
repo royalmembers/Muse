@@ -170,6 +170,7 @@ namespace PageCtrl {
         DeepX.MdBlogs.setElementText("title-links", "otherLinks");
         DeepX.MdBlogs.setElementText("button-blog", "blog");
         setElementProp("link-certs", null, "certHonors");
+        DeepX.MdBlogs.setElementText("link-blog", "blog");
         setElementProp("title-works-series", null, "series");
         setElementProp("title-works-common", null, "general");
         DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));

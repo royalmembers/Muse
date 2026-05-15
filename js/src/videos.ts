@@ -21,7 +21,7 @@ namespace PageCtrl {
         name: "景德镇陶瓷研学之旅",
         year: 2025,
         month: 7,
-        thumb: "posters/thumbnails/20250706_145015.webp",
+        thumb: "posters/thumbnails/2025/20250706_145015.webp",
         links: {
             iqiyi: "https://www.iqiyi.com/v_14kpuv94euo.html",
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=4176576759377500"
@@ -94,15 +94,19 @@ namespace PageCtrl {
     export function videosModel(kind: "home" | "videos" | "3" | IElementBag) {
         let info: IElementBag;
         let prefix = "../videos/?";
+        let images = "../images/";
         switch (kind || "") {
             case "home":
                 prefix = "./videos/?";
+                images = "./images/";
                 break;
             case "videos":
                 prefix = "./?";
+                images = "./images/";
                 break;
             case "3":
                 prefix = "../../videos/?"
+                images = "../../images/";
                 break;
             default:
                 if ((kind as IElementBag).frame && (kind as IElementBag).name) info = kind as IElementBag;
@@ -118,8 +122,14 @@ namespace PageCtrl {
             let m: Hje.DescriptionContract = {
                 tagName: "a",
                 props: { href: embed ? (prefix + item.year + "/" + item.id) : url },
-                className: "link-long-button",
                 children: [{
+                    tagName: "img",
+                    props: {
+                        alt: item.name,
+                        src: item.thumb ? `${images}${item.thumb}` : "",
+                        loading: "lazy",
+                    }
+                }, {
                     tagName: "span",
                     children: item.name
                 }, {
@@ -141,7 +151,8 @@ namespace PageCtrl {
             return !!item;
         });
         Hje.render("part-videos", {
-            children: arr
+            className: "x-container-pics",
+            children: arr,
         });
     }
 
