@@ -166,3 +166,25 @@ body > section > nav > section.layout-wide-full.x-zone-hl > h2 {
     margin: 0 auto;
     line-height: 30px;
 }
+section#part-videos.x-container-pics > a, section#part-videos.x-container-pics > a:visited {
+    color: #CCC; background-color: rgba(128, 128, 128, 0.06); border-bottom: 1px solid rgba(16, 16, 16, 0.3); text-decoration: none; transition: 0.4s;
+    border-radius: 4px; backdrop-filter: blur(4px);
+}
+section#part-videos.x-container-pics > a:hover {
+    color: #EEE; background-color: rgba(128, 128, 128, 0.1); border-bottom: 1px solid rgba(16, 16, 16, 0.5); text-decoration: none; scale: 1.01; transition: 0.1s;
+}
+section#part-videos.x-container-pics > a:active {
+    color: #AAA; background-color: rgba(128, 128, 128, 0.04); border-bottom: 1px solid rgba(16, 16, 16, 0.2); text-decoration: none; scale: 1; transition: 0.1s;
+}
+section#part-videos.x-container-pics > a > img, section#part-videos.x-container-pics > a > span {
+    width: 100%; display: block;
+}
+section#part-videos.x-container-pics > a > img:first-child + span {
+    font-size: 16px; line-height: 20px; margin: 8px; height: 40px; overflow: hidden;
+}
+section#part-videos.x-container-pics > a > img {
+    border-radius: 4px 4px 0 0;
+}
+section#part-videos.x-container-pics > a > span {
+    line-height: 20px; margin: 0 8px 8px 8px; height: 20px; text-overflow: ellipsis; overflow: hidden;
+}

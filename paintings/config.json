@@ -533,6 +533,40 @@
             "keywords": ["幼年版"]
         }],
         "starna": [{
+            "id": "mao-260515-p2",
+            "name": "咖啡曲奇星娜喵",
+            "name#en": "Coffee Cookie Starna",
+            "year": 2026,
+            "month": 5
+        }, {
+            "id": "mao-260515-p1",
+            "name": "围裙星娜喵",
+            "name#en": "Starna with Apron",
+            "year": 2026,
+            "month": 5
+        }, {
+            "id": "mao-260512-p3",
+            "name": "反派星娜喵",
+            "name#en": "Villain Starna",
+            "year": 2026,
+            "month": 5
+        }, {
+            "id": "mao-260512-p2",
+            "name": "欧洲贵族星娜喵副本",
+            "name#en": "Starna European Aristocrat Copy",
+            "year": 2026,
+            "month": 5
+        }, {
+            "id": "mao-260512-p1",
+            "name": "欧洲贵族星娜喵",
+            "name#en": "Starna European Aristocrat",
+            "year": 2026,
+            "month": 5
+        }, {
+            "id": "mao-260509-p1",
+            "year": 2026,
+            "month": 5
+        }, {
             "id": "mao-260504-p3",
             "year": 2026,
             "month": 5
@@ -630,12 +664,14 @@
             "month": 4
         }, {
             "id": "mao-260416-p2",
-            "year": 2026,
             "name": "气质星娜喵",
             "name#en": "Intellectual Starna",
+            "year": 2026,
             "month": 4
         }, {
             "id": "mao-260416-p1",
+            "name": "腼腆星娜喵",
+            "name#en": "Shy Starna",
             "year": 2026,
             "month": 4
         }]
