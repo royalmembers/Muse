@@ -1,5 +1,36 @@
 {
     "certs": [{
+        "id": "kawai",
+        "disable": true,
+        "name": "Kawai 亚洲钢琴大赛",
+        "scope": "match",
+        "season": "第9届",
+        "year": 2026,
+        "month": 5,
+        "group": "上海赛区业余组儿童A组",
+        "ranking": "评定中",
+        "publisher": "柏斯音乐基金会",
+        "keywords": ["instrumental performance", "match"],
+        "images": [{
+            "id": "img-1779062635385",
+            "name": "弹奏钢琴现场侧面照片",
+            "name#en": "Photo",
+            "year": 2026,
+            "month": 5,
+            "day": 17,
+            "size": "10Mpx 3:2",
+            "keywords": []
+        }, {
+            "id": "img-1779062663386",
+            "name": "弹奏钢琴现场正面照片",
+            "name#en": "Photo",
+            "year": 2026,
+            "month": 5,
+            "day": 17,
+            "size": "10Mpx 3:2",
+            "keywords": []
+        }]
+    }, {
         "id": "shnu3ps-match",
         "name": "上师三附小艺术单项比赛",
         "scope": "school",
@@ -10,7 +41,7 @@
         "ranking": "一等奖",
         "publisher": "上海师范大学附属闵行第三小学",
         "keywords": ["instrumental performance", "match"]
-    },{
+    }, {
         "id": "shnu3ps-honor",
         "name": "“传承雷锋精神，绽放文明之花”活动",
         "scope": "school",
@@ -52,7 +83,7 @@
         "keywords": ["instrumental performance", "match"],
         "images": [{
             "id": "p-260201-1526",
-            "name": "弹奏钢琴",
+            "name": "弹奏钢琴现场特写照片",
             "year": 2026,
             "month": 2,
             "day": 1,
@@ -60,7 +91,7 @@
             "keywords": []
         }, {
             "id": "p-260201-1527",
-            "name": "弹奏钢琴",
+            "name": "弹奏钢琴现场特写照片",
             "year": 2026,
             "month": 2,
             "day": 1,
@@ -68,7 +99,7 @@
             "keywords": []
         }, {
             "id": "p-260201-1528",
-            "name": "弹奏钢琴",
+            "name": "弹奏钢琴现场远景照片",
             "year": 2026,
             "month": 2,
             "day": 1,
@@ -225,7 +256,7 @@
             "year": 2020,
             "month": 11,
             "day": 1,
-            "size": "6.3Mpx 3:2",
+            "size": "6Mpx 3:2",
             "keywords": []
         }, {
             "id": "p-201101-1757",
@@ -233,7 +264,7 @@
             "year": 2020,
             "month": 11,
             "day": 1,
-            "size": "6.3Mpx 3:2",
+            "size": "6Mpx 3:2",
             "keywords": []
         }, {
             "id": "p-201101-1800",
@@ -241,7 +272,7 @@
             "year": 2020,
             "month": 11,
             "day": 1,
-            "size": "6.3Mpx 3:2",
+            "size": "6Mpx 3:2",
             "keywords": []
         }]
     }, {

@@ -33,7 +33,7 @@ namespace PageCtrl {
         const container = getContainerElement(options);
         if (options.root) await init(container, options.root);
         else await init(container);
-        setElementProp(getContainerElement(options, "title"), null, "paintings");
+        DeepX.MdBlogs.setElementText(getContainerElement(options, "title"), "paintings");
         const id = options.gallery?.id || "default";
         let items = DeepX.MdBlogs.getGallery(works.gallery, id)?.items;
         let rela = new Hje.RelativePathInfo(`${rootRela(options.root)}paintings/`);
@@ -144,9 +144,9 @@ namespace PageCtrl {
                     share: ["x-part-panel", "x-bg-emphasis"],
                 },
                 strings: {
-                    pics: getString("paintings"),
-                    all: getString("picLibs"),
-                    site: getString("worksBy").replace("{0}", "Muse").replace("{1}", getString("paintings")),
+                    pics: DeepX.MdBlogs.getLocaleString("paintings"),
+                    all: DeepX.MdBlogs.getLocaleString("picLibs"),
+                    site: getString("worksBy").replace("{0}", "Muse").replace("{1}", DeepX.MdBlogs.getLocaleString("paintings")),
                 },
                 mkt,
                 page: 24,
@@ -170,7 +170,7 @@ namespace PageCtrl {
                                 if (component) component.scrollMenuIntoView();
                             }
                         },
-                        children: getString("picLibs"),
+                        children: DeepX.MdBlogs.getLocaleString("picLibs"),
                     }]
                 }
             } as DeepX.MdBlogs.IImageGalleryPartData,

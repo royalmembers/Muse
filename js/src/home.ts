@@ -165,15 +165,17 @@ namespace PageCtrl {
         });
         videosModel("home");
         if (typeof DeepX === "undefined") return;
-        DeepX.MdBlogs.setElementText("title-about", "about");
-        DeepX.MdBlogs.setElementText("title-videos", "videos");
-        DeepX.MdBlogs.setElementText("title-links", "otherLinks");
-        DeepX.MdBlogs.setElementText("button-blog", "blog");
-        setElementProp("link-certs", null, "certHonors");
-        DeepX.MdBlogs.setElementText("link-blog", "blog");
-        setElementProp("title-works-series", null, "series");
-        setElementProp("title-works-common", null, "general");
-        DeepX.MdBlogs.setElementProp("button-works-more", null, DeepX.MdBlogs.getLocaleString("seeMore"));
+        setElementProps([
+            { element: "title-about", key: "about", mdblogs: true },
+            { element: "title-videos", key: "videos", mdblogs: true },
+            { element: "title-links", key: "otherLinks", mdblogs: true },
+            { element: "button-blog", key: "blog", mdblogs: true },
+            { element: "link-certs", key: "certHonors" },
+            { element: "link-blog", key: "blog", mdblogs: true },
+            { element: "title-works-series", key: "series" },
+            { element: "title-works-common", key: "general", mdblogs: true },
+            { element: "button-works-more", key: "seeMore", mdblogs: true },
+        ]);
         initMenu(true);
     }
 }

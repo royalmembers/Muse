@@ -3,27 +3,8 @@ export interface IArticleRenderExtension {
     end: Hje.DescriptionContract[]
 }
 
-interface IBlogSeriesInfo {
-    name: string;
-    url: string;
-    logo?: string;
-}
-
 const inner = {
     articles: undefined as Promise<DeepX.MdBlogs.Articles> | undefined,
-};
-
-const seriesMap = {
-    "mor-ow-meow": {
-        name: "workMorOwMeow" as const,
-        url: "../paintings/?mao",
-        logo: "../images/logos/mao-2026.png",
-    },
-    "starna": {
-        name: "workStarna" as const,
-        url: "../paintings/?starna",
-        logo: "../images/logos/starna-2026.png"
-    },
 };
 
 export function loadBlogArticles(root?: boolean | number) {

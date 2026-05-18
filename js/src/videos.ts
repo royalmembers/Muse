@@ -14,6 +14,7 @@ namespace PageCtrl {
         month?: number;
         thumb?: string;
         links: Record<string, string>;
+        [property: string]: any;
     }
 
     const videos: IVideoInfo[] = [{
@@ -27,14 +28,19 @@ namespace PageCtrl {
             "iqiyi-embed": "https://static-s.iqiyi.com/pca/uwp/new_web_player/index.html?mode=player&from=embed&tvid=4176576759377500"
         }
     }, {
-        id: "jingdezhen",
+        id: "piano-adv",
         disable: true,
         guest: "featuring",
         name: "学生不练琴，我选择做这三件事",
         year: 2025,
         month: 4,
+        thumb: "posters/thumbnails/2025/piano-adv.webp",
+        source: {
+            thumb: "https://sns-webpic-qc.xhscdn.com/202605162335/f8cbba31f22b8a8ffe6fb68f1e70e1fa/1040g00831giub9c53a0049ogaidq7upugjaflco!nd_dft_wlteh_webp_3",
+            publisher: "Cherry Xu"
+        },
         links: {
-            xiaohongshu: "https://xhslink.com/m/9SueR085WK8",
+            xiaohongshu: "https://xhslink.com/o/4IGbSvQvUDo",
         }
     }, {
         id: "led",

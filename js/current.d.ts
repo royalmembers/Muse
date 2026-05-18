@@ -63,42 +63,22 @@ declare namespace PageCtrl {
 }
 declare namespace PageCtrl {
     const strings: {
-        all: string;
-        "all#zh": string;
         share: string;
         "share#zh": string;
         photoTaken: string;
         "photoTaken#zh": string;
-        general: string;
-        "general#zh": string;
-        paintings: string;
-        "paintings#zh": string;
         series: string;
         "series#zh": string;
         dateToMonth: string;
         "dateToMonth#zh": string;
         certHonors: string;
         "certHonors#zh": string;
-        picLibs: string;
-        "picLibs#zh": string;
         generalPaintings: string;
         "generalPaintings#zh": string;
-        related: string;
-        "related#zh": string;
-        relatedBlog: string;
-        "relatedBlog#zh": string;
-        relatedPaintings: string;
-        "relatedPaintings#zh": string;
+        relatedPictures: string;
+        "relatedPictures#zh": string;
         worksBy: string;
         "worksBy#zh": string;
-        workMorOwMeow: string;
-        "workMorOwMeow#en": string;
-        "workMorOwMeow#fr": string;
-        "workMorOwMeow#ko": string;
-        workStarna: string;
-        "workStarna#zh": string;
-        seeSeriesWorks: string;
-        "seeSeriesWorks#zh": string;
         loveDrawing: string;
         "loveDrawing#zh": string;
     };
@@ -106,6 +86,17 @@ declare namespace PageCtrl {
         mkt?: string | boolean;
     }): string;
     export function setElementProp(element: string | HTMLElement, prop: string | null, key: keyof typeof strings): void;
+    export function setElementProps(col: ({
+        element: string | HTMLElement;
+        key: keyof typeof strings;
+        prop?: string | null;
+        mdblogs?: false;
+    } | {
+        element: string | HTMLElement;
+        key: Parameters<typeof DeepX.MdBlogs.getLocaleString>[0];
+        prop?: string | null;
+        mdblogs: true;
+    })[]): void;
     export function monthYear(year: number, month?: number | null): string;
     export {};
 }
@@ -158,6 +149,7 @@ declare namespace PageCtrl {
         month?: number;
         thumb?: string;
         links: Record<string, string>;
+        [property: string]: any;
     }
     export function video(year: number, id: string): IVideoInfo | undefined;
     export function videosModel(kind: "home" | "videos" | "3" | IElementBag): void;

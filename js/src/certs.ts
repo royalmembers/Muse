@@ -155,7 +155,7 @@ namespace PageCtrl {
         inner.related = Hje.render("part-related", {
             component: DeepX.MdBlogs.RelatedInfoPart,
             data: {
-                title: getString("related"),
+                title: getString("relatedPictures"),
                 imageRela: "../images/",
                 defaultImageName: DeepX.MdBlogs.getLocaleString("pic"),
                 click: onImageItemClick,
