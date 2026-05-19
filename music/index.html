@@ -17,8 +17,10 @@
     }
 	</style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@3.0.0/docs/js/mdblogs.js" ></script>
+	<script type="text/javascript" src="../js/current.js" ></script>
 	<script type="text/javascript" >
     function initPage() {
+        PageCtrl.initMenu("music");
     }
     </script>
 </head>
@@ -31,17 +33,22 @@
         </section>
 	</header>
     <section>
+        <section>
+            <div>🎵 Music</div>
+        </section>
         <section class="x-zone-hl layout-wide-full x-bg-outstanding">
-            <h2 id="title-certs">钢琴曲</h2>
+            <h2 id="title-certs">Piano 钢琴曲</h2>
         </section>
         <section>
-            <ul>
-                <li>Waltz in E flat major Op.18 No.1 “brilliant”<br />肖邦降E大调华丽大圆舞曲</li>
+            <ul id="list-audio">
+                <li>
+                    <span>Waltz in E flat major Op.18 No.1 “brilliant”<br />肖邦降E大调华丽大圆舞曲</span>
+                </li>
             </ul>
         </section>
 		<section>
             <audio controls preload="none" >
-                <source src="./files/audio/2026/waltz-in-e-flat-major-op18-no1-brilliant.mp3" />
+                <source src="../files/audio/2026/waltz-in-e-flat-major-op18-no1-brilliant.mp3" />
             </audio>
 		</section>
     </section>
