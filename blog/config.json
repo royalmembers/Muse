@@ -1,5 +1,5 @@
 ﻿{
-    "$schema": "https://cdn.jsdelivr.net/npm/hje@2.4.6/dist/mdblogs.schema.json",
+    "$schema": "https://cdn.jsdelivr.net/npm/hje@3.1.0/dist/mdblogs.schema.json",
     "name": "ᥫᩣMuse Blog",
     "name#zh": "ᥫᩣMuse 博客",
     "blog": [
