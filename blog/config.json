@@ -321,6 +321,36 @@
                 },
                 "gallery": "starna"
             }
+        },
+        {
+            "disable": true,
+            "name": "钢琴比赛",
+            "name#en": "Piano competition",
+            "dir": "piano",
+            "file": "kawai.md",
+            "date": "20260517",
+            "location": "上海",
+            "author": "Muse Tuan",
+            "end": true,
+            "thumb": {
+                "common": "./2026/piano/thumbnails/kawai.webp",
+                "wide": "./2026/piano/thumbnails/kawai-w.webp"
+            },
+            "related": [
+                {
+                    "name": "比赛奖状",
+                    "url": "../certs/?2026/kawai"
+                }
+            ],
+            "data": {
+                "audio": [{
+                    "name": "Waltz in E flat major Op.18 No.1 “brilliant”",
+                    "name#zh": "肖邦降E大调华丽大圆舞曲",
+                    "desc": "The piano music performed",
+                    "desc#zh": "现场演奏的钢琴曲",
+                    "url": "../files/audio/2026/waltz-in-e-flat-major-op18-no1-brilliant.mp3"
+                }]
+            }
         }
     ],
     "gallery": [{

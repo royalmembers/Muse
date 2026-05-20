@@ -1,6 +1,11 @@
 declare namespace PageCtrl {
     interface IArticleRenderExtension {
+        start: Hje.DescriptionContract[];
         end: Hje.DescriptionContract[];
+        last: Hje.DescriptionContract[];
+        mkt?: string | boolean;
+        article: DeepX.MdBlogs.ArticleInfo;
+        relative(path: string | Hje.RelativePathInfo): string;
     }
     function loadBlogArticles(root?: boolean | number): Promise<DeepX.MdBlogs.Articles>;
     function renderBlog(element: string | HTMLElement, root?: boolean | number): Promise<void>;
@@ -69,6 +74,8 @@ declare namespace PageCtrl {
         "photoTaken#zh": string;
         series: string;
         "series#zh": string;
+        audio: string;
+        "audio#zh": string;
         dateToMonth: string;
         "dateToMonth#zh": string;
         certHonors: string;

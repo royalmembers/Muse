@@ -7,6 +7,8 @@ namespace PageCtrl {
         "photoTaken#zh": "本照片拍摄于{0}年",
         series: "Series",
         "series#zh": "系列",
+        audio: "Audio",
+        "audio#zh": "音频",
         dateToMonth: "MMM YYYY",
         "dateToMonth#zh": "YYYY年MM月",
         certHonors: "Honors",
