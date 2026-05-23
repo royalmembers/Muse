@@ -185,7 +185,7 @@ namespace PageCtrl {
             url: "./images/paintings/2026/self-cartoon-portrait-april.webp",
             thumb: "./images/paintings/thumbnails/2026/self-cartoon-portrait-april.webp",
             name: getString("selfPortrait"),
-            desc: "'2025",
+            desc: "'2026",
         });
     }
 }
