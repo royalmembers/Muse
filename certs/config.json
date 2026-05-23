@@ -148,7 +148,24 @@
         "group": "上海赛区少儿A组",
         "ranking": "二等奖",
         "publisher": "法国中法艺术协会",
-        "keywords": ["instrumental performance", "match"]
+        "keywords": ["instrumental performance", "match"],
+        "images": [{
+            "id": "img-1716086478822",
+            "name": "入场",
+            "year": 2024,
+            "month": 5,
+            "day": 19,
+            "size": "24Mpx 2:3",
+            "keywords": []
+        }, {
+            "id": "img-1716087768884",
+            "name": "弹奏钢琴现场特写照片",
+            "year": 2024,
+            "month": 5,
+            "day": 19,
+            "size": "24Mpx 3:2",
+            "keywords": []
+        }]
     }, {
         "id": "shnu3ps-honor",
         "name": "红领巾奖章",
