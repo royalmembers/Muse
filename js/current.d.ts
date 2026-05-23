@@ -64,6 +64,7 @@ declare namespace PageCtrl {
         close?(ev?: MouseEvent): void;
     }): void;
     export function initHome(): void;
+    export function showSelfPortrait(): void;
     export {};
 }
 declare namespace PageCtrl {
@@ -84,6 +85,8 @@ declare namespace PageCtrl {
         "generalPaintings#zh": string;
         relatedPictures: string;
         "relatedPictures#zh": string;
+        selfPortrait: string;
+        "selfPortrait#zh": string;
         worksBy: string;
         "worksBy#zh": string;
         loveDrawing: string;

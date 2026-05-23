@@ -17,6 +17,8 @@ namespace PageCtrl {
         "generalPaintings#zh": "常规画作",
         relatedPictures: "Related pictures",
         "relatedPictures#zh": "相关图片",
+        selfPortrait: "Self portrait",
+        "selfPortrait#zh": "自画像",
         worksBy: "{1} by {0}",
         "worksBy#zh": "{0}的{1}",
         loveDrawing: "I love drawing and following are my works.",

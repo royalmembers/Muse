@@ -172,10 +172,20 @@ namespace PageCtrl {
             { element: "button-blog", key: "blog", mdblogs: true },
             { element: "link-certs", key: "certHonors" },
             { element: "link-blog", key: "blog", mdblogs: true },
+            { element: "link-portrait", key: "selfPortrait" },
             { element: "title-works-series", key: "series" },
             { element: "title-works-common", key: "general", mdblogs: true },
             { element: "button-works-more", key: "seeMore", mdblogs: true },
         ]);
         initMenu(true);
+    }
+
+    export function showSelfPortrait() {
+        showPopupView({
+            url: "./images/paintings/2026/self-cartoon-portrait-april.webp",
+            thumb: "./images/paintings/thumbnails/2026/self-cartoon-portrait-april.webp",
+            name: getString("selfPortrait"),
+            desc: "'2025",
+        });
     }
 }
