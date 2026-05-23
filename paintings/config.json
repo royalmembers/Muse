@@ -108,9 +108,17 @@
             "keywords": ["watercolor"]
         }],
         "mao": [{
+            "id": "mao-260523-p1",
+            "name": "埃及艳摸凹喵",
+            "name#en": "Egypt Queen Mor-Ow Meow",
+            "year": 2026,
+            "month": 5,
+            "day": 12,
+            "keywords": ["民族服饰"]
+        }, {
             "id": "mao-260412-p2",
             "name": "摸凹喵小矮人",
-            "name#en": "Mor-Ow Meow",
+            "name#en": "Dwarf Mor-Ow Meow",
             "year": 2026,
             "month": 4,
             "day": 12,
@@ -118,11 +126,11 @@
         }, {
             "id": "mao-260412-p1",
             "name": "摸凹喵昕调香",
-            "name#en": "Mor-Ow Meow",
+            "name#en": "Perfumer Mor-Ow Meow",
             "year": 2026,
             "month": 4,
             "day": 12,
-            "keywords": ["卡通形象"]
+            "keywords": []
         }, {
             "id": "mao-260405-p1",
             "name": "摸凹喵邪恶王后",
