@@ -108,12 +108,20 @@
             "keywords": ["watercolor"]
         }],
         "mao": [{
+            "id": "mao-260525-p1",
+            "name": "自由女神摸凹喵",
+            "name#en": "Liberty Mor-Ow Meow",
+            "year": 2026,
+            "month": 5,
+            "day": 25,
+            "keywords": ["民族服饰"]
+        }, {
             "id": "mao-260523-p1",
             "name": "埃及艳摸凹喵",
             "name#en": "Egypt Queen Mor-Ow Meow",
             "year": 2026,
             "month": 5,
-            "day": 12,
+            "day": 23,
             "keywords": ["民族服饰"]
         }, {
             "id": "mao-260412-p2",
@@ -541,39 +549,59 @@
             "keywords": ["幼年版"]
         }],
         "starna": [{
+            "id": "mao-260525-p2",
+            "name": "神奇女侠星娜喵",
+            "name#en": "Wonder Starna",
+            "year": 2026,
+            "month": 5,
+            "day": 25,
+            "keywords": ["民族服饰"]
+        }, {
+            "id": "mao-260523-p2",
+            "year": 2026,
+            "month": 5,
+            "day": 23,
+            "keywords": ["民族服饰"]
+        }, {
             "id": "mao-260515-p2",
             "name": "咖啡曲奇星娜喵",
             "name#en": "Coffee Cookie Starna",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 15
         }, {
             "id": "mao-260515-p1",
             "name": "围裙星娜喵",
             "name#en": "Starna with Apron",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 15
         }, {
             "id": "mao-260512-p3",
             "name": "反派星娜喵",
             "name#en": "Villain Starna",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 12
         }, {
             "id": "mao-260512-p2",
             "name": "欧洲贵族星娜喵副本",
             "name#en": "Starna European Aristocrat Copy",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 12
         }, {
             "id": "mao-260512-p1",
             "name": "欧洲贵族星娜喵",
             "name#en": "Starna European Aristocrat",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 12
         }, {
             "id": "mao-260509-p1",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 9
         }, {
             "id": "mao-260504-p3",
             "year": 2026,
@@ -581,107 +609,127 @@
         }, {
             "id": "mao-260504-p2",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 4
         }, {
             "id": "mao-260504-p1",
             "name": "异瞳星娜喵",
             "name#en": "Starna heterochromia iridum",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 4
         }, {
             "id": "mao-260502-p2",
             "name": "星娜喵嘴叼灯笼",
             "name#en": "Starna with Lantern in Mouth",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 2
         }, {
             "id": "mao-260502-p1",
             "name": "云朵星娜喵",
             "name#en": "Cloud Starna",
             "year": 2026,
-            "month": 5
+            "month": 5,
+            "day": 2
         }, {
             "id": "mao-260427-p1",
             "name": "异瞳星娜喵",
             "name#en": "Starna heterochromia iridum",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 27
         }, {
             "id": "mao-260426-p2",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 26
         }, {
             "id": "mao-260426-p1",
             "year": 2026,
             "name": "紫罗兰星娜喵",
             "name#en": "Violet Starna",
-            "month": 4
+            "month": 4,
+            "day": 26
         }, {
             "id": "mao-260425-p4",
             "year": 2026,
             "name": "星娜有翼喵",
             "name#en": "Starna with wings",
-            "month": 4
+            "month": 4,
+            "day": 25
         }, {
             "id": "mao-260425-p3",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 25
         }, {
             "id": "mao-260425-p2",
             "name": "美少女战士星娜喵",
             "name#en": "Starna sailor moon",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 25
         }, {
             "id": "mao-260425-p1",
             "name": "校花星娜喵",
             "name#en": "Campus belle Starna",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 25
         }, {
             "id": "mao-260421-p1",
             "name": "气气星娜喵",
             "name#en": "Angry Starna",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 21
         }, {
             "id": "mao-260416-p8",
             "name": "星娜兔兔喵",
             "name#en": "Starna Rabbit",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 16
         }, {
             "id": "mao-260416-p7",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 16
         }, {
             "id": "mao-260416-p6",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 16
         }, {
             "id": "mao-260416-p5",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 16
         }, {
             "id": "mao-260416-p4",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 16
         }, {
             "id": "mao-260416-p3",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 16
         }, {
             "id": "mao-260416-p2",
             "name": "气质星娜喵",
             "name#en": "Intellectual Starna",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 16
         }, {
             "id": "mao-260416-p1",
             "name": "腼腆星娜喵",
             "name#en": "Shy Starna",
             "year": 2026,
-            "month": 4
+            "month": 4,
+            "day": 16
         }]
     }
 }
