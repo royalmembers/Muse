@@ -323,7 +323,6 @@
             }
         },
         {
-            "disable": true,
             "name": "钢琴比赛",
             "name#en": "Piano competition",
             "dir": "piano",
